@@ -1,3 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UFit</string>
+
+    <string name="home">Home</string>
+    <string name="plan">Plans</string>
+    <string name="trainer">Trainer</string>
+    <string name="stats">Stats</string>
+    <string name="profile">Profile</string>
+
+
+    <string name="myPlans">My workout plans</string>
+    <string name="trainerPlans">Trainer\'s workout plans</string>
+
+    <string name="addTo">Add to…</string>
+
+
+    <!-- Profile -->
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="workouts">Workouts</string>
+
+    <string name="email">E-Mail</string>
+    <string name="password">Password</string>
 </resources>

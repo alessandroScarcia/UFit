@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+
+        android:icon="@drawable/baseline_home_black_48dp"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/nav_plans"
+        android:icon="@drawable/outline_assignment_black_48dp"
+        android:title="@string/plan" />
+    <item
+        android:id="@+id/nav_trainer"
+        android:icon="@drawable/outline_supervisor_account_black_48dp"
+        android:title="@string/trainer" />
+
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/outline_assessment_black_48dp"
+        android:title="@string/stats" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/outline_account_box_black_48dp"
+        android:title="@string/profile" />
+</menu>
