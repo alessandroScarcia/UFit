@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit;
+package it.sms1920.spqs.ufit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,7 +11,11 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivitySearch extends AppCompatActivity {
+import it.sms1920.spqs.ufit.R;
+import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.presenter.ExerciseAdapter;
+
+public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +23,7 @@ public class ActivitySearch extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         Button btnBack = findViewById(R.id.btnBackFromSearch);
-        btnBack.setOnClickListener(new Button.OnClickListener(){
+        btnBack.setOnClickListener(new Button.OnClickListener() {
 
             @Override
             public void onClick(View view) {

@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit;
+package it.sms1920.spqs.ufit.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragmentStats extends Fragment {
+import it.sms1920.spqs.ufit.R;
+
+public class StatsFragment extends Fragment {
 
     @Nullable
     @Override

@@ -1,11 +1,11 @@
-package it.sms1920.spqs.ufit;
+package it.sms1920.spqs.ufit.model;
 
 public class Exercise {
 
     private String name;
     private int image;
 
-    Exercise(String name, int image) {
+    public Exercise(String name, int image) {
         this.name = name;
         this.image = image;
     }

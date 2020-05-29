@@ -1,6 +1,5 @@
-package it.sms1920.spqs.ufit;
+package it.sms1920.spqs.ufit.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-public class ActivityLauncher extends AppCompatActivity {
+import it.sms1920.spqs.ufit.R;
+
+public class LauncherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +32,21 @@ public class ActivityLauncher extends AppCompatActivity {
         //img.getLayoutParams().height = (int) getResources().getDimension(R.dimen.toolbar_height);
 
         Button btnSearch = findViewById(R.id.btnSearch);
-        btnSearch.setOnClickListener(new FloatingActionButton.OnClickListener(){
+        btnSearch.setOnClickListener(new FloatingActionButton.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ActivityLauncher.this, ActivitySearch.class));
+                startActivity(new Intent(LauncherActivity.this, SearchActivity.class));
                 overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
             }
         });
 
 
-
-
-
         // Starting with Home at the launch
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
         // Setting bottom bar
-        final BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_bar);
+        final BottomNavigationView bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -63,7 +61,7 @@ public class ActivityLauncher extends AppCompatActivity {
                         resetBottomIcons(menu);
                         // Marking current item icon
                         menu.findItem(R.id.nav_home).setIcon(R.drawable.baseline_home_black_48dp);
-                        selectedFragment = new FragmentHome();
+                        selectedFragment = new HomeFragment();
                         break;
 
                     // Plans
@@ -71,7 +69,7 @@ public class ActivityLauncher extends AppCompatActivity {
                         resetBottomIcons(menu);
                         // Marking current item icon
                         menu.findItem(R.id.nav_plans).setIcon(R.drawable.baseline_assignment_black_48dp);
-                        selectedFragment = new FragmentPlans();
+                        selectedFragment = new PlansFragment();
                         break;
 
                     // Trainer
@@ -79,7 +77,7 @@ public class ActivityLauncher extends AppCompatActivity {
                         resetBottomIcons(menu);
                         // Marking current item icon
                         menu.findItem(R.id.nav_trainer).setIcon(R.drawable.baseline_supervisor_account_black_48dp);
-                        selectedFragment = new FragmentTrainer();
+                        selectedFragment = new TrainerFragment();
                         break;
 
                     // Stats
@@ -87,7 +85,7 @@ public class ActivityLauncher extends AppCompatActivity {
                         resetBottomIcons(menu);
                         // Marking current item icon
                         menu.findItem(R.id.nav_stats).setIcon(R.drawable.baseline_assessment_black_48dp);
-                        selectedFragment = new FragmentStats();
+                        selectedFragment = new StatsFragment();
                         break;
 
                     // Profile
@@ -95,9 +93,9 @@ public class ActivityLauncher extends AppCompatActivity {
                         resetBottomIcons(menu);
                         menu.findItem(R.id.nav_profile).setIcon(R.drawable.baseline_account_box_black_48dp);
 
-                        startActivity(new Intent(ActivityLauncher.this, ActivityLogin.class));
+                        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
                         finish();
-                        selectedFragment = new FragmentProfile();
+                        selectedFragment = new ProfileFragment();
                         break;
                 }
 

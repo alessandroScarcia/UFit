@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityExercise">
+    tools:context=".view.ExerciseActivity">
 
     <ImageView
         android:id="@+id/imgExercise"
@@ -14,6 +14,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Image of the exercise"
         app:srcCompat="@drawable/esercizio" />
 
     <ImageView
@@ -24,6 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Gradient"
         app:srcCompat="@drawable/card_gradient" />
 
     <TextView
@@ -33,7 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto"
-        android:text="Squat"
+        android:text="@string/squat"
         android:textColor="@color/colorWhite76"
         android:textSize="@dimen/exercise_title_size"
         app:layout_constraintBottom_toBottomOf="@+id/imgExercise"
@@ -94,7 +96,7 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_style"
             android:backgroundTint="@color/colorSecondary"
-            android:text="Aggiungi a una scheda"
+            android:text="@string/add_exercise_to_plan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.655"

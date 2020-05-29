@@ -8,5 +8,5 @@
     app:elevation="@dimen/bottombar_elevation"
     app:itemIconSize="@dimen/icon_size"
     app:itemIconTint="@drawable/bottom_bar_color_selector"
-    app:menu="@menu/menu_bottom_bar" />
+    app:menu="@menu/bottom_bar" />
 

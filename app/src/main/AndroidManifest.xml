@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ActivityLogin"></activity>
-        <activity android:name=".ActivityRegistration" />
-        <activity android:name=".ActivitySearch" />
-        <activity android:name=".ActivityExercise" />
-        <activity android:name=".ActivityLauncher">
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.RegistrationActivity" />
+        <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.ExerciseActivity" />
+        <activity android:name=".view.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
