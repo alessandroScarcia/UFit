@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ActivityLogin"></activity>
+        <activity android:name=".ActivityChoose"></activity>
+        <activity android:name=".ActivityLogin" />
         <activity android:name=".ActivityRegistration" />
         <activity android:name=".ActivitySearch" />
         <activity android:name=".ActivityExercise" />
