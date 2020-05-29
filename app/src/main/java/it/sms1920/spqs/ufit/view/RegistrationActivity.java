@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import it.sms1920.spqs.ufit.R;
+import it.sms1920.spqs.ufit.model.User;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -14,8 +15,8 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        private User userReg;
-       // private EditText nameReg = findViewById( R.id.)
+        User userReg;
+        // private EditText nameReg = findViewById( R.id.)
 
     }
 }

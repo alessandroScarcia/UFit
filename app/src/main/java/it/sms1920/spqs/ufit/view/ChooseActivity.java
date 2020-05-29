@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import it.sms1920.spqs.ufit.R;
 
+//TODO: Change class name to an self-explanatory term
 public class ChooseActivity extends AppCompatActivity {
 
     private Button buttonSignUp;
@@ -22,7 +23,7 @@ public class ChooseActivity extends AppCompatActivity {
         buttonSignIn = findViewById(R.id.signInChooseBtn);
         buttonSignUp = findViewById(R.id.btnSignUpChoose);
 
-        buttonSignUp.setOnClickListener(  new View.OnClickListener() {
+        buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChooseActivity.this, RegistrationActivity.class));
@@ -30,7 +31,7 @@ public class ChooseActivity extends AppCompatActivity {
             }
         });
 
-        buttonSignIn.setOnClickListener(  new View.OnClickListener() {
+        buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChooseActivity.this, LoginActivity.class));

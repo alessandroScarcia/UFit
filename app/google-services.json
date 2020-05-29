@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "818557211693",
+    "firebase_url": "https://ufit-a747a.firebaseio.com",
+    "project_id": "ufit-a747a",
+    "storage_bucket": "ufit-a747a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818557211693:android:2d6a0e21fea6ea40a414a4",
+        "android_client_info": {
+          "package_name": "it.sms1920.spqs.ufit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818557211693-k99m7csnso1munk1lk7me9t0ib39dkso.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwI_EZQZhEpvllnABlq1Yvpm4t9Qfw984"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818557211693-k99m7csnso1munk1lk7me9t0ib39dkso.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
