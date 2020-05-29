@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "928782049875",
+    "firebase_url": "https://ufit-73ef5.firebaseio.com",
+    "project_id": "ufit-73ef5",
+    "storage_bucket": "ufit-73ef5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928782049875:android:d7d857cc6435dbb7a8dca6",
+        "android_client_info": {
+          "package_name": "it.sms1920.spqs.ufit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928782049875-juc4c523t32rr1bv3cs6q7rnjpvk02e7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.sms1920.spqs.ufit",
+            "certificate_hash": "65c533ca9acbec52d94c74ecafa445d16cb277db"
+          }
+        },
+        {
+          "client_id": "928782049875-s6144rnfaovtq8286881asf8g6clqu6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYjBrezi0HGaFlqNgA6zq1GlVrCIvgrh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928782049875-s6144rnfaovtq8286881asf8g6clqu6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
