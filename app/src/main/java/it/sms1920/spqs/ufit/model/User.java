@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit;
+package it.sms1920.spqs.ufit.model;
 
 public class User {
     private String name;

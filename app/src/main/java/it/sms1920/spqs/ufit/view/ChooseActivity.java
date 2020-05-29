@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit;
+package it.sms1920.spqs.ufit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ActivityChoose extends AppCompatActivity {
+import it.sms1920.spqs.ufit.R;
+
+public class ChooseActivity extends AppCompatActivity {
 
     private Button buttonSignUp;
     private Button buttonSignIn;
@@ -17,13 +19,13 @@ public class ActivityChoose extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
 
-        buttonSignIn = findViewById( R.id.signInChooseBtn );
-        buttonSignUp = findViewById( R.id.btnSignUpChoose );
+        buttonSignIn = findViewById(R.id.signInChooseBtn);
+        buttonSignUp = findViewById(R.id.btnSignUpChoose);
 
         buttonSignUp.setOnClickListener(  new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityChoose.this, ActivityRegistration.class));
+                startActivity(new Intent(ChooseActivity.this, RegistrationActivity.class));
                 finish();
             }
         });
@@ -31,7 +33,7 @@ public class ActivityChoose extends AppCompatActivity {
         buttonSignIn.setOnClickListener(  new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityChoose.this, ActivityLogin.class));
+                startActivity(new Intent(ChooseActivity.this, LoginActivity.class));
                 finish();
             }
         });
