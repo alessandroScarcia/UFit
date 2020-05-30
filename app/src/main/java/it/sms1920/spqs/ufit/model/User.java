@@ -1,23 +1,27 @@
 package it.sms1920.spqs.ufit.model;
 
+import java.util.Date;
+
 public class User {
     private String name;
     private String surname;
-    private String sex;
+    private String gender;
+    private Date dateBirth;
     private int bodyWeight;
     private int height; // express in cm
     private String email;
     private String password;
 
-    public User(String name, String surname, String sex, int bodyWeight, int height, String email, String password) {
+    public User(String name, String surname, String gender, Date dateBirth, int bodyWeight, int height ) {
         this.name = name;
         this.surname = surname;
-        this.sex = sex;
+        this.gender = gender;
+        this.dateBirth = dateBirth;
         this.bodyWeight = bodyWeight;
         this.height = height;
-        this.email = email;
-        this.password = password;
     }
+
+    public User(){};
 
     public String getName() {
         return name;
@@ -35,12 +39,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getSex() {
-        return sex;
+    public String getGender() {
+        return gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setSex(String gender) {
+        this.gender = gender;
     }
 
     public int getBodyWeight() {
@@ -73,5 +77,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getDateBirth() {
+        return dateBirth;
+    }
+
+    public void setDateBirth(Date dateBirth) {
+        this.dateBirth = dateBirth;
     }
 }
