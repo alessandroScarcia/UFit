@@ -93,7 +93,7 @@ public class LauncherActivity extends AppCompatActivity {
                         resetBottomIcons(menu);
                         menu.findItem(R.id.nav_profile).setIcon(R.drawable.baseline_account_box_black_48dp);
 
-                        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
+                        startActivity(new Intent(LauncherActivity.this, ChooseActivity.class));
                         finish();
                         selectedFragment = new ProfileFragment();
                         break;
