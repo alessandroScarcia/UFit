@@ -71,7 +71,7 @@ public class RegistrationActivity extends AppCompatActivity {
             String password;
             @Override
             public void onClick(View v) {
-                SimpleDateFormat dataFormatter = new SimpleDateFormat("dd/mm/yy", Locale.ENGLISH );
+                SimpleDateFormat dataFormatter = new SimpleDateFormat("dd-MM-yy" );
                 name = nameReg.getText().toString();
                 surname = surnameReg.getText().toString();
                 String dateString = dateBirthReg.getText().toString();

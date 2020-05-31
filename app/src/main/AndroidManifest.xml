@@ -12,6 +12,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.ChooseActivity" />
         <activity android:name=".view.RegistrationActivity" />
         <activity android:name=".view.SearchActivity" />
         <activity android:name=".view.ExerciseActivity" />
