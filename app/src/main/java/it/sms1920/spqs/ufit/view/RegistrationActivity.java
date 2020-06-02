@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import it.sms1920.spqs.ufit.R;
 import it.sms1920.spqs.ufit.model.User;
 
 public class RegistrationActivity extends AppCompatActivity {

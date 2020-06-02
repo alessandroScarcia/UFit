@@ -11,7 +11,6 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.sms1920.spqs.ufit.R;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.ExerciseAdapter;
 

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import it.sms1920.spqs.ufit.R;
 
 //TODO: Change class name to an self-explanatory term
 public class ChooseActivity extends AppCompatActivity {

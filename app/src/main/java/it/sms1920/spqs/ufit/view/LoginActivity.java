@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import it.sms1920.spqs.ufit.R;
-
 public class LoginActivity extends AppCompatActivity {
 
     @Override

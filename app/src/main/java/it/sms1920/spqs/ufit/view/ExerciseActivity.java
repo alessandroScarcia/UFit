@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import it.sms1920.spqs.ufit.R;
 
 public class ExerciseActivity extends AppCompatActivity {
 
