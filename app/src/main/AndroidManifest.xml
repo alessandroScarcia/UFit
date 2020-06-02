@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="it.sms1920.spqs.ufit">
+    package="it.sms1920.spqs.ufit.view">
 
     <application
         android:allowBackup="true"
@@ -11,12 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.ChooseActivity" />
-        <activity android:name=".view.RegistrationActivity" />
-        <activity android:name=".view.SearchActivity" />
-        <activity android:name=".view.ExerciseActivity" />
-        <activity android:name=".view.LauncherActivity">
+        <activity android:name="LoginActivity" />
+        <activity android:name="ChooseActivity" />
+        <activity android:name="RegistrationActivity" />
+        <activity android:name="SearchActivity" />
+        <activity android:name="ExerciseActivity" />
+        <activity android:name="LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
