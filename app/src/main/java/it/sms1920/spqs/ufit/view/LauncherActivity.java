@@ -49,6 +49,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
+                menu = bottomNav.getMenu();
                 menu.findItem(R.id.nav_home).setIcon(R.drawable.outline_home_black_48dp);
                 menu.findItem(R.id.nav_plans).setIcon(R.drawable.outline_assignment_black_48dp);
                 menu.findItem(R.id.nav_stats).setIcon(R.drawable.outline_assessment_black_48dp);
