@@ -14,19 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import it.sms1920.spqs.ufit.MainframeMVP;
-import it.sms1920.spqs.ufit.R;
+import it.sms1920.spqs.ufit.contract.SearchContract;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
-public class SearchActivity extends AppCompatActivity implements MainframeMVP.view.search {
+
+public class SearchActivity extends AppCompatActivity implements SearchContract.view {
 
     Activity mContext = this;
     SearchAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         mContext = this;
@@ -47,17 +46,16 @@ public class SearchActivity extends AppCompatActivity implements MainframeMVP.vi
             }
         });
 
-        adapter = new SearchAdapter( (MainframeMVP.view.search) mContext );
+        // Setting adapter to the recycler view for search result
+        adapter = new SearchAdapter( (SearchContract.view) mContext );
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
-
-    @Override
+    @Override  // TODO aggiungere dinamicità in base all'esercizio
     public void showExercise(int image, String nome) {
-        // TODO aggiungere dinamicità in base all'esercizio
         startActivity(new Intent(this, ExerciseActivity.class));
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
@@ -70,8 +68,10 @@ public class SearchActivity extends AppCompatActivity implements MainframeMVP.vi
         return new myViewHolder(v);
     }
 
-
-    public class myViewHolder extends RecyclerView.ViewHolder implements MainframeMVP.view.search.recyclerViewAdapter {
+    /**
+     * Recycler View Holder that bind a single exercise to a single recyclerView row
+     */
+    public class myViewHolder extends RecyclerView.ViewHolder implements itemHolder {
 
         ImageView image;
         TextView name;
@@ -82,14 +82,6 @@ public class SearchActivity extends AppCompatActivity implements MainframeMVP.vi
             this.itemView = itemView;
             image = itemView.findViewById(R.id.imgExercise);
             name = itemView.findViewById(R.id.txtExerciseName);
-        }
-
-
-        public myViewHolder infilate(ViewGroup parent, Activity activity) {
-            LayoutInflater inflater = android.view.LayoutInflater.from(activity);
-            View v = inflater.inflate(R.layout.item_exercise, parent, false);
-
-            return new myViewHolder(v);
         }
 
         @Override

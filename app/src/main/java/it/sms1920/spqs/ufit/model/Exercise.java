@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Exercise {
 
+
     private String description; // English exercise description
     private String descrizione; // Italian exercise description
     private String image;

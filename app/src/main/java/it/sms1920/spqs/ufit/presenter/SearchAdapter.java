@@ -9,19 +9,19 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import it.sms1920.spqs.ufit.MainframeMVP;
-import it.sms1920.spqs.ufit.R;
+import it.sms1920.spqs.ufit.contract.SearchContract;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.model.Search;
+import it.sms1920.spqs.ufit.view.R;
 import it.sms1920.spqs.ufit.view.SearchActivity.myViewHolder;
 
-public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements MainframeMVP.presenter.search {
+public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements SearchContract.presenter {
 
     private List<Exercise> lstExercise;
-    private MainframeMVP.view.search view;
+    private SearchContract.view view;
     Search model;
 
-    public SearchAdapter(MainframeMVP.view.search view) {
+    public SearchAdapter(SearchContract.view view) {
         model = new Search(this);
         this.lstExercise = new ArrayList<>();
         this.view = view;
