@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -92,8 +93,7 @@ public class LauncherActivity extends AppCompatActivity {
                     case R.id.nav_profile:
                         resetBottomIcons(menu);
                         menu.findItem(R.id.nav_profile).setIcon(R.drawable.baseline_account_box_black_48dp);
-
-                        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
+                        startActivity(new Intent(LauncherActivity.this, ChooseActivity.class));
                         finish();
                         selectedFragment = new ProfileFragment();
                         break;

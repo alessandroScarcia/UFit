@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editWeight"
+                android:id="@+id/editName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -31,7 +31,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editHeight"
+                android:id="@+id/editSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -44,7 +44,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editDateBirth"
+                android:id="@+id/editDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -84,7 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            <RadioGroup
+                android:id="@+id/chooseGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -93,21 +94,21 @@
                     android:id="@+id/radio_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
+                    android:onClick="checkButton"
                     android:text="male" />
 
                 <RadioButton
                     android:id="@+id/radio_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
+                    android:onClick="checkButton"
                     android:text="female" />
 
                 <RadioButton
                     android:id="@+id/radio_not_specified"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
+                    android:onClick="checkButton"
                     android:text="not specified" />
             </RadioGroup>
         </TableRow>
