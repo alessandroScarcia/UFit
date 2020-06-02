@@ -15,16 +15,16 @@ import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.model.Search;
 import it.sms1920.spqs.ufit.view.SearchActivity.myViewHolder;
 
-public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements MainframeMVP.presenter.search {
 
     private List<Exercise> lstExercise;
-    private SearchViewManager searchViewManager;
+    private MainframeMVP.view.search view;
     Search model;
 
-    public SearchAdapter(SearchViewManager searchViewManager) {
+    public SearchAdapter(MainframeMVP.view.search view) {
         model = new Search(this);
         this.lstExercise = new ArrayList<>();
-        this.searchViewManager = searchViewManager;
+        this.view = view;
     }
 
     public void publishData(Exercise exercise) {
@@ -36,7 +36,7 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> {
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return searchViewManager.createSearchViewItem(parent);
+        return view.createSearchViewItem(parent);
     }
 
     @Override
@@ -52,18 +52,9 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> {
     }
 
 
-    public interface SearchViewItem {
-        void bind(Exercise item, final int position);
-    }
-
-    public interface SearchViewManager {
-        void showExercise(int image, String nome);
-
-        myViewHolder createSearchViewItem(ViewGroup parent);
-    }
-
+    @Override
     public void onClickExercise(int position) {
-        searchViewManager.showExercise(R.drawable.profile_photo,
+        view.showExercise(R.drawable.profile_photo,
                 lstExercise.get(position).getName());
 
     }

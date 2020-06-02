@@ -14,11 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import it.sms1920.spqs.ufit.MainframeMVP;
 import it.sms1920.spqs.ufit.R;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
-public class SearchActivity extends AppCompatActivity implements SearchAdapter.SearchViewManager {
+public class SearchActivity extends AppCompatActivity implements MainframeMVP.view.search {
 
     Activity mContext = this;
     SearchAdapter adapter;
@@ -46,7 +47,7 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.S
             }
         });
 
-        adapter = new SearchAdapter((SearchAdapter.SearchViewManager) mContext);
+        adapter = new SearchAdapter( (MainframeMVP.view.search) mContext );
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
@@ -70,7 +71,7 @@ public class SearchActivity extends AppCompatActivity implements SearchAdapter.S
     }
 
 
-    public class myViewHolder extends RecyclerView.ViewHolder implements SearchAdapter.SearchViewItem {
+    public class myViewHolder extends RecyclerView.ViewHolder implements MainframeMVP.view.search.recyclerViewAdapter {
 
         ImageView image;
         TextView name;
