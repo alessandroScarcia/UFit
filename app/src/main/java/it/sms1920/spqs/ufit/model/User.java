@@ -1,8 +1,28 @@
 package it.sms1920.spqs.ufit.model;
 
+import android.content.Intent;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Date;
 
-public class User {
+import it.sms1920.spqs.ufit.view.LauncherActivity;
+import it.sms1920.spqs.ufit.view.RegistrationActivity;
+
+import static androidx.core.content.ContextCompat.startActivity;
+
+public class User implements Cloneable {
+
+    final String USER = "User";
+
     private String name;
     private String surname;
     private String gender;
@@ -11,8 +31,9 @@ public class User {
     private int height; // express in cm
     private String email;
     private String password;
+    private FirebaseAuth firebaseAuth;
 
-    public User(String name, String surname, String gender, Date dateBirth, int bodyWeight, int height ) {
+    public User(String name, String surname, String gender, Date dateBirth, int bodyWeight, int height) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -21,7 +42,8 @@ public class User {
         this.height = height;
     }
 
-    public User(){};
+    public User() {
+    }
 
     public String getName() {
         return name;
@@ -89,5 +111,30 @@ public class User {
 
     public void setDateBirth(Date dateBirth) {
         this.dateBirth = dateBirth;
+    }
+
+    public boolean signUpNewUser() {
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if (!firebaseAuth.fetchSignInMethodsForEmail(this.email).isSuccessful())
+            return false;
+        else {
+            firebaseAuth.createUserWithEmailAndPassword(this.email, this.password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+
+                                FirebaseDatabase.getInstance().getReference(USER)
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(this);
+                            }
+
+                        }
+                    });
+        }
+
+        return true;
     }
 }
