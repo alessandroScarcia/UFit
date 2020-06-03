@@ -5,162 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="RegistrationActivity">
+    android:background="@color/colorPrimary"
+    android:theme="@android:style/Theme.Holo">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+    <androidx.appcompat.widget.AppCompatImageView
+
+        android:id="@+id/appCompatImageView2"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/logo"
+        android:backgroundTint="@color/colorWhite90"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
+    <Button
+        android:id="@+id/singUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="130dp"
+        android:text="signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordConfirm" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editEmailReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditEmailReg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite90"
+            android:inputType="textEmailAddress"
+            android:textColorHighlight="@color/colorSecondary"
+            android:textColorLink="@color/colorSecondary"
+            android:textCursorDrawable="@drawable/button_style" />
 
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
-        </TableRow>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editPasswordReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEmailReg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite90"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/editSurname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Surname" />
-        </TableRow>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TableRow
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editPasswordConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editPasswordReg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditTextPasswordConfirm"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite90"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/editDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="date"
-                android:text="date"
-                tools:text="@tools:sample/date/ddmmyy" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/weight" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/height" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioGroup
-                android:id="@+id/chooseGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radio_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="checkButton"
-                    android:text="male" />
-
-                <RadioButton
-                    android:id="@+id/radio_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="checkButton"
-                    android:text="female" />
-
-                <RadioButton
-                    android:id="@+id/radio_not_specified"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="checkButton"
-                    android:text="not specified" />
-            </RadioGroup>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="35dp">
-
-            <EditText
-                android:id="@+id/editEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Email" />
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/editPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Password" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnDo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Do" />
-        </TableRow>
-    </TableLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
