@@ -40,14 +40,14 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             @Override
             public boolean onQueryTextChange(String s) {
 
-                adapter.search(s.trim());
+                adapter.search(mContext, s.trim());
 
                 return false;
             }
         });
 
         // Setting adapter to the recycler view for search result
-        adapter = new SearchAdapter( (SearchContract.view) mContext );
+        adapter = new SearchAdapter((SearchContract.view) mContext);
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
