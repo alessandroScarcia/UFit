@@ -4,7 +4,7 @@ package it.sms1920.spqs.ufit.presenter;
 import android.text.TextUtils;
 
 import it.sms1920.spqs.ufit.contract.RegistrationContract;
-import it.sms1920.spqs.ufit.model.User;
+import it.sms1920.spqs.ufit.model.Auth;
 
 public class RegistrationPresenter implements RegistrationContract.Presenter {
     final static int SINGUP_SUCCESSFULL = 0;
@@ -13,7 +13,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
     final static int USER_ALREADY_EXISTS = 3;
 
     private RegistrationContract.View view;
-    private User userReg;
+    private Auth auth;
 
     public RegistrationPresenter(RegistrationContract.View view) {
         this.view = view;
@@ -21,14 +21,14 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
 
     @Override
     public void onSignUp(String email, String password, String confirmPassword) {
-        userReg = new User();
-        userReg.setEmail(email);
-        userReg.setPassword(password);
+        auth = new Auth();
+        auth.setEmail(email);
+        auth.setPassword(password);
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) )
             view.showValidationError("Fields are empty");
         else if(password.equals(confirmPassword)){
-            userReg.signUpNewUser(this);
+            auth.signUp(this);
         }else{
             view.showValidationError("Passwords do not match");
         }
