@@ -20,18 +20,11 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
 
     private List<Exercise> lstExercise = new ArrayList<>();
     private SearchContract.view view;
-    private Context mContext;
     Search model;
 
     public SearchAdapter(SearchContract.view view) {
-        this.mContext = (Context) view;
-        model = new Search(this);
+        model = new Search((Context) view);
         this.view = view;
-    }
-
-    public void publishData(List<Exercise> results) {
-        lstExercise = new ArrayList<>(results);
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -56,13 +49,11 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
                 lstExercise.get(position).getName());
     }
 
-    public void search(Context view, String keyString) {
+    public void search(String keyString) {
         lstExercise.clear();
         notifyDataSetChanged();
-        model.askForResult(keyString);
+        lstExercise = new ArrayList<>(model.askForResult(keyString));
+        notifyDataSetChanged();
     }
 
-    public Context getContext() {
-        return mContext;
-    }
 }

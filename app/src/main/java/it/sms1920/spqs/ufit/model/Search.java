@@ -1,16 +1,18 @@
 package it.sms1920.spqs.ufit.model;
 
+import android.content.Context;
+
+import java.util.List;
+
 import androidx.room.Room;
-import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
 public class Search {
 
-    private final SearchAdapter presenter;
     DatabaseHandler mDB;
 
-    public Search(SearchAdapter presenter) {
-        this.presenter = presenter;
-        mDB = Room.databaseBuilder(presenter.getContext(), DatabaseHandler.class, "Ufit")
+    public Search(Context mContext) {
+
+        mDB = Room.databaseBuilder(mContext, DatabaseHandler.class, "Ufit")
                 .allowMainThreadQueries() //remove this before production (using background thread is better)
                 .build();
         mDB.exerciseDao().deleteAll();
@@ -22,10 +24,11 @@ public class Search {
                 new Exercise("Bicycle Crunch", "cono cose con le gambe e braccia", "", "", 0),
                 new Exercise("Diamond Push Up", "cono cose con le braccia", "", "", 0),
                 new Exercise("Pull up", "cono cose con le braccia", "", "", 0));
+
     }
 
-    public void askForResult(String key) {
-        presenter.publishData(mDB.exerciseDao().getExercisesByName(key));
+    public List<Exercise> askForResult(String key) {
+        return mDB.exerciseDao().getExercisesByName(key);
     }
 
 }

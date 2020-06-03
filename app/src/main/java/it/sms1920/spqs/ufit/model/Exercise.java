@@ -11,7 +11,7 @@ public class Exercise {
     private int id;
 
     @ColumnInfo(name = "description")
-    private String description; // English exercise description
+    private String description;
 
     @ColumnInfo(name = "image")
     private String image;
@@ -20,10 +20,10 @@ public class Exercise {
     private String link;
 
     @ColumnInfo(name = "muscles")
-    private int muscles; // English muscles list
+    private int muscles;
 
     @ColumnInfo(name = "name")
-    private String name; // English name
+    private String name;
 
 
     public Exercise(){

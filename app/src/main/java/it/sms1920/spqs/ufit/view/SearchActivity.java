@@ -40,7 +40,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             @Override
             public boolean onQueryTextChange(String s) {
 
-                adapter.search(mContext, s.trim());
+                adapter.search(s.trim());
 
                 return false;
             }
