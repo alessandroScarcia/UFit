@@ -55,8 +55,10 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override  // TODO aggiungere dinamicità in base all'esercizio
-    public void showExercise(int image, String nome) {
-        startActivity(new Intent(this, ExerciseActivity.class));
+    public void showExercise(Exercise exercise) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        intent.putExtra("Exercise", exercise );
+        startActivity(intent);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
 
@@ -69,7 +71,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     /**
-     * Recycler View Holder that bind a single exercise to a single recyclerView row
+     * Recycler View Holder binds a single exercise to a single recyclerView row
      */
     public class myViewHolder extends RecyclerView.ViewHolder implements itemHolder {
 
