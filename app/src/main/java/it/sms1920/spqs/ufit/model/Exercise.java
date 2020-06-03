@@ -1,80 +1,88 @@
 package it.sms1920.spqs.ufit.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
-
+@Entity
 public class Exercise {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-    private String description; // English exercise description
-    private String descrizione; // Italian exercise description
+    @ColumnInfo(name = "description")
+    private String description;
+
+    @ColumnInfo(name = "image")
     private String image;
+
+    @ColumnInfo(name = "link")
     private String link;
-    private ArrayList<String> muscles; // English muscles list
-    private ArrayList<String> muscoli; // Italian muscles list
-    private String name; // English name
-    private String nome; // Italian name
+
+    @ColumnInfo(name = "muscles")
+    private int muscles;
+
+    @ColumnInfo(name = "name")
+    private String name;
 
 
     public Exercise(){
 
     }
 
-    public Exercise(String description, String descrizione, String image, String link, ArrayList<String> muscles, ArrayList<String> muscoli, String name, String nome) {
+    public Exercise(String name, String description, String image, String link, int muscles) {
         this.description = description;
-        this.descrizione = descrizione;
         this.image = image;
         this.link = link;
         this.muscles = muscles;
-        this.muscoli = muscoli;
         this.name = name;
-        this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImage() {
         return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getLink() {
         return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public int getMuscles() {
+        return muscles;
+    }
+
+    public void setMuscles(int muscles) {
+        this.muscles = muscles;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public ArrayList<String> getMuscoli() {
-        return muscoli;
-    }
-
-    public ArrayList<String> getMuscles() {
-        return muscles;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Exercise{" +
-                "description='" + description + '\'' +
-                ", descrizione='" + descrizione + '\'' +
-                ", image='" + image + '\'' +
-                ", link='" + link + '\'' +
-                ", muscles=" + muscles +
-                ", muscoli=" + muscoli +
-                ", name='" + name + '\'' +
-                ", nome='" + nome + '\'' +
-                '}';
+    public void setName(String name) {
+        this.name = name;
     }
 }

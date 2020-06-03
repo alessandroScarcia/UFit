@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         });
 
         // Setting adapter to the recycler view for search result
-        adapter = new SearchAdapter( (SearchContract.view) mContext );
+        adapter = new SearchAdapter((SearchContract.view) mContext);
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
