@@ -26,4 +26,6 @@
     <string name="password">Password</string>
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
+
+    <string name="login">Login</string>
 </resources>

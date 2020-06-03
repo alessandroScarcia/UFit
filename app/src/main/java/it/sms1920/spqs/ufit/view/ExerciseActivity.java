@@ -1,13 +1,23 @@
 package it.sms1920.spqs.ufit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
+import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.presenter.ShowExercise;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
-public class ExerciseActivity extends AppCompatActivity {
+public class ExerciseActivity extends AppCompatActivity implements ShowExerciseContract.view {
+
+    ShowExerciseContract.presenter presenter;
+
+    TextView name;
+    TextView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +33,17 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         });
 
+        presenter = new ShowExercise(this);
+
+        name = findViewById(R.id.txtExerciseName);
+        description = findViewById(R.id.txtExerciseDescription);
+
+        presenter.onCreateComplete( getIntent() );
+    }
+
+    @Override
+    public void load(Exercise exercise) {
+        name.setText(exercise.getName());
+        description.setText(exercise.getDescription());
     }
 }

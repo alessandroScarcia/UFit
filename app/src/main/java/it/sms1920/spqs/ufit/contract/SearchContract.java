@@ -8,7 +8,7 @@ import it.sms1920.spqs.ufit.view.SearchActivity;
 public interface SearchContract {
     interface view {
 
-        void showExercise(int image, String nome);
+        void showExercise(Exercise exercise);
 
         SearchActivity.myViewHolder createSearchViewItem(ViewGroup parent);
 

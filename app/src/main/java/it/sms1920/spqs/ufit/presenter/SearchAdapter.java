@@ -45,8 +45,7 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
 
     @Override
     public void onClickExercise(int position) {
-        view.showExercise(R.drawable.profile_photo,
-                lstExercise.get(position).getName());
+        view.showExercise(lstExercise.get(position));
     }
 
     public void search(String keyString) {

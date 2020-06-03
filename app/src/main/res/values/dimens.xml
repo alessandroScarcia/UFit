@@ -4,6 +4,9 @@
     <dimen name="toolbar_height">60dp</dimen>
     <dimen name="toolbar_elevation">0dp</dimen>
 
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="bigger_standard_margin">24dp</dimen>
+
     <dimen name="icon_size">28dp</dimen>
 
     <dimen name="bottombar_elevation">1dp</dimen>
@@ -26,7 +29,7 @@
     <!-- ActivityExercise card -->
     <dimen name="exercise_card_height">104dp</dimen>
     <dimen name="exercise_card_thumbnail_size">88dp</dimen>
-    <dimen name="exercise_card_title_size">21sp</dimen>
+    <dimen name="exercise_card_title_size">20sp</dimen>
 
 
     <!-- FragmentProfile -->

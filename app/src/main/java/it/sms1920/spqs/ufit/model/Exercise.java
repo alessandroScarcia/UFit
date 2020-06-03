@@ -1,11 +1,13 @@
 package it.sms1920.spqs.ufit.model;
 
+import java.io.Serializable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Exercise {
+public class Exercise implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
