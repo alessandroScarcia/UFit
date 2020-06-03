@@ -1,27 +1,32 @@
 package it.sms1920.spqs.ufit.model;
 
-import android.content.Intent;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
 
-import it.sms1920.spqs.ufit.view.LauncherActivity;
-import it.sms1920.spqs.ufit.view.RegistrationActivity;
+import it.sms1920.spqs.ufit.contract.Login;
+import it.sms1920.spqs.ufit.contract.RegistrationContract;
 
-import static androidx.core.content.ContextCompat.startActivity;
+public class User {
 
-public class User implements Cloneable {
+    final static String USER = "User";
+    final static int SINGUP_SUCCESSFULL = 0;
+    final static int PASSWORD_IS_NOT_STRONG_ENOUGH = 1;
+    final static int EMAIL_MALFORMED = 2;
+    final static int USER_ALREADY_EXISTS = 3;
+    final static int EMAIL_NOT_MATCH = 4;
+    final static int PASSWORD_NOT_MATCH = 5;
 
-    final String USER = "User";
 
     private String name;
     private String surname;
@@ -31,7 +36,7 @@ public class User implements Cloneable {
     private int height; // express in cm
     private String email;
     private String password;
-    private FirebaseAuth firebaseAuth;
+
 
     public User(String name, String surname, String gender, Date dateBirth, int bodyWeight, int height) {
         this.name = name;
@@ -43,7 +48,9 @@ public class User implements Cloneable {
     }
 
     public User() {
+
     }
+
 
     public String getName() {
         return name;
@@ -113,28 +120,64 @@ public class User implements Cloneable {
         this.dateBirth = dateBirth;
     }
 
-    public boolean signUpNewUser() {
 
-        firebaseAuth = FirebaseAuth.getInstance();
+    public void singInUser(final Login.Presenter presenter) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        if (!firebaseAuth.fetchSignInMethodsForEmail(this.email).isSuccessful())
-            return false;
-        else {
-            firebaseAuth.createUserWithEmailAndPassword(this.email, this.password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+        firebaseAuth.signInWithEmailAndPassword(this.email, this.password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                FirebaseDatabase.getInstance().getReference(USER)
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(this);
+                        if (!task.isSuccessful()) {
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthInvalidUserException e) {
+                                presenter.onResultSignIn(EMAIL_NOT_MATCH);
+                            } catch (FirebaseAuthInvalidCredentialsException e) {
+                                presenter.onResultSignIn(PASSWORD_NOT_MATCH);
+                            } catch (Exception e) {
+                                System.out.println(e.getStackTrace());
                             }
+                        } else
+                            presenter.onResultSignIn(SINGUP_SUCCESSFULL);
+                    }
+                });
 
-                        }
-                    });
-        }
-
-        return true;
     }
+
+    public void signUpNewUser(final RegistrationContract.Presenter presenter) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseAuth.createUserWithEmailAndPassword(this.email, this.password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (!task.isSuccessful()) {
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthWeakPasswordException e) {
+                                presenter.onResultSignUp(PASSWORD_IS_NOT_STRONG_ENOUGH);
+                            } catch (FirebaseAuthInvalidCredentialsException e) {
+                                presenter.onResultSignUp(EMAIL_MALFORMED);
+                            } catch (FirebaseAuthUserCollisionException e) {
+                                presenter.onResultSignUp(USER_ALREADY_EXISTS);
+                            } catch (Exception e) {
+                                System.out.println(e.getStackTrace());
+                            }
+                        } else {
+                            presenter.onResultSignUp(SINGUP_SUCCESSFULL);
+
+                            FirebaseDatabase.getInstance().getReference(USER)
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(User.this);
+                        }
+
+                    }
+                });
+    }
+
+
 }
+

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="LoginActivity"
     android:background="@color/colorPrimary"
-    android:theme="@android:style/Theme.Holo">
+    android:theme="@android:style/Theme.Holo"
+    tools:context="LoginActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
 
@@ -33,12 +33,13 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorWhite90"
+            android:inputType="textEmailAddress"
             android:textColorHighlight="@color/colorSecondary"
             android:textColorLink="@color/colorSecondary"
-            android:inputType="textEmailAddress"
             android:textCursorDrawable="@drawable/button_style" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,11 +59,34 @@
         app:layout_constraintTop_toBottomOf="@+id/email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:backgroundTint="@color/colorWhite90"/>
+            android:backgroundTint="@color/colorWhite90"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textViewForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="136dp"
+        android:text="Forgot password?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passoword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

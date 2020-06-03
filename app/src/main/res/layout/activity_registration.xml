@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="RegistrationActivity">
-
-
     android:background="@color/colorPrimary"
     android:theme="@android:style/Theme.Holo">
 
@@ -22,8 +20,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/singUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="130dp"
+        android:text="signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordConfirm" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailReg"
+        android:id="@+id/editEmailReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -35,18 +46,19 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditEmailReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorWhite90"
+            android:inputType="textEmailAddress"
             android:textColorHighlight="@color/colorSecondary"
             android:textColorLink="@color/colorSecondary"
-            android:inputType="textEmailAddress"
             android:textCursorDrawable="@drawable/button_style" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordReg"
+        android:id="@+id/editPasswordReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -56,18 +68,19 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailReg">
+        app:layout_constraintTop_toBottomOf="@+id/editEmailReg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:backgroundTint="@color/colorWhite90"/>
+            android:backgroundTint="@color/colorWhite90"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordConfirm"
+        android:id="@+id/editPasswordConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -77,27 +90,15 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordReg">
+        app:layout_constraintTop_toBottomOf="@id/editPasswordReg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditTextPasswordConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:backgroundTint="@color/colorWhite90"/>
+            android:backgroundTint="@color/colorWhite90"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/singUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="161dp"
-        android:text="singup"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordConfirm" />
 </androidx.constraintlayout.widget.ConstraintLayout>

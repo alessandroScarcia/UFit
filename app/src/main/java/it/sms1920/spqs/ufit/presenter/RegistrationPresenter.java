@@ -3,72 +3,57 @@ package it.sms1920.spqs.ufit.presenter;
 
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeoutException;
-
 import it.sms1920.spqs.ufit.contract.RegistrationContract;
 import it.sms1920.spqs.ufit.model.User;
 
 public class RegistrationPresenter implements RegistrationContract.Presenter {
+    final static int SINGUP_SUCCESSFULL = 0;
+    final static int PASSWORD_IS_NOT_STRONG_ENOUGH = 1;
+    final static int EMAIL_MALFORMED = 2;
+    final static int USER_ALREADY_EXISTS = 3;
+
     private RegistrationContract.View view;
     private User userReg;
 
     public RegistrationPresenter(RegistrationContract.View view) {
-        this.userReg = new User();
         this.view = view;
     }
 
     @Override
-    public void handleSignUp(String email, String password, String confirmPassword) {
+    public void onSignUp(String email, String password, String confirmPassword) {
+        userReg = new User();
         userReg.setEmail(email);
         userReg.setPassword(password);
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) )
-            view.showValidationError();
+            view.showValidationError("Fields are empty");
         else if(password.equals(confirmPassword)){
-
+            userReg.signUpNewUser(this);
+        }else{
+            view.showValidationError("Passwords do not match");
         }
 
-        if (password.equals(confirmPassword) && userReg.signUpNewUser())
-            view.showSignUpSuccessFully();
-        else if (!password.equals(confirmPassword) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
-            view.showValidationError();
-        else if (!userReg.signUpNewUser())
-            view.showSignUpFail();
     }
 
 
-   /* @Override
-    public void signUp(DatabaseReference databaseReference, FirebaseAuth firebaseAuth, User user) {
-        final User userReg = (User) user.clone();
-        databaseReference = FirebaseDatabase.getInstance().getReference("User");
-        firebaseAuth = FirebaseAuth.getInstance();
+    @Override
+    public void onResultSignUp(int check) {
+        switch( check) {
+            case SINGUP_SUCCESSFULL:
+                view.showSignUpSuccessFully("Signup successfully");
+                break;
+            case PASSWORD_IS_NOT_STRONG_ENOUGH:
+                view.showValidationError("Password is weak");
+                break;
+            case USER_ALREADY_EXISTS:
+                view.showSignUpFail("User already exists");
+                break;
+            case EMAIL_MALFORMED:
+                view.showValidationError("Credentials is not valid");
+                break;
+            default:
+                break;
+        }
+    }
 
-        firebaseAuth.createUserWithEmailAndPassword(userReg.getEmail(), userReg.getPassword())
-                .addOnCompleteListener((Executor) RegistrationPresenter.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-
-                            FirebaseDatabase.getInstance().getReference("User")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(userReg).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                }
-                            });
-                        }
-                    }
-                });
-    }*/
 }

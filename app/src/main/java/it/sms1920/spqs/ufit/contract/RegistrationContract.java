@@ -1,17 +1,17 @@
 package it.sms1920.spqs.ufit.contract;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-
-import it.sms1920.spqs.ufit.model.User;
-
 public interface RegistrationContract {
-    interface View{
-        void showSignUpSuccessFully();
-        void showSignUpFail();
-        void showValidationError();
+    interface View {
+        void showSignUpSuccessFully(String message);
+
+        void showSignUpFail(String message);
+
+        void showValidationError(String message);
     }
-    interface Presenter{
-        void handleSignUp( String email, String password, String confirmPassword);
+
+    interface Presenter {
+        void onSignUp(String email, String password, String confirmPassword);
+
+        void onResultSignUp(int check);
     }
 }
