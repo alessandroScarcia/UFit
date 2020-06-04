@@ -75,6 +75,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                 return true;
             }
         });
+        insertHomeFragment();
     }
 
     @Override

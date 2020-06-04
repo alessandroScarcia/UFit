@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.presenter;
 
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType;
 import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.HOME;
 import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.PLANS;
 import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.PROFILE;
@@ -11,7 +12,7 @@ import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragTyp
 public class LauncherManager implements LauncherManagerContract.presenter {
 
     LauncherManagerContract.view view;
-    LauncherManagerContract.view.FragType currentFragment;
+    FragType currentFragment = HOME;
 
     public LauncherManager(LauncherManagerContract.view view) {
         this.view = view;
