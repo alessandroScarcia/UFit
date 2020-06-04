@@ -31,6 +31,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         mContext = this;
 
         final SearchView keyString = findViewById(R.id.search_edit_text);
+
+
         keyString.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -48,16 +50,24 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         // Setting adapter to the recycler view for search result
         adapter = new SearchAdapter((SearchContract.view) mContext);
+        adapter.search("");
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+    }
+
     @Override  // TODO aggiungere dinamicità in base all'esercizio
     public void showExercise(Exercise exercise) {
         Intent intent = new Intent(this, ExerciseActivity.class);
-        intent.putExtra("Exercise", exercise );
+        intent.putExtra("Exercise", exercise);
         startActivity(intent);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }

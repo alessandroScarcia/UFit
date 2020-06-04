@@ -45,16 +45,11 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
         // Setting bottom bar
         final BottomNavigationView bottomNav = findViewById(R.id.bottom_bar);
+        menu = bottomNav.getMenu();
+
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                menu = bottomNav.getMenu();
-                menu.findItem(R.id.nav_home).setIcon(R.drawable.outline_home_black_48dp);
-                menu.findItem(R.id.nav_plans).setIcon(R.drawable.outline_assignment_black_48dp);
-                menu.findItem(R.id.nav_stats).setIcon(R.drawable.outline_assessment_black_48dp);
-                menu.findItem(R.id.nav_trainer).setIcon(R.drawable.outline_supervisor_account_black_48dp);
-                menu.findItem(R.id.nav_profile).setIcon(R.drawable.outline_account_box_black_48dp);
 
                 // Choosing right fragment ( click on home -> choose FragmentHome, etc.. )
                 switch (menuItem.getItemId()) {
@@ -83,15 +78,22 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     }
 
     @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
+
+    @Override
     public void insertHomeFragment() {
-        // Replacing old fragment with the selected one
+        resetMenuIcons();
+        menu.findItem(R.id.nav_home).setChecked(true);
         menu.findItem(R.id.nav_home).setIcon(R.drawable.baseline_home_black_48dp);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
     @Override
     public void insertPlansFragment() {
-        // Replacing old fragment with the selected one
+        resetMenuIcons();
+        menu.findItem(R.id.nav_plans).setChecked(true);
         menu.findItem(R.id.nav_plans).setIcon(R.drawable.baseline_assignment_black_48dp);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlansFragment()).commit();
 
@@ -99,7 +101,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
     @Override
     public void insertTrainerFragment() {
-        // Replacing old fragment with the selected one
+        resetMenuIcons();
+        menu.findItem(R.id.nav_trainer).setChecked(true);
         menu.findItem(R.id.nav_trainer).setIcon(R.drawable.baseline_supervisor_account_black_48dp);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
 
@@ -107,7 +110,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
     @Override
     public void insertStatsFragment() {
-        // Replacing old fragment with the selected one
+        resetMenuIcons();
+        menu.findItem(R.id.nav_stats).setChecked(true);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.baseline_assessment_black_48dp);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
 
@@ -115,7 +119,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
     @Override
     public void insertProfileFragment() {
-        // Replacing old fragment with the selected one
+        resetMenuIcons();
+        menu.findItem(R.id.nav_profile).setChecked(true);
         menu.findItem(R.id.nav_profile).setIcon(R.drawable.baseline_account_box_black_48dp);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
@@ -126,4 +131,19 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         startActivity(new Intent(LauncherActivity.this, SearchActivity.class));
         overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
+
+    @Override
+    public void endActivity() {
+        finish();
+    }
+
+    @Override
+    public void resetMenuIcons() {
+        menu.findItem(R.id.nav_home).setIcon(R.drawable.outline_home_black_48dp);
+        menu.findItem(R.id.nav_plans).setIcon(R.drawable.outline_assignment_black_48dp);
+        menu.findItem(R.id.nav_stats).setIcon(R.drawable.outline_assessment_black_48dp);
+        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.outline_supervisor_account_black_48dp);
+        menu.findItem(R.id.nav_profile).setIcon(R.drawable.outline_account_box_black_48dp);
+    }
+
 }
