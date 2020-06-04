@@ -3,6 +3,7 @@ package it.sms1920.spqs.ufit.presenter;
 import android.text.TextUtils;
 
 import it.sms1920.spqs.ufit.contract.Login;
+import it.sms1920.spqs.ufit.model.Auth;
 import it.sms1920.spqs.ufit.model.User;
 
 public class LoginPresenter implements Login.Presenter {
@@ -12,7 +13,7 @@ public class LoginPresenter implements Login.Presenter {
 
 
     private Login.View view;
-    private User userReg;
+    private Auth auth;
 
     public LoginPresenter(Login.View view) {
         this.view = view;
@@ -21,15 +22,15 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void onSignIn(String email, String password) {
-        userReg = new User();
-        userReg.setEmail(email);
-        userReg.setPassword(password);
+        auth = new Auth();
+        auth.setEmail(email);
+        auth.setPassword(password);
 
 
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             view.showSignInFail("Fields are empty");
-        }else
-            userReg.singInUser( this );
+        } else
+            auth.signIn(this);
 
     }
 
@@ -47,8 +48,5 @@ public class LoginPresenter implements Login.Presenter {
                 break;
         }
     }
-    @Override
-    public void onChangePassword(int check) {
 
-    }
 }

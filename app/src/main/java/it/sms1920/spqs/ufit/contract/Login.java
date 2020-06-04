@@ -12,6 +12,5 @@ public interface Login {
 
         void onResultSignIn(int check);
 
-        void onChangePassword(int check);
     }
 }

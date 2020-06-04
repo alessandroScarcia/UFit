@@ -8,10 +8,15 @@ public interface LauncherManagerContract {
         enum FragType { HOME, PLANS, TRAINER, STATS, PROFILE }
 
         void insertHomeFragment();
+
         void insertPlansFragment();
+
         void insertTrainerFragment();
+
         void insertStatsFragment();
+
         void insertProfileFragment();
+
         void startSearchActivity();
         void endActivity();
         void resetMenuIcons();
@@ -19,10 +24,15 @@ public interface LauncherManagerContract {
 
     interface presenter {
         void onHomeIconClick();
+
         void onPlansIconClick();
+
         void onTrainerIconClick();
+
         void onStatsIconClick();
+
         void onProfileIconClick();
+
         void onSearchIconClick();
         void onBackPressed();
     }
