@@ -68,7 +68,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                         break;
                     case R.id.nav_profile:
                         presenter.onProfileIconClick();
-                        startActivity(new Intent(LauncherActivity.this, ChooseActivity.class));
+                        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
                         finish();
                         break;
                 }

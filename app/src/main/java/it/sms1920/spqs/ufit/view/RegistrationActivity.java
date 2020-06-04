@@ -19,10 +19,10 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     private RegistrationPresenter presenter;
     Activity mContext = this;
 
-    private TextInputEditText emailReg;
-    private TextInputEditText passwordReg;
-    private TextInputEditText passwordConfirm;
-    private Button signUpBtn;
+    private TextInputEditText tiEditTextEmailReg;
+    private TextInputEditText tiEditTextPasswordReg;
+    private TextInputEditText tiEditTextPasswordConfirm;
+    private Button btnSignup;
 
 
     @Override
@@ -32,13 +32,13 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
 
         initializeView();
 
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter = new RegistrationPresenter((RegistrationContract.View) mContext);
 
-                presenter.onSignUp(emailReg.getText().toString(), passwordReg.getText().toString(),
-                        passwordConfirm.getText().toString());
+                presenter.onSignUp(tiEditTextEmailReg.getText().toString(), tiEditTextPasswordReg.getText().toString(),
+                        tiEditTextPasswordConfirm.getText().toString());
 
             }
         });
@@ -47,10 +47,10 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     }
 
     private void initializeView() {
-        emailReg = findViewById(R.id.TextInputEditEmailReg);
-        passwordReg = findViewById(R.id.TextInputEditTextPassword);
-        passwordConfirm = findViewById(R.id.TextInputEditTextPasswordConfirm);
-        signUpBtn = findViewById(R.id.singUpBtn);
+        tiEditTextEmailReg = findViewById(R.id.TextInputEditEmailReg);
+        tiEditTextPasswordReg = findViewById(R.id.TextInputEditTextPassword);
+        tiEditTextPasswordConfirm = findViewById(R.id.TextInputEditTextPasswordConfirm);
+        btnSignup = findViewById(R.id.singUpBtn);
     }
 
     @Override

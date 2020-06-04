@@ -1,17 +1,12 @@
 package it.sms1920.spqs.ufit.presenter;
 
 import android.text.TextUtils;
+import android.util.Patterns;
 
 import it.sms1920.spqs.ufit.contract.Login;
 import it.sms1920.spqs.ufit.model.Auth;
-import it.sms1920.spqs.ufit.model.User;
 
 public class LoginPresenter implements Login.Presenter {
-    final static int SINGUP_SUCCESSFULL = 0;
-    final static int EMAIL_NOT_MATCH = 4;
-    final static int PASSWORD_NOT_MATCH = 5;
-
-
     private Login.View view;
     private Auth auth;
 
@@ -21,30 +16,38 @@ public class LoginPresenter implements Login.Presenter {
 
 
     @Override
+    public void checkFields(String emailField, String passwordField) {
+
+
+        if (TextUtils.isEmpty(emailField))
+            view.showInputFail(view.EMAIL_FIELD_EMPTY);
+        else if (TextUtils.isEmpty(passwordField))
+            view.showInputFail(view.PASSWORD_FIELD_EMPTY);
+        else if (!Patterns.EMAIL_ADDRESS.matcher(emailField).matches())
+            view.showInputFail(view.EMAIL_NOT_VALID);
+        else
+            view.showInputFail(view.FIELDS_CORRECT);
+    }
+
+    @Override
     public void onSignIn(String email, String password) {
-        auth = new Auth();
-        auth.setEmail(email);
-        auth.setPassword(password);
+        auth = new Auth(email, password);
 
-
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            view.showSignInFail("Fields are empty");
-        } else
-            auth.signIn(this);
+        auth.signIn(this);
 
     }
 
     @Override
     public void onResultSignIn(int check) {
         switch (check) {
-            case PASSWORD_NOT_MATCH:
-                view.showSignInFail("Password not match");
+            case Login.View.PASSWORD_NOT_MATCH:
+                view.showSignInFail(Login.View.PASSWORD_NOT_MATCH);
                 break;
-            case SINGUP_SUCCESSFULL:
-                view.showSignInSuccessFully("Login successfully");
+            case Login.View.SIGNIN_SUCCESSFULL:
+                view.showSignInFail(Login.View.SIGNIN_SUCCESSFULL);
                 break;
-            case EMAIL_NOT_MATCH:
-                view.showSignInFail("This user doesn't exists");
+            case Login.View.EMAIL_NOT_MATCH:
+                view.showSignInFail(Login.View.EMAIL_NOT_MATCH);
                 break;
         }
     }

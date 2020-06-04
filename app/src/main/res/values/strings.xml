@@ -28,4 +28,12 @@
     <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
 
     <string name="login">Login</string>
+
+    <!-- Login -->
+    <string name="email_empty">"Email can not be empty"</string>
+    <string name="password_empty">"Password can not be empty"</string>
+    <string name="email_not_valid">"Email is not valid"</string>
+    <string name="password_not_match">"Password not match"</string>
+    <string name="email_not_match">"User with this email not exists"</string>
+
 </resources>
