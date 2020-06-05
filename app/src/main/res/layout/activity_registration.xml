@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="RegistrationActivity">
+    tools:context="RegistrationActivity"
     android:background="@color/colorPrimary"
     android:theme="@android:style/Theme.Holo">
 
@@ -21,32 +21,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/singUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="130dp"
-        android:text="signup"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_style"
+        android:backgroundTint="@color/colorSecondary"
+        android:text="@string/signup"
+        android:textColor="@android:color/primary_text_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordConfirm" />
+        app:layout_constraintTop_toBottomOf="@+id/txtConfirmPasswordLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editEmailReg"
+        android:id="@+id/txtEmailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+
+        app:errorEnabled="true"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditEmailReg"
+            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorWhite90"
@@ -58,20 +62,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editPasswordReg"
+        android:id="@+id/txtPasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+
+        app:errorEnabled="true"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailReg">
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditTextPassword"
+            android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorWhite90"
@@ -80,20 +86,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editPasswordConfirm"
+        android:id="@+id/txtConfirmPasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+
+        app:errorEnabled="true"
         android:layout_marginEnd="32dp"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPasswordReg">
+        app:layout_constraintTop_toBottomOf="@id/txtPasswordLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditTextPasswordConfirm"
+            android:id="@+id/txtConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorWhite90"

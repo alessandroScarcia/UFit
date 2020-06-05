@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     }
 
     @Override
-    public void setInputError(InputErrorType inputErrorType) {
+    public void setInputError(Login.Presenter.InputErrorType inputErrorType) {
         switch (inputErrorType) {
             case EMAIL_FIELD_EMPTY:
                 txtEmailLayout.setError(getString(R.string.email_empty));
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     }
 
     @Override
-    public void setSignInError(AuthResultType authResultType) {
+    public void setSignInError(Login.Presenter.AuthResultType authResultType) {
         switch (authResultType) {
             case EMAILS_NOT_MATCH:
                 txtEmailLayout.setError(getString(R.string.email_not_exists));
@@ -140,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     public void startLauncherActivity() {
         finish();
         startActivity(new Intent(LoginActivity.this, LauncherActivity.class));
-        // TODO SESSIONE
     }
 
     @Override

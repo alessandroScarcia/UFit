@@ -38,4 +38,10 @@
     <string name="password_not_valid">"Password format is not valid"</string>
     <string name="password_not_match">"Password not match"</string>
     <string name="email_not_exists">"This email doesn't exist in our database"</string>
+
+    <string name="signup">Sign Up</string>
+    <string name="passwords_not_equal">"Insert same password pls"</string>
+    <string name="email_already_exists">"Insert same password pls"</string>
 </resources>
+
+
