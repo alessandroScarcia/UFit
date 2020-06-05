@@ -13,6 +13,10 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import it.sms1920.spqs.ufit.contract.Login;
 import it.sms1920.spqs.ufit.contract.RegistrationContract;
 
+import static it.sms1920.spqs.ufit.contract.Login.View.AuthResultType.EMAILS_NOT_MATCH;
+import static it.sms1920.spqs.ufit.contract.Login.View.AuthResultType.PASSWORDS_NOT_MATCH;
+import static it.sms1920.spqs.ufit.contract.Login.View.AuthResultType.SUCCESS;
+
 public class Auth {
     private String Uid;
     private String email;
@@ -58,14 +62,14 @@ public class Auth {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthInvalidUserException e) {
-                                presenter.onResultSignIn(Login.View.EMAIL_NOT_MATCH);
+                                presenter.returnSignInResult(EMAILS_NOT_MATCH);
                             } catch (FirebaseAuthInvalidCredentialsException e) {
-                                presenter.onResultSignIn(Login.View.PASSWORD_NOT_MATCH);
+                                presenter.returnSignInResult(PASSWORDS_NOT_MATCH);
                             } catch (Exception e) {
                                 System.out.println(e.getStackTrace());
                             }
                         } else
-                            presenter.onResultSignIn(Login.View.SIGNIN_SUCCESSFULL);
+                            presenter.returnSignInResult(SUCCESS);
                     }
                 });
 
@@ -82,7 +86,7 @@ public class Auth {
                         if (!task.isSuccessful()) {
                             try {
                                 throw task.getException();
-                            }  catch (FirebaseAuthUserCollisionException e) {
+                            } catch (FirebaseAuthUserCollisionException e) {
                                 presenter.onResultSignUp(RegistrationContract.View.USER_ALREADY_EXISTS);
                             } catch (Exception e) {
                                 System.out.println(e.getStackTrace());

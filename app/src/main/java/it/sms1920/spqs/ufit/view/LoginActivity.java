@@ -7,16 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import it.sms1920.spqs.ufit.contract.Login;
 import it.sms1920.spqs.ufit.presenter.LoginPresenter;
-import it.sms1920.spqs.ufit.presenter.RegistrationPresenter;
 
 
 public class LoginActivity extends AppCompatActivity implements Login.View {
@@ -24,11 +23,14 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     private LoginPresenter presenter;
     Activity mContext = this;
 
-    private TextView textViewforgotPassword;
-    private TextView textViewSignUp;
-    private TextView textViewError;
-    private TextInputEditText textInputEditTextEmail;
-    private TextInputEditText textInputEditTextPassword;
+    private TextView lblForgotPassword;
+    private TextView lblSignUp;
+
+    private TextInputEditText txtEmail;
+    private TextInputLayout txtEmailLayout;
+    private TextInputEditText txtPassword;
+    private TextInputLayout txtPasswordLayout;
+
     private Button btnSignIn;
 
     @Override
@@ -36,55 +38,61 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initializeView();
+        txtEmail = findViewById(R.id.txtEmail);
+        txtPassword = findViewById(R.id.txtPassword);
 
-       textInputEditTextEmail.addTextChangedListener(new TextWatcher() {
+        txtEmailLayout = findViewById(R.id.txtEmailLayout);
+        txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
+
+        lblForgotPassword = findViewById(R.id.lblForgotPassword);
+        lblSignUp = findViewById(R.id.lblSignUp);
+        btnSignIn = findViewById(R.id.btnSignIn);
+
+        presenter = new LoginPresenter((Login.View) mContext);
+
+        txtEmail.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtEmailLayout.setError(null);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                presenter = new LoginPresenter((Login.View) mContext);
-                presenter.checkFields(textInputEditTextEmail.getText().toString(), textViewforgotPassword.getText().toString());
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
-        textInputEditTextPassword.addTextChangedListener(new TextWatcher() {
+        txtPassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtPasswordLayout.setError(null);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                presenter = new LoginPresenter((Login.View) mContext);
-                presenter.checkFields(textInputEditTextEmail.getText().toString(), textViewforgotPassword.getText().toString());
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter = new LoginPresenter((Login.View) mContext);
-
-                presenter.onSignIn(textInputEditTextEmail.getText().toString(), textInputEditTextPassword.getText().toString());
-
+                txtEmailLayout.setError(null);
+                txtPasswordLayout.setError(null);
+                presenter.onSignIn(txtEmail.getText().toString(), txtPassword.getText().toString());
             }
         });
 
-        textViewforgotPassword.setOnClickListener(new View.OnClickListener() {
+        lblForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
@@ -92,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         });
 
 
-        textViewSignUp.setOnClickListener(new View.OnClickListener() {
+        lblSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
@@ -101,47 +109,45 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
 
     }
 
-    private void initializeView() {
-
-        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
-        textViewforgotPassword = findViewById(R.id.textViewForgotPassword);
-        textViewSignUp = findViewById(R.id.textViewSIgnup);
-        textViewError = findViewById(R.id.textViewError);
-        btnSignIn = findViewById(R.id.btnSignIn);
-
-        textViewError.setVisibility(View.INVISIBLE);
-        btnSignIn.setEnabled(false);
-    }
-
     @Override
-    public void showSignInFail(int signInError) {
-        switch (signInError) {
-            case PASSWORD_NOT_MATCH:
-                textViewError.setText(getResources().getString(R.string.password_not_match));
-                textViewError.setVisibility(View.VISIBLE);
+    public void setInputError(InputErrorType inputErrorType) {
+        switch (inputErrorType) {
+            case EMAIL_FIELD_EMPTY:
+                txtEmailLayout.setError(getString(R.string.email_empty));
                 break;
-            case EMAIL_NOT_MATCH:
-                textViewError.setText(getResources().getString(R.string.email_not_match));
-                textViewError.setVisibility(View.VISIBLE);
+            case PASSWORD_FIELD_EMPTY:
+                txtPasswordLayout.setError(getString(R.string.password_empty));
                 break;
-            default:
-                startActivity(new Intent(LoginActivity.this, LauncherActivity.class));
+            case EMAIL_FORMAT_NOT_VALID:
+                txtEmailLayout.setError(getString(R.string.email_not_valid));
                 break;
         }
     }
 
+    @Override
+    public void setSignInError(AuthResultType authResultType) {
+        switch (authResultType) {
+            case EMAILS_NOT_MATCH:
+                txtEmailLayout.setError(getString(R.string.email_not_exists));
+                break;
+            case PASSWORDS_NOT_MATCH:
+                txtPasswordLayout.setError(getString(R.string.password_not_match));
+                break;
+        }
+    }
 
     @Override
-    public void showInputFail(int inputError) {
-        if (inputError == EMAIL_FIELD_EMPTY)
-            textInputEditTextEmail.setError(getResources().getString(R.string.email_empty));
-        else if (inputError == PASSWORD_FIELD_EMPTY)
-            textInputEditTextPassword.setError(getResources().getString(R.string.password_empty));
-        else if (inputError == EMAIL_NOT_VALID)
-            textInputEditTextEmail.setError(getResources().getString(R.string.email_not_valid));
-        else
-            btnSignIn.setEnabled(true);
+    public void startLauncherActivity() {
+        finish();
+        startActivity(new Intent(LoginActivity.this, LauncherActivity.class));
+        // TODO SESSIONE
+    }
+
+    @Override
+    public void setEnabledUI(boolean enabled) {
+        txtPassword.setEnabled(enabled);
+        txtEmail.setEnabled(enabled);
+        btnSignIn.setEnabled(enabled);
     }
 
 }

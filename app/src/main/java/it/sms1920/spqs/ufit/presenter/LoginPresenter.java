@@ -6,6 +6,11 @@ import android.util.Patterns;
 import it.sms1920.spqs.ufit.contract.Login;
 import it.sms1920.spqs.ufit.model.Auth;
 
+import static it.sms1920.spqs.ufit.contract.Login.View.AuthResultType.SUCCESS;
+import static it.sms1920.spqs.ufit.contract.Login.View.InputErrorType.EMAIL_FIELD_EMPTY;
+import static it.sms1920.spqs.ufit.contract.Login.View.InputErrorType.EMAIL_FORMAT_NOT_VALID;
+import static it.sms1920.spqs.ufit.contract.Login.View.InputErrorType.PASSWORD_FIELD_EMPTY;
+
 public class LoginPresenter implements Login.Presenter {
     private Login.View view;
     private Auth auth;
@@ -15,41 +20,44 @@ public class LoginPresenter implements Login.Presenter {
     }
 
 
-    @Override
-    public void checkFields(String emailField, String passwordField) {
+    public boolean checkFields(String emailField, String passwordField) {
+        boolean bool = true;
 
-
-        if (TextUtils.isEmpty(emailField))
-            view.showInputFail(view.EMAIL_FIELD_EMPTY);
-        else if (TextUtils.isEmpty(passwordField))
-            view.showInputFail(view.PASSWORD_FIELD_EMPTY);
-        else if (!Patterns.EMAIL_ADDRESS.matcher(emailField).matches())
-            view.showInputFail(view.EMAIL_NOT_VALID);
-        else
-            view.showInputFail(view.FIELDS_CORRECT);
+        if (TextUtils.isEmpty(emailField)) {
+            view.setInputError(EMAIL_FIELD_EMPTY);
+            bool = false;
+        } else if (TextUtils.isEmpty(passwordField)) {
+            view.setInputError(PASSWORD_FIELD_EMPTY);
+            bool = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailField).matches()) {
+            view.setInputError(EMAIL_FORMAT_NOT_VALID);
+            bool = false;
+        }
+        return bool;
     }
 
     @Override
     public void onSignIn(String email, String password) {
-        auth = new Auth(email, password);
+        if (checkFields(email, password)) {
+            view.setEnabledUI(false);
 
-        auth.signIn(this);
-
+            auth = new Auth(email, password);
+            auth.signIn(this);
+        }
     }
 
     @Override
-    public void onResultSignIn(int check) {
-        switch (check) {
-            case Login.View.PASSWORD_NOT_MATCH:
-                view.showSignInFail(Login.View.PASSWORD_NOT_MATCH);
-                break;
-            case Login.View.SIGNIN_SUCCESSFULL:
-                view.showSignInFail(Login.View.SIGNIN_SUCCESSFULL);
-                break;
-            case Login.View.EMAIL_NOT_MATCH:
-                view.showSignInFail(Login.View.EMAIL_NOT_MATCH);
-                break;
-        }
+    public void returnSignInResult(Login.View.AuthResultType check) {
+        if (check != SUCCESS) {
+            view.setEnabledUI(true);
+            view.setSignInError(check);
+        } else
+            signInSuccessful();
+    }
+
+    @Override
+    public void signInSuccessful() {
+        view.startLauncherActivity();
     }
 
 }
