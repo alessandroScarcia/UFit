@@ -40,7 +40,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
             view.setInputError(EMAIL_FORMAT_NOT_VALID); // non è una mail
         else if (TextUtils.isEmpty(passwordField))
             view.setInputError(PASSWORD_FIELD_EMPTY); // password vuota
-        else if (passwordField.matches(PASSWORD_REGEX))
+        else if (!passwordField.matches(PASSWORD_REGEX))
             view.setInputError(PASSWORD_FORMAT_NOT_VALID); // formato password
         else if (!passwordField.equals(confirmPasswordField))
             view.setInputError(PASSWORDS_NOT_MATCHING); // password non corrispondono

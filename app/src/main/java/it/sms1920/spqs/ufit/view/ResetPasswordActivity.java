@@ -21,29 +21,24 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
     Activity mContext = this;
 
     private Button btnSendEmail;
-    private EditText email;
+    private EditText txtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-        initializeView();
+        btnSendEmail = findViewById(R.id.btnSendEmail);
+        txtEmail = findViewById(R.id.txtEmailReset);
 
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter = new ResetPasswordPresenter((ResetPassword.View) mContext);
-                presenter.onResetPassword(email.getText().toString());
+                presenter.onResetPassword(txtEmail.getText().toString());
             }
         });
     }
-
-    private void initializeView() {
-        btnSendEmail = findViewById(R.id.btnSendReset);
-        email = findViewById(R.id.editTextEmail);
-    }
-
 
     @Override
     public void showCheckMailBox() {

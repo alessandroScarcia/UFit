@@ -4,8 +4,11 @@ public interface RegistrationContract {
     interface View {
 
         void setInputError(Presenter.InputErrorType inputErrorType);
+
         void setSignUpError(Presenter.AuthResultType authResultType);
+
         void startLauncherActivity();
+
         void setEnabledUI(boolean enabled);
 
     }
@@ -27,8 +30,8 @@ public interface RegistrationContract {
 
         void onSignUp(String email, String password, String confirmPassword);
 
-
         void returnSignUpResult(AuthResultType check);
+
         void signUpSuccessful();
     }
 }

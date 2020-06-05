@@ -44,7 +44,11 @@
 
     <!-- Reg -->
     <string name="signup">Sign Up</string>
+    <string name="confirm_password">"Confirm Password"</string>
     <string name="password_not_valid">"Required uppercase, lowercase, number and special char"</string>
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">"Insert same password pls"</string>
+
+    <!--Reset Password-->
+    <string name="send_email">Send</string>
 </resources>

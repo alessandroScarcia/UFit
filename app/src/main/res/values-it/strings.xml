@@ -29,8 +29,8 @@
 
     <!-- Login -->
     <string name="login">Accedi</string>
-    <string name="forgot_password">Forgot password…</string>
-    <string name="not_registered_yet">Not registered yet? Sign-up.</string>
+    <string name="forgot_password">Password dimenticata…</string>
+    <string name="not_registered_yet">Non sei ancora registrato? Registrati.</string>
 
     <string name="email_empty">"Email can not be empty"</string>
     <string name="password_empty">"Password can not be empty"</string>
@@ -40,8 +40,12 @@
     <string name="email_not_exists">"This email doesn't exist in our database"</string>
 
     <string name="signup">Sign Up</string>
+    <string name="confirm_password">Conferma password</string>
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">"Insert same password pls"</string>
+
+    <!--Reset Password-->
+    <string name="send_email">Send</string>
 </resources>
 
 

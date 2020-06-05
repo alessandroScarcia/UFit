@@ -16,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
-
 public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.view {
 
     LauncherManager presenter;
@@ -67,6 +66,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                         presenter.onStatsIconClick();
                         break;
                     case R.id.nav_profile:
+                        //qua deve stare il controllo della sessione così se è connesso mostro
+                        //il profilo altrimenti il login
                         presenter.onProfileIconClick();
                         startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
                         finish();

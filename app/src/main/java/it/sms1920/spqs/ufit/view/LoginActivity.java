@@ -38,10 +38,10 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtEmail = findViewById(R.id.txtEmail);
+        txtEmail = findViewById(R.id.txtEmailReset);
         txtPassword = findViewById(R.id.txtPassword);
 
-        txtEmailLayout = findViewById(R.id.txtEmailLayout);
+        txtEmailLayout = findViewById(R.id.txtEmailResetLayout);
         txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
 
         lblForgotPassword = findViewById(R.id.lblForgotPassword);
