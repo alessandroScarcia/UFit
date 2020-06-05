@@ -2,10 +2,9 @@ package it.sms1920.spqs.ufit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
-import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.model.repository.Exercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +42,8 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
 
     @Override
     public void load(Exercise exercise) {
-        name.setText(exercise.getName());
-        description.setText(exercise.getDescription());
+        // TODO: implement room usage
+        //name.setText(exercise.getName());
+        description.setText("Temp");
     }
 }

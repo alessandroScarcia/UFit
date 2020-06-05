@@ -11,19 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ResetPasswordActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ChooseActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ExerciseActivity" />
-        <activity android:name=".LauncherActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ChooseActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ExerciseActivity" />
+        <activity android:name=".LauncherActivity" />
     </application>
 
 </manifest>

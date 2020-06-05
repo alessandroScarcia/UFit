@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import it.sms1920.spqs.ufit.contract.Login;
 import it.sms1920.spqs.ufit.model.Auth;
-import it.sms1920.spqs.ufit.model.User;
 
 public class LoginPresenter implements Login.Presenter {
     final static int SINGUP_SUCCESSFULL = 0;

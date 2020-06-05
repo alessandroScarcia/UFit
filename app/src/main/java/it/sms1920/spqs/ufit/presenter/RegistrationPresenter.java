@@ -25,11 +25,11 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
         auth.setEmail(email);
         auth.setPassword(password);
 
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword) )
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword))
             view.showValidationError("Fields are empty");
-        else if(password.equals(confirmPassword)){
+        else if (password.equals(confirmPassword)) {
             auth.signUp(this);
-        }else{
+        } else {
             view.showValidationError("Passwords do not match");
         }
 
@@ -38,7 +38,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
 
     @Override
     public void onResultSignUp(int check) {
-        switch( check) {
+        switch (check) {
             case SINGUP_SUCCESSFULL:
                 view.showSignUpSuccessFully("Signup successfully");
                 break;

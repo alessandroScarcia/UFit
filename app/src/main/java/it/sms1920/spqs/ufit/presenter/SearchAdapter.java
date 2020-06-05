@@ -2,7 +2,6 @@
 
 package it.sms1920.spqs.ufit.presenter;
 
-import android.content.Context;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -11,19 +10,18 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
-import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.model.repository.Exercise;
 import it.sms1920.spqs.ufit.model.Search;
-import it.sms1920.spqs.ufit.view.R;
 import it.sms1920.spqs.ufit.view.SearchActivity.myViewHolder;
 
-public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements SearchContract.presenter {
+public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements SearchContract.Presenter {
 
     private List<Exercise> lstExercise = new ArrayList<>();
-    private SearchContract.view view;
+    private SearchContract.View view;
     Search model;
 
-    public SearchAdapter(SearchContract.view view) {
-        model = new Search((Context) view);
+    public SearchAdapter(SearchContract.View view) {
+        model = new Search();
         this.view = view;
     }
 

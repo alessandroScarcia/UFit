@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.model;
+package it.sms1920.spqs.ufit.model.repository;
 
 import java.util.List;
 
@@ -13,9 +13,6 @@ interface ExerciseDao {
 
     @Insert
     void insertAll(Exercise... exercises);
-
-    @Query("SELECT * FROM Exercise WHERE name LIKE '%' || :key || '%'")
-    List<Exercise> getExercisesByName(String key);
 
     @Query("DELETE FROM Exercise")
     void deleteAll();

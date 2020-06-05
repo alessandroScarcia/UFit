@@ -50,5 +50,9 @@
     <dimen name="button_corner_radius">30dp</dimen>
     <dimen name="button_height">40dp</dimen>
 
+    <!-- Main Activity Logo -->
+    <dimen name="activity_main_logo_width">200dp</dimen>
+    <dimen name="activity_main_logo_height">200dp</dimen>
+
 
 </resources>

@@ -2,11 +2,11 @@ package it.sms1920.spqs.ufit.contract;
 
 import android.view.ViewGroup;
 
-import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.model.repository.Exercise;
 import it.sms1920.spqs.ufit.view.SearchActivity;
 
 public interface SearchContract {
-    interface view {
+    interface View {
 
         void showExercise(Exercise exercise);
 
@@ -17,7 +17,7 @@ public interface SearchContract {
         }
     }
 
-    interface presenter {
+    interface Presenter {
         void onClickExercise(int position);
 
     }
