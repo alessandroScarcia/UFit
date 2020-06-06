@@ -9,7 +9,7 @@ public interface SearchContract {
     interface View {
 
         void showExercise(Exercise exercise);
-
+        void back();
         SearchActivity.myViewHolder createSearchViewItem(ViewGroup parent);
 
         interface itemHolder {
@@ -19,6 +19,7 @@ public interface SearchContract {
 
     interface Presenter {
         void onClickExercise(int position);
+        void onBackPressed();
 
     }
 

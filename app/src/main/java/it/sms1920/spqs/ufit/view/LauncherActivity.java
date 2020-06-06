@@ -16,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
-
 public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.view {
 
     LauncherManager presenter;
@@ -68,8 +67,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                         break;
                     case R.id.nav_profile:
                         presenter.onProfileIconClick();
-                        startActivity(new Intent(LauncherActivity.this, ChooseActivity.class));
-                        finish();
                         break;
                 }
                 return true;
@@ -131,6 +128,12 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void startSearchActivity() {
         startActivity(new Intent(LauncherActivity.this, SearchActivity.class));
         overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
+    }
+
+    @Override
+    public void startLoginActivity() {
+        startActivity( new Intent( LauncherActivity.this, LoginActivity.class));
+        finish();
     }
 
     @Override

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
@@ -22,6 +24,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     Activity mContext = this;
     SearchAdapter adapter;
+    Button btnBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +33,24 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         setContentView(R.layout.activity_search);
         mContext = this;
 
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.onBackPressed();
+            }
+        });
+
         final SearchView keyString = findViewById(R.id.search_edit_text);
+        keyString.setIconified(false);
 
-
+        keyString.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                keyString.setQuery(null,false);
+                return true;
+            }
+        });
         keyString.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -58,9 +77,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+        adapter.onBackPressed();
     }
 
     @Override  // TODO aggiungere dinamicità in base all'esercizio
@@ -70,6 +87,13 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         startActivity(intent);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
+
+    @Override
+    public void back() {
+        finish();
+        overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+    }
+
 
     @Override
     public myViewHolder createSearchViewItem(ViewGroup parent) {
