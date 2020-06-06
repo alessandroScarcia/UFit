@@ -112,18 +112,18 @@
             android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="150dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintTop_toBottomOf="@id/lblAltezza" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSignOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_style"
-            android:text="Become Personal Trainer"
+            android:text="sign out"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
