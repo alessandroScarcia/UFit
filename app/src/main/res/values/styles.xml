@@ -24,4 +24,11 @@
         <item name="android:textColorLink">@color/colorSecondary</item>
     </style>
 
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <!-- Query Text Color -->
+        <item name="hintTextColor">@color/colorWhite90</item>
+        <!-- Icon Color -->
+        <item name="iconTint">@color/colorWhite76</item>
+    </style>
+
 </resources>

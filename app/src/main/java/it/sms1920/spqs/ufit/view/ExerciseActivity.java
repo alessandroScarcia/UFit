@@ -46,4 +46,15 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
         name.setText(exercise.getName());
         description.setText(exercise.getDescription());
     }
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
+
+    @Override
+    public void back() {
+        finish();
+        overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+    }
 }

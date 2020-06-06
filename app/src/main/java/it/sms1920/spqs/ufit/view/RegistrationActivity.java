@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,6 +29,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     private TextInputEditText txtConfirmPassword;
     private TextInputLayout txtConfirmPasswordLayout;
     private Button btnSignup;
+    private TextView lblLogin;
 
 
     @Override
@@ -42,6 +44,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
         txtConfirmPasswordLayout = findViewById(R.id.txtConfirmPasswordLayout);
         btnSignup = findViewById(R.id.btnSignUp);
+        lblLogin = findViewById(R.id.lblLogin);
 
         presenter = new RegistrationPresenter((RegistrationContract.View) mContext);
 
@@ -55,6 +58,13 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
                 presenter.onSignUp(txtEmail.getText().toString(), txtPassword.getText().toString(),
                         txtConfirmPassword.getText().toString());
 
+            }
+        });
+
+        lblLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onLoginRequest();
             }
         });
 
@@ -106,5 +116,14 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         btnSignup.setEnabled(enabled);
     }
 
+    @Override
+    public void startLoginActivity() {
+        finish();
+        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+    }
 
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
 }

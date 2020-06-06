@@ -55,4 +55,9 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
         notifyDataSetChanged();
     }
 
+    @Override
+    public void onBackPressed(){
+        view.back();
+    }
+
 }

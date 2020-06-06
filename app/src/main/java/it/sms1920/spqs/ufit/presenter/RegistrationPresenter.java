@@ -89,10 +89,20 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
             signUpSuccessful();
     }
 
+
+    @Override
+    public void onLoginRequest() {
+        view.startLoginActivity();
+    }
+
     @Override
     public void signUpSuccessful() {
         view.startLauncherActivity();
         // TODO SESSION
     }
 
+    @Override
+    public void onBackPressed() {
+        view.startLauncherActivity();
+    }
 }

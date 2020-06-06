@@ -11,6 +11,8 @@ public interface RegistrationContract {
 
         void setEnabledUI(boolean enabled);
 
+        void startLoginActivity();
+
     }
 
     interface Presenter {
@@ -29,7 +31,8 @@ public interface RegistrationContract {
         }
 
         void onSignUp(String email, String password, String confirmPassword);
-
+        void onLoginRequest();
+        void onBackPressed();
         void returnSignUpResult(AuthResultType check);
 
         void signUpSuccessful();

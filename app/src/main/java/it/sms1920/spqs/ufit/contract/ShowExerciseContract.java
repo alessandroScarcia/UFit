@@ -8,10 +8,12 @@ public interface ShowExerciseContract {
 
     interface view {
         void load(Exercise exercise);
+        void back();
     }
 
     interface presenter {
         void onCreateComplete(Intent intent);
+        void onBackPressed();
     }
 
 }

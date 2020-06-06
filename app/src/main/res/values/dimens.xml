@@ -5,7 +5,7 @@
     <dimen name="toolbar_elevation">0dp</dimen>
 
 
-    <dimen name="logo_height">180dp</dimen>
+    <dimen name="logo_height">160dp</dimen>
     <dimen name="logo_width">250dp</dimen>
 
 

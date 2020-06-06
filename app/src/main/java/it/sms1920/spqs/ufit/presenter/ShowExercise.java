@@ -20,4 +20,9 @@ public class ShowExercise implements ShowExerciseContract.presenter {
         this.exercise = (Exercise) intent.getSerializableExtra("Exercise");
         view.load(this.exercise);
     }
+
+    @Override
+    public void onBackPressed() {
+        view.back();
+    }
 }

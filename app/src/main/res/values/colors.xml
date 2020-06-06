@@ -11,6 +11,8 @@
     <color name="colorWhite76">#C2FFFFFF</color>
     <color name="colorWhite90">#E6FFFFFF</color>
 
+    <color name="colorOnSurface">#1F000000</color>
+
     <color name="colorAccent">#A5D6A7</color>
 
     <color name="cardGradient">#121212</color>
