@@ -49,4 +49,5 @@
     <string name="password_not_valid">"Needs at least 6 characters. Required: uppercase, lowercase, numbers and special chars"</string>
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">Email already exists</string>
+    <string name="send_email">Send</string>
 </resources>

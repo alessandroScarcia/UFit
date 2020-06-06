@@ -44,6 +44,9 @@
     <string name="email_already_exists">Email già in uso</string>
     <string name="confirm_password">Conferma Password</string>
     <string name="already_have_account">Già iscritto? Accedi.</string>
+
+    <!--Reset Password-->
+    <string name="send_email">Invia</string>
 </resources>
 
 
