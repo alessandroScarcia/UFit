@@ -3,7 +3,7 @@ package it.sms1920.spqs.ufit.presenter;
 import android.content.Intent;
 
 import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
-import it.sms1920.spqs.ufit.model.repository.Exercise;
+import it.sms1920.spqs.ufit.model.firebase.Exercise;
 
 public class ShowExercise implements ShowExerciseContract.presenter {
 

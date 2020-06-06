@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
-import it.sms1920.spqs.ufit.model.repository.Exercise;
+import it.sms1920.spqs.ufit.model.firebase.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
 

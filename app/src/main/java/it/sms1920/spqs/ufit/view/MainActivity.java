@@ -17,17 +17,12 @@ public class MainActivity extends AppCompatActivity implements AppLoading.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        presenter = new Loading(this);
+        presenter = new Loading();
         presenter.appInitialized();
     }
 
     @Override
     public void showLauncher() {
-
     }
 
-    @Override
-    public Context retriveApplicationContext() {
-        return getApplicationContext();
-    }
 }

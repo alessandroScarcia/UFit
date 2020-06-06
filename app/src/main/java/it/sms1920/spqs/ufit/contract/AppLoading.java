@@ -6,7 +6,6 @@ public interface AppLoading {
     interface View {
         void showLauncher();
 
-        Context retriveApplicationContext();
     }
 
     interface Presenter {

@@ -10,18 +10,15 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
-import it.sms1920.spqs.ufit.model.repository.Exercise;
-import it.sms1920.spqs.ufit.model.Search;
+import it.sms1920.spqs.ufit.model.firebase.Exercise;
 import it.sms1920.spqs.ufit.view.SearchActivity.myViewHolder;
 
 public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements SearchContract.Presenter {
 
     private List<Exercise> lstExercise = new ArrayList<>();
     private SearchContract.View view;
-    Search model;
 
     public SearchAdapter(SearchContract.View view) {
-        model = new Search();
         this.view = view;
     }
 
@@ -49,7 +46,7 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
     public void search(String keyString) {
         lstExercise.clear();
         notifyDataSetChanged();
-        lstExercise = new ArrayList<>(model.askForResult(keyString));
+        //lstExercise = new ArrayList<>(model.askForResult(keyString));
         notifyDataSetChanged();
     }
 
