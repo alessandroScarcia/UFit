@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,13 +10,15 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
-
 
 public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.view {
 
@@ -68,7 +71,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                         break;
                     case R.id.nav_profile:
                         presenter.onProfileIconClick();
-                        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
                         break;
                 }
                 return true;
@@ -130,6 +132,12 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void startSearchActivity() {
         startActivity(new Intent(LauncherActivity.this, SearchActivity.class));
         overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
+    }
+
+    @Override
+    public void startLoginActivity() {
+        finish();
+        startActivity( new Intent( LauncherActivity.this, LoginActivity.class));
     }
 
     @Override
