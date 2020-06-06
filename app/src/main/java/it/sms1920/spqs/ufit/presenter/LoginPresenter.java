@@ -93,4 +93,9 @@ public class LoginPresenter implements Login.Presenter {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        view.startLauncherActivity();
+    }
+
 }

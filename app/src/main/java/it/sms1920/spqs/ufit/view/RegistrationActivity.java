@@ -35,8 +35,8 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        txtEmail = findViewById(R.id.txtEmailReset);
-        txtEmailLayout = findViewById(R.id.txtEmailResetLayout);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtEmailLayout = findViewById(R.id.txtEmailLayout);
         txtPassword = findViewById(R.id.txtPassword);
         txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
         txtConfirmPassword = findViewById(R.id.txtConfirmPassword);

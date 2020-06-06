@@ -38,10 +38,10 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtEmail = findViewById(R.id.txtEmailReset);
+        txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
 
-        txtEmailLayout = findViewById(R.id.txtEmailResetLayout);
+        txtEmailLayout = findViewById(R.id.txtEmailLayout);
         txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
 
         lblForgotPassword = findViewById(R.id.lblForgotPassword);
@@ -149,4 +149,8 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         btnSignIn.setEnabled(enabled);
     }
 
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
 }

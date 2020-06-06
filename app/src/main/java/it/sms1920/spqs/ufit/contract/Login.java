@@ -29,6 +29,7 @@ public interface Login {
         void onSignIn(String email, String password);
         void returnSignInResult(AuthResultType check);
         void signInSuccessful();
+        void onBackPressed();
     }
 }
 
