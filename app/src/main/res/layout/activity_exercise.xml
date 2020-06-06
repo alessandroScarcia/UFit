@@ -14,7 +14,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Image of the exercise"
+        android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/esercizio" />
 
     <ImageView
@@ -24,8 +24,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/imgExercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="Gradient"
         app:srcCompat="@drawable/card_gradient" />
 
     <TextView
@@ -73,12 +73,12 @@
                 android:id="@+id/txtExerciseDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/bigger_standard_margin"
-                android:layout_marginTop="@dimen/bigger_standard_margin"
-                android:layout_marginEnd="@dimen/bigger_standard_margin"
+                android:layout_marginStart="@dimen/big_standard_margin"
+                android:layout_marginTop="@dimen/big_standard_margin"
+                android:layout_marginEnd="@dimen/big_standard_margin"
                 android:textColor="@color/colorWhite76"
                 android:fontFamily="@font/roboto"
-                android:text="ASIFUIfnalifnlasef alsefjmcalwejfnla fascufmhapoihemfcao aocmfpose"
+                android:text=""
                 android:textSize="@dimen/home_hintbox_hint_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

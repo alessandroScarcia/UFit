@@ -29,19 +29,21 @@
 
     <!-- Login -->
     <string name="login">Accedi</string>
-    <string name="forgot_password">Forgot password…</string>
-    <string name="not_registered_yet">Not registered yet? Sign-up.</string>
+    <string name="forgot_password">Recupera password.</string>
+    <string name="not_registered_yet">Non hai un account? Registrati.</string>
 
-    <string name="email_empty">"Email can not be empty"</string>
-    <string name="password_empty">"Password can not be empty"</string>
-    <string name="email_not_valid">"Email is not valid"</string>
-    <string name="password_not_valid">"Password format is not valid"</string>
-    <string name="password_not_match">"Password not match"</string>
-    <string name="email_not_exists">"This email doesn't exist in our database"</string>
+    <string name="email_empty">Inserisci un email</string>
+    <string name="password_empty">Inserisci una password</string>
+    <string name="email_not_valid">Non sembra una email questa</string>
+    <string name="password_not_valid">Deve essere di almeno 6 caratteri. Richieste maiuscole, minuscole, numeri e caratteri speciali.</string>
+    <string name="password_not_match">La password non è corretta</string>
+    <string name="email_not_exists">Account inesistente</string>
 
-    <string name="signup">Sign Up</string>
-    <string name="passwords_not_equal">"Insert same password pls"</string>
-    <string name="email_already_exists">"Insert same password pls"</string>
+    <string name="signup">Registrati</string>
+    <string name="passwords_not_equal">Le password non corrispondono</string>
+    <string name="email_already_exists">Email già in uso</string>
+    <string name="confirm_password">Conferma Password</string>
+    <string name="already_have_account">Già iscritto? Accedi.</string>
 </resources>
 
 

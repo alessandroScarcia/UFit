@@ -24,6 +24,7 @@
 
     <string name="email">E-Mail</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Add to your plan</string>
 
@@ -31,7 +32,7 @@
 
     <!-- Login -->
     <string name="login">Login</string>
-    <string name="forgot_password">Forgot password…</string>
+    <string name="forgot_password">Forgot password.</string>
     <string name="not_registered_yet">Not registered yet? Sign-up.</string>
 
     <string name="email_empty">"Email can not be empty"</string>
@@ -44,7 +45,8 @@
 
     <!-- Reg -->
     <string name="signup">Sign Up</string>
-    <string name="password_not_valid">"Required uppercase, lowercase, number and special char"</string>
+    <string name="already_have_account">Already have an account? Login.</string>
+    <string name="password_not_valid">"Needs at least 6 characters. Required: uppercase, lowercase, numbers and special chars"</string>
     <string name="passwords_not_equal">"Insert same password pls"</string>
-    <string name="email_already_exists">"Insert same password pls"</string>
+    <string name="email_already_exists">Email already exists</string>
 </resources>
