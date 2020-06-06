@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.presenter;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -9,6 +10,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.contract.Login;
@@ -83,7 +85,12 @@ public class LoginPresenter implements Login.Presenter {
 
     @Override
     public void signInSuccessful() {
-        view.startLauncherActivity();
+        FirebaseUser fbUser = firebaseAuth.getCurrentUser();
+
+        if( fbUser != null ) {
+            view.startLauncherActivity();
+
+        }
     }
 
 }

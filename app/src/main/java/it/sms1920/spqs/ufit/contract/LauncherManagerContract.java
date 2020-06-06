@@ -5,7 +5,7 @@ public interface LauncherManagerContract {
 
     interface view {
 
-        enum FragType { HOME, PLANS, TRAINER, STATS, PROFILE }
+        enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE}
 
         void insertHomeFragment();
 
@@ -18,7 +18,11 @@ public interface LauncherManagerContract {
         void insertProfileFragment();
 
         void startSearchActivity();
+
+        void startLoginActivity();
+
         void endActivity();
+
         void resetMenuIcons();
     }
 
@@ -34,6 +38,7 @@ public interface LauncherManagerContract {
         void onProfileIconClick();
 
         void onSearchIconClick();
+
         void onBackPressed();
     }
 

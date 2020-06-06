@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.presenter;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 
 import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType;
@@ -17,6 +19,7 @@ public class LauncherManager implements LauncherManagerContract.presenter {
     public LauncherManager(LauncherManagerContract.view view) {
         this.view = view;
     }
+
 
     @Override
     public void onHomeIconClick() {
@@ -44,8 +47,11 @@ public class LauncherManager implements LauncherManagerContract.presenter {
 
     @Override
     public void onProfileIconClick() {
-        view.insertProfileFragment();
-        currentFragment = PROFILE;
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {//se è già loggato
+            view.insertProfileFragment();
+            currentFragment = PROFILE;
+        } else
+            view.startLoginActivity();
     }
 
     @Override
