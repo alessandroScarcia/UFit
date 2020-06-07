@@ -8,8 +8,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -119,7 +117,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         @Override
         public void bind(Exercise item, final int position) {
-            this.image.setImageResource(R.drawable.esercizio);
+            this.image.setImageResource(R.drawable.img_exercise);
             this.name.setText(item.getName());
 
             itemView.setOnClickListener(new ImageView.OnClickListener() {
