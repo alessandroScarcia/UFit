@@ -4,19 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context="MainActivity">
+    android:background="@color/colorPrimaryDark"
+    tools:context="SplashScreenActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/activity_main_logo_width"
-        android:layout_height="@dimen/activity_main_logo_height"
-        android:contentDescription="@string/app_name"
+        android:id="@+id/logo"
+        android:layout_width="@dimen/logo_width"
+        android:layout_height="@dimen/logo_height"
         android:src="@drawable/ufit_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
