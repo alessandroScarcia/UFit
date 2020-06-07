@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     public void startLauncherActivity() {
         finish();
         startActivity(new Intent(LoginActivity.this, LauncherActivity.class));
+        this.overridePendingTransition(R.anim.idle, R.anim.idle);
     }
 
     @Override

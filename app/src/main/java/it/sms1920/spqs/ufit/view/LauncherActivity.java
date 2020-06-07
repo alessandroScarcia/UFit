@@ -84,7 +84,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void insertHomeFragment() {
         resetMenuIcons();
         menu.findItem(R.id.nav_home).setChecked(true);
-        menu.findItem(R.id.nav_home).setIcon(R.drawable.baseline_home_black_48dp);
+        menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
@@ -92,7 +92,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void insertPlansFragment() {
         resetMenuIcons();
         menu.findItem(R.id.nav_plans).setChecked(true);
-        menu.findItem(R.id.nav_plans).setIcon(R.drawable.baseline_assignment_black_48dp);
+        menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlansFragment()).commit();
 
     }
@@ -101,7 +101,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void insertTrainerFragment() {
         resetMenuIcons();
         menu.findItem(R.id.nav_trainer).setChecked(true);
-        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.baseline_supervisor_account_black_48dp);
+        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
 
     }
@@ -110,7 +110,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void insertStatsFragment() {
         resetMenuIcons();
         menu.findItem(R.id.nav_stats).setChecked(true);
-        menu.findItem(R.id.nav_stats).setIcon(R.drawable.baseline_assessment_black_48dp);
+        menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
 
     }
@@ -119,7 +119,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void insertProfileFragment() {
         resetMenuIcons();
         menu.findItem(R.id.nav_profile).setChecked(true);
-        menu.findItem(R.id.nav_profile).setIcon(R.drawable.baseline_account_box_black_48dp);
+        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
 
     }
@@ -143,11 +143,11 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
     @Override
     public void resetMenuIcons() {
-        menu.findItem(R.id.nav_home).setIcon(R.drawable.outline_home_black_48dp);
-        menu.findItem(R.id.nav_plans).setIcon(R.drawable.outline_assignment_black_48dp);
-        menu.findItem(R.id.nav_stats).setIcon(R.drawable.outline_assessment_black_48dp);
-        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.outline_supervisor_account_black_48dp);
-        menu.findItem(R.id.nav_profile).setIcon(R.drawable.outline_account_box_black_48dp);
+        menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_normal);
+        menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_normal);
+        menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_normal);
+        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_normal);
+        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_normal);
     }
 
 }

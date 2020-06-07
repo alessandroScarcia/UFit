@@ -9,13 +9,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.contract.RegistrationContract;
+import it.sms1920.spqs.ufit.model.User;
 
+import static it.sms1920.spqs.ufit.contract.Profile.Presenter.TABLE_USER;
 import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType.SIGNUP_SUCCESSFUL;
 import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType.USER_ALREADY_EXISTS;
 import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType.EMAIL_FIELD_EMPTY;
@@ -56,7 +59,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
     public void onSignUp(String email, String password, String confirmPassword) {
 
         if (checkFields(email, password, confirmPassword)) {
-            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -71,9 +74,11 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
                                 } catch (Exception e) {
                                     System.out.println(Arrays.toString(e.getStackTrace()));
                                 }
-                            } else
+                            } else {
                                 returnSignUpResult(SIGNUP_SUCCESSFUL);
-
+                                FirebaseDatabase.getInstance().getReference(TABLE_USER).child(firebaseAuth.getUid())
+                                        .setValue(new User());
+                            }
                         }
                     });
         }

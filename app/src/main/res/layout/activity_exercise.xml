@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/esercizio" />
+        app:srcCompat="@drawable/img_exercise" />
 
     <ImageView
         android:id="@+id/imgExerciseGradient"
@@ -26,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/card_gradient" />
+        app:srcCompat="@drawable/gradient_black" />
 
     <TextView
         android:id="@+id/txtExerciseName"
@@ -47,7 +47,7 @@
         android:layout_height="@dimen/icon_size"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_marginTop="@dimen/standard_margin"
-        android:background="@drawable/baseline_arrow_back_ios_black_48dp"
+        android:background="@drawable/ic_arrow_back_ios"
         android:backgroundTint="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="@+id/imgExercise"
         app:layout_constraintTop_toTopOf="@+id/imgExercise" />
@@ -94,7 +94,7 @@
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
             android:layout_marginBottom="@dimen/standard_margin"
-            android:background="@drawable/button_style"
+            android:background="@drawable/ufit_button"
             android:backgroundTint="@color/colorSecondary"
             android:text="@string/add_exercise_to_plan"
             app:layout_constraintBottom_toBottomOf="parent"

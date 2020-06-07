@@ -18,13 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import it.sms1920.spqs.ufit.contract.SearchContract;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+public class SearchActivity extends AppCompatActivity implements SearchContract.view {
 
     Activity mContext = this;
     SearchAdapter adapter;
@@ -65,7 +64,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
 
         // Setting adapter to the recycler view for search result
-        adapter = new SearchAdapter((SearchContract.View) mContext);
+        adapter = new SearchAdapter((SearchContract.view) mContext);
         adapter.search("");
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
@@ -92,11 +91,10 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
     }
 
-
     @Override
     public myViewHolder createSearchViewItem(ViewGroup parent) {
         LayoutInflater inflater = android.view.LayoutInflater.from(this);
-        android.view.View v = inflater.inflate(R.layout.item_exercise, parent, false);
+        View v = inflater.inflate(R.layout.item_exercise, parent, false);
 
         return new myViewHolder(v);
     }
@@ -108,9 +106,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         ImageView image;
         TextView name;
-        android.view.View itemView;
+        View itemView;
 
-        myViewHolder(@NonNull android.view.View itemView) {
+        myViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
             image = itemView.findViewById(R.id.imgExercise);
@@ -119,14 +117,13 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         @Override
         public void bind(Exercise item, final int position) {
-            this.image.setImageResource(R.drawable.esercizio);
-            // TODO: implement room usage
+            this.image.setImageResource(R.drawable.img_exercise);
             this.name.setText(item.getName());
 
             itemView.setOnClickListener(new ImageView.OnClickListener() {
 
                 @Override
-                public void onClick(android.view.View view) {
+                public void onClick(View view) {
                     adapter.onClickExercise(position);
                 }
             });
