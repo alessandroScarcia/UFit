@@ -28,7 +28,7 @@
                 android:layout_width="@dimen/logo_width"
                 android:layout_height="@dimen/logo_height"
                 android:layout_marginTop="64dp"
-                android:background="@drawable/logo"
+                android:background="@drawable/ufit_logo"
                 android:backgroundTint="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorWhite90"
                     android:inputType="textPassword"
-                    android:textCursorDrawable="@drawable/cursor"/>
+                    android:textCursorDrawable="@drawable/ufir_cursor"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +102,7 @@
                 android:layout_marginStart="@dimen/big_standard_margin"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:layout_marginEnd="@dimen/big_standard_margin"
-                android:background="@drawable/button_style"
+                android:background="@drawable/ufit_button"
                 android:backgroundTint="@color/colorSecondary"
                 android:text="@string/login"
                 android:textColor="@android:color/primary_text_light"

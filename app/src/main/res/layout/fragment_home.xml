@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include
+    <!--include
         android:id="@+id/last_used_card"
         layout="@layout/layout_card"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" /-->
 
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/home_hintbox_margin_x"
         android:layout_marginEnd="@dimen/home_hintbox_margin_x"
-        app:layout_constraintBottom_toTopOf="@+id/last_used_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,10 +25,10 @@
             android:id="@+id/txtDailyHint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Consiglio del giorno, non so che scrivere per riempire sto spazio così da vedere che effetto fa.."
-            android:textSize="@dimen/home_hintbox_hint_font_size"
             android:layout_marginStart="@dimen/card_text_margin_left"
-            android:fontFamily="@font/roboto"/>
+            android:fontFamily="@font/roboto"
+            android:text="Consiglio del giorno, non so che scrivere per riempire sto spazio così da vedere che effetto fa.."
+            android:textSize="@dimen/home_hintbox_hint_font_size" />
 
     </FrameLayout>
 

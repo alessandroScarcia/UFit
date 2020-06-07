@@ -19,7 +19,7 @@
 
     <style name="CustomMaterialEditext">
         <item name="colorControlActivated">@color/colorSecondary</item>
-        <item name="android:textCursorDrawable">@drawable/cursor</item>
+        <item name="android:textCursorDrawable">@drawable/ufir_cursor</item>
         <item name="android:textColorHighlight">@color/colorSecondary</item>
         <item name="android:textColorLink">@color/colorSecondary</item>
     </style>

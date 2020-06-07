@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/layout_tool_bar" />
+        layout="@layout/partial_tool_bar" />
 
 
     <FrameLayout
@@ -22,6 +22,6 @@
 
     <include
         android:id="@+id/bottom_bar"
-        layout="@layout/layout_bottom_bar" />
+        layout="@layout/partial_bottom_bar" />
 
 </RelativeLayout>
