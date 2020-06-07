@@ -22,7 +22,7 @@
             android:layout_height="41dp"
             android:layout_marginTop="9dp"
             android:layout_marginBottom="3dp"
-            android:background="@drawable/ufit_logo"
+            android:background="@drawable/ufit_logo_text"
             android:backgroundTint="@color/colorWhite90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

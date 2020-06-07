@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorWhite"
     android:theme="@style/Theme.MaterialComponents"
     tools:context="SearchActivity">
 
@@ -24,7 +24,7 @@
             style="@style/CustomMaterialEditextLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
-            app:startIconTint="@color/colorWhite76"
+            app:startIconTint="@color/colorWhite90"
             app:startIconDrawable="@drawable/ic_arrow_back"
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"

@@ -5,9 +5,10 @@
     <dimen name="toolbar_elevation">0dp</dimen>
 
 
-    <dimen name="logo_height">160dp</dimen>
-    <dimen name="logo_width">250dp</dimen>
-
+    <dimen name="logo_text_height">160dp</dimen>
+    <dimen name="logo_text_width">250dp</dimen>
+    <dimen name="logo_size">120dp</dimen>
+    <dimen name="fade_anim_duration">200</dimen>
 
     <dimen name="small_standard_margin">8dp</dimen>
     <dimen name="standard_margin">16dp</dimen>

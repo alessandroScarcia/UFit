@@ -36,7 +36,7 @@
         android:layout_marginStart="@dimen/standard_margin"
         android:fontFamily="@font/roboto_bold"
         android:text=""
-        android:textColor="@color/colorWhite90"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/exercise_card_title_size"
         app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
         app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
@@ -44,6 +44,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/lytEsercizio"
         android:layout_width="match_parent"
+
         android:layout_height="@dimen/exercise_card_thumbnail_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />

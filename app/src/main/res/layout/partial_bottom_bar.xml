@@ -8,5 +8,6 @@
     app:elevation="@dimen/bottombar_elevation"
     app:itemIconSize="@dimen/icon_size"
     app:itemIconTint="@drawable/ufit_bottom_bar"
+    app:itemTextColor="@color/colorWhite"
     app:menu="@menu/bottom_bar" />
 
