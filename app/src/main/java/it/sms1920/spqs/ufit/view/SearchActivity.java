@@ -23,7 +23,7 @@ import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.view {
+public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
     Activity mContext = this;
     SearchAdapter adapter;
@@ -64,7 +64,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
 
         // Setting adapter to the recycler view for search result
-        adapter = new SearchAdapter((SearchContract.view) mContext);
+        adapter = new SearchAdapter((SearchContract.View) mContext);
         adapter.search("");
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
@@ -77,8 +77,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         adapter.onBackPressed();
     }
 
-    @Override  // TODO aggiungere dinamicità in base all'esercizio
+    @Override
     public void showExercise(Exercise exercise) {
+        // TODO aggiungere dinamicità in base all'esercizio
         Intent intent = new Intent(this, ExerciseActivity.class);
         intent.putExtra("Exercise", exercise);
         startActivity(intent);
@@ -102,7 +103,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     /**
      * Recycler View Holder binds a single exercise to a single recyclerView row
      */
-    public class myViewHolder extends RecyclerView.ViewHolder implements itemHolder {
+    public class myViewHolder extends RecyclerView.ViewHolder implements SearchContract.View.itemHolder {
 
         ImageView image;
         TextView name;
