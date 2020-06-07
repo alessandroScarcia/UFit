@@ -79,7 +79,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     @Override
     public void showExercise(Exercise exercise) {
-        // TODO aggiungere dinamicità in base all'esercizio
         Intent intent = new Intent(this, ExerciseActivity.class);
         intent.putExtra("Exercise", exercise);
         startActivity(intent);

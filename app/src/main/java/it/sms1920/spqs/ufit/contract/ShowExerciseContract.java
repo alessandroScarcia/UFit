@@ -6,13 +6,21 @@ import it.sms1920.spqs.ufit.model.Exercise;
 
 public interface ShowExerciseContract {
 
-    interface view {
-        void load(Exercise exercise);
-        void back();
+    interface View {
+        void setName(String name);
+
+        void setDescription();
+
+        void setDescription(String description);
+
+        void setImage();
+
+        void closeActivity();
     }
 
-    interface presenter {
+    interface Presenter {
         void onCreateComplete(Intent intent);
+
         void onBackPressed();
     }
 
