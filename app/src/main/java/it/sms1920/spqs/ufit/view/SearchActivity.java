@@ -93,7 +93,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
     }
 
-
     @Override
     public myViewHolder createSearchViewItem(ViewGroup parent) {
         LayoutInflater inflater = android.view.LayoutInflater.from(this);
