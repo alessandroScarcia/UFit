@@ -3,6 +3,8 @@ package it.sms1920.spqs.ufit.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
@@ -25,7 +29,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     Activity mContext = this;
     SearchAdapter adapter;
-    Button btnBack;
 
 
     @Override
@@ -34,38 +37,33 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         setContentView(R.layout.activity_search);
         mContext = this;
 
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
+        TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
+
+        txtSearchFieldLayout.setStartIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adapter.onBackPressed();
             }
         });
 
-        final SearchView keyString = findViewById(R.id.search_edit_text);
-        keyString.setIconified(false);
-
-        keyString.setOnCloseListener(new SearchView.OnCloseListener() {
+        txtSearchField.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onClose() {
-                keyString.setQuery(null,false);
-                return true;
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adapter.search(charSequence.toString().trim());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
-        keyString.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-
-                adapter.search(s.trim());
-
-                return false;
-            }
-        });
 
         // Setting adapter to the recycler view for search result
         adapter = new SearchAdapter((SearchContract.view) mContext);
