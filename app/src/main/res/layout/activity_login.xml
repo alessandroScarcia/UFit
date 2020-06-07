@@ -25,10 +25,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView2"
-                android:layout_width="@dimen/logo_width"
-                android:layout_height="@dimen/logo_height"
+                android:layout_width="@dimen/logo_text_width"
+                android:layout_height="@dimen/logo_text_height"
                 android:layout_marginTop="64dp"
-                android:background="@drawable/ufit_logo"
+                android:background="@drawable/ufit_logo_text"
                 android:backgroundTint="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

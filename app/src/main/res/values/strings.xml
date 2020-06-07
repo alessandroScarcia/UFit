@@ -49,4 +49,8 @@
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">Email already exists</string>
     <string name="send_email">Send</string>
+
+
+
+    <string name="splash_screen_team_name">by SPQS</string>
 </resources>

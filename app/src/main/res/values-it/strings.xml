@@ -47,6 +47,10 @@
 
     <!--Reset Password-->
     <string name="send_email">Invia</string>
+
+
+
+    <string name="splash_screen_team_name">by SPQS</string>
 </resources>
 
 
