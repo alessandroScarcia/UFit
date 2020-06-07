@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ChooseActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".ExerciseActivity" />

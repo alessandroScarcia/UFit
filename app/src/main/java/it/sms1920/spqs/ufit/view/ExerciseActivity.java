@@ -2,7 +2,7 @@ package it.sms1920.spqs.ufit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
-import it.sms1920.spqs.ufit.model.firebase.Exercise;
+import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
 
 import android.os.Bundle;

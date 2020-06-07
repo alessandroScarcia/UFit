@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import it.sms1920.spqs.ufit.contract.SearchContract;
-import it.sms1920.spqs.ufit.model.firebase.Exercise;
+import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchAdapter;
 
 
@@ -121,7 +121,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         public void bind(Exercise item, final int position) {
             this.image.setImageResource(R.drawable.esercizio);
             // TODO: implement room usage
-            //this.name.setText(item.getName());
+            this.name.setText(item.getName());
 
             itemView.setOnClickListener(new ImageView.OnClickListener() {
 

@@ -2,7 +2,7 @@ package it.sms1920.spqs.ufit.contract;
 
 import android.content.Intent;
 
-import it.sms1920.spqs.ufit.model.firebase.Exercise;
+import it.sms1920.spqs.ufit.model.Exercise;
 
 public interface ShowExerciseContract {
 
