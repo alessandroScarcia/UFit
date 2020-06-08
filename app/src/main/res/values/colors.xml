@@ -6,6 +6,7 @@
     <color name="colorPrimaryLight">#4A6572</color>
 
     <color name="colorSecondary">#F9AA33</color>
+    <color name="colorSecondaryLight">#80F9AA33</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhite76">#C2FFFFFF</color>

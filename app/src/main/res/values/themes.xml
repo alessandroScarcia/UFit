@@ -13,11 +13,8 @@
 
 
     <style name="CustomMaterialComponent" parent="Theme.MaterialComponents">
-        <item name="colorControlHighlight">@color/colorSecondary</item>
-        <item name="colorOnPrimarySurface">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
 
 
 </resources>
