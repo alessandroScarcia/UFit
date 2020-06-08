@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
@@ -69,7 +70,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
-        rvSearchResult.setLayoutManager(new LinearLayoutManager(mContext));
+        rvSearchResult.setLayoutManager(new GridLayoutManager(this, 2));
     }
 
     @Override
