@@ -5,7 +5,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="colorPrimaryVariant">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondary</item>
@@ -13,7 +12,8 @@
 
 
     <style name="CustomMaterialComponent" parent="Theme.MaterialComponents">
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="android:textColorHighlight">@color/colorSecondaryLight</item>
     </style>
 
 

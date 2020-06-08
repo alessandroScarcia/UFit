@@ -5,11 +5,12 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 
-    <style name="CustomMaterialEditextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="CustomMaterialOutlinedEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/colorSecondary</item>
         <item name="hintTextColor">@color/colorSecondary</item>
         <item name="errorEnabled">true</item>
@@ -18,9 +19,18 @@
         <item name="colorControlNormal">@color/colorSecondary</item>
     </style>
 
-    <style name="CustomMaterialEditext">
+    <style name="CustomMaterialEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
+        <item name="errorEnabled">true</item>
+        <item name="colorAccent">@color/colorSecondary</item>
         <item name="colorControlActivated">@color/colorSecondary</item>
-        <item name="android:textCursorDrawable">@drawable/ufir_cursor</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
+    </style>
+
+    <style name="CustomMaterialEditText">
+        <item name="colorControlActivated">@color/colorSecondary</item>
+        <item name="android:textCursorDrawable">@drawable/ufit_cursor</item>
         <item name="android:textColorLink">@color/colorSecondary</item>
     </style>
 

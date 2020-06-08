@@ -62,7 +62,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtEmailLayout"
-                style="@style/CustomMaterialEditextLayout"
+                style="@style/CustomMaterialOutlinedEditTextLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/big_standard_margin"
@@ -75,7 +75,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtEmail"
-                    style="@style/CustomMaterialEditext"
+                    style="@style/CustomMaterialEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress" />
@@ -84,7 +84,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtPasswordLayout"
-                style="@style/CustomMaterialEditextLayout"
+                style="@style/CustomMaterialOutlinedEditTextLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/big_standard_margin"
@@ -97,7 +97,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPassword"
-                    style="@style/CustomMaterialEditext"
+                    style="@style/CustomMaterialEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -106,7 +106,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtConfirmPasswordLayout"
-                style="@style/CustomMaterialEditextLayout"
+                style="@style/CustomMaterialOutlinedEditTextLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/big_standard_margin"
@@ -119,7 +119,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtConfirmPassword"
-                    style="@style/CustomMaterialEditext"
+                    style="@style/CustomMaterialEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />

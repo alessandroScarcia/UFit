@@ -20,22 +20,26 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtSearchFieldLayout"
-            style="@style/CustomMaterialEditextLayout"
+            style="@style/CustomMaterialEditTextLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
             app:endIconMode="clear_text"
+            android:saveEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:focusedByDefault="true"
             app:layout_constraintTop_toTopOf="parent"
+            app:helperText="Insert here to search"
+            app:helperTextEnabled="true"
             app:startIconDrawable="@drawable/ic_arrow_back"
             app:startIconTint="@color/colorWhite90">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtSearchField"
-                style="@style/CustomMaterialEditext"
+                style="@style/CustomMaterialEditText"
+                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
                 android:paddingTop="10dp"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
