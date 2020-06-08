@@ -103,7 +103,6 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
     @Override
     public void signUpSuccessful() {
         view.startLauncherActivity();
-        // TODO SESSION
     }
 
     @Override

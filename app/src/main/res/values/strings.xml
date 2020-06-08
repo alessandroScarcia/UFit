@@ -30,6 +30,22 @@
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Add to your plan</string>
 
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Not specified</item>
+    </string-array>
+
+    <string-array name="weight_units">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+
+    <string-array name="height_untis">
+        <item>cm</item>
+        <item>in</item>
+    </string-array>
+
 
     <!-- Login -->
     <string name="login">Login</string>
