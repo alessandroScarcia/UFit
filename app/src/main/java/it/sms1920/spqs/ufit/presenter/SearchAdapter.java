@@ -43,7 +43,6 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         loadExerciseList();
-
     }
 
     @NonNull
@@ -82,6 +81,7 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
 
                 Exercise exercise = dataSnapshot.getValue(Exercise.class);
                 lstExerciseFull.add(exercise);
+                lstExercise.add(exercise);
                 notifyDataSetChanged();
             }
 
@@ -122,8 +122,7 @@ public class SearchAdapter extends RecyclerView.Adapter<myViewHolder> implements
     }
 
 
-    public class ExerciseComparator implements Comparator<Exercise> {
-
+    public static class ExerciseComparator implements Comparator<Exercise> {
         @Override
         public int compare(Exercise o1, Exercise o2) {
             return o1.getName().compareTo(o2.getName());

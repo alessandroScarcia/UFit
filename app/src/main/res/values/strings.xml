@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UFit</string>
+    <string name="splash_screen_team_name">by SPQS</string>
 
     <string name="home">Home</string>
     <string name="plan">Plans</string>
@@ -14,6 +15,7 @@
 
     <string name="addTo">Add to…</string>
 
+    <string name="loading">Loading&#8230;</string>
 
     <!-- Profile -->
     <string name="name">Name</string>
@@ -49,8 +51,4 @@
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">Email already exists</string>
     <string name="send_email">Send</string>
-
-
-
-    <string name="splash_screen_team_name">by SPQS</string>
 </resources>

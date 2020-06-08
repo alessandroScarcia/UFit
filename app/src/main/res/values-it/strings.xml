@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UFit</string>
+    <string name="splash_screen_team_name">by SPQS</string>
 
     <string name="home">Home</string>
     <string name="plan">Schede</string>
@@ -13,6 +14,7 @@
 
     <string name="addTo">Aggiungi a…</string>
 
+    <string name="loading">Caricamento&#8230;</string>
 
     <!-- Profilo -->
     <string name="name">Nome</string>
@@ -47,10 +49,6 @@
 
     <!--Reset Password-->
     <string name="send_email">Invia</string>
-
-
-
-    <string name="splash_screen_team_name">by SPQS</string>
 </resources>
 
 
