@@ -5,30 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
 import it.sms1920.spqs.ufit.model.Exercise;
-import it.sms1920.spqs.ufit.presenter.SearchAdapter;
+import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
     Activity mContext = this;
-    SearchAdapter adapter;
-
+    SearchPresenter presenter;
+    SearchListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +30,15 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         setContentView(R.layout.activity_search);
         mContext = this;
 
+        presenter = new SearchPresenter(this);
+
         TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
         TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
 
         txtSearchFieldLayout.setStartIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.onBackPressed();
+                presenter.onBackPressed();
             }
         });
 
@@ -54,7 +50,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                adapter.search(charSequence.toString().trim());
+                presenter.onQueryTextChanged(charSequence.toString());
             }
 
             @Override
@@ -65,8 +61,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
 
         // Setting adapter to the recycler view for search result
-        adapter = new SearchAdapter((SearchContract.View) mContext);
-        adapter.search("");
+        adapter = new SearchListAdapter(this);
 
         RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
         rvSearchResult.setAdapter(adapter);
@@ -75,13 +70,13 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
     @Override
     public void onBackPressed() {
-        adapter.onBackPressed();
+        presenter.onBackPressed();
     }
 
-    @Override
-    public void showExercise(Exercise exercise) {
+    public void startExerciseActivity(int exerciseId, String exerciseName) {
         Intent intent = new Intent(this, ExerciseActivity.class);
-        intent.putExtra("Exercise", exercise);
+        intent.putExtra("exerciseId", exerciseId);
+        intent.putExtra("exerciseName", exerciseName);
         startActivity(intent);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
@@ -93,42 +88,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public myViewHolder createSearchViewItem(ViewGroup parent) {
-        LayoutInflater inflater = android.view.LayoutInflater.from(this);
-        View v = inflater.inflate(R.layout.item_exercise, parent, false);
-
-        return new myViewHolder(v);
+    public void notifyQueryTextChangedToAdapter(String query) {
+        adapter.changeQueryText(query);
     }
 
-    /**
-     * Recycler View Holder binds a single exercise to a single recyclerView row
-     */
-    public class myViewHolder extends RecyclerView.ViewHolder implements SearchContract.View.itemHolder {
-
-        ImageView image;
-        TextView name;
-        View itemView;
-
-        myViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.itemView = itemView;
-            image = itemView.findViewById(R.id.imgExercise);
-            name = itemView.findViewById(R.id.txtExerciseName);
-        }
-
-        @Override
-        public void bind(Exercise item, final int position) {
-            this.image.setImageResource(R.drawable.img_exercise);
-            this.name.setText(item.getName());
-
-            itemView.setOnClickListener(new ImageView.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    adapter.onClickExercise(position);
-                }
-            });
-        }
-    }
 
 }

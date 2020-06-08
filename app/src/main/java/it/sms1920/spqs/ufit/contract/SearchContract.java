@@ -7,20 +7,13 @@ import it.sms1920.spqs.ufit.view.SearchActivity;
 
 public interface SearchContract {
     interface View {
-
-        void showExercise(Exercise exercise);
         void back();
-        SearchActivity.myViewHolder createSearchViewItem(ViewGroup parent);
-
-        interface itemHolder {
-            void bind(Exercise item, final int position);
-        }
+        void notifyQueryTextChangedToAdapter(String query);
     }
 
     interface Presenter {
-        void onClickExercise(int position);
         void onBackPressed();
-
+        void onQueryTextChanged(String query);
     }
 
 }
