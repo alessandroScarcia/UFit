@@ -11,7 +11,7 @@
         android:id="@+id/logo"
         android:layout_width="@dimen/logo_size"
         android:layout_height="@dimen/logo_size"
-        android:src="@drawable/ufit_logo_small"
+        android:src="@drawable/ufit_logo_small_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -7,6 +7,19 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorPrimaryVariant">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondary</item>
     </style>
+
+
+    <style name="CustomMaterialComponent" parent="Theme.MaterialComponents">
+        <item name="colorControlHighlight">@color/colorSecondary</item>
+        <item name="colorOnPrimarySurface">@color/colorSecondary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+    </style>
+
+
 
 </resources>
