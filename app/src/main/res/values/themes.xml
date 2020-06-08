@@ -16,8 +16,6 @@
         <item name="colorControlHighlight">@color/colorSecondary</item>
         <item name="colorOnPrimarySurface">@color/colorSecondary</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-
     </style>
 
 

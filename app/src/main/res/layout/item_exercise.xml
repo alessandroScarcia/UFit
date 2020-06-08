@@ -2,50 +2,72 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="1dp"
     android:layout_width="match_parent"
     android:layout_height="@dimen/exercise_card_height"
+    android:layout_marginBottom="1dp"
     android:orientation="vertical">
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/appCompatImageView"
-        android:layout_width="@dimen/exercise_card_thumbnail_size"
-        android:layout_height="@dimen/exercise_card_thumbnail_size"
-        android:layout_marginStart="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorWhite"
         app:cardCornerRadius="@dimen/image_corner_radius"
-        app:cardElevation="0dp"
+        app:cardElevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgExercise"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerInside"
-            android:src="@drawable/img_exercise"
-            tools:ignore="ContentDescription" />
+            android:layout_height="match_parent">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="@dimen/exercise_card_thumbnail_size"
+                android:layout_height="@dimen/exercise_card_thumbnail_size"
+                android:layout_marginStart="@dimen/small_standard_margin"
+                android:layout_marginTop="@dimen/small_standard_margin"
+                app:cardCornerRadius="@dimen/image_corner_radius"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgExercise"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_exercise"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtExerciseName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:fontFamily="@font/roboto_bold"
+                android:text=""
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/exercise_card_title_size"
+                app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/lytEsercizio"
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/exercise_card_thumbnail_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/txtExerciseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/standard_margin"
-        android:fontFamily="@font/roboto_bold"
-        android:text=""
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/exercise_card_title_size"
-        app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-        app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/lytEsercizio"
-        android:layout_width="match_parent"
-
-        android:layout_height="@dimen/exercise_card_thumbnail_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
