@@ -8,6 +8,28 @@
         <item name="colorControlNormal">@color/colorSecondary</item>
     </style>
 
+    <style name="CustomMaterialOutlinedEditTextDenseLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="helperTextEnabled">false</item>
+        <item name="colorControlActivated">@color/colorSecondary</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
+        <item name="android:textColorHint">@null</item>
+        <item name="suffixTextColor">@color/colorGray50</item>
+    </style>
+
+    <style name="CustomMaterialOutlinedEditTextDenseLayoutDropDown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="helperTextEnabled">false</item>
+        <item name="colorControlActivated">@color/colorSecondary</item>
+
+        <item name="android:textColorHint">@null</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
+    </style>
+
     <style name="CustomMaterialEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxStrokeColor">@color/colorSecondary</item>
         <item name="hintTextColor">@color/colorSecondary</item>

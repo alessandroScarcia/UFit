@@ -1,15 +1,13 @@
 package it.sms1920.spqs.ufit.view;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
-import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
-
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 public class ExerciseActivity extends AppCompatActivity implements ShowExerciseContract.View {
@@ -19,6 +17,7 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
     private TextView name;
     private TextView description;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,23 +25,22 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
 
         // Setting toolbar
         toolbar = findViewById(R.id.tool_bar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setTitleTextColor(getColor(R.color.colorWhite));
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onBackPressed();
+            }
+        });
 
 
         presenter = new ShowExercise(this);
 
         name = findViewById(R.id.txtExerciseName);
         description = findViewById(R.id.txtExerciseDescription);
-        Button btn = findViewById(R.id.btnBack);
-
-        btn.setOnClickListener(new Button.OnClickListener() {
-
-            @Override
-            public void onClick(android.view.View view) {
-                finish();
-                overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
-            }
-        });
 
         presenter.onCreateComplete(getIntent());
     }

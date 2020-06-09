@@ -66,4 +66,10 @@ public class LauncherManager implements LauncherManagerContract.presenter {
             currentFragment = HOME;
         } else view.endActivity();
     }
+
+    @Override
+    public void onLogOutIconClick() {
+        view.resetActivity();
+        FirebaseAuth.getInstance().signOut();
+    }
 }

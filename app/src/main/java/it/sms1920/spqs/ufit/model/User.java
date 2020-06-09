@@ -1,15 +1,39 @@
 package it.sms1920.spqs.ufit.model;
 
-import android.icu.util.LocaleData;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import androidx.annotation.NonNull;
 
 public class User {
 
-    public enum Gender {MALE, FEMALE, NOT_SPECIFIED};
-    public enum HeightUnit{CM, IN};
-    public enum WeightUnit{KG, LB};
+    public enum Gender {
+
+        MALE, FEMALE, NOT_SPECIFIED;
+
+        @NonNull
+        @Override
+        public String toString() {
+            return super.toString().substring(0, 1).toUpperCase()
+                    + super.toString().substring(1).toLowerCase();
+        }
+    }
+
+    public enum HeightUnit {CM, IN;
+
+        @NonNull
+        @Override
+        public String toString() {
+            return super.toString().toLowerCase();
+        }
+    }
+
+    public enum WeightUnit {KG, LB;
+
+        @NonNull
+        @Override
+        public String toString() {
+            return super.toString().toLowerCase();
+        }
+    }
+
 
     private String linkImgProfile;
     private String name;
@@ -42,7 +66,7 @@ public class User {
 
 
     //viene settato così perchè viene inizializzato all'interno del realtime database
-    public User(){
+    public User() {
         this.linkImgProfile = "";
         this.name = "";
         this.surname = "";
@@ -53,8 +77,9 @@ public class User {
         this.weightUnit = WeightUnit.KG;
         this.heightCm = 0;
         this.heightIn = 0;
-        this.dateBirth= "";
+        this.dateBirth = "";
     }
+
     public HeightUnit getHeightUnit() {
         return heightUnit;
     }

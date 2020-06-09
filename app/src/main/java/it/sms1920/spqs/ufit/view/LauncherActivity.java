@@ -2,13 +2,11 @@ package it.sms1920.spqs.ufit.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +18,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
     LauncherManager presenter;
     Menu menu;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         setContentView(R.layout.activity_launcher);
 
         // Setting toolbar
-        Toolbar toolbar = findViewById(R.id.tool_bar);
+        toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         presenter = new LauncherManager(this);
@@ -63,7 +62,9 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                 return true;
             }
         });
-        insertHomeFragment();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
     }
 
     @Override
@@ -80,6 +81,9 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
             case R.id.search:
                 presenter.onSearchIconClick();
                 return true;
+            case R.id.logout:
+                presenter.onLogOutIconClick();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -93,6 +97,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     @Override
     public void insertHomeFragment() {
         resetMenuIcons();
+        resetToolbarIcons();
+        toolbar.getMenu().findItem(R.id.search).setVisible(true);
         menu.findItem(R.id.nav_home).setChecked(true);
         menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -101,37 +107,38 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     @Override
     public void insertPlansFragment() {
         resetMenuIcons();
+        resetToolbarIcons();
         menu.findItem(R.id.nav_plans).setChecked(true);
         menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlansFragment()).commit();
-
     }
 
     @Override
     public void insertTrainerFragment() {
         resetMenuIcons();
+        resetToolbarIcons();
         menu.findItem(R.id.nav_trainer).setChecked(true);
         menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
-
     }
 
     @Override
     public void insertStatsFragment() {
         resetMenuIcons();
+        resetToolbarIcons();
         menu.findItem(R.id.nav_stats).setChecked(true);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
-
     }
 
     @Override
     public void insertProfileFragment() {
         resetMenuIcons();
+        resetToolbarIcons();
+        toolbar.getMenu().findItem(R.id.logout).setVisible(true);
         menu.findItem(R.id.nav_profile).setChecked(true);
         menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-
     }
 
     @Override
@@ -152,12 +159,22 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     }
 
     @Override
+    public void resetActivity() {
+        startActivity(new Intent(this, LauncherActivity.class));
+        finish();
+    }
+
     public void resetMenuIcons() {
         menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_normal);
         menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_normal);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_normal);
         menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_normal);
         menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_normal);
+    }
+
+    public void resetToolbarIcons() {
+        toolbar.getMenu().findItem(R.id.logout).setVisible(false);
+        toolbar.getMenu().findItem(R.id.search).setVisible(false);
     }
 
 }

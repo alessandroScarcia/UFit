@@ -14,6 +14,7 @@
     <dimen name="logo_size">120dp</dimen>
     <dimen name="fade_anim_duration">200</dimen>
 
+    <dimen name="smaller_standard_margin">4dp</dimen>
     <dimen name="small_standard_margin">8dp</dimen>
     <dimen name="standard_margin">16dp</dimen>
     <dimen name="medium_standard_margin">24dp</dimen>
@@ -47,8 +48,8 @@
 
 
     <!-- FragmentProfile -->
-    <dimen name="profile_image_size">200dp</dimen>
-    <dimen name="profile_image_corner_radius">100dp</dimen>
+    <dimen name="profile_image_size">120dp</dimen>
+    <dimen name="profile_image_corner_radius">60dp</dimen>
     <dimen name="profile_font_size_big">28sp</dimen>
     <dimen name="profile_font_size_normal">18sp</dimen>
     <dimen name="profile_font_size_small">16sp</dimen>

@@ -10,6 +10,8 @@
     <string name="profile">Profile</string>
 
 
+    <string name="signout">Sign Out</string>
+
     <string name="myPlans">My workout plans</string>
     <string name="trainerPlans">Trainer\'s workout plans</string>
 
@@ -29,6 +31,8 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Add to your plan</string>
+    <string name="gender">Gender</string>
+    <string name="date">Date of birth</string>
 
     <string-array name="genders">
         <item>Male</item>

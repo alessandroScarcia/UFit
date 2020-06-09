@@ -1,7 +1,6 @@
 package it.sms1920.spqs.ufit.presenter;
 
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -14,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,12 +39,6 @@ public class ProfilePresenter implements Profile.Presenter {
 
 
     @Override
-    public void onSignOut() {
-        FirebaseAuth.getInstance().signOut();
-        view.resetLauncherActivity();
-    }
-
-    @Override
     public void onChangePassword(String newPassword) {
         firebaseUser.updatePassword(newPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -62,7 +56,7 @@ public class ProfilePresenter implements Profile.Presenter {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        }else{
+                        } else {
 
                         }
                     }
@@ -76,22 +70,21 @@ public class ProfilePresenter implements Profile.Presenter {
         firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(!task.isSuccessful()){
+                if (!task.isSuccessful()) {
                     try {
                         throw task.getException();
-                    }catch(FirebaseAuthInvalidCredentialsException e){
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
                         e.printStackTrace();
-                    }catch(FirebaseAuthUserCollisionException e){
+                    } catch (FirebaseAuthUserCollisionException e) {
                         e.printStackTrace();
-                    }catch(FirebaseAuthInvalidUserException e){
+                    } catch (FirebaseAuthInvalidUserException e) {
                         e.printStackTrace();
-                    }catch(FirebaseAuthRecentLoginRequiredException e){
+                    } catch (FirebaseAuthRecentLoginRequiredException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }else{
+                } else {
 
                 }
             }
@@ -100,7 +93,6 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onChangeName(String newName) {
-
     }
 
     @Override
@@ -141,17 +133,17 @@ public class ProfilePresenter implements Profile.Presenter {
     @Override
     public void onUpdateRequest() {
         database.child(firebaseUser.getUid());
-        Log.i("Pippo",firebaseUser.getUid());
+        Log.i("Pippo", firebaseUser.getUid());
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("pippo","steng a qua");
+                Log.i("pippo", "steng a qua");
                 User userInfo = dataSnapshot.getValue(User.class);
 
-                if(userInfo!=null)
-                   Log.i("pippo",userInfo.getName() + "pippo");
+                if (userInfo != null)
+                    Log.i("pippo", userInfo.getName() + "pippo");
                 else
-                    Log.i("pippo","è nullo");
+                    Log.i("pippo", "è nullo");
 
                 view.updateInfo(userInfo);
             }

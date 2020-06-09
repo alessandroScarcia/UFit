@@ -34,4 +34,9 @@ public class ResetPasswordPresenter implements ResetPassword.Presenter {
                 });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        view.closeActivity();
+    }
 }
