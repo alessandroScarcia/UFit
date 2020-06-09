@@ -13,10 +13,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
+import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
+public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.view {
 
-public class LauncherActivity extends AppCompatActivity {
+    LauncherManager presenter;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,108 +30,134 @@ public class LauncherActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        //ImageView img = findViewById(R.id.logo);
-        //img.getLayoutParams().height = (int) getResources().getDimension(R.dimen.toolbar_height);
+        presenter = new LauncherManager(this);
 
-        Button btnSearch = findViewById(R.id.btnSearch);
-        btnSearch.setOnClickListener(new FloatingActionButton.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LauncherActivity.this, SearchActivity.class));
-                overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
-            }
-        });
-
-
-        // Starting with Home at the launch
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
         // Setting bottom bar
         final BottomNavigationView bottomNav = findViewById(R.id.bottom_bar);
+        menu = bottomNav.getMenu();
+
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment selectedFragment = null;
-                Menu menu = bottomNav.getMenu();
 
                 // Choosing right fragment ( click on home -> choose FragmentHome, etc.. )
                 switch (menuItem.getItemId()) {
-
                     // Home
                     case R.id.nav_home:
-                        resetBottomIcons(menu);
-                        // Marking current item icon
-                        menu.findItem(R.id.nav_home).setIcon(R.drawable.baseline_home_black_48dp);
-                        selectedFragment = new HomeFragment();
+                        presenter.onHomeIconClick();
                         break;
-
-                    // Plans
                     case R.id.nav_plans:
-                        resetBottomIcons(menu);
-                        // Marking current item icon
-                        menu.findItem(R.id.nav_plans).setIcon(R.drawable.baseline_assignment_black_48dp);
-                        selectedFragment = new PlansFragment();
+                        presenter.onPlansIconClick();
                         break;
-
-                    // Trainer
                     case R.id.nav_trainer:
-                        resetBottomIcons(menu);
-                        // Marking current item icon
-                        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.baseline_supervisor_account_black_48dp);
-                        selectedFragment = new TrainerFragment();
+                        presenter.onTrainerIconClick();
                         break;
-
-                    // Stats
                     case R.id.nav_stats:
-                        resetBottomIcons(menu);
-                        // Marking current item icon
-                        menu.findItem(R.id.nav_stats).setIcon(R.drawable.baseline_assessment_black_48dp);
-                        selectedFragment = new StatsFragment();
+                        presenter.onStatsIconClick();
                         break;
-
-                    // Profile
                     case R.id.nav_profile:
-                        resetBottomIcons(menu);
-                        menu.findItem(R.id.nav_profile).setIcon(R.drawable.baseline_account_box_black_48dp);
-                        startActivity(new Intent(LauncherActivity.this, ChooseActivity.class));
-                        finish();
-                        selectedFragment = new ProfileFragment();
+                        presenter.onProfileIconClick();
                         break;
                 }
-
-                // Replacing old fragment with the selected one
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                 return true;
-
             }
         });
+        insertHomeFragment();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar.
+        getMenuInflater().inflate(R.menu.tool_bar_launcher, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.search:
+                presenter.onSearchIconClick();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-        /*final FloatingActionButton profile = findViewById(R.id.btnProfile);
-        profile.setOnClickListener(new FloatingActionButton.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityLauncher.this, Profile.class));
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
 
-            }
-        });*/
+    @Override
+    public void insertHomeFragment() {
+        resetMenuIcons();
+        menu.findItem(R.id.nav_home).setChecked(true);
+        menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+    }
+
+    @Override
+    public void insertPlansFragment() {
+        resetMenuIcons();
+        menu.findItem(R.id.nav_plans).setChecked(true);
+        menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutPlansFragment()).commit();
 
     }
 
-    /**
-     * Unmark all bottom bar icons to their outline version, usefull in marking only selected one item icon in bottomBarListener
-     *
-     * @param menu Bottom bar menu
-     */
-    private void resetBottomIcons(Menu menu) {
-        menu.findItem(R.id.nav_home).setIcon(R.drawable.outline_home_black_48dp);
-        menu.findItem(R.id.nav_plans).setIcon(R.drawable.outline_assignment_black_48dp);
-        menu.findItem(R.id.nav_stats).setIcon(R.drawable.outline_assessment_black_48dp);
-        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.outline_supervisor_account_black_48dp);
-        menu.findItem(R.id.nav_profile).setIcon(R.drawable.outline_account_box_black_48dp);
+    @Override
+    public void insertTrainerFragment() {
+        resetMenuIcons();
+        menu.findItem(R.id.nav_trainer).setChecked(true);
+        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
+
+    }
+
+    @Override
+    public void insertStatsFragment() {
+        resetMenuIcons();
+        menu.findItem(R.id.nav_stats).setChecked(true);
+        menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
+
+    }
+
+    @Override
+    public void insertProfileFragment() {
+        resetMenuIcons();
+        menu.findItem(R.id.nav_profile).setChecked(true);
+        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+
+    }
+
+    @Override
+    public void startSearchActivity() {
+        startActivity(new Intent(LauncherActivity.this, SearchActivity.class));
+        overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
+    }
+
+    @Override
+    public void startLoginActivity() {
+        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
+        finish();
+    }
+
+    @Override
+    public void endActivity() {
+        finish();
+    }
+
+    @Override
+    public void resetMenuIcons() {
+        menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_normal);
+        menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_normal);
+        menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_normal);
+        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_normal);
+        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_normal);
     }
 
 }

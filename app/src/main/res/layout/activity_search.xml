@@ -4,39 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".view.SearchActivity">
+    android:background="@color/colorWhite"
+    android:theme="@style/CustomMaterialComponent"
+    tools:context="SearchActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_bar_layout"
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/search_bar_height"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimary">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <SearchView
-            android:id="@+id/search_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtSearchFieldLayout"
+            style="@style/CustomMaterialEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:helperText="Insert here to search"
+            app:startIconDrawable="@drawable/ic_arrow_back"
+            app:startIconTint="@color/colorWhite90">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtSearchField"
+                style="@style/CustomMaterialEditText"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchResult"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/lightGray"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar_layout" />
-
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

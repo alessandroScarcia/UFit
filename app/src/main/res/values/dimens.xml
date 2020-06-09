@@ -4,6 +4,21 @@
     <dimen name="toolbar_height">60dp</dimen>
     <dimen name="toolbar_elevation">0dp</dimen>
 
+    <dimen name="item_exercise_card_height">220dp</dimen>
+    <dimen name="item_exercise_card_image_height">150dp</dimen>
+    <dimen name="item_exercise_card_text_size">20sp</dimen>
+
+
+    <dimen name="logo_text_height">160dp</dimen>
+    <dimen name="logo_text_width">250dp</dimen>
+    <dimen name="logo_size">120dp</dimen>
+    <dimen name="fade_anim_duration">200</dimen>
+
+    <dimen name="small_standard_margin">8dp</dimen>
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="medium_standard_margin">24dp</dimen>
+    <dimen name="big_standard_margin">32dp</dimen>
+
     <dimen name="icon_size">28dp</dimen>
 
     <dimen name="bottombar_elevation">1dp</dimen>
@@ -14,7 +29,7 @@
 
     <dimen name="plans_tab_items_height">45dp</dimen>
 
-    <dimen name="search_bar_height">60dp</dimen>
+    <dimen name="search_bar_height">65dp</dimen>
 
     <dimen name="exercise_thumbnail_height">300dp</dimen>
     <dimen name="exercise_thumbnail_gradient_height">150dp</dimen>
@@ -24,9 +39,11 @@
     <dimen name="image_corner_radius">5dp</dimen>
 
     <!-- ActivityExercise card -->
-    <dimen name="exercise_card_height">104dp</dimen>
-    <dimen name="exercise_card_thumbnail_size">88dp</dimen>
-    <dimen name="exercise_card_title_size">21sp</dimen>
+    <dimen name="exercise_card_height">212dp</dimen>
+    <dimen name="exercise_card_width">182dp</dimen>
+    <dimen name="exercise_card_thumbnail_size">150dp</dimen>
+    <dimen name="exercise_card_title_size">20sp</dimen>
+    <dimen name="exercise_card_title_width">134dp</dimen>
 
 
     <!-- FragmentProfile -->
@@ -45,7 +62,13 @@
     <!-- ButtonStyle values -->
     <dimen name="button_padding_x">8dp</dimen>
     <dimen name="button_corner_radius">30dp</dimen>
-    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_height">50dp</dimen>
+
+    <!-- Main Activity Logo -->
+    <dimen name="activity_main_logo_width">200dp</dimen>
+    <dimen name="activity_main_logo_height">200dp</dimen>
 
 
+    <dimen name="search_bar_text_size">20sp</dimen>
+    <dimen name="search_bar_padding_top">10dp</dimen>
 </resources>

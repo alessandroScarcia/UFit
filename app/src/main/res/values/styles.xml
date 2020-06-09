@@ -1,11 +1,45 @@
 <resources>
+    <style name="CustomMaterialOutlinedEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
+        <item name="errorEnabled">true</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="colorControlActivated">@color/colorSecondary</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
+    </style>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="CustomMaterialEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
+        <item name="errorEnabled">true</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+        <item name="colorControlActivated">@color/colorSecondary</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
+    </style>
+
+    <style name="CustomMaterialEditText">
+        <item name="colorControlActivated">@color/colorSecondary</item>
+        <item name="android:textCursorDrawable">@drawable/ufit_cursor</item>
+        <item name="android:textColorLink">@color/colorSecondary</item>
+    </style>
+
+    <style name="CustomMaterialButtonIcon" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:colorPressedHighlight">@color/colorTransparent</item>
+        <item name="android:colorLongPressedHighlight">@color/colorTransparent</item>
+        <item name="background">@color/colorTransparent</item>
+        <item name="backgroundTint">@color/colorTransparent</item>
+        <item name="backgroundColor">@color/colorTransparent</item>
+    </style>
+
+    <style name="CustomMaterialButton" parent="@style/Widget.MaterialComponents.Button">
+        <item name="background">@drawable/ufit_button</item>
+        <item name="backgroundTint">@color/colorSecondary</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textColor">@null</item>
+    </style>
+
+    <style name="CustomMaterialToolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+
     </style>
 
 

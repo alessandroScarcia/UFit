@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlWorkoutPlans"
         android:layout_width="0dp"
         android:layout_height="@dimen/plans_tab_items_height"
         android:elevation="@dimen/toolbar_elevation"
@@ -34,10 +35,11 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/plans_tab_items_height">
 
-        <Button
-            android:id="@+id/btn"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWorkoutPlans"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Button" />
+            android:visibility="visible" />
+
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

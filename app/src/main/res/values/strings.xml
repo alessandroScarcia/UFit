@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">UFit</string>
+    <string name="splash_screen_team_name">by SPQS</string>
 
     <string name="home">Home</string>
     <string name="plan">Plans</string>
@@ -14,6 +15,7 @@
 
     <string name="addTo">Add to…</string>
 
+    <string name="loading">Loading&#8230;</string>
 
     <!-- Profile -->
     <string name="name">Name</string>
@@ -24,6 +26,7 @@
 
     <string name="email">E-Mail</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
 
@@ -50,5 +53,43 @@
     <string name="measureLabel" tools:ignore="MissingTranslation">Inserisci carico qui</string>
     <string name="sizeTableLabel" tools:ignore="MissingTranslation">Misurazioni acquisite</string>
 
+
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Not specified</item>
+    </string-array>
+
+    <string-array name="weight_units">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+
+    <string-array name="height_untis">
+        <item>cm</item>
+        <item>in</item>
+    </string-array>
+
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password.</string>
+    <string name="not_registered_yet">Not registered yet? Sign-up.</string>
+
+    <string name="email_empty">"Email can not be empty"</string>
+    <string name="password_empty">"Password can not be empty"</string>
+    <string name="email_not_valid">"This is not an email"</string>
+
+    <string name="password_not_match">"Password not match"</string>
+    <string name="email_not_exists">"This email doesn't exist in our database"</string>
+
+
+    <!-- Reg -->
+    <string name="signup">Sign Up</string>
+    <string name="already_have_account">Already have an account? Login.</string>
+    <string name="password_not_valid">"Needs at least 6 characters. Required: uppercase, lowercase, numbers and special chars"</string>
+    <string name="passwords_not_equal">"Insert same password pls"</string>
+    <string name="email_already_exists">Email already exists</string>
+    <string name="send_email">Send</string>
 
 </resources>
