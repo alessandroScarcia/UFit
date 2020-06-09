@@ -30,28 +30,28 @@
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
 
-    <string name="edit_value" tools:ignore="MissingTranslation">Modifica Valore</string>
-    <string name="global_cancel" tools:ignore="MissingTranslation">Cancella</string>
-    <string name="add_label" tools:ignore="MissingTranslation">Aggiungi</string>
+    <string name="edit_value" >Modifica Valore</string>
+    <string name="global_cancel" >Cancella</string>
+    <string name="add_label" >Aggiungi</string>
 
 
-    <string name="weightLabel" tools:ignore="MissingTranslation">Peso(kg)</string>
-    <string name="fatLabel" tools:ignore="MissingTranslation">Grasso(%)</string>
-    <string name="bonesLabel" tools:ignore="MissingTranslation">Ossa(%)</string>
-    <string name="waterLabel" tools:ignore="MissingTranslation">Acqua(%)</string>
-    <string name="musclesLabel" tools:ignore="MissingTranslation">Muscoli(%)</string>
+    <string name="weightLabel">Peso(kg)</string>
+    <string name="fatLabel" >Grasso(%)</string>
+    <string name="bonesLabel" >Ossa(%)</string>
+    <string name="waterLabel">Acqua(%)</string>
+    <string name="musclesLabel" >Muscoli(%)</string>
 
-    <string name="indexLabel" tools:ignore="MissingTranslation">Indice</string>
-    <string name="imcLabel" tools:ignore="MissingTranslation">BMI</string>
-    <string name="rfmLabel" tools:ignore="MissingTranslation">RFM</string>
-    <string name="ffmiLabel" tools:ignore="MissingTranslation">FFMI</string>
+    <string name="indexLabel">Indice</string>
+    <string name="imcLabel">BMI</string>
+    <string name="rfmLabel" >RFM</string>
+    <string name="ffmiLabel" >FFMI</string>
 
 
-    <string name="DateLabel" tools:ignore="MissingTranslation">Data</string>
-    <string name="MeasureLabel" tools:ignore="MissingTranslation">Carico(Kg)</string>
-    <string name="MesureHint" tools:ignore="MissingTranslation">Inserisci carico qui</string>
-    <string name="measureLabel" tools:ignore="MissingTranslation">Inserisci carico qui</string>
-    <string name="sizeTableLabel" tools:ignore="MissingTranslation">Misurazioni acquisite</string>
+    <string name="DateLabel" >Data</string>
+    <string name="MeasureLabel" >Carico(Kg)</string>
+    <string name="MesureHint" >Inserisci carico qui</string>
+    <string name="measureLabel">Inserisci carico qui</string>
+    <string name="sizeTableLabel" >Misurazioni acquisite</string>
 
 
     <string-array name="genders">

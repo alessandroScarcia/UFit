@@ -342,7 +342,7 @@
                             android:gravity="center_vertical|center_horizontal"
                             android:maxWidth="100dp"
                             android:maxLines="1"
-                            android:textColor="@color/blue_btn_bg_pressed_color"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
                             tools:text="20" />
 
@@ -385,7 +385,7 @@
                             android:gravity="center"
                             android:maxWidth="100dp"
                             android:maxLines="1"
-                            android:textColor="@color/blue_btn_bg_pressed_color"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
                             tools:text="20" />
 
