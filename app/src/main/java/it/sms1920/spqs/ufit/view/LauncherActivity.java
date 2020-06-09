@@ -32,15 +32,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
         presenter = new LauncherManager(this);
 
-        //Setting search button
-        Button btnSearch = findViewById(R.id.btnSearch);
-        btnSearch.setOnClickListener(new FloatingActionButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onSearchIconClick();
-            }
-        });
-
 
         // Setting bottom bar
         final BottomNavigationView bottomNav = findViewById(R.id.bottom_bar);
@@ -73,6 +64,25 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
             }
         });
         insertHomeFragment();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar.
+        getMenuInflater().inflate(R.menu.tool_bar_launcher, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.search:
+                presenter.onSearchIconClick();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -132,7 +142,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
 
     @Override
     public void startLoginActivity() {
-        startActivity( new Intent( LauncherActivity.this, LoginActivity.class));
+        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
         finish();
     }
 

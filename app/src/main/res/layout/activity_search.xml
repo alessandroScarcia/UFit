@@ -22,15 +22,12 @@
             android:id="@+id/txtSearchFieldLayout"
             style="@style/CustomMaterialEditTextLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/search_bar_height"
+            android:layout_height="match_parent"
             app:endIconMode="clear_text"
-            android:saveEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:focusedByDefault="true"
             app:layout_constraintTop_toTopOf="parent"
             app:helperText="Insert here to search"
-            app:helperTextEnabled="true"
             app:startIconDrawable="@drawable/ic_arrow_back"
             app:startIconTint="@color/colorWhite90">
 
@@ -46,6 +43,8 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchResult"

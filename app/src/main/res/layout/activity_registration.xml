@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/big_standard_margin"
                 android:layout_marginEnd="@dimen/big_standard_margin"
-                android:hint="@string/password"
+                android:hint="@string/confirm_password"
                 app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

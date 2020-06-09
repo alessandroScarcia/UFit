@@ -6,15 +6,19 @@
     android:layout_height="match_parent"
     tools:context="ExerciseActivity">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/partial_tool_bar" />
+
     <ImageView
         android:id="@+id/imgExercise"
         android:layout_width="match_parent"
         android:layout_height="@dimen/exercise_thumbnail_height"
+        android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar"
         app:srcCompat="@drawable/img_exercise" />
 
     <ImageView
@@ -47,8 +51,9 @@
         android:layout_height="@dimen/icon_size"
         android:layout_marginStart="@dimen/standard_margin"
         android:layout_marginTop="@dimen/standard_margin"
-        android:background="@drawable/ic_arrow_back_ios"
-        android:backgroundTint="@color/colorPrimary"
+        android:foreground="@drawable/ic_arrow_back_ios"
+        android:foregroundTint="@color/colorPrimary"
+        style="@style/CustomMaterialButtonIcon"
         app:layout_constraintStart_toStartOf="@+id/imgExercise"
         app:layout_constraintTop_toTopOf="@+id/imgExercise" />
 
@@ -94,9 +99,8 @@
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
             android:layout_marginBottom="@dimen/standard_margin"
-            android:background="@drawable/ufit_button"
-            android:backgroundTint="@color/colorSecondary"
             android:text="@string/add_exercise_to_plan"
+            style="@style/CustomMaterialButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.655"

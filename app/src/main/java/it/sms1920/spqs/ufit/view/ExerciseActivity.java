@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
@@ -17,11 +18,16 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
 
     private TextView name;
     private TextView description;
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
+
+        // Setting toolbar
+        toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
 
         presenter = new ShowExercise(this);
 
@@ -48,6 +54,7 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
 
     @Override
     public void setName(String name) {
+        this.toolbar.setTitle(name);
         this.name.setText(name);
     }
 
