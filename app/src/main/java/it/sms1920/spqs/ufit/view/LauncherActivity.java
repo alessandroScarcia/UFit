@@ -103,7 +103,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         resetMenuIcons();
         menu.findItem(R.id.nav_plans).setChecked(true);
         menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_selected);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlansFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutPlansFragment()).commit();
 
     }
 
