@@ -63,5 +63,9 @@
     <style name="CustomMaterialToolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
 
     </style>
+    
+    <style name="CustomMaterialTextSearchBar" parent="CustomMaterialEditTextLayout">
+        <item name="hintTextColor">@color/colorTransparent</item>
+    </style>
 
 </resources>

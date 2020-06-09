@@ -26,12 +26,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtSearchFieldLayout"
-            style="@style/CustomMaterialEditTextLayout"
+            style="@style/CustomMaterialTextSearchBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="50dp"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:hint="Search here"
             app:endIconMode="clear_text"
-            app:helperText="Insert here to search"
+            app:hintAnimationEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -43,7 +45,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:paddingTop="10dp"
-                android:textSize="20sp" />
+                android:textSize="18sp"
+                android:maxLines="1"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
 

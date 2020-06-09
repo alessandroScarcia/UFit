@@ -47,8 +47,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             }
         });
 
-        TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
-        TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
+        final TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
+        final TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
 
         txtSearchFieldLayout.setStartIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 presenter.onBackPressed();
             }
         });
+
 
         txtSearchField.addTextChangedListener(new TextWatcher() {
             @Override

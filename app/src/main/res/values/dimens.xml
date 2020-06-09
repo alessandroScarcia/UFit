@@ -30,7 +30,7 @@
 
     <dimen name="plans_tab_items_height">45dp</dimen>
 
-    <dimen name="search_bar_height">65dp</dimen>
+    <dimen name="search_bar_height">60dp</dimen>
 
     <dimen name="exercise_thumbnail_height">300dp</dimen>
     <dimen name="exercise_thumbnail_gradient_height">150dp</dimen>
