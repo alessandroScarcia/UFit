@@ -1,0 +1,492 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE">
+
+    <LinearLayout
+        android:id="@+id/tab_weight"
+        android:name="tab_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/weightLabel"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                        android:id="@+id/weightInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="70.5" />
+
+                    <ImageButton
+                        android:id="@+id/weightDetailsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/fatLabel"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                        android:id="@+id/fatInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="number|numberSigned|numberDecimal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="50.9" />
+
+                    <ImageButton
+                        android:id="@+id/fatDetailsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/musclesLabel"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                        android:id="@+id/musclesInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="20.2" />
+
+                    <ImageButton
+                        android:id="@+id/musclesDetailsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/waterLabel"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                        android:id="@+id/waterInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="20.5" />
+
+                    <ImageButton
+                        android:id="@+id/waterDetailsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                app:cardCornerRadius="5dp"
+                app:contentPadding="5dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:shrinkColumns="3"
+                    android:stretchColumns="0,1,2">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/indexTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_span="4"
+                            android:gravity="center_horizontal"
+                            android:text="@string/indexLabel"
+                            android:textColor="@color/gray"
+                            android:textSize="24sp"
+                            android:textStyle="italic" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/imcTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/imcLabel"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/imcValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:maxWidth="100dp"
+                            android:maxLines="1"
+                            android:textColor="@color/blue_btn_bg_pressed_color"
+                            android:textSize="20sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:id="@+id/imcViewText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:ellipsize="start"
+                            android:gravity="center"
+                            android:textSize="20sp"
+                            android:textStyle="italic"
+                            tools:text="normal" />
+
+                        <ImageButton
+                            android:id="@+id/imcHelp"
+                            android:layout_width="match_parent"
+                            android:layout_height="25sp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="false"
+                            android:background="@color/colorWhite"
+                            android:cropToPadding="false"
+                            app:srcCompat="@drawable/ic_baseline_help_outline_24px" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/ffmiTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ffmiLabel"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/ffmiValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:maxWidth="100dp"
+                            android:maxLines="1"
+                            android:textColor="@color/blue_btn_bg_pressed_color"
+                            android:textSize="20sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:id="@+id/ffmiViewText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="20sp"
+                            android:textStyle="italic"
+                            tools:text="normal" />
+
+                        <ImageButton
+                            android:id="@+id/ffmiHelp"
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="false"
+                            android:background="@color/colorWhite"
+                            android:cropToPadding="false"
+                            app:srcCompat="@drawable/ic_baseline_help_outline_24px"
+                            tools:ignore="ContentDescription" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        tools:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/imc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/rfmLabel"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/rfmValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:maxWidth="100dp"
+                            android:maxLines="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:id="@+id/rfmViewText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textSize="18sp"
+                            android:textStyle="italic"
+                            tools:text="normal" />
+
+                        <ImageButton
+                            android:id="@+id/rfmHelp"
+                            android:layout_width="25sp"
+                            android:layout_height="25sp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="false"
+                            android:background="@color/colorWhite"
+                            android:cropToPadding="false"
+                            app:srcCompat="@drawable/ic_baseline_help_outline_24px" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="50"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                android:visibility="gone"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
