@@ -20,9 +20,9 @@ import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
-    Activity mContext = this;
-    SearchPresenter presenter;
-    SearchListAdapter adapter;
+    private Activity mContext = this;
+    private SearchPresenter presenter;
+    private SearchListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
