@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -37,29 +38,16 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
     public void loadExerciseList() {
         Query myExerciseQuery = mDatabase.child("Exercise").orderByKey();
 
-        myExerciseQuery.addChildEventListener(new ChildEventListener() {
+        myExerciseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "exerciseEventListener::onChildAdded:" + dataSnapshot.getKey());
-
-                Exercise exercise = dataSnapshot.getValue(Exercise.class);
-                lstExerciseFull.add(exercise);
-                lstExercise.add(exercise);
-                view.callNotifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Exercise exercise = data.getValue(Exercise.class);
+                    lstExerciseFull.add(exercise);
+                    lstExercise.add(exercise);
+                    view.callNotifyDataSetChanged();
+                }
             }
 
             @Override
