@@ -1,5 +1,10 @@
 package it.sms1920.spqs.ufit.model;
 
+import android.icu.util.LocaleData;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 
 public class User {
@@ -34,7 +39,6 @@ public class User {
         }
     }
 
-
     private String linkImgProfile;
     private String name;
     private String surname;
@@ -66,7 +70,7 @@ public class User {
 
 
     //viene settato così perchè viene inizializzato all'interno del realtime database
-    public User() {
+    public User(){
         this.linkImgProfile = "";
         this.name = "";
         this.surname = "";
@@ -77,9 +81,8 @@ public class User {
         this.weightUnit = WeightUnit.KG;
         this.heightCm = 0;
         this.heightIn = 0;
-        this.dateBirth = "";
+        this.dateBirth= "";
     }
-
     public HeightUnit getHeightUnit() {
         return heightUnit;
     }

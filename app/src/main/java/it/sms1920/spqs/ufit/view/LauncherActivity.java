@@ -2,11 +2,13 @@ package it.sms1920.spqs.ufit.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,7 +64,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                 return true;
             }
         });
-
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
@@ -110,7 +111,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         resetToolbarIcons();
         menu.findItem(R.id.nav_plans).setChecked(true);
         menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_selected);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlansFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutPlansFragment()).commit();
+
     }
 
     @Override
@@ -120,6 +122,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         menu.findItem(R.id.nav_trainer).setChecked(true);
         menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
+
     }
 
     @Override
@@ -129,6 +132,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         menu.findItem(R.id.nav_stats).setChecked(true);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
+
     }
 
     @Override

@@ -21,16 +21,15 @@ import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
 
-    Activity mContext = this;
-    SearchPresenter presenter;
-    SearchListAdapter adapter;
-    Toolbar toolbar;
+    private Activity mContext = this;
+    private SearchPresenter presenter;
+    private SearchListAdapter adapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
         mContext = this;
 
         presenter = new SearchPresenter(this);
@@ -47,7 +46,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 presenter.onBackPressed();
             }
         });
-
 
         TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
         TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);

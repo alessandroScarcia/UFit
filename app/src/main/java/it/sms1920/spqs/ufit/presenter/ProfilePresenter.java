@@ -1,10 +1,15 @@
 package it.sms1920.spqs.ufit.presenter;
 
+
+import android.net.Uri;
 import android.util.Log;
+
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -13,12 +18,14 @@ import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 import java.util.Date;
@@ -29,6 +36,8 @@ import it.sms1920.spqs.ufit.model.User;
 public class ProfilePresenter implements Profile.Presenter {
     private DatabaseReference database;
     private FirebaseUser firebaseUser;
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+
     Profile.View view;
 
     public ProfilePresenter(Profile.View view) {
@@ -37,6 +46,35 @@ public class ProfilePresenter implements Profile.Presenter {
         this.view = view;
     }
 
+    @Override
+    public void uploadPicOnStorage(final Uri imageUri) {
+        String nameFile = FirebaseAuth.getInstance().getUid();
+
+        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile);
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String string = uri.toString();
+                                database.child(FirebaseAuth.getInstance().getUid()).
+                                        child("linkImgProfile").setValue(string);
+
+                            }
+                        });
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
+    }
 
     @Override
     public void onChangePassword(String newPassword) {
@@ -56,7 +94,7 @@ public class ProfilePresenter implements Profile.Presenter {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else {
+                        }else{
 
                         }
                     }
@@ -70,21 +108,22 @@ public class ProfilePresenter implements Profile.Presenter {
         firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (!task.isSuccessful()) {
+                if(!task.isSuccessful()){
                     try {
                         throw task.getException();
-                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                    }catch(FirebaseAuthInvalidCredentialsException e){
                         e.printStackTrace();
-                    } catch (FirebaseAuthUserCollisionException e) {
+                    }catch(FirebaseAuthUserCollisionException e){
                         e.printStackTrace();
-                    } catch (FirebaseAuthInvalidUserException e) {
+                    }catch(FirebaseAuthInvalidUserException e){
                         e.printStackTrace();
-                    } catch (FirebaseAuthRecentLoginRequiredException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
+                    }catch(FirebaseAuthRecentLoginRequiredException e){
                         e.printStackTrace();
                     }
-                } else {
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
 
                 }
             }
@@ -93,6 +132,7 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onChangeName(String newName) {
+
     }
 
     @Override
@@ -117,6 +157,11 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onUploadPicProfile() {
+        view.choosePic();
+    }
+
+    @Override
+    public void onChangePicProfile() {
 
     }
 
@@ -133,17 +178,11 @@ public class ProfilePresenter implements Profile.Presenter {
     @Override
     public void onUpdateRequest() {
         database.child(firebaseUser.getUid());
-        Log.i("Pippo", firebaseUser.getUid());
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("pippo", "steng a qua");
-                User userInfo = dataSnapshot.getValue(User.class);
 
-                if (userInfo != null)
-                    Log.i("pippo", userInfo.getName() + "pippo");
-                else
-                    Log.i("pippo", "è nullo");
+                User userInfo = dataSnapshot.getValue(User.class);
 
                 view.updateInfo(userInfo);
             }
