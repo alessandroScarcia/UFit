@@ -1,11 +1,16 @@
 package it.sms1920.spqs.ufit.model;
 
-import android.icu.util.LocaleData;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class User {
+
+
+    public String getLinkImgProfile() {
+        return linkImgProfile;
+    }
+
+    public void setLinkImgProfile(String linkImgProfile) {
+        this.linkImgProfile = linkImgProfile;
+    }
 
     public enum Gender {MALE, FEMALE, NOT_SPECIFIED};
     public enum HeightUnit{CM, IN};
@@ -39,7 +44,6 @@ public class User {
         this.heightCm = heightCm;
         this.heightIn = heightIn;
     }
-
 
     //viene settato così perchè viene inizializzato all'interno del realtime database
     public User(){
@@ -88,13 +92,7 @@ public class User {
     }
 
 
-    public String getLinkImgProfile() {
-        return linkImgProfile;
-    }
 
-    public void setLinkImgProfile(String linkImgProfile) {
-        this.linkImgProfile = linkImgProfile;
-    }
 
     public Gender getGender() {
         return gender;
