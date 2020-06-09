@@ -13,7 +13,8 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhite76">#C2FFFFFF</color>
     <color name="colorWhite90">#E6FFFFFF</color>
-    <color name="lightGray">#0D000000</color>
+    <color name="lightGray">#05000000</color>
+    <color name="colorGray50">#80000000</color>
     <color name="colorOnSurface">#1F000000</color>
     <color name="colorBlack">#000000</color>
 

@@ -17,26 +17,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/partial_tool_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtSearchFieldLayout"
             style="@style/CustomMaterialEditTextLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="50dp"
             app:endIconMode="clear_text"
+            app:helperText="Insert here to search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:helperText="Insert here to search"
-            app:startIconDrawable="@drawable/ic_arrow_back"
-            app:startIconTint="@color/colorWhite90">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtSearchField"
                 style="@style/CustomMaterialEditText"
-                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
                 android:paddingTop="10dp"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>

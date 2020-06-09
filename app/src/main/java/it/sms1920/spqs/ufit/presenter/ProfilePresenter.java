@@ -1,11 +1,15 @@
 package it.sms1920.spqs.ufit.presenter;
 
+
+import android.net.Uri;
 import android.util.Log;
-import android.view.View;
+
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -19,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 import java.util.Date;
@@ -29,6 +36,8 @@ import it.sms1920.spqs.ufit.model.User;
 public class ProfilePresenter implements Profile.Presenter {
     private DatabaseReference database;
     private FirebaseUser firebaseUser;
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+
     Profile.View view;
 
     public ProfilePresenter(Profile.View view) {
@@ -37,11 +46,34 @@ public class ProfilePresenter implements Profile.Presenter {
         this.view = view;
     }
 
-
     @Override
-    public void onSignOut() {
-        FirebaseAuth.getInstance().signOut();
-        view.resetLauncherActivity();
+    public void uploadPicOnStorage(final Uri imageUri) {
+        String nameFile = FirebaseAuth.getInstance().getUid();
+
+        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile);
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String string = uri.toString();
+                                database.child(FirebaseAuth.getInstance().getUid()).
+                                        child("linkImgProfile").setValue(string);
+
+                            }
+                        });
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
     }
 
     @Override
@@ -125,6 +157,11 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onUploadPicProfile() {
+        view.choosePic();
+    }
+
+    @Override
+    public void onChangePicProfile() {
 
     }
 
@@ -141,17 +178,11 @@ public class ProfilePresenter implements Profile.Presenter {
     @Override
     public void onUpdateRequest() {
         database.child(firebaseUser.getUid());
-        Log.i("Pippo",firebaseUser.getUid());
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("pippo","steng a qua");
-                User userInfo = dataSnapshot.getValue(User.class);
 
-                if(userInfo!=null)
-                   Log.i("pippo",userInfo.getName() + "pippo");
-                else
-                    Log.i("pippo","è nullo");
+                User userInfo = dataSnapshot.getValue(User.class);
 
                 view.updateInfo(userInfo);
             }

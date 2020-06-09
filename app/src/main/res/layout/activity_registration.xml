@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:theme="@style/Theme.MaterialComponents"
+    android:theme="@style/CustomMaterialComponent"
     tools:context="RegistrationActivity">
 
     <ScrollView
@@ -19,6 +19,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/partial_tool_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/lblLogin"

@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
@@ -23,6 +24,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     private Activity mContext = this;
     private SearchPresenter presenter;
     private SearchListAdapter adapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,19 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         mContext = this;
 
         presenter = new SearchPresenter(this);
+
+        // Setting toolbar
+        toolbar = findViewById(R.id.tool_bar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onBackPressed();
+            }
+        });
 
         TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
         TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);

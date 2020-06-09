@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.Login;
 import it.sms1920.spqs.ufit.presenter.LoginPresenter;
 
@@ -22,6 +23,8 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
 
     private LoginPresenter presenter;
     Activity mContext = this;
+
+    private Toolbar toolbar;
 
     private TextView lblForgotPassword;
     private TextView lblSignUp;
@@ -38,6 +41,11 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        toolbar = findViewById(R.id.tool_bar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        setSupportActionBar(toolbar);
+
+
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
 
@@ -49,6 +57,13 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         btnSignIn = findViewById(R.id.btnSignIn);
 
         presenter = new LoginPresenter((Login.View) mContext);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onBackPressed();
+            }
+        });
 
         txtEmail.addTextChangedListener(new TextWatcher() {
             @Override

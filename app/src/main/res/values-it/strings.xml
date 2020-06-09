@@ -28,6 +28,24 @@
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
 
+    <string name="gender">Genere</string>
+    <string name="date">Data di nascita</string>
+
+    <string-array name="genders">
+        <item>Maschio</item>
+        <item>Femmina</item>
+        <item>Non specificato</item>
+    </string-array>
+
+    <string-array name="weight_units">
+        <item>kg</item>
+        <item>lb</item>
+    </string-array>
+
+    <string-array name="height_untis">
+        <item>cm</item>
+        <item>in</item>
+    </string-array>
 
     <!-- Login -->
     <string name="login">Accedi</string>
@@ -42,6 +60,7 @@
     <string name="email_not_exists">Account inesistente</string>
 
     <string name="signup">Registrati</string>
+    <string name="signout">Esci</string>
     <string name="passwords_not_equal">Le password non corrispondono</string>
     <string name="email_already_exists">Email già in uso</string>
     <string name="confirm_password">Conferma Password</string>

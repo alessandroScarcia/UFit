@@ -8,7 +8,10 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/partial_tool_bar" />
+        layout="@layout/partial_tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgExercise"
@@ -44,18 +47,6 @@
         android:textSize="@dimen/exercise_title_size"
         app:layout_constraintBottom_toBottomOf="@+id/imgExercise"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginStart="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:foreground="@drawable/ic_arrow_back_ios"
-        android:foregroundTint="@color/colorPrimary"
-        style="@style/CustomMaterialButtonIcon"
-        app:layout_constraintStart_toStartOf="@+id/imgExercise"
-        app:layout_constraintTop_toTopOf="@+id/imgExercise" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

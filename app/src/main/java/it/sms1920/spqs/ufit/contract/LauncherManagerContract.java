@@ -23,7 +23,7 @@ public interface LauncherManagerContract {
 
         void endActivity();
 
-        void resetMenuIcons();
+        void resetActivity();
     }
 
     interface presenter {
@@ -40,6 +40,8 @@ public interface LauncherManagerContract {
         void onSearchIconClick();
 
         void onBackPressed();
+
+        void onLogOutIconClick();
     }
 
 }

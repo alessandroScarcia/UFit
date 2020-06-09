@@ -3,6 +3,8 @@ package it.sms1920.spqs.ufit.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.RegistrationContract;
 import it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType;
 import it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType;
@@ -30,12 +33,16 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     private TextInputLayout txtConfirmPasswordLayout;
     private Button btnSignup;
     private TextView lblLogin;
-
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        toolbar = findViewById(R.id.tool_bar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        setSupportActionBar(toolbar);
 
         txtEmail = findViewById(R.id.txtEmail);
         txtEmailLayout = findViewById(R.id.txtEmailLayout);
@@ -47,6 +54,60 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         lblLogin = findViewById(R.id.lblLogin);
 
         presenter = new RegistrationPresenter((RegistrationContract.View) mContext);
+
+        txtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtEmailLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        txtPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtPasswordLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        txtConfirmPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtConfirmPasswordLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onBackPressed();
+            }
+        });
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
