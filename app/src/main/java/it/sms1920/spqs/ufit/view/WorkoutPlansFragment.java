@@ -24,11 +24,12 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
 
     private WorkoutPlansAdapter adapter;
 
-    private TabLayout tlWorkoutPlans;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        presenter = new WorkoutPlansPresenter(this);
+        adapter = new WorkoutPlansAdapter();
     }
 
     @Nullable
@@ -36,9 +37,11 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plans, container, false);
 
-        presenter = new WorkoutPlansPresenter(this);
+        // initialize view references
+        TabLayout tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
+        RecyclerView rvWorkoutPlans = view.findViewById(R.id.rvWorkoutPlans);
 
-        tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
+        // add listener to change workout plans list visualized
         tlWorkoutPlans.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -57,9 +60,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
             }
         });
 
-        adapter = new WorkoutPlansAdapter();
-
-        RecyclerView rvWorkoutPlans = view.findViewById(R.id.rvWorkoutPlans);
+        // setup recyclerview for workout plans list
         rvWorkoutPlans.setAdapter(adapter);
         rvWorkoutPlans.setLayoutManager(new LinearLayoutManager(getContext()));
 
