@@ -20,8 +20,8 @@ import it.sms1920.spqs.ufit.presenter.WorkoutPlansPresenter;
 
 public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragment.View {
     private static final String TAG = WorkoutPlansFragment.class.getCanonicalName();
-    private iWorkoutPlansFragment.Presenter presenter;
 
+    private iWorkoutPlansFragment.Presenter presenter;
     private WorkoutPlansAdapter adapter;
 
     @Override
