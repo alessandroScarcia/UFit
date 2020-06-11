@@ -5,9 +5,13 @@ public interface iWorkoutPlansFragment {
         void showPersonalWorkoutPlans();
 
         void showTrainerWorkoutPlans();
+
+        void addNewPlan();
     }
 
     interface Presenter {
-        void onTabSelectedAtPostition(int position);
+        void onTabSelectedAtPosition(int position);
+
+        void onAddClicked();
     }
 }

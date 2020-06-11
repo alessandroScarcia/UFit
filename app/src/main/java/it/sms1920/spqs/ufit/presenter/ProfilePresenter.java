@@ -2,7 +2,6 @@ package it.sms1920.spqs.ufit.presenter;
 
 
 import android.net.Uri;
-import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -30,17 +29,17 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
 
-import it.sms1920.spqs.ufit.contract.Profile;
+import it.sms1920.spqs.ufit.contract.iProfile;
 import it.sms1920.spqs.ufit.model.User;
 
-public class ProfilePresenter implements Profile.Presenter {
+public class ProfilePresenter implements iProfile.Presenter {
     private DatabaseReference database;
     private FirebaseUser firebaseUser;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    Profile.View view;
+    iProfile.View view;
 
-    public ProfilePresenter(Profile.View view) {
+    public ProfilePresenter(iProfile.View view) {
         this.database = FirebaseDatabase.getInstance().getReference(TABLE_USER);
         this.firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         this.view = view;
@@ -77,7 +76,7 @@ public class ProfilePresenter implements Profile.Presenter {
     }
 
     @Override
-    public void onChangePassword(String newPassword) {
+    public void onPasswordChanged(String newPassword) {
         firebaseUser.updatePassword(newPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -104,7 +103,7 @@ public class ProfilePresenter implements Profile.Presenter {
 
 
     @Override
-    public void onChangeEmail(String newEmail) {
+    public void onEmailChanged(String newEmail) {
         firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -131,47 +130,47 @@ public class ProfilePresenter implements Profile.Presenter {
     }
 
     @Override
-    public void onChangeName(String newName) {
+    public void onNameChanged(String newName) {
 
     }
 
     @Override
-    public void onChangeSurname(String newSurname) {
+    public void onSurnameChanged(String newSurname) {
 
     }
 
     @Override
-    public void onChangeHeight(int newHeight, User.HeightUnit heightUnit) {
+    public void onHeightChanged(int newHeight, User.HeightUnit heightUnit) {
 
     }
 
     @Override
-    public void onChangeWeight(int newWeight, User.WeightUnit weightUnit) {
+    public void onWeightChanged(int newWeight, User.WeightUnit weightUnit) {
 
     }
 
     @Override
-    public void onChangeBirthDate(Date newDate) {
+    public void onBirthDateChanged(Date newDate) {
 
     }
 
     @Override
-    public void onUploadPicProfile() {
+    public void onPicProfileUploaded() {
         view.choosePic();
     }
 
     @Override
-    public void onChangePicProfile() {
+    public void onPicProfileChanged() {
 
     }
 
     @Override
-    public void onChangeGender(User.Gender newGender) {
+    public void onGenderChanged(User.Gender newGender) {
 
     }
 
     @Override
-    public void onChangeWeight(int newWeight) {
+    public void onWeightChanged(int newWeight) {
 
     }
 

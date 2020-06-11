@@ -2,7 +2,6 @@ package it.sms1920.spqs.ufit.presenter;
 
 import android.util.Log;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,13 +14,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import it.sms1920.spqs.ufit.contract.iSearchListAdapter;
 import it.sms1920.spqs.ufit.model.Exercise;
 
 public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter {
-    private static final String TAG = SearchPresenter.class.getCanonicalName();
+    private static final String TAG = SearchListAdapterPresenter.class.getCanonicalName();
 
+//    Link to associated view
     private iSearchListAdapter.View view;
     private DatabaseReference mDatabase;
 
@@ -41,7 +40,6 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
         myExerciseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(TAG, "exerciseEventListener::onChildAdded:" + dataSnapshot.getKey());
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Exercise exercise = data.getValue(Exercise.class);
                     lstExerciseFull.add(exercise);
@@ -73,11 +71,13 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
                 return o1.getName().compareTo(o2.getName());
             }
         });
+        Log.d(TAG, "changeQueryText: " + lstExercise);
         view.callNotifyDataSetChanged();
     }
 
     @Override
     public void onBindExerciseItemViewAtPosition(iSearchListAdapter.View.Item holder, int position) {
+        Log.d(TAG, "onBindExerciseItemViewAtPosition: " + lstExercise.get(position).getName());
         holder.setName(lstExercise.get(position).getName());
         // TODO setImage
         holder.setPosition(position);
@@ -88,10 +88,10 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
         return lstExercise.size();
     }
 
-    @Override
-    public void onClickedExerciseHolder(int position) {
-        view.showExercise(lstExercise.get(position).getExerciseId(), lstExercise.get(position).getName());
-    }
+//    @Override
+//    public void onClickedExerciseHolder(int position) {
+//        view.showExercise(lstExercise.get(position).getExerciseId(), lstExercise.get(position).getName());
+//    }
 
 
 }

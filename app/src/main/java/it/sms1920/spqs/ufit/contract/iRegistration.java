@@ -1,6 +1,6 @@
 package it.sms1920.spqs.ufit.contract;
 
-public interface RegistrationContract {
+public interface iRegistration {
     interface View {
 
         void setInputError(Presenter.InputErrorType inputErrorType);
@@ -31,8 +31,11 @@ public interface RegistrationContract {
         }
 
         void onSignUp(String email, String password, String confirmPassword);
+
         void onLoginRequest();
+
         void onBackPressed();
+
         void returnSignUpResult(AuthResultType check);
 
         void signUpSuccessful();

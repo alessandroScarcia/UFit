@@ -15,24 +15,24 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
-import it.sms1920.spqs.ufit.contract.RegistrationContract;
+import it.sms1920.spqs.ufit.contract.iRegistration;
 import it.sms1920.spqs.ufit.model.User;
 
-import static it.sms1920.spqs.ufit.contract.Profile.Presenter.TABLE_USER;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType.SIGNUP_SUCCESSFUL;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType.USER_ALREADY_EXISTS;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType.EMAIL_FIELD_EMPTY;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType.EMAIL_FORMAT_NOT_VALID;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType.PASSWORDS_NOT_MATCHING;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType.PASSWORD_FIELD_EMPTY;
-import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType.PASSWORD_FORMAT_NOT_VALID;
+import static it.sms1920.spqs.ufit.contract.iProfile.Presenter.TABLE_USER;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.AuthResultType.SIGNUP_SUCCESSFUL;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.AuthResultType.USER_ALREADY_EXISTS;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType.EMAIL_FIELD_EMPTY;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType.EMAIL_FORMAT_NOT_VALID;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType.PASSWORDS_NOT_MATCHING;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType.PASSWORD_FIELD_EMPTY;
+import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType.PASSWORD_FORMAT_NOT_VALID;
 
 
-public class RegistrationPresenter implements RegistrationContract.Presenter {
-    private RegistrationContract.View view;
+public class RegistrationPresenter implements iRegistration.Presenter {
+    private iRegistration.View view;
     static final String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$&+,:;=?#|'<>.^*()%!-])[A-Za-z\\d@$&+,:;=?#|'<>.^*()%!-]{6,}$";
 
-    public RegistrationPresenter(RegistrationContract.View view) {
+    public RegistrationPresenter(iRegistration.View view) {
         this.view = view;
     }
 

@@ -10,7 +10,7 @@ public class WorkoutPlansPresenter implements iWorkoutPlansFragment.Presenter {
     }
 
     @Override
-    public void onTabSelectedAtPostition(int position) {
+    public void onTabSelectedAtPosition(int position) {
         if (position == 0) {
             view.showPersonalWorkoutPlans();
         } else if (position == 1) {
@@ -18,5 +18,10 @@ public class WorkoutPlansPresenter implements iWorkoutPlansFragment.Presenter {
         } else {
             throw new IllegalArgumentException("Invalid value for argument position.");
         }
+    }
+
+    @Override
+    public void onAddClicked() {
+        view.addNewPlan();
     }
 }

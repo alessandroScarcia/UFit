@@ -1,19 +1,22 @@
 package it.sms1920.spqs.ufit.contract;
 
-import android.view.ViewGroup;
+import androidx.recyclerview.widget.RecyclerView;
 
-import it.sms1920.spqs.ufit.model.Exercise;
-import it.sms1920.spqs.ufit.view.SearchActivity;
-
-public interface SearchContract {
+public interface iSearch {
     interface View {
         void back();
+
         void notifyQueryTextChangedToAdapter(String query);
+
+        void showExercise(int position);
     }
 
     interface Presenter {
         void onBackPressed();
+
         void onQueryTextChanged(String query);
+
+        void onItemClicked(int position);
     }
 
 }

@@ -6,13 +6,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
+import it.sms1920.spqs.ufit.contract.iExercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
 
 
-public class ExerciseActivity extends AppCompatActivity implements ShowExerciseContract.View {
+public class ExerciseActivity extends AppCompatActivity implements iExercise.View {
 
-    private ShowExerciseContract.Presenter presenter;
+    private iExercise.Presenter presenter;
 
     private TextView name;
     private TextView description;
@@ -42,7 +42,7 @@ public class ExerciseActivity extends AppCompatActivity implements ShowExerciseC
         name = findViewById(R.id.txtExerciseName);
         description = findViewById(R.id.txtExerciseDescription);
 
-        presenter.onCreateComplete(getIntent());
+        presenter.onCreateCompleted(getIntent());
     }
 
     @Override

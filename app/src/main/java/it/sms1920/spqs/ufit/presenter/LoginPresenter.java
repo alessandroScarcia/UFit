@@ -1,6 +1,5 @@
 package it.sms1920.spqs.ufit.presenter;
 
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -13,20 +12,20 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
-import it.sms1920.spqs.ufit.contract.Login;
+import it.sms1920.spqs.ufit.contract.iLogin;
 
-import static it.sms1920.spqs.ufit.contract.Login.Presenter.AuthResultType.EMAILS_NOT_MATCH;
-import static it.sms1920.spqs.ufit.contract.Login.Presenter.AuthResultType.PASSWORDS_NOT_MATCH;
-import static it.sms1920.spqs.ufit.contract.Login.Presenter.AuthResultType.SUCCESS;
-import static it.sms1920.spqs.ufit.contract.Login.Presenter.InputErrorType.EMAIL_FIELD_EMPTY;
-import static it.sms1920.spqs.ufit.contract.Login.Presenter.InputErrorType.EMAIL_FORMAT_NOT_VALID;
-import static it.sms1920.spqs.ufit.contract.Login.Presenter.InputErrorType.PASSWORD_FIELD_EMPTY;
+import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.AuthResultType.EMAILS_NOT_MATCH;
+import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.AuthResultType.PASSWORDS_NOT_MATCH;
+import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.AuthResultType.SUCCESS;
+import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.InputErrorType.EMAIL_FIELD_EMPTY;
+import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.InputErrorType.EMAIL_FORMAT_NOT_VALID;
+import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.InputErrorType.PASSWORD_FIELD_EMPTY;
 
 
-public class LoginPresenter implements Login.Presenter {
-    private Login.View view;
+public class LoginPresenter implements iLogin.Presenter {
+    private iLogin.View view;
     FirebaseAuth firebaseAuth;
-    public LoginPresenter(Login.View view) {
+    public LoginPresenter(iLogin.View view) {
         this.view = view;
     }
 

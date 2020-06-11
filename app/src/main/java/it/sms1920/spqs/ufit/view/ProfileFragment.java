@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import it.sms1920.spqs.ufit.contract.Profile;
+import it.sms1920.spqs.ufit.contract.iProfile;
 import it.sms1920.spqs.ufit.model.User;
 import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
 
@@ -25,9 +25,9 @@ import static android.app.Activity.RESULT_OK;
 import static it.sms1920.spqs.ufit.model.User.HeightUnit.CM;
 import static it.sms1920.spqs.ufit.model.User.WeightUnit.KG;
 
-public class ProfileFragment extends Fragment implements Profile.View {
+public class ProfileFragment extends Fragment implements iProfile.View {
 
-    private Profile.Presenter presenter;
+    private iProfile.Presenter presenter;
 
     private ImageView imgProfilePicture;
 

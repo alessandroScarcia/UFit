@@ -15,11 +15,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.widget.Toolbar;
-import it.sms1920.spqs.ufit.contract.Login;
+import it.sms1920.spqs.ufit.contract.iLogin;
 import it.sms1920.spqs.ufit.presenter.LoginPresenter;
 
 
-public class LoginActivity extends AppCompatActivity implements Login.View {
+public class LoginActivity extends AppCompatActivity implements iLogin.View {
 
     private LoginPresenter presenter;
     Activity mContext = this;
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         lblSignUp = findViewById(R.id.lblSignUp);
         btnSignIn = findViewById(R.id.btnSignIn);
 
-        presenter = new LoginPresenter((Login.View) mContext);
+        presenter = new LoginPresenter((iLogin.View) mContext);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     }
 
     @Override
-    public void setInputError(Login.Presenter.InputErrorType inputErrorType) {
+    public void setInputError(iLogin.Presenter.InputErrorType inputErrorType) {
         switch (inputErrorType) {
             case EMAIL_FIELD_EMPTY:
                 txtEmailLayout.setError(getString(R.string.email_empty));
@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     }
 
     @Override
-    public void setSignInError(Login.Presenter.AuthResultType authResultType) {
+    public void setSignInError(iLogin.Presenter.AuthResultType authResultType) {
         switch (authResultType) {
             case EMAILS_NOT_MATCH:
                 txtEmailLayout.setError(getString(R.string.email_not_exists));

@@ -2,17 +2,17 @@
 
 package it.sms1920.spqs.ufit.presenter;
 
-import it.sms1920.spqs.ufit.contract.SearchContract;
+import it.sms1920.spqs.ufit.contract.iSearch;
 
 /**
  * Presenter for the View 'SearchActivity'.
  * Contains business logic for 'Search Exercise' functionality.
  */
-public class SearchPresenter implements SearchContract.Presenter {
+public class SearchPresenter implements iSearch.Presenter {
 
-    private final SearchContract.View view;
+    private final iSearch.View view;
 
-    public SearchPresenter(SearchContract.View view) {
+    public SearchPresenter(iSearch.View view) {
         this.view = view;
     }
 
@@ -24,6 +24,11 @@ public class SearchPresenter implements SearchContract.Presenter {
     @Override
     public void onQueryTextChanged(String query) {
         view.notifyQueryTextChangedToAdapter(query.trim());
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        view.showExercise(position);
     }
 
 }
