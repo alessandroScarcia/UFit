@@ -5,8 +5,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseDbSingleton {
     private static FirebaseDatabase database;
 
-    public static FirebaseDatabase getDatabase(){
-        if(database==null) {
+    public static FirebaseDatabase getDatabase() {
+        if (database == null) {
             database = FirebaseDatabase.getInstance();
             database.setPersistenceEnabled(true);
         }

@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment implements iProfile.View {
         imgProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onUpdatePic();
+                presenter.onPicProfileChanged();
             }
         });
 
@@ -181,7 +181,7 @@ public class ProfileFragment extends Fragment implements iProfile.View {
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            presenter.onUpdatePicStorage(imageUri);
+            presenter.uploadPicOnStorage(imageUri);
         }
     }
 

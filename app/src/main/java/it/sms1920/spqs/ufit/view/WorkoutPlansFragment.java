@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import it.sms1920.spqs.ufit.contract.iWorkoutPlansFragment;
@@ -58,7 +59,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.d(TAG, String.valueOf(tab.getPosition()));
-                presenter.onTabSelectedAtPostition(tab.getPosition());
+                presenter.onTabSelectedAtPosition(tab.getPosition());
             }
 
             @Override

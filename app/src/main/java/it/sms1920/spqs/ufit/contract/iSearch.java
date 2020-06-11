@@ -1,7 +1,7 @@
 package it.sms1920.spqs.ufit.contract;
 
 
-public interface SearchContract {
+public interface iSearch {
     interface View {
         void back();
         void notifyQueryTextChangedToAdapter(final String keyword);

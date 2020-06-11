@@ -8,7 +8,19 @@ import it.sms1920.spqs.ufit.model.User;
 
 public interface iProfile {
     interface View {
-        void updateInfo(User user);
+        void updatePic(String urlImage);
+
+        void updateName(String name);
+
+        void updateEmail(String email);
+
+        void updateHeight(int height);
+
+        void updateWeight(int weight);
+
+        void updateSurname(String surname);
+
+        void updatePassword();
 
         void choosePic();
     }
@@ -25,10 +37,6 @@ public interface iProfile {
 
         void onSurnameChanged(String newSurname);
 
-        void onHeightChanged(int newHeight, User.HeightUnit heightUnit);
-
-        void onWeightChanged(int newWeight, User.WeightUnit weightUnit);
-
         void onBirthDateChanged(Date newDate);
 
         void onPicProfileUploaded();
@@ -44,5 +52,7 @@ public interface iProfile {
         void onUpdateRequest();
 
         void onBecomeTrainer();
+
+        void onUpdateInfo();
     }
 }

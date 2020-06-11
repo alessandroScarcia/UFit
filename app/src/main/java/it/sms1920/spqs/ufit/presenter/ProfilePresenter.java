@@ -40,7 +40,7 @@ public class ProfilePresenter implements iProfile.Presenter {
     private FirebaseUser firebaseUser;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    Profile.View view;
+    iProfile.View view;
 
     public ProfilePresenter(iProfile.View view) {
         this.database = FirebaseDbSingleton.getDatabase().getReference(TABLE_USER);
@@ -48,119 +48,8 @@ public class ProfilePresenter implements iProfile.Presenter {
         this.view = view;
     }
 
-    @Override
-    public void onUpdateGender(User.Gender newGender) {
-
-    }
-
-    @Override
-    public void onUpdateWeight(int newWeight) {
-
-    }
-
-    @Override
-    public void onUpdatePassword(String newPassword) {
-        firebaseUser.updatePassword(newPassword)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (!task.isSuccessful()) {
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                e.printStackTrace();
-                            } catch (FirebaseAuthInvalidUserException e) {
-                                e.printStackTrace();
-                            } catch (FirebaseAuthRecentLoginRequiredException e) {
-                                e.printStackTrace();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }else{
-
-                        }
-                    }
-
-                });
-    }
 
 
-    @Override
-    public void onUpdateEmail(String newEmail) {
-        firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(!task.isSuccessful()){
-                    try {
-                        throw task.getException();
-                    }catch(FirebaseAuthInvalidCredentialsException e){
-                        e.printStackTrace();
-                    }catch(FirebaseAuthUserCollisionException e){
-                        e.printStackTrace();
-                    }catch(FirebaseAuthInvalidUserException e){
-                        e.printStackTrace();
-                    }catch(FirebaseAuthRecentLoginRequiredException e){
-                        e.printStackTrace();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }else{
-
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onUpdateName(String newName) {
-
-    }
-
-    @Override
-    public void onUpdateSurname(String newSurname) {
-
-    }
-
-    @Override
-    public void onUpdateBirthDate(Date newDate) {
-
-    }
-
-    @Override
-    public void onUpdatePicStorage(Uri imageUri) {
-        final String nameFile = FirebaseAuth.getInstance().getUid();
-
-        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile+".jpg");
-
-        riversRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                database.child(nameFile).child("urlImage").setValue(uri.toString());
-                                view.updatePic(uri.toString());//TO DO ci vorebbe una snack bar quando viene invocato questo metodo
-                            }
-                        });
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-
-                    }
-                });
-
-
-    }
-
-    @Override
-    public void onUpdatePic() {
-        view.choosePic();
-    }
 
 
 
@@ -194,8 +83,126 @@ public class ProfilePresenter implements iProfile.Presenter {
                 });
     }
 
+
+
     @Override
-    public void onUpdateHeight() {
+    public void onPasswordChanged(String newPassword) {
+        firebaseUser.updatePassword(newPassword)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful()) {
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthWeakPasswordException e) {
+                                e.printStackTrace();
+                            } catch (FirebaseAuthInvalidUserException e) {
+                                e.printStackTrace();
+                            } catch (FirebaseAuthRecentLoginRequiredException e) {
+                                e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+
+                        }
+                    }
+
+                });
+    }
+
+    @Override
+    public void onEmailChanged(String newEmail) {
+        firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(!task.isSuccessful()){
+                    try {
+                        throw task.getException();
+                    }catch(FirebaseAuthInvalidCredentialsException e){
+                        e.printStackTrace();
+                    }catch(FirebaseAuthUserCollisionException e){
+                        e.printStackTrace();
+                    }catch(FirebaseAuthInvalidUserException e){
+                        e.printStackTrace();
+                    }catch(FirebaseAuthRecentLoginRequiredException e){
+                        e.printStackTrace();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onNameChanged(String newName) {
+
+    }
+
+    @Override
+    public void onSurnameChanged(String newSurname) {
+
+    }
+
+    @Override
+    public void onBirthDateChanged(Date newDate) {
+
+    }
+
+    @Override
+    public void onPicProfileUploaded() {
+
+    }
+
+    @Override
+    public void uploadPicOnStorage(Uri imageUri) {
+        final String nameFile = FirebaseAuth.getInstance().getUid();
+
+        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile+".jpg");
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                database.child(nameFile).child("urlImage").setValue(uri.toString());
+                                view.updatePic(uri.toString());//TO DO ci vorebbe una snack bar quando viene invocato questo metodo
+                            }
+                        });
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onPicProfileChanged() {
+        view.choosePic();
+    }
+
+    @Override
+    public void onGenderChanged(User.Gender newGender) {
+
+    }
+
+    @Override
+    public void onWeightChanged(int newWeight) {
+
+    }
+
+    @Override
+    public void onUpdateRequest() {
 
     }
 

@@ -1,10 +1,5 @@
 package it.sms1920.spqs.ufit.model;
 
-import android.icu.util.LocaleData;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import androidx.annotation.NonNull;
 
 public class User {

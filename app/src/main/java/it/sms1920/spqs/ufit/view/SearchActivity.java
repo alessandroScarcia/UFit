@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -18,7 +19,7 @@ import it.sms1920.spqs.ufit.contract.iSearch;
 import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+public class SearchActivity extends AppCompatActivity implements iSearch.View {
     private static final String TAG = SearchActivity.class.getCanonicalName();
 
     private SearchPresenter presenter;
@@ -30,7 +31,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mContext = this;
 
         presenter = new SearchPresenter(this);
 
@@ -84,7 +84,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             @Override
             public void onClick(View view) {
 
-                Log.d("TAG", String.valueOf(rvSearchResult.getChildLayoutPosition(view)));
                 presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(view));
             }
         });
@@ -130,7 +129,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         if (!txtName.getText().toString().equals("") && !txtName.getHint().toString().equals("")) {
             startExerciseActivity(Integer.parseInt(txtName.getHint().toString()), txtName.getText().toString());
         }
-        txtName.setText("ho clickato qua");
     }
 
 }
