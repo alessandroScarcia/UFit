@@ -20,15 +20,16 @@ import it.sms1920.spqs.ufit.presenter.WorkoutPlansPresenter;
 
 public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragment.View {
     private static final String TAG = WorkoutPlansFragment.class.getCanonicalName();
+
     private iWorkoutPlansFragment.Presenter presenter;
-
     private WorkoutPlansAdapter adapter;
-
-    private TabLayout tlWorkoutPlans;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        presenter = new WorkoutPlansPresenter(this);
+        adapter = new WorkoutPlansAdapter(this);
     }
 
     @Nullable
@@ -36,9 +37,11 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plans, container, false);
 
-        presenter = new WorkoutPlansPresenter(this);
+        // initialize view references
+        TabLayout tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
+        RecyclerView rvWorkoutPlans = view.findViewById(R.id.rvWorkoutPlans);
 
-        tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
+        // add listener to change workout plans list visualized
         tlWorkoutPlans.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -57,9 +60,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
             }
         });
 
-        adapter = new WorkoutPlansAdapter();
-
-        RecyclerView rvWorkoutPlans = view.findViewById(R.id.rvWorkoutPlans);
+        // setup recyclerview for workout plans list
         rvWorkoutPlans.setAdapter(adapter);
         rvWorkoutPlans.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -69,6 +70,16 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     @Override
     public void showTrainerWorkoutPlans() {
         adapter.showTrainerWorkoutPlans();
+    }
+
+    @Override
+    public void insertShowWorkoutPlanFragment(int workoutPlanId) {
+        ShowWorkoutPlanFragment showWorkoutPlanFragment = ShowWorkoutPlanFragment.newInstance(workoutPlanId);
+
+        this.getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, showWorkoutPlanFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

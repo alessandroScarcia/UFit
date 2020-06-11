@@ -5,6 +5,8 @@ public interface iWorkoutPlansFragment {
         void showPersonalWorkoutPlans();
 
         void showTrainerWorkoutPlans();
+
+        void insertShowWorkoutPlanFragment(int workoutPlanId);
     }
 
     interface Presenter {
