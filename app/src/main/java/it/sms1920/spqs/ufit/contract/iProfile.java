@@ -6,9 +6,8 @@ import java.util.Date;
 
 import it.sms1920.spqs.ufit.model.User;
 
-public interface Profile {
+public interface iProfile {
     interface View {
-
         void updatePic(String urlImage);
 
         void updateName(String name);
@@ -30,28 +29,30 @@ public interface Profile {
 
         String TABLE_USER = "User";
 
-        void onUpdatePassword(String newPassword);//chiedi la vecchia password
+        void onPasswordChanged(String newPassword);//chiedi la vecchia password
 
-        void onUpdateEmail(String newEmail);//chiedi la vecchia email
+        void onEmailChanged(String newEmail);//chiedi la vecchia email
 
-        void onUpdateName(String newName);
+        void onNameChanged(String newName);
 
-        void onUpdateSurname(String newSurname);
+        void onHeightChanged(int newHeight);
 
-        void onUpdateBirthDate(Date newDate);
+        void onSurnameChanged(String newSurname);
 
-        void onUpdatePicStorage(Uri imageUri);
+        void onBirthDateChanged(Date newDate);
 
-        void onUpdatePic();
+        void onPicProfileUploaded();
 
-        void onUpdateGender(User.Gender newGender);
+        void uploadPicOnStorage(final Uri imageUri);
 
-        void onUpdateWeight(int newWeight);
+        void onPicProfileChanged();
 
-        void onUpdateInfo();
+        void onGenderChanged(User.Gender newGender);
 
-        void onUpdateHeight(int newHeight);
+        void onWeightChanged(int newWeight);
 
         void onBecomeTrainer();
+
+        void onUpdateInfo();
     }
 }

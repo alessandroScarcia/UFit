@@ -25,39 +25,40 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
 
-import it.sms1920.spqs.ufit.contract.Profile;
+import it.sms1920.spqs.ufit.contract.iProfile;
 import it.sms1920.spqs.ufit.model.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.User;
 
 
-public class ProfilePresenter implements Profile.Presenter {
+public class ProfilePresenter implements iProfile.Presenter {
 
     private DatabaseReference database;
     private FirebaseUser firebaseUser;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    Profile.View view;
+    iProfile.View view;
 
-    public ProfilePresenter(Profile.View view) {
+    public ProfilePresenter(iProfile.View view) {
         this.database = FirebaseDbSingleton.getDatabase().getReference(TABLE_USER);
         this.firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         this.view = view;
     }
 
     @Override
-    public void onUpdateGender(User.Gender newGender) {
+    public void onGenderChanged(User.Gender newGender) {
         /*database.child("gender").setValue(newGender);
         view.updateGender(newGender);*/
     }
 
     @Override
-    public void onUpdateWeight(int newWeight) {
+    public void onWeightChanged(int newWeight) {
          /*database.child("weight").setValue(newWeight);
         view.updateGender(newWeight);*/
     }
 
+
     @Override
-    public void onUpdatePassword(String newPassword) {
+    public void onPasswordChanged(String newPassword) {
         firebaseUser.updatePassword(newPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -84,7 +85,7 @@ public class ProfilePresenter implements Profile.Presenter {
 
 
     @Override
-    public void onUpdateEmail(String newEmail) {
+    public void onEmailChanged(String newEmail) {
         firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -111,24 +112,30 @@ public class ProfilePresenter implements Profile.Presenter {
     }
 
     @Override
-    public void onUpdateName(String newName) {
+    public void onNameChanged(String newName) {
          /*database.child("name").setValue(newName);
         view.updateGender(newName);*/
     }
 
     @Override
-    public void onUpdateSurname(String newSurname) {
+    public void onSurnameChanged(String newSurname) {
          /*database.child("surname").setValue(newSurname);
         view.updateGender(newSurname);*/
     }
 
     @Override
-    public void onUpdateBirthDate(Date newDate) {
+    public void onBirthDateChanged(Date newDate) {
+        /*database.child("birthDate").setValue(newDate);
+        view.updateGender(newDate);*/
+    }
+
+    @Override
+    public void onPicProfileUploaded() {
 
     }
 
     @Override
-    public void onUpdatePicStorage(Uri imageUri) {
+    public void uploadPicOnStorage(Uri imageUri) {
         final String nameFile = FirebaseAuth.getInstance().getUid();
 
         final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile+".jpg");
@@ -157,12 +164,12 @@ public class ProfilePresenter implements Profile.Presenter {
 
     }
 
-    //TODO da decidere dove vanno messe le costanti dei nomi dei percorsi e degi attributi delle tabelle
     @Override
-    public void onUpdatePic() {
+    public void onPicProfileChanged() {
         view.choosePic();
     }
 
+    //TODO da decidere dove vanno messe le costanti dei nomi dei percorsi e degi attributi delle tabelle
 
 
     @Override
@@ -208,7 +215,7 @@ public class ProfilePresenter implements Profile.Presenter {
     }
 
     @Override
-    public void onUpdateHeight(int newHeight) {
+    public void onHeightChanged(int newHeight) {
          /*database.child("height").setValue(newHeight);
         view.updateGender(newHeight);*/
     }
