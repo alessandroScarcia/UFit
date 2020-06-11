@@ -8,7 +8,20 @@ import it.sms1920.spqs.ufit.model.User;
 
 public interface Profile {
     interface View {
-        void updateInfo(User user);
+
+        void updatePic(String urlImage);
+
+        void updateName(String name);
+
+        void updateEmail(String email);
+
+        void updateHeight(int height);
+
+        void updateWeight(int weight);
+
+        void updateSurname(String surname);
+
+        void updatePassword();
 
         void choosePic();
     }
@@ -17,31 +30,27 @@ public interface Profile {
 
         String TABLE_USER = "User";
 
-        void onChangePassword(String newPassword);//chiedi la vecchia password
+        void onUpdatePassword(String newPassword);//chiedi la vecchia password
 
-        void onChangeEmail(String newEmail);//chiedi la vecchia email
+        void onUpdateEmail(String newEmail);//chiedi la vecchia email
 
-        void onChangeName(String newName);
+        void onUpdateName(String newName);
 
-        void onChangeSurname(String newSurname);
+        void onUpdateSurname(String newSurname);
 
-        void onChangeHeight(int newHeight, User.HeightUnit heightUnit);
+        void onUpdateBirthDate(Date newDate);
 
-        void onChangeWeight(int newWeight, User.WeightUnit weightUnit);
+        void onUpdatePicStorage(Uri imageUri);
 
-        void onChangeBirthDate(Date newDate);
+        void onUpdatePic();
 
-        void onUploadPicProfile();
+        void onUpdateGender(User.Gender newGender);
 
-        void uploadPicOnStorage(final Uri imageUri);
+        void onUpdateWeight(int newWeight);
 
-        void onChangePicProfile();
+        void onUpdateInfo();
 
-        void onChangeGender(User.Gender newGender);
-
-        void onChangeWeight(int newWeight);
-
-        void onUpdateRequest();
+        void onUpdateHeight();
 
         void onBecomeTrainer();
     }

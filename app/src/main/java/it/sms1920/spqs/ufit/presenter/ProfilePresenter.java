@@ -27,13 +27,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-
 import java.util.Date;
 
 import it.sms1920.spqs.ufit.contract.Profile;
+import it.sms1920.spqs.ufit.model.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.User;
 
+
 public class ProfilePresenter implements Profile.Presenter {
+
     private DatabaseReference database;
     private FirebaseUser firebaseUser;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -41,43 +43,23 @@ public class ProfilePresenter implements Profile.Presenter {
     Profile.View view;
 
     public ProfilePresenter(Profile.View view) {
-        this.database = FirebaseDatabase.getInstance().getReference(TABLE_USER);
+        this.database = FirebaseDbSingleton.getDatabase().getReference(TABLE_USER);
         this.firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         this.view = view;
     }
 
     @Override
-    public void uploadPicOnStorage(final Uri imageUri) {
-        String nameFile = FirebaseAuth.getInstance().getUid();
+    public void onUpdateGender(User.Gender newGender) {
 
-        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile);
-
-        riversRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String string = uri.toString();
-                                database.child(FirebaseAuth.getInstance().getUid()).
-                                        child("linkImgProfile").setValue(string);
-
-                            }
-                        });
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-
-                    }
-                });
     }
 
     @Override
-    public void onChangePassword(String newPassword) {
+    public void onUpdateWeight(int newWeight) {
+
+    }
+
+    @Override
+    public void onUpdatePassword(String newPassword) {
         firebaseUser.updatePassword(newPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -104,7 +86,7 @@ public class ProfilePresenter implements Profile.Presenter {
 
 
     @Override
-    public void onChangeEmail(String newEmail) {
+    public void onUpdateEmail(String newEmail) {
         firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -131,60 +113,77 @@ public class ProfilePresenter implements Profile.Presenter {
     }
 
     @Override
-    public void onChangeName(String newName) {
+    public void onUpdateName(String newName) {
 
     }
 
     @Override
-    public void onChangeSurname(String newSurname) {
+    public void onUpdateSurname(String newSurname) {
 
     }
 
     @Override
-    public void onChangeHeight(int newHeight, User.HeightUnit heightUnit) {
+    public void onUpdateBirthDate(Date newDate) {
 
     }
 
     @Override
-    public void onChangeWeight(int newWeight, User.WeightUnit weightUnit) {
+    public void onUpdatePicStorage(Uri imageUri) {
+        final String nameFile = FirebaseAuth.getInstance().getUid();
+
+        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile+".jpg");
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                database.child(nameFile).child("urlImage").setValue(uri.toString());
+                                view.updatePic(uri.toString());//TO DO ci vorebbe una snack bar quando viene invocato questo metodo
+                            }
+                        });
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
+
 
     }
 
     @Override
-    public void onChangeBirthDate(Date newDate) {
-
-    }
-
-    @Override
-    public void onUploadPicProfile() {
+    public void onUpdatePic() {
         view.choosePic();
     }
 
-    @Override
-    public void onChangePicProfile() {
 
-    }
 
     @Override
-    public void onChangeGender(User.Gender newGender) {
+    public void onUpdateInfo() {
+        Log.i("pippo","prima della persistenza");
 
-    }
+        database.keepSynced(true);
 
-    @Override
-    public void onChangeWeight(int newWeight) {
-
-    }
-
-    @Override
-    public void onUpdateRequest() {
-        database.child(firebaseUser.getUid());
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 User userInfo = dataSnapshot.getValue(User.class);
 
-                view.updateInfo(userInfo);
+                view.updatePic(userInfo.getUrlImage());
+                view.updateEmail(firebaseUser.getEmail());
+                view.updatePassword();
+                view.updateName(userInfo.getName());
+                view.updateSurname(userInfo.getSurname());
+                view.updateHeight(userInfo.getHeight());
+                view.updateWeight(userInfo.getWeight());
             }
 
 
@@ -193,6 +192,11 @@ public class ProfilePresenter implements Profile.Presenter {
 
             }
         });
+    }
+
+    @Override
+    public void onUpdateHeight() {
+
     }
 
     @Override
