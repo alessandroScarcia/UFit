@@ -4,19 +4,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import it.sms1920.spqs.ufit.contract.iLauncher;
 
-import static it.sms1920.spqs.ufit.contract.iLauncher.view.FragType;
-import static it.sms1920.spqs.ufit.contract.iLauncher.view.FragType.HOME;
-import static it.sms1920.spqs.ufit.contract.iLauncher.view.FragType.PLANS;
-import static it.sms1920.spqs.ufit.contract.iLauncher.view.FragType.PROFILE;
-import static it.sms1920.spqs.ufit.contract.iLauncher.view.FragType.STATS;
-import static it.sms1920.spqs.ufit.contract.iLauncher.view.FragType.TRAINER;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.HOME;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.PLANS;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.PROFILE;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.STATS;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.TRAINER;
 
-public class LauncherManager implements iLauncher.presenter {
+public class LauncherManager implements iLauncher.Presenter {
 
-    iLauncher.view view;
+    iLauncher.View view;
     FragType currentFragment = HOME;
 
-    public LauncherManager(iLauncher.view view) {
+    public LauncherManager(iLauncher.View view) {
         this.view = view;
     }
 

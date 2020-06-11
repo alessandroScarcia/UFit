@@ -1,8 +1,18 @@
 package it.sms1920.spqs.ufit.view;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Network;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +20,29 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+
 import it.sms1920.spqs.ufit.contract.iProfile;
-import it.sms1920.spqs.ufit.model.User;
+
+import it.sms1920.spqs.ufit.model.PicassoSingleton;
 import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
 
 import static android.app.Activity.RESULT_OK;
-import static it.sms1920.spqs.ufit.model.User.HeightUnit.CM;
-import static it.sms1920.spqs.ufit.model.User.WeightUnit.KG;
+
 
 public class ProfileFragment extends Fragment implements iProfile.View {
 
@@ -51,18 +70,15 @@ public class ProfileFragment extends Fragment implements iProfile.View {
 
 
     private ArrayAdapter<CharSequence> adapterGender;
-    private ArrayAdapter<CharSequence> adapterHeight;
-    private ArrayAdapter<CharSequence> adapterWeight;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
-
-
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         /*
-            Initializing view items
-         */
+        Initializing view items
+                */
         imgProfilePicture = view.findViewById(R.id.imgProfile);
         txtNameLayout = view.findViewById(R.id.txtNameLayout);
         txtSurnameLayout = view.findViewById(R.id.txtSurnameLayout);
@@ -89,53 +105,86 @@ public class ProfileFragment extends Fragment implements iProfile.View {
 
         presenter = new ProfilePresenter(ProfileFragment.this);
 
-        presenter.onUpdateRequest(); // TODO mettere uno splash per ingannare il caricamento
+        presenter.onUpdateInfo(); // TODO mettere uno splash per ingannare il caricamento
+
+        imgProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onUpdatePic();
+            }
+        });
 
         return view;
     }
 
+
     @Override
-    public void updateInfo(User user) {
-        txtUserEmail.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        txtUserPassword.setText("");//qua dovrebbero stare i pallini i neri
-        txtName.setText("Michele");//user.getName());
-        txtSurname.setText("Cironinano");//user.getSurname());
-        //txtGender.setText(MALE.toString());//user.getGender().toString());
+    public void updateName(String name) {
+        txtName.setText(name);
+    }
 
-        txtHeightLayout.setSuffixText(user.getHeightUnit().toString());
-        txtWeightLayout.setSuffixText(user.getWeightUnit().toString());
+    @Override
+    public void updateEmail(String email) {
+        txtUserEmail.setText(email);
+    }
 
-        // Picasso.get().load(user.getLinkImgProfile()).into(imgProfile);
+    @Override
+    public void updateHeight(int height) {
+        txtHeight.setText(String.valueOf(height));
+    }
 
-        if (user.getHeightUnit() == CM)
-            txtHeight.setText(String.valueOf(user.getHeightCm()));
-        else
-            txtHeight.setText(String.valueOf(user.getHeightIn()));
+    @Override
+    public void updateWeight(int weight) {
+        txtWeight.setText(String.valueOf(weight));
+    }
 
-        if (user.getWeightUnit() == KG)
-            txtWeight.setText(String.valueOf(user.getBodyWeightKg()));
-        else
-            txtWeight.setText(String.valueOf(user.getBodyWeightLbs()));
+    @Override
+    public void updateSurname(String surname) {
+        txtSurname.setText(surname);
+    }
+
+    @Override
+    public void updatePassword() {
+        txtUserPassword.setText(R.string.password);
+        txtUserPassword.setTransformationMethod(new PasswordTransformationMethod());
+    }
+
+    @Override
+    public void updatePic(final String urlImage) {
+
+
+        Picasso.get().load(urlImage).networkPolicy(NetworkPolicy.OFFLINE).into(imgProfilePicture, new Callback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Picasso.get().load(urlImage).into(imgProfilePicture);
+            }
+        });
+
     }
 
     public void choosePic() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,1);
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, 1);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         Uri imageUri;
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            presenter.uploadPicOnStorage(imageUri);
-            presenter.onUpdateRequest();
+            presenter.onUpdatePicStorage(imageUri);
         }
     }
 
 }
+
+

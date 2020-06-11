@@ -7,6 +7,8 @@ public interface iWorkoutPlansFragment {
         void showTrainerWorkoutPlans();
 
         void addNewPlan();
+
+        void insertShowWorkoutPlanFragment(int workoutPlanId);
     }
 
     interface Presenter {

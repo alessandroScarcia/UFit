@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.iLauncher;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
-public class LauncherActivity extends AppCompatActivity implements iLauncher.view {
+public class LauncherActivity extends AppCompatActivity implements iLauncher.View {
 
     LauncherManager presenter;
     Menu menu;
@@ -27,8 +27,6 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.vie
         // Setting toolbar
         toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-
 
         presenter = new LauncherManager(this);
 
@@ -71,7 +69,6 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.vie
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar.
         getMenuInflater().inflate(R.menu.tool_bar, menu);
-
         toolbar.getMenu().findItem(R.id.search).setVisible(true);
         return true;
     }

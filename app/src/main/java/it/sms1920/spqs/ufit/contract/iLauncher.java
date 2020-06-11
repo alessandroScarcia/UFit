@@ -3,7 +3,7 @@ package it.sms1920.spqs.ufit.contract;
 
 public interface iLauncher {
 
-    interface view {
+    interface View {
 
         enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE}
 
@@ -26,7 +26,7 @@ public interface iLauncher {
         void resetActivity();
     }
 
-    interface presenter {
+    interface Presenter {
         void onHomeIconClicked();
 
         void onPlansIconClicked();

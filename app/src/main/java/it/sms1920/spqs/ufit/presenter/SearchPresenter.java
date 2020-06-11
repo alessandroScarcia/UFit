@@ -22,8 +22,8 @@ public class SearchPresenter implements iSearch.Presenter {
     }
 
     @Override
-    public void onQueryTextChanged(String query) {
-        view.notifyQueryTextChangedToAdapter(query.trim());
+    public void onQueryTextChanged(final String keyword) {
+        view.notifyQueryTextChangedToAdapter(keyword.trim());
     }
 
     @Override

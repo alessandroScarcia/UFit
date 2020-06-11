@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -20,9 +18,9 @@ import it.sms1920.spqs.ufit.contract.iSearch;
 import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 
-public class SearchActivity extends AppCompatActivity implements iSearch.View {
+public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+    private static final String TAG = SearchActivity.class.getCanonicalName();
 
-    private Activity mContext = this;
     private SearchPresenter presenter;
     private SearchListAdapter adapter;
     private Toolbar toolbar;
@@ -116,8 +114,8 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
     }
 
     @Override
-    public void notifyQueryTextChangedToAdapter(String query) {
-        adapter.changeQueryText(query);
+    public void notifyQueryTextChangedToAdapter(final String query) {
+        adapter.onQueryTextChanged(query);
     }
 
     @Override
