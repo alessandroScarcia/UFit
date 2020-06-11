@@ -4,23 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Exercise implements Serializable {
-    private int exerciseId;
-    private String name;
+    public static final String CHILD_NAME = "Exercise";
+
     private String defLanguage;
     private String image;
     private String videoUrl;
     private List<Integer> muscleList;
-
-    public Exercise() {
-    }
-
-    public int getExerciseId() {
-        return exerciseId;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public String getDefLanguage() {
         return defLanguage;
@@ -37,4 +26,5 @@ public class Exercise implements Serializable {
     public List<Integer> getMuscleList() {
         return muscleList;
     }
+
 }

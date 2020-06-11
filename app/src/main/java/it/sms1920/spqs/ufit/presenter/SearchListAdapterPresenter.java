@@ -9,15 +9,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.utilities.Tree;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import it.sms1920.spqs.ufit.contract.iSearchListAdapter;
 import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.model.ExerciseTranslation;
+import it.sms1920.spqs.ufit.model.SearchExerciseResult;
+import it.sms1920.spqs.ufit.view.SearchListAdapter;
 
 public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter {
     private static final String TAG = SearchPresenter.class.getCanonicalName();
@@ -25,14 +35,17 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
     private iSearchListAdapter.View view;
     private DatabaseReference mDatabase;
 
-    private List<Exercise> lstExercise = new ArrayList<>();
-    private List<Exercise> lstExerciseFull = new ArrayList<>();
+    private Set<SearchExerciseResult> searchExerciseResults = new TreeSet<>();
+    private List<SearchExerciseResult> searchExerciseResultList = new ArrayList<>();
+    private List<String> exerciseKeys = new ArrayList<>();
+    private Map<String, Exercise> mapExerciseFull = new TreeMap<>();
 
     public SearchListAdapterPresenter(iSearchListAdapter.View view) {
         this.view = view;
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         loadExerciseList();
+        onQueryTextChanged("");
     }
 
     public void loadExerciseList() {
@@ -42,11 +55,11 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "exerciseEventListener::onChildAdded:" + dataSnapshot.getKey());
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Exercise exercise = data.getValue(Exercise.class);
-                    lstExerciseFull.add(exercise);
-                    lstExercise.add(exercise);
-                    view.callNotifyDataSetChanged();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String key = child.getKey();
+                    Exercise exercise = child.getValue(Exercise.class);
+
+                    mapExerciseFull.put(key, exercise);
                 }
             }
 
@@ -58,39 +71,84 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
     }
 
     @Override
-    public void changeQueryText(String query) {
-        lstExercise.clear();
+    public void onQueryTextChanged(final String keyword) {
+        exerciseKeys.clear();
+        searchExerciseResults.clear();
+        Query mExerciseTranslationQuery = mDatabase.child(ExerciseTranslation.CHILD_NAME);
 
-        for (Exercise exercise : lstExerciseFull) {
-            if (exercise.getName().contains(query)) {
-                lstExercise.add(exercise);
-            }
-        }
-
-        lstExercise.sort(new Comparator<Exercise>() {
+        mExerciseTranslationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public int compare(Exercise o1, Exercise o2) {
-                return o1.getName().compareTo(o2.getName());
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    ExerciseTranslation et = child.getValue(ExerciseTranslation.class);
+
+                    if (et != null && et.getName().contains(keyword)) {
+                        exerciseKeys.add(String.valueOf(et.getExerciseId()));
+                    }
+                }
+
+                fetchSearchResult();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-        view.callNotifyDataSetChanged();
+
+    }
+
+    public void fetchSearchResult() {
+        Query mNameTranslatedQuery = mDatabase.child(ExerciseTranslation.CHILD_NAME);
+
+        mNameTranslatedQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    ExerciseTranslation temp = child.getValue(ExerciseTranslation.class);
+
+                    if (temp != null
+                            && exerciseKeys.contains(String.valueOf(temp.getExerciseId()))
+                            && temp.getCodLanguage().equals(Locale.getDefault().getISO3Language())) {
+
+                        int exerciseId = temp.getExerciseId();
+                        String name = temp.getName();
+                        String imageUrl = mapExerciseFull.get(String.valueOf(temp.getExerciseId())).getImage();
+
+                        searchExerciseResults.add(new SearchExerciseResult(exerciseId, name, imageUrl));
+                    }
+                }
+
+
+                searchExerciseResultList.clear();
+                searchExerciseResultList = new ArrayList<>(searchExerciseResults);
+                view.callNotifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
     public void onBindExerciseItemViewAtPosition(iSearchListAdapter.View.Item holder, int position) {
-        holder.setName(lstExercise.get(position).getName());
+        holder.setName(searchExerciseResultList.get(position).getName());
         // TODO setImage
         holder.setPosition(position);
     }
 
     @Override
     public int getExerciseCount() {
-        return lstExercise.size();
+        return searchExerciseResultList.size();
     }
 
     @Override
     public void onClickedExerciseHolder(int position) {
-        view.showExercise(lstExercise.get(position).getExerciseId(), lstExercise.get(position).getName());
+        view.showExercise(searchExerciseResultList.get(position).getExerciseId(), searchExerciseResultList.get(position).getName());
     }
 
 

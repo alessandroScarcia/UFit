@@ -17,9 +17,12 @@ public interface iSearchListAdapter {
     }
 
     interface Presenter {
-        void changeQueryText(String query);
+        void onQueryTextChanged(final String keyword);
+
         void onBindExerciseItemViewAtPosition(iSearchListAdapter.View.Item holder, int position);
+
         int getExerciseCount();
+
         void onClickedExerciseHolder(int position);
     }
 

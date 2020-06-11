@@ -1,6 +1,5 @@
 package it.sms1920.spqs.ufit.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,13 +14,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.SearchContract;
-import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 
 public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+    private static final String TAG = SearchActivity.class.getCanonicalName();
 
-    private Activity mContext = this;
     private SearchPresenter presenter;
     private SearchListAdapter adapter;
     private Toolbar toolbar;
@@ -30,7 +28,6 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mContext = this;
 
         presenter = new SearchPresenter(this);
 
@@ -104,8 +101,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public void notifyQueryTextChangedToAdapter(String query) {
-        adapter.changeQueryText(query);
+    public void notifyQueryTextChangedToAdapter(final String query) {
+        adapter.onQueryTextChanged(query);
     }
 
 

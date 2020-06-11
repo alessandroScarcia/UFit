@@ -43,8 +43,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         notifyDataSetChanged();
     }
 
-    public void changeQueryText(String query){
-        presenter.changeQueryText(query);
+    public void onQueryTextChanged(final String keyword) {
+        presenter.onQueryTextChanged(keyword);
     }
 
 
@@ -74,6 +74,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
         @Override
         public void setName(String name) {
+            if (name == null || name.length() == 0) {
+                name = "";
+            } else if (name.length() == 1) {
+                name = name.toUpperCase();
+            } else {
+                name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+            }
+
             this.name.setText(name);
         }
 
