@@ -36,7 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-import it.sms1920.spqs.ufit.contract.Profile;
+import it.sms1920.spqs.ufit.contract.iProfile;
 
 import it.sms1920.spqs.ufit.model.PicassoSingleton;
 import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
@@ -44,9 +44,9 @@ import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
 import static android.app.Activity.RESULT_OK;
 
 
-public class ProfileFragment extends Fragment implements Profile.View {
+public class ProfileFragment extends Fragment implements iProfile.View {
 
-    private Profile.Presenter presenter;
+    private iProfile.Presenter presenter;
 
     private ImageView imgProfilePicture;
 
@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment implements Profile.View {
         imgProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onUpdatePic();
+                presenter.onPicProfileChanged();
             }
         });
 
@@ -181,7 +181,7 @@ public class ProfileFragment extends Fragment implements Profile.View {
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
-            presenter.onUpdatePicStorage(imageUri);
+            presenter.uploadPicOnStorage(imageUri);
         }
     }
 

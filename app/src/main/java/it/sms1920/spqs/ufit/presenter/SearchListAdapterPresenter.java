@@ -30,7 +30,7 @@ import it.sms1920.spqs.ufit.model.SearchExerciseResult;
 import it.sms1920.spqs.ufit.view.SearchListAdapter;
 
 public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter {
-    private static final String TAG = SearchPresenter.class.getCanonicalName();
+    private static final String TAG = SearchListAdapterPresenter.class.getCanonicalName();
 
     private iSearchListAdapter.View view;
     private DatabaseReference mDatabase;
@@ -146,10 +146,10 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
         return searchExerciseResultList.size();
     }
 
-    @Override
-    public void onClickedExerciseHolder(int position) {
-        view.showExercise(searchExerciseResultList.get(position).getExerciseId(), searchExerciseResultList.get(position).getName());
-    }
+//    @Override
+//    public void onClickedExerciseHolder(int position) {
+//        view.showExercise(lstExercise.get(position).getExerciseId(), lstExercise.get(position).getName());
+//    }
 
 
 }

@@ -10,10 +10,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
+import it.sms1920.spqs.ufit.contract.iLauncher;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
-public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.View {
+public class LauncherActivity extends AppCompatActivity implements iLauncher.View {
 
     LauncherManager presenter;
     Menu menu;
@@ -43,19 +43,19 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
                 switch (menuItem.getItemId()) {
                     // Home
                     case R.id.nav_home:
-                        presenter.onHomeIconClick();
+                        presenter.onHomeIconClicked();
                         break;
                     case R.id.nav_plans:
-                        presenter.onPlansIconClick();
+                        presenter.onPlansIconClicked();
                         break;
                     case R.id.nav_trainer:
-                        presenter.onTrainerIconClick();
+                        presenter.onTrainerIconClicked();
                         break;
                     case R.id.nav_stats:
-                        presenter.onStatsIconClick();
+                        presenter.onStatsIconClicked();
                         break;
                     case R.id.nav_profile:
-                        presenter.onProfileIconClick();
+                        presenter.onProfileIconClicked();
                         break;
                 }
                 return true;
@@ -68,7 +68,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar.
-        getMenuInflater().inflate(R.menu.tool_bar_launcher, menu);
+        getMenuInflater().inflate(R.menu.tool_bar, menu);
+        toolbar.getMenu().findItem(R.id.search).setVisible(true);
         return true;
     }
 
@@ -77,10 +78,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.search:
-                presenter.onSearchIconClick();
+                presenter.onSearchIconClicked();
                 return true;
             case R.id.logout:
-                presenter.onLogOutIconClick();
+                presenter.onLogOutIconClicked();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -176,6 +177,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherManag
     public void resetToolbarIcons() {
         toolbar.getMenu().findItem(R.id.logout).setVisible(false);
         toolbar.getMenu().findItem(R.id.search).setVisible(false);
+        toolbar.getMenu().findItem(R.id.add).setVisible(false);
     }
 
 }

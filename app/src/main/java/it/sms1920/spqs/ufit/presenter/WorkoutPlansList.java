@@ -32,7 +32,7 @@ public class WorkoutPlansList implements iWorkoutPlans.Presenter {
     }
 
     @Override
-    public void onClickedItem(int position) {
+    public void onItemClicked(int position) {
         view.showWorkoutPlanDetail(workoutPlans.get(position).getWorkoutPlanId());
     }
 

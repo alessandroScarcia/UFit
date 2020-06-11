@@ -17,13 +17,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Locale;
 import java.util.Objects;
 
-import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
+import it.sms1920.spqs.ufit.contract.iExercise;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.model.ExerciseTranslation;
 
-public class ShowExercise implements ShowExerciseContract.Presenter {
+public class ShowExercise implements iExercise.Presenter {
     private static final String TAG = ShowExercise.class.getCanonicalName();
-    private ShowExerciseContract.View view;
+    private iExercise.View view;
 
     private DatabaseReference mDatabase;
     private Exercise exercise;
@@ -31,14 +31,14 @@ public class ShowExercise implements ShowExerciseContract.Presenter {
     private ExerciseTranslation exerciseDefaultTranslation;
     private ExerciseTranslation exerciseLocalTranslation;
 
-    public ShowExercise(ShowExerciseContract.View view) {
+    public ShowExercise(iExercise.View view) {
         this.view = view;
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
 
     @Override
-    public void onCreateComplete(Intent intent) {
+    public void onCreateCompleted(Intent intent) {
         final int exerciseId = intent.getIntExtra("exerciseId", -1);
         final String exerciseName = intent.getStringExtra("exerciseName");
 

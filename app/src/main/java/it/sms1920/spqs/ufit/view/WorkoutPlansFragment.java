@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import it.sms1920.spqs.ufit.contract.iWorkoutPlansFragment;
@@ -20,14 +21,16 @@ import it.sms1920.spqs.ufit.presenter.WorkoutPlansPresenter;
 
 public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragment.View {
     private static final String TAG = WorkoutPlansFragment.class.getCanonicalName();
-
     private iWorkoutPlansFragment.Presenter presenter;
+
     private WorkoutPlansAdapter adapter;
+
+    private TabLayout tlWorkoutPlans;
+    private FloatingActionButton fabAdd;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         presenter = new WorkoutPlansPresenter(this);
         adapter = new WorkoutPlansAdapter(this);
     }
@@ -36,6 +39,16 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plans, container, false);
+
+        fabAdd = view.findViewById(R.id.btnAddPlan);
+
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onAddClicked();
+            }
+        });
+
 
         // initialize view references
         TabLayout tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
@@ -46,7 +59,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.d(TAG, String.valueOf(tab.getPosition()));
-                presenter.onTabSelectedAtPostition(tab.getPosition());
+                presenter.onTabSelectedAtPosition(tab.getPosition());
             }
 
             @Override
@@ -70,7 +83,15 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     @Override
     public void showTrainerWorkoutPlans() {
         adapter.showTrainerWorkoutPlans();
+
+        fabAdd.hide();
     }
+
+    @Override
+    public void addNewPlan() {
+        startActivity(new Intent( getContext(), CreatingWorkoutActivity.class));
+    }
+
 
     @Override
     public void insertShowWorkoutPlanFragment(int workoutPlanId) {
@@ -85,5 +106,6 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     @Override
     public void showPersonalWorkoutPlans() {
         adapter.showPersonalWorkoutPlans();
+        fabAdd.show();
     }
 }

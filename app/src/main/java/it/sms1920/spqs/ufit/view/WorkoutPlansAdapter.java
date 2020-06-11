@@ -67,7 +67,7 @@ public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    presenter.onClickedItem(position);
+                    presenter.onItemClicked(position);
                 }
             });
         }

@@ -1,20 +1,18 @@
 package it.sms1920.spqs.ufit.presenter;
 
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-import it.sms1920.spqs.ufit.contract.ResetPassword;
+import it.sms1920.spqs.ufit.contract.iResetPassword;
 
-public class ResetPasswordPresenter implements ResetPassword.Presenter {
-    private ResetPassword.View view;
+public class ResetPasswordPresenter implements iResetPassword.Presenter {
+    private iResetPassword.View view;
 
-    public ResetPasswordPresenter(ResetPassword.View view) {
+    public ResetPasswordPresenter(iResetPassword.View view) {
         this.view = view;
     }
 

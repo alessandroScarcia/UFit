@@ -1,7 +1,7 @@
 package it.sms1920.spqs.ufit.contract;
 
 
-public interface LauncherManagerContract {
+public interface iLauncher {
 
     interface View {
 
@@ -27,21 +27,21 @@ public interface LauncherManagerContract {
     }
 
     interface Presenter {
-        void onHomeIconClick();
+        void onHomeIconClicked();
 
-        void onPlansIconClick();
+        void onPlansIconClicked();
 
-        void onTrainerIconClick();
+        void onTrainerIconClicked();
 
-        void onStatsIconClick();
+        void onStatsIconClicked();
 
-        void onProfileIconClick();
+        void onProfileIconClicked();
 
-        void onSearchIconClick();
+        void onSearchIconClicked();
 
         void onBackPressed();
 
-        void onLogOutIconClick();
+        void onLogOutIconClicked();
     }
 
 }

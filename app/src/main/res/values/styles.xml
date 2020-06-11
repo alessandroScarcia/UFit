@@ -8,6 +8,8 @@
         <item name="colorControlNormal">@color/colorSecondary</item>
     </style>
 
+
+
     <style name="CustomMaterialOutlinedEditTextDenseLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorSecondary</item>
         <item name="hintTextColor">@color/colorSecondary</item>
@@ -18,6 +20,18 @@
         <item name="android:textColorHint">@null</item>
         <item name="suffixTextColor">@color/colorGray50</item>
     </style>
+
+    <style name="CustomMaterialOutlinedEditTextDenseLayoutOnWhite" parent="CustomMaterialOutlinedEditTextDenseLayout">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="CustomMaterialFAB" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorBlack</item>
+        <item name="maxImageSize">30dp</item>
+    </style>
+
 
     <style name="CustomMaterialOutlinedEditTextDenseLayoutDropDown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
         <item name="boxStrokeColor">@color/colorSecondary</item>

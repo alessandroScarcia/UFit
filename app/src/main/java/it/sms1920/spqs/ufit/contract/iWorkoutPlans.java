@@ -15,7 +15,7 @@ public interface iWorkoutPlans {
     }
 
     interface Presenter {
-        void onClickedItem(int position);
+        void onItemClicked(int position);
 
         void onBindWorkoutPlanItemListViewAtPosition(iWorkoutPlans.View.Item holder, int position);
 

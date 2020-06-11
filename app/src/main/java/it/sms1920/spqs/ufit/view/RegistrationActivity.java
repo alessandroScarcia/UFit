@@ -15,12 +15,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.widget.Toolbar;
-import it.sms1920.spqs.ufit.contract.RegistrationContract;
-import it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType;
-import it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.InputErrorType;
+import it.sms1920.spqs.ufit.contract.iRegistration;
+import it.sms1920.spqs.ufit.contract.iRegistration.Presenter.AuthResultType;
+import it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType;
 import it.sms1920.spqs.ufit.presenter.RegistrationPresenter;
 
-public class RegistrationActivity extends AppCompatActivity implements RegistrationContract.View {
+public class RegistrationActivity extends AppCompatActivity implements iRegistration.View {
 
     private RegistrationPresenter presenter;
     Activity mContext = this;
@@ -53,7 +53,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         btnSignup = findViewById(R.id.btnSignUp);
         lblLogin = findViewById(R.id.lblLogin);
 
-        presenter = new RegistrationPresenter((RegistrationContract.View) mContext);
+        presenter = new RegistrationPresenter((iRegistration.View) mContext);
 
         txtEmail.addTextChangedListener(new TextWatcher() {
             @Override

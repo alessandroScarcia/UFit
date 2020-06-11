@@ -14,18 +14,31 @@ import it.sms1920.spqs.ufit.presenter.SearchListAdapterPresenter;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ExerciseHolder> implements iSearchListAdapter.View {
 
+    //    Link to associated presenter
     private iSearchListAdapter.Presenter presenter;
-    private SearchActivity activity;
 
-    public SearchListAdapter(SearchActivity activity) {
+    /*
+        Resource ID indicating layout to use in binding. Required at least something like below:
+        Required: TextView with "txtExerciseName" as ID
+                  ImageView with "imgExercise" as ID
+    */
+    private int layoutItemID;
+
+    /*
+        Listener to apply for each item "setOnClickListener" in list
+     */
+    private View.OnClickListener myClickListener;
+
+
+    public SearchListAdapter(int layoutItemID) {
         presenter = new SearchListAdapterPresenter(this);
-        this.activity = activity;
+        this.layoutItemID = layoutItemID;
     }
 
     @NonNull
     @Override
     public ExerciseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ExerciseHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise, parent, false));
+        return new ExerciseHolder(LayoutInflater.from(parent.getContext()).inflate(layoutItemID, parent, false));
     }
 
     @Override
@@ -47,13 +60,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         presenter.onQueryTextChanged(keyword);
     }
 
-
-    // TODO che maialata
-    @Override
-    public void showExercise(int exerciseId, String exerciseName) {
-        activity.startExerciseActivity(exerciseId, exerciseName);
+    public void setMyClickListener(View.OnClickListener listener) {
+        this.myClickListener = listener;
     }
 
+
+    /*
+     * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
+     */
     public class ExerciseHolder extends RecyclerView.ViewHolder implements iSearchListAdapter.View.Item {
 
         TextView name;
@@ -62,14 +76,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.txtExerciseName);
-            image=itemView.findViewById(R.id.imgExercise);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    presenter.onClickedExerciseHolder(position);
-                }
-            });
+            name = itemView.findViewById(R.id.txtExerciseName);
+            image = itemView.findViewById(R.id.imgExercise);
+            itemView.setOnClickListener(myClickListener);
         }
 
         @Override
@@ -81,19 +90,23 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
             } else {
                 name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
             }
-
             this.name.setText(name);
         }
 
         @Override
         public void setImage(Image image) {
-            //TODO
+            //TODO image fetch
             this.image.setImageResource(R.drawable.img_exercise);
         }
 
         @Override
         public void setPosition(int position) {
-            this.position = position;
+            this.name.setHint(String.valueOf(position));
+        }
+
+        @Override
+        public void setId(int Id) {
+            this.name.setHint(String.valueOf(Id));
         }
     }
 }

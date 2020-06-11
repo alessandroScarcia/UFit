@@ -19,6 +19,9 @@
 
     <string name="loading">Loading&#8230;</string>
 
+    <string name="new_workout_plan">New Workout Plan</string>
+
+
     <!-- Profile -->
     <string name="name">Name</string>
     <string name="surname">Surname</string>
@@ -71,4 +74,8 @@
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">Email already exists</string>
     <string name="send_email">Send</string>
+
+
+
+    <string name="search_here">Search here</string>
 </resources>
