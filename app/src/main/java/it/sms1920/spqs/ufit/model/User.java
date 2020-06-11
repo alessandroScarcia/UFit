@@ -1,10 +1,5 @@
 package it.sms1920.spqs.ufit.model;
 
-import android.icu.util.LocaleData;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import androidx.annotation.NonNull;
 
 public class User {
@@ -44,16 +39,6 @@ public class User {
         this.dateBirth = dateBirth;
         this.weight = weight;
         this.height = height;
-    }
-
-    public User() {
-        this.urlImage = "";
-        this.name = "";
-        this.surname = "";
-        this.gender = Gender.NOT_SPECIFIED;
-        this.dateBirth = "";
-        this.weight = 0;
-        this.height = 0;
     }
 
     public String getName() {

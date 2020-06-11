@@ -1,9 +1,6 @@
 package it.sms1920.spqs.ufit.presenter;
 
-
 import android.net.Uri;
-import android.util.Log;
-
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -50,12 +46,14 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onUpdateGender(User.Gender newGender) {
-
+        /*database.child("gender").setValue(newGender);
+        view.updateGender(newGender);*/
     }
 
     @Override
     public void onUpdateWeight(int newWeight) {
-
+         /*database.child("weight").setValue(newWeight);
+        view.updateGender(newWeight);*/
     }
 
     @Override
@@ -114,12 +112,14 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onUpdateName(String newName) {
-
+         /*database.child("name").setValue(newName);
+        view.updateGender(newName);*/
     }
 
     @Override
     public void onUpdateSurname(String newSurname) {
-
+         /*database.child("surname").setValue(newSurname);
+        view.updateGender(newSurname);*/
     }
 
     @Override
@@ -141,7 +141,7 @@ public class ProfilePresenter implements Profile.Presenter {
                             @Override
                             public void onSuccess(Uri uri) {
                                 database.child(nameFile).child("urlImage").setValue(uri.toString());
-                                view.updatePic(uri.toString());//TO DO ci vorebbe una snack bar quando viene invocato questo metodo
+                                view.updatePic(uri.toString());//TODO ci vorebbe una snack bar quando viene invocato questo metodo
                             }
                         });
 
@@ -157,6 +157,7 @@ public class ProfilePresenter implements Profile.Presenter {
 
     }
 
+    //TODO da decidere dove vanno messe le costanti dei nomi dei percorsi e degi attributi delle tabelle
     @Override
     public void onUpdatePic() {
         view.choosePic();
@@ -166,7 +167,6 @@ public class ProfilePresenter implements Profile.Presenter {
 
     @Override
     public void onUpdateInfo() {
-        Log.i("pippo","prima della persistenza");
 
         database.keepSynced(true);
 
@@ -175,15 +175,28 @@ public class ProfilePresenter implements Profile.Presenter {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                User userInfo = dataSnapshot.getValue(User.class);
+                if(dataSnapshot.hasChild("name"))
+                    view.updateName(dataSnapshot.child("name").getValue().toString());
 
-                view.updatePic(userInfo.getUrlImage());
+                if(dataSnapshot.hasChild("surname"))
+                    view.updateSurname(dataSnapshot.child("surname").getValue().toString());
+
                 view.updateEmail(firebaseUser.getEmail());
                 view.updatePassword();
-                view.updateName(userInfo.getName());
-                view.updateSurname(userInfo.getSurname());
-                view.updateHeight(userInfo.getHeight());
-                view.updateWeight(userInfo.getWeight());
+
+                if(dataSnapshot.hasChild("height"))
+                    view.updateHeight(Integer.parseInt(dataSnapshot.child("height").getValue().toString()));
+
+                if(dataSnapshot.hasChild("weight"))
+                    view.updateWeight(Integer.parseInt(dataSnapshot.child("weight").getValue().toString()));
+
+                if(dataSnapshot.hasChild("urlImage"))
+                    view.updatePic(dataSnapshot.child("urlImage").getValue().toString());
+                /*if( dataSnapshot.hasChild("gender"))
+                    view.updateGender(dataSnapshot.child("gender").getValue().toString());
+                if(dataSnapshot.hasChild("birthDate"))
+                    view.updateBirthDate(dataSnapshot.child("birthDate").getValue());*/
+
             }
 
 
@@ -195,8 +208,9 @@ public class ProfilePresenter implements Profile.Presenter {
     }
 
     @Override
-    public void onUpdateHeight() {
-
+    public void onUpdateHeight(int newHeight) {
+         /*database.child("height").setValue(newHeight);
+        view.updateGender(newHeight);*/
     }
 
     @Override

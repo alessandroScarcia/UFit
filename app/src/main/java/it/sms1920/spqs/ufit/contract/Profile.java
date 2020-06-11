@@ -50,7 +50,7 @@ public interface Profile {
 
         void onUpdateInfo();
 
-        void onUpdateHeight();
+        void onUpdateHeight(int newHeight);
 
         void onBecomeTrainer();
     }

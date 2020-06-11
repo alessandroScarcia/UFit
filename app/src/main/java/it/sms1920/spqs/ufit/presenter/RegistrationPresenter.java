@@ -4,6 +4,8 @@ package it.sms1920.spqs.ufit.presenter;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -14,9 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Arrays;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.contract.RegistrationContract;
-import it.sms1920.spqs.ufit.model.User;
 
 import static it.sms1920.spqs.ufit.contract.Profile.Presenter.TABLE_USER;
 import static it.sms1920.spqs.ufit.contract.RegistrationContract.Presenter.AuthResultType.SIGNUP_SUCCESSFUL;
@@ -76,8 +76,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
                                 }
                             } else {
                                 returnSignUpResult(SIGNUP_SUCCESSFUL);
-                                FirebaseDatabase.getInstance().getReference(TABLE_USER).child(firebaseAuth.getUid())
-                                        .setValue(new User());
+                                FirebaseDatabase.getInstance().getReference(TABLE_USER).child(firebaseAuth.getUid());
                             }
                         }
                     });
