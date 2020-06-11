@@ -29,7 +29,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
         super.onCreate(savedInstanceState);
 
         presenter = new WorkoutPlansPresenter(this);
-        adapter = new WorkoutPlansAdapter();
+        adapter = new WorkoutPlansAdapter(this);
     }
 
     @Nullable
@@ -70,6 +70,16 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     @Override
     public void showTrainerWorkoutPlans() {
         adapter.showTrainerWorkoutPlans();
+    }
+
+    @Override
+    public void insertShowWorkoutPlanFragment(int workoutPlanId) {
+        ShowWorkoutPlanFragment showWorkoutPlanFragment = ShowWorkoutPlanFragment.newInstance(workoutPlanId);
+
+        this.getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, showWorkoutPlanFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

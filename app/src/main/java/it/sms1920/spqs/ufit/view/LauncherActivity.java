@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
-public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.view {
+public class LauncherActivity extends AppCompatActivity implements LauncherManagerContract.View {
 
     LauncherManager presenter;
     Menu menu;

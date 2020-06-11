@@ -4,19 +4,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
 
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.HOME;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.PLANS;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.PROFILE;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.STATS;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.TRAINER;
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.View.FragType;
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.View.FragType.HOME;
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.View.FragType.PLANS;
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.View.FragType.PROFILE;
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.View.FragType.STATS;
+import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.View.FragType.TRAINER;
 
-public class LauncherManager implements LauncherManagerContract.presenter {
+public class LauncherManager implements LauncherManagerContract.Presenter {
 
-    LauncherManagerContract.view view;
+    LauncherManagerContract.View view;
     FragType currentFragment = HOME;
 
-    public LauncherManager(LauncherManagerContract.view view) {
+    public LauncherManager(LauncherManagerContract.View view) {
         this.view = view;
     }
 
