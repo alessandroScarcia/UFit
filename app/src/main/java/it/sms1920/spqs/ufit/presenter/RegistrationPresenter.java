@@ -8,17 +8,19 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 import it.sms1920.spqs.ufit.contract.iRegistration;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 
-import static it.sms1920.spqs.ufit.contract.iProfile.Presenter.TABLE_USER;
 import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.AuthResultType.SIGNUP_SUCCESSFUL;
 import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.AuthResultType.USER_ALREADY_EXISTS;
 import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType.EMAIL_FIELD_EMPTY;
@@ -59,13 +61,16 @@ public class RegistrationPresenter implements iRegistration.Presenter {
     public void onSignUp(String email, String password, String confirmPassword) {
 
         if (checkFields(email, password, confirmPassword)) {
-            final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            final FirebaseAuth firebaseAuth = FirebaseAuthSingleton.getFirebaseAuth();
 
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+            AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+
+            firebaseUser.linkWithCredential(credential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
                             if (!task.isSuccessful()) {
                                 try {
                                     throw Objects.requireNonNull(task.getException());
@@ -76,7 +81,6 @@ public class RegistrationPresenter implements iRegistration.Presenter {
                                 }
                             } else {
                                 returnSignUpResult(SIGNUP_SUCCESSFUL);
-                                FirebaseDatabase.getInstance().getReference(TABLE_USER).child(firebaseAuth.getUid());
                             }
                         }
                     });

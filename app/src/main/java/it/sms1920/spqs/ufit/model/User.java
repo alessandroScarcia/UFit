@@ -3,13 +3,18 @@ package it.sms1920.spqs.ufit.model;
 import androidx.annotation.NonNull;
 
 public class User {
-    public String getUrlImage() {
-        return urlImage;
-    }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
+    public static String NAME_FIELD = "name";
+    public static String SURNAME_FIELD = "surname";
+    public static String GENDER_FIELD = "gender";
+    public static String IMG_URL_FIELD = "urlImage";
+    public static String BIRTH_DATE_FIELD = "birthDate";
+    public static String HEIGHT_FIELD = "height";
+    public static String WEIGHT_FIELD = "weight";
+
+    public static String PATH_STORAGE_PIC = "PicsProfile/";
+    public static String JPG = ".jpg";
+
 
     public enum Gender {
 
@@ -26,17 +31,17 @@ public class User {
     private String name;
     private String surname;
     private Gender gender;
-    private String dateBirth;
+    private String birthDate;
     private String urlImage;
     private int weight;
     private int height;
 
-    public User(String name, String surname, Gender gender, String urlImageProfile, String dateBirth, int weight, int height) {
+    public User(String name, String surname, Gender gender, String urlImageProfile, String birthDate, int weight, int height) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
         this.urlImage = urlImageProfile;
-        this.dateBirth = dateBirth;
+        this.birthDate = birthDate;
         this.weight = weight;
         this.height = height;
     }
@@ -65,12 +70,20 @@ public class User {
         this.gender = gender;
     }
 
-    public String getDateBirth() {
-        return dateBirth;
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 
     public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
+        this.birthDate = birthDate;
     }
 
     public int getWeight() {
@@ -88,10 +101,6 @@ public class User {
     public void setHeight(int height) {
         this.height = height;
     }
-
-
-
-
 
 }
 

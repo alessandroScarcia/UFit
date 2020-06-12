@@ -1,8 +1,9 @@
 package it.sms1920.spqs.ufit.presenter;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import it.sms1920.spqs.ufit.contract.iLauncher;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 
 import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType;
 import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.HOME;
@@ -13,8 +14,8 @@ import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.TRAINER;
 
 public class LauncherManager implements iLauncher.Presenter {
 
-    iLauncher.View view;
-    FragType currentFragment = HOME;
+    private iLauncher.View view;
+    private FragType currentFragment = HOME;
 
     public LauncherManager(iLauncher.View view) {
         this.view = view;
@@ -47,11 +48,23 @@ public class LauncherManager implements iLauncher.Presenter {
 
     @Override
     public void onProfileIconClicked() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {//se è già loggato
-            view.insertProfileFragment();
-            currentFragment = PROFILE;
+
+        FirebaseUser firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
+
+        if (firebaseUser != null) {
+
+            if (!firebaseUser.isAnonymous()) {//se è già loggato
+
+                view.insertProfileFragment();
+                currentFragment = PROFILE;
+
+            }else
+
+                view.startLoginActivity();
+
         } else
             view.startLoginActivity();
+
     }
 
     @Override
@@ -70,6 +83,6 @@ public class LauncherManager implements iLauncher.Presenter {
     @Override
     public void onLogOutIconClicked() {
         view.resetActivity();
-        FirebaseAuth.getInstance().signOut();
+        FirebaseAuthSingleton.getFirebaseAuth().signOut();
     }
 }

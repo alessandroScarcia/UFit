@@ -26,8 +26,17 @@ import com.google.firebase.storage.UploadTask;
 import java.util.Date;
 
 import it.sms1920.spqs.ufit.contract.iProfile;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.User;
+
+import static it.sms1920.spqs.ufit.model.User.HEIGHT_FIELD;
+import static it.sms1920.spqs.ufit.model.User.IMG_URL_FIELD;
+import static it.sms1920.spqs.ufit.model.User.JPG;
+import static it.sms1920.spqs.ufit.model.User.NAME_FIELD;
+import static it.sms1920.spqs.ufit.model.User.PATH_STORAGE_PIC;
+import static it.sms1920.spqs.ufit.model.User.SURNAME_FIELD;
+import static it.sms1920.spqs.ufit.model.User.WEIGHT_FIELD;
 
 
 public class ProfilePresenter implements iProfile.Presenter {
@@ -36,13 +45,16 @@ public class ProfilePresenter implements iProfile.Presenter {
     private FirebaseUser firebaseUser;
     private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    iProfile.View view;
+    private iProfile.View view;
 
     public ProfilePresenter(iProfile.View view) {
         this.database = FirebaseDbSingleton.getDatabase().getReference(TABLE_USER);
-        this.firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        this.firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
         this.view = view;
     }
+
+
+
 
     @Override
     public void onGenderChanged(User.Gender newGender) {
@@ -75,7 +87,7 @@ public class ProfilePresenter implements iProfile.Presenter {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        }else{
+                        } else {
 
                         }
                     }
@@ -89,22 +101,21 @@ public class ProfilePresenter implements iProfile.Presenter {
         firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(!task.isSuccessful()){
+                if (!task.isSuccessful()) {
                     try {
                         throw task.getException();
-                    }catch(FirebaseAuthInvalidCredentialsException e){
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
                         e.printStackTrace();
-                    }catch(FirebaseAuthUserCollisionException e){
+                    } catch (FirebaseAuthUserCollisionException e) {
                         e.printStackTrace();
-                    }catch(FirebaseAuthInvalidUserException e){
+                    } catch (FirebaseAuthInvalidUserException e) {
                         e.printStackTrace();
-                    }catch(FirebaseAuthRecentLoginRequiredException e){
+                    } catch (FirebaseAuthRecentLoginRequiredException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }else{
+                } else {
 
                 }
             }
@@ -138,7 +149,7 @@ public class ProfilePresenter implements iProfile.Presenter {
     public void uploadPicOnStorage(Uri imageUri) {
         final String nameFile = FirebaseAuth.getInstance().getUid();
 
-        final StorageReference riversRef = mStorageRef.child("PicsProfile/" + nameFile+".jpg");
+        final StorageReference riversRef = mStorageRef.child(PATH_STORAGE_PIC + nameFile + JPG);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -147,7 +158,7 @@ public class ProfilePresenter implements iProfile.Presenter {
                         riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                database.child(nameFile).child("urlImage").setValue(uri.toString());
+                                database.child(nameFile).child(IMG_URL_FIELD).setValue(uri.toString());
                                 view.updatePic(uri.toString());//TODO ci vorebbe una snack bar quando viene invocato questo metodo
                             }
                         });
@@ -179,39 +190,39 @@ public class ProfilePresenter implements iProfile.Presenter {
 
         database.child(firebaseUser.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.hasChild("name"))
-                    view.updateName(dataSnapshot.child("name").getValue().toString());
+                        if (dataSnapshot.hasChild(NAME_FIELD))
+                            view.updateName(dataSnapshot.child(NAME_FIELD).getValue().toString());
 
-                if(dataSnapshot.hasChild("surname"))
-                    view.updateSurname(dataSnapshot.child("surname").getValue().toString());
+                        if (dataSnapshot.hasChild(SURNAME_FIELD))
+                            view.updateSurname(dataSnapshot.child(SURNAME_FIELD).getValue().toString());
 
-                view.updateEmail(firebaseUser.getEmail());
-                view.updatePassword();
+                        view.updateEmail(firebaseUser.getEmail());
+                        view.updatePassword();
 
-                if(dataSnapshot.hasChild("height"))
-                    view.updateHeight(Integer.parseInt(dataSnapshot.child("height").getValue().toString()));
+                        if (dataSnapshot.hasChild(HEIGHT_FIELD))
+                            view.updateHeight(Integer.parseInt(dataSnapshot.child(HEIGHT_FIELD).getValue().toString()));
 
-                if(dataSnapshot.hasChild("weight"))
-                    view.updateWeight(Integer.parseInt(dataSnapshot.child("weight").getValue().toString()));
+                        if (dataSnapshot.hasChild(WEIGHT_FIELD))
+                            view.updateWeight(Integer.parseInt(dataSnapshot.child(WEIGHT_FIELD).getValue().toString()));
 
-                if(dataSnapshot.hasChild("urlImage"))
-                    view.updatePic(dataSnapshot.child("urlImage").getValue().toString());
-                /*if( dataSnapshot.hasChild("gender"))
-                    view.updateGender(dataSnapshot.child("gender").getValue().toString());
-                if(dataSnapshot.hasChild("birthDate"))
-                    view.updateBirthDate(dataSnapshot.child("birthDate").getValue());*/
+                        if (dataSnapshot.hasChild(IMG_URL_FIELD))
+                            view.updatePic(dataSnapshot.child(IMG_URL_FIELD).getValue().toString());
+                /*if( dataSnapshot.hasChild(GENDER_FIELD))
+                    view.updateGender(dataSnapshot.child(GENDER_FIELD).getValue().toString());
+                if(dataSnapshot.hasChild(BIRTH_DATE_FIELD))
+                    view.updateBirthDate(dataSnapshot.child(BIRTH_DATE_FIELD).getValue());*/
 
-            }
+                    }
 
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                });
     }
 
     @Override

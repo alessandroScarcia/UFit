@@ -7,6 +7,7 @@ import java.util.Date;
 import it.sms1920.spqs.ufit.model.User;
 
 public interface iProfile {
+
     interface View {
         void updatePic(String urlImage);
 

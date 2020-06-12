@@ -3,6 +3,8 @@ package it.sms1920.spqs.ufit.presenter;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -11,8 +13,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.contract.iLogin;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 
 import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.AuthResultType.EMAILS_NOT_MATCH;
 import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.AuthResultType.PASSWORDS_NOT_MATCH;
@@ -24,8 +26,10 @@ import static it.sms1920.spqs.ufit.contract.iLogin.Presenter.InputErrorType.PASS
 
 public class LoginPresenter implements iLogin.Presenter {
     private iLogin.View view;
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
+
     public LoginPresenter(iLogin.View view) {
+        this.firebaseAuth = FirebaseAuthSingleton.getFirebaseAuth();
         this.view = view;
     }
 
@@ -47,8 +51,6 @@ public class LoginPresenter implements iLogin.Presenter {
     public void onSignIn(String email, String password) {
         if (checkFields(email, password)) {
             view.setEnabledUI(false);
-
-            firebaseAuth = FirebaseAuth.getInstance();
 
             firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

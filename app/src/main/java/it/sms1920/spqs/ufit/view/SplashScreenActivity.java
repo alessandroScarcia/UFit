@@ -1,26 +1,38 @@
 package it.sms1920.spqs.ufit.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
+import it.sms1920.spqs.ufit.contract.iSplashScreen;
+import it.sms1920.spqs.ufit.presenter.SplashScreenPresenter;
 
-import it.sms1920.spqs.ufit.model.PicassoSingleton;
+import static it.sms1920.spqs.ufit.contract.iSplashScreen.SPLASH_TIME_OUT;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity implements iSplashScreen.View {
 
-    private static int SPLASH_TIME_OUT = 1000;//1 s
+    private SplashScreenPresenter presenter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        Picasso.setSingletonInstance(PicassoSingleton.getInstancePicasso(this));
+        Context context = this;
+
+        presenter = new SplashScreenPresenter(SplashScreenActivity.this, context );
+
+        presenter.onStartApp();
+
+    }
+
+    @Override
+    public void startApp() {
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

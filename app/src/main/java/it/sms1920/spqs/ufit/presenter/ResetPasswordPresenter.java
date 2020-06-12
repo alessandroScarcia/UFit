@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import it.sms1920.spqs.ufit.contract.iResetPassword;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 
 public class ResetPasswordPresenter implements iResetPassword.Presenter {
     private iResetPassword.View view;
@@ -19,7 +20,7 @@ public class ResetPasswordPresenter implements iResetPassword.Presenter {
 
     @Override
     public void onResetPassword(String email) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuthSingleton.getFirebaseAuth();
 
         auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

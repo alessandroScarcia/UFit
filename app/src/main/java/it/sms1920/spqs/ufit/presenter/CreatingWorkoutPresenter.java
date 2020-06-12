@@ -6,7 +6,7 @@ public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
 
 
     private final static int PICK_EXERCISE = 1;
-    iCreatingWorkout.View view;
+    private  iCreatingWorkout.View view;
 
     public CreatingWorkoutPresenter(iCreatingWorkout.View view) {
         this.view = view;
