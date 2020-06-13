@@ -78,6 +78,12 @@
     <string name="send_email">Send</string>
 
 
+    <string name="myGeneralStats" >Stato generale</string>
+    <string name="myBodyStats" >Misurazioni corporee</string>
+
+
 
     <string name="search_here">Search here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import it.sms1920.spqs.ufit.contract.iLauncher;
 import it.sms1920.spqs.ufit.presenter.LauncherManager;
 
@@ -130,7 +131,6 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
         menu.findItem(R.id.nav_stats).setChecked(true);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
-
     }
 
     @Override
@@ -166,7 +166,8 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
         finish();
     }
 
-    public void resetMenuIcons() {
+
+    private void resetMenuIcons() {
         menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_normal);
         menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_normal);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_normal);
@@ -174,7 +175,7 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
         menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_normal);
     }
 
-    public void resetToolbarIcons() {
+    private void resetToolbarIcons() {
         toolbar.getMenu().findItem(R.id.logout).setVisible(false);
         toolbar.getMenu().findItem(R.id.search).setVisible(false);
         toolbar.getMenu().findItem(R.id.add).setVisible(false);

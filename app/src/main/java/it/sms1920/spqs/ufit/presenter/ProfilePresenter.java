@@ -226,6 +226,11 @@ public class ProfilePresenter implements iProfile.Presenter {
     }
 
     @Override
+    public void onClickChangeProfileInfo() {
+        view.startChangeProfileInfoFragment();
+    }
+
+    @Override
     public void onHeightChanged(int newHeight) {
          /*database.child("height").setValue(newHeight);
         view.updateGender(newHeight);*/

@@ -1,18 +1,9 @@
 package it.sms1920.spqs.ufit.view;
 
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Network;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import it.sms1920.spqs.ufit.contract.iProfile;
-
-import it.sms1920.spqs.ufit.model.PicassoSingleton;
 import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
 
 import static android.app.Activity.RESULT_OK;
@@ -68,6 +52,8 @@ public class ProfileFragment extends Fragment implements iProfile.View {
     private TextInputEditText txtUserEmail;
     private TextInputEditText txtUserPassword;
 
+    private MaterialButton btnChangeProfileInfo;
+
 
     private ArrayAdapter<CharSequence> adapterGender;
 
@@ -76,6 +62,8 @@ public class ProfileFragment extends Fragment implements iProfile.View {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
         /*
         Initializing view items
                 */
@@ -93,6 +81,7 @@ public class ProfileFragment extends Fragment implements iProfile.View {
         txtWeight = view.findViewById(R.id.txtWeight);
         txtUserEmail = view.findViewById(R.id.txtEmail);
         txtUserPassword = view.findViewById(R.id.txtPassword);
+        btnChangeProfileInfo = view.findViewById(R.id.btnChangeProfileInfo);
 
         /*
             Setting gender list to drop down menu
@@ -111,6 +100,15 @@ public class ProfileFragment extends Fragment implements iProfile.View {
             @Override
             public void onClick(View v) {
                 presenter.onPicProfileChanged();
+            }
+        });
+
+
+
+        btnChangeProfileInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onClickChangeProfileInfo();
             }
         });
 
@@ -172,6 +170,24 @@ public class ProfileFragment extends Fragment implements iProfile.View {
                 Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, 1);
+    }
+
+    @Override
+    public void startChangeProfileInfoFragment() {
+
+        Bundle bundle = new Bundle();
+
+        bundle.putString("name",txtName.getText().toString());
+        bundle.putString(String.valueOf(R.string.email),txtUserEmail.getText().toString());
+        bundle.putString(String.valueOf(R.string.surname),txtSurname.getText().toString());
+        bundle.putString(String.valueOf(R.string.gender),txtSurname.getText().toString());
+
+        ChangeProfileInfoFragment changeProfileInfoFragment = new ChangeProfileInfoFragment();
+        changeProfileInfoFragment.setArguments(bundle);
+
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, changeProfileInfoFragment).commit();
+
+
     }
 
     @Override
