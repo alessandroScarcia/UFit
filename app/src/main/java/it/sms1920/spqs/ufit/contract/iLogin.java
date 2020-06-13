@@ -1,12 +1,15 @@
 package it.sms1920.spqs.ufit.contract;
 
-public interface Login {
+public interface iLogin {
     interface View {
 
 
         void setInputError(Presenter.InputErrorType inputErrorType);
+
         void setSignInError(Presenter.AuthResultType authResultType);
+
         void startLauncherActivity();
+
         void setEnabledUI(boolean enabled);
     }
 
@@ -25,8 +28,11 @@ public interface Login {
         }
 
         void onSignIn(String email, String password);
+
         void returnSignInResult(AuthResultType check);
+
         void signInSuccessful();
+
         void onBackPressed();
     }
 }

@@ -11,12 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
-import it.sms1920.spqs.ufit.contract.Login;
-import it.sms1920.spqs.ufit.contract.ResetPassword;
-import it.sms1920.spqs.ufit.presenter.LoginPresenter;
+import it.sms1920.spqs.ufit.contract.iResetPassword;
 import it.sms1920.spqs.ufit.presenter.ResetPasswordPresenter;
 
-public class ResetPasswordActivity extends AppCompatActivity implements ResetPassword.View {
+public class ResetPasswordActivity extends AppCompatActivity implements iResetPassword.View {
 
     private ResetPasswordPresenter presenter;
     Activity mContext = this;
@@ -34,7 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
         setSupportActionBar(toolbar);
 
 
-        presenter = new ResetPasswordPresenter((ResetPassword.View) mContext);
+        presenter = new ResetPasswordPresenter((iResetPassword.View) mContext);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

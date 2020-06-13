@@ -13,10 +13,14 @@ import it.sms1920.spqs.ufit.presenter.WorkoutPlansList;
 
 public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapter.WorkoutPlanHolder> implements iWorkoutPlans.View {
     private static final String TAG = WorkoutPlansAdapter.class.getCanonicalName();
+
     private iWorkoutPlans.Presenter presenter;
 
-    public WorkoutPlansAdapter() {
+    private WorkoutPlansFragment parentFragment;
+
+    public WorkoutPlansAdapter(WorkoutPlansFragment parentFragment) {
         presenter = new WorkoutPlansList(this);
+        this.parentFragment = parentFragment;
     }
 
     @NonNull
@@ -48,6 +52,11 @@ public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapte
         notifyDataSetChanged();
     }
 
+    @Override
+    public void showWorkoutPlanDetail(int workoutPlanId) {
+        parentFragment.insertShowWorkoutPlanFragment(workoutPlanId);
+    }
+
     public class WorkoutPlanHolder extends RecyclerView.ViewHolder implements iWorkoutPlans.View.Item {
         private TextView tvName;
         private int position;
@@ -58,7 +67,7 @@ public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    presenter.onClickedItem(position);
+                    presenter.onItemClicked(position);
                 }
             });
         }

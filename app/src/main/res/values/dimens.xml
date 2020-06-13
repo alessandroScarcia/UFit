@@ -9,6 +9,9 @@
     <dimen name="item_exercise_card_text_size">20sp</dimen>
 
 
+    <dimen name="item_workout_creation_exercise_card_image_height">75dp</dimen>
+    <dimen name="item_workout_creation_exercise_card_image_width">110dp</dimen>
+
     <dimen name="logo_text_height">160dp</dimen>
     <dimen name="logo_text_width">250dp</dimen>
     <dimen name="logo_size">120dp</dimen>
@@ -30,7 +33,7 @@
 
     <dimen name="plans_tab_items_height">45dp</dimen>
 
-    <dimen name="search_bar_height">65dp</dimen>
+    <dimen name="search_bar_height">60dp</dimen>
 
     <dimen name="exercise_thumbnail_height">300dp</dimen>
     <dimen name="exercise_thumbnail_gradient_height">150dp</dimen>

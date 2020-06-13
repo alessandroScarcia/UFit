@@ -1,9 +1,9 @@
 package it.sms1920.spqs.ufit.contract;
 
 
-public interface LauncherManagerContract {
+public interface iLauncher {
 
-    interface view {
+    interface View {
 
         enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE}
 
@@ -26,22 +26,22 @@ public interface LauncherManagerContract {
         void resetActivity();
     }
 
-    interface presenter {
-        void onHomeIconClick();
+    interface Presenter {
+        void onHomeIconClicked();
 
-        void onPlansIconClick();
+        void onPlansIconClicked();
 
-        void onTrainerIconClick();
+        void onTrainerIconClicked();
 
-        void onStatsIconClick();
+        void onStatsIconClicked();
 
-        void onProfileIconClick();
+        void onProfileIconClicked();
 
-        void onSearchIconClick();
+        void onSearchIconClicked();
 
         void onBackPressed();
 
-        void onLogOutIconClick();
+        void onLogOutIconClicked();
     }
 
 }

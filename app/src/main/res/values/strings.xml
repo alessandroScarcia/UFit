@@ -10,12 +10,17 @@
     <string name="profile">Profile</string>
 
 
+    <string name="signout">Sign Out</string>
+
     <string name="myPlans">My workout plans</string>
     <string name="trainerPlans">Trainer\'s workout plans</string>
 
     <string name="addTo">Add to…</string>
 
     <string name="loading">Loading&#8230;</string>
+
+    <string name="new_workout_plan">New Workout Plan</string>
+
 
     <!-- Profile -->
     <string name="name">Name</string>
@@ -28,31 +33,7 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="squat">Squat</string>
-    <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
-
-    <string name="edit_value" >Modifica Valore</string>
-    <string name="global_cancel" >Cancella</string>
-    <string name="add_label" >Aggiungi</string>
-
-
-    <string name="weightLabel">Peso(kg)</string>
-    <string name="fatLabel" >Grasso(%)</string>
-    <string name="bonesLabel" >Ossa(%)</string>
-    <string name="waterLabel">Acqua(%)</string>
-    <string name="musclesLabel" >Muscoli(%)</string>
-
-    <string name="indexLabel">Indice</string>
-    <string name="imcLabel">BMI</string>
-    <string name="rfmLabel" >RFM</string>
-    <string name="ffmiLabel" >FFMI</string>
-
-
-    <string name="DateLabel" >Data</string>
-    <string name="MeasureLabel" >Carico(Kg)</string>
-    <string name="MesureHint" >Inserisci carico qui</string>
-    <string name="measureLabel">Inserisci carico qui</string>
-    <string name="sizeTableLabel" >Misurazioni acquisite</string>
-
+    <string name="add_exercise_to_plan">Add to your plan</string>
     <string name="gender">Gender</string>
     <string name="date">Date of birth</string>
 
@@ -98,4 +79,9 @@
     <string name="myGeneralStats" >Stato generale</string>
     <string name="myBodyStats" >Misurazioni corporee</string>
 
+
+
+    <string name="search_here">Search here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

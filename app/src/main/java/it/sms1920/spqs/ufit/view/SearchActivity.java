@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -14,23 +15,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import it.sms1920.spqs.ufit.contract.SearchContract;
-import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.contract.iSearch;
 import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+public class SearchActivity extends AppCompatActivity implements iSearch.View {
+    private static final String TAG = SearchActivity.class.getCanonicalName();
 
-    private Activity mContext = this;
     private SearchPresenter presenter;
     private SearchListAdapter adapter;
     private Toolbar toolbar;
+    private RecyclerView rvSearchResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mContext = this;
 
         presenter = new SearchPresenter(this);
 
@@ -47,8 +47,8 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             }
         });
 
-        TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
-        TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
+        final TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
+        final TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
 
         txtSearchFieldLayout.setStartIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 presenter.onBackPressed();
             }
         });
+
 
         txtSearchField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,13 +75,22 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
             }
         });
 
-
+        rvSearchResult = findViewById(R.id.rvSearchResult);
         // Setting adapter to the recycler view for search result
-        adapter = new SearchListAdapter(this);
 
-        RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
+
+        adapter = new SearchListAdapter(R.layout.item_exercise);
+        adapter.setMyClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(view));
+            }
+        });
+
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new GridLayoutManager(this, 2));
+
     }
 
     @Override
@@ -103,9 +113,22 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     }
 
     @Override
-    public void notifyQueryTextChangedToAdapter(String query) {
-        adapter.changeQueryText(query);
+    public void notifyQueryTextChangedToAdapter(final String query) {
+        adapter.onQueryTextChanged(query);
     }
 
+    @Override
+    public void showExercise(int position) {
+        /*
+            Extract single view item from recycler view with used LayoutManager method "findViewByPosition"
+         */
+        GridLayoutManager layoutManager = (GridLayoutManager) rvSearchResult.getLayoutManager();
+        View view = layoutManager.findViewByPosition(position);
+        TextView txtName = view.findViewById(R.id.txtExerciseName);
+
+        if (!txtName.getText().toString().equals("") && !txtName.getHint().toString().equals("")) {
+            startExerciseActivity(Integer.parseInt(txtName.getHint().toString()), txtName.getText().toString());
+        }
+    }
 
 }

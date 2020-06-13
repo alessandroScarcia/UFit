@@ -9,7 +9,12 @@
     </style>
 
 
-    <style name="CustomMaterialComponent" parent="Theme.MaterialComponents">
+    <style name="CustomMaterialComponent" parent="@style/Theme.MaterialComponents">
+        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="android:textColorHighlight">@color/colorSecondaryLight</item>
+    </style>
+
+    <style name="CustomMaterialComponentProfile" parent="@style/Theme.MaterialComponents">
         <item name="colorPrimary">@color/colorSecondary</item>
         <item name="android:textColorHighlight">@color/colorSecondaryLight</item>
     </style>

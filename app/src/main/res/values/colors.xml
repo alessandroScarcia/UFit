@@ -18,6 +18,8 @@
     <color name="colorOnSurface">#1F000000</color>
     <color name="colorBlack">#000000</color>
 
+    <color name="separator">?android:attr/listDivider</color>
+
     <color name="colorAccent">#B652C6</color>
 
     <color name="cardGradient">#121212</color>

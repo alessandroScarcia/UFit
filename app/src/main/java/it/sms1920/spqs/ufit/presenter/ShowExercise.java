@@ -17,13 +17,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Locale;
 import java.util.Objects;
 
-import it.sms1920.spqs.ufit.contract.ShowExerciseContract;
+import it.sms1920.spqs.ufit.contract.iExercise;
 import it.sms1920.spqs.ufit.model.Exercise;
 import it.sms1920.spqs.ufit.model.ExerciseTranslation;
 
-public class ShowExercise implements ShowExerciseContract.Presenter {
+public class ShowExercise implements iExercise.Presenter {
     private static final String TAG = ShowExercise.class.getCanonicalName();
-    private ShowExerciseContract.View view;
+    private iExercise.View view;
 
     private DatabaseReference mDatabase;
     private Exercise exercise;
@@ -31,14 +31,14 @@ public class ShowExercise implements ShowExerciseContract.Presenter {
     private ExerciseTranslation exerciseDefaultTranslation;
     private ExerciseTranslation exerciseLocalTranslation;
 
-    public ShowExercise(ShowExerciseContract.View view) {
+    public ShowExercise(iExercise.View view) {
         this.view = view;
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
 
     @Override
-    public void onCreateComplete(Intent intent) {
+    public void onCreateCompleted(Intent intent) {
         final int exerciseId = intent.getIntExtra("exerciseId", -1);
         final String exerciseName = intent.getStringExtra("exerciseName");
 
@@ -47,18 +47,18 @@ public class ShowExercise implements ShowExerciseContract.Presenter {
         myExerciseQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Log.d(TAG, Objects.requireNonNull(child.getKey()));
-
-                    Exercise temp = child.getValue(Exercise.class);
-
-                    if (temp != null && temp.getName().equals(exerciseName)) {
-                        exercise = child.getValue(Exercise.class);
-                        view.setName(exerciseName);
-                        // TODO image e muscoli
-                        fetchExerciseTranslation();
-                    }
-                }
+//                for (DataSnapshot child : dataSnapshot.getChildren()) {
+//                    Log.d(TAG, Objects.requireNonNull(child.getKey()));
+//
+//                    Exercise temp = child.getValue(Exercise.class);
+//
+//                    if (temp != null && temp.getName().equals(exerciseName)) {
+//                        exercise = child.getValue(Exercise.class);
+//                        view.setName(exerciseName);
+//                        // TODO image e muscoli
+//                        fetchExerciseTranslation();
+//                    }
+//                }
             }
 
             @Override
@@ -74,51 +74,50 @@ public class ShowExercise implements ShowExerciseContract.Presenter {
     }
 
     private void fetchExerciseTranslation() {
-
-        Query myExerciseTranslationQuery = mDatabase.child("ExerciseTranslation")
-                .orderByChild("exerciseId").equalTo(exercise.getExerciseId());
-
-        myExerciseTranslationQuery.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ExerciseTranslation temp = dataSnapshot.getValue(ExerciseTranslation.class);
-
-                if (temp != null) {
-                    if (temp.getCodLanguage().compareTo(exercise.getDefLanguage()) == 0) {
-                        exerciseDefaultTranslation = temp;
-                    } else if (temp.getCodLanguage().compareTo(Locale.getDefault().getISO3Language()) == 0) {
-                        exerciseLocalTranslation = temp;
-                    }
-                }
-
-                if (exerciseDefaultTranslation != null && exerciseLocalTranslation == null) {
-                    view.setDescription(exerciseDefaultTranslation.getDescription());
-                } else if (exerciseLocalTranslation != null) {
-                    view.setDescription(exerciseLocalTranslation.getDescription());
-                } else {
-                    view.setDescription();
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        Query myExerciseTranslationQuery = mDatabase.child("ExerciseTranslation")
+//                .orderByChild("exerciseId").equalTo(exercise.getExerciseId());
+//
+//        myExerciseTranslationQuery.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                ExerciseTranslation temp = dataSnapshot.getValue(ExerciseTranslation.class);
+//
+//                if (temp != null) {
+//                    if (temp.getCodLanguage().compareTo(exercise.getDefLanguage()) == 0) {
+//                        exerciseDefaultTranslation = temp;
+//                    } else if (temp.getCodLanguage().compareTo(Locale.getDefault().getISO3Language()) == 0) {
+//                        exerciseLocalTranslation = temp;
+//                    }
+//                }
+//
+//                if (exerciseDefaultTranslation != null && exerciseLocalTranslation == null) {
+//                    view.setDescription(exerciseDefaultTranslation.getDescription());
+//                } else if (exerciseLocalTranslation != null) {
+//                    view.setDescription(exerciseLocalTranslation.getDescription());
+//                } else {
+//                    view.setDescription();
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 }

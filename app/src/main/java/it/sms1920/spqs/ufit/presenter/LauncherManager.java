@@ -1,61 +1,74 @@
 package it.sms1920.spqs.ufit.presenter;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import it.sms1920.spqs.ufit.contract.LauncherManagerContract;
+import it.sms1920.spqs.ufit.contract.iLauncher;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.HOME;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.PLANS;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.PROFILE;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.STATS;
-import static it.sms1920.spqs.ufit.contract.LauncherManagerContract.view.FragType.TRAINER;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.HOME;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.PLANS;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.PROFILE;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.STATS;
+import static it.sms1920.spqs.ufit.contract.iLauncher.View.FragType.TRAINER;
 
-public class LauncherManager implements LauncherManagerContract.presenter {
+public class LauncherManager implements iLauncher.Presenter {
 
-    LauncherManagerContract.view view;
-    FragType currentFragment = HOME;
+    private iLauncher.View view;
+    private FragType currentFragment = HOME;
 
-    public LauncherManager(LauncherManagerContract.view view) {
+    public LauncherManager(iLauncher.View view) {
         this.view = view;
     }
 
 
     @Override
-    public void onHomeIconClick() {
+    public void onHomeIconClicked() {
         view.insertHomeFragment();
         currentFragment = HOME;
     }
 
     @Override
-    public void onPlansIconClick() {
+    public void onPlansIconClicked() {
         view.insertPlansFragment();
         currentFragment = PLANS;
     }
 
     @Override
-    public void onTrainerIconClick() {
+    public void onTrainerIconClicked() {
         view.insertTrainerFragment();
         currentFragment = TRAINER;
     }
 
     @Override
-    public void onStatsIconClick() {
+    public void onStatsIconClicked() {
         view.insertStatsFragment();
         currentFragment = STATS;
     }
 
     @Override
-    public void onProfileIconClick() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {//se è già loggato
-            view.insertProfileFragment();
-            currentFragment = PROFILE;
+    public void onProfileIconClicked() {
+
+        FirebaseUser firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
+
+        if (firebaseUser != null) {
+
+            if (!firebaseUser.isAnonymous()) {//se è già loggato
+
+                view.insertProfileFragment();
+                currentFragment = PROFILE;
+
+            }else
+
+                view.startLoginActivity();
+
         } else
             view.startLoginActivity();
+
     }
 
     @Override
-    public void onSearchIconClick() {
+    public void onSearchIconClicked() {
         view.startSearchActivity();
     }
 
@@ -68,8 +81,8 @@ public class LauncherManager implements LauncherManagerContract.presenter {
     }
 
     @Override
-    public void onLogOutIconClick() {
+    public void onLogOutIconClicked() {
         view.resetActivity();
-        FirebaseAuth.getInstance().signOut();
+        FirebaseAuthSingleton.getFirebaseAuth().signOut();
     }
 }

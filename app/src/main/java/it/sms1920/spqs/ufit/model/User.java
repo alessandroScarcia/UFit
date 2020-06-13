@@ -1,13 +1,20 @@
 package it.sms1920.spqs.ufit.model;
 
-import android.icu.util.LocaleData;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import androidx.annotation.NonNull;
 
 public class User {
+
+    public static String NAME_FIELD = "name";
+    public static String SURNAME_FIELD = "surname";
+    public static String GENDER_FIELD = "gender";
+    public static String IMG_URL_FIELD = "urlImage";
+    public static String BIRTH_DATE_FIELD = "birthDate";
+    public static String HEIGHT_FIELD = "height";
+    public static String WEIGHT_FIELD = "weight";
+
+    public static String PATH_STORAGE_PIC = "PicsProfile/";
+    public static String JPG = ".jpg";
+
 
     public enum Gender {
 
@@ -21,115 +28,22 @@ public class User {
         }
     }
 
-    public enum HeightUnit {CM, IN;
-
-        @NonNull
-        @Override
-        public String toString() {
-            return super.toString().toLowerCase();
-        }
-    }
-
-    public enum WeightUnit {KG, LB;
-
-        @NonNull
-        @Override
-        public String toString() {
-            return super.toString().toLowerCase();
-        }
-    }
-
-    private String linkImgProfile;
     private String name;
     private String surname;
     private Gender gender;
-    private String dateBirth;
-    private int bodyWeightKg;
-    private double bodyWeightLbs;
-    private HeightUnit heightUnit;
-    private WeightUnit weightUnit;
-    private int heightCm;
-    private double heightIn;
+    private String birthDate;
+    private String urlImage;
+    private int weight;
+    private int height;
 
-
-    public User(String linkImgProfile, String name, String surname, Gender gender, String dateBirth,
-                int bodyWeightKg, double bodyWeightLbs, HeightUnit heightUnit, WeightUnit weightUnit,
-                int heightCm, double heightIn) {
-        this.linkImgProfile = linkImgProfile;
+    public User(String name, String surname, Gender gender, String urlImageProfile, String birthDate, int weight, int height) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
-        this.dateBirth = dateBirth;
-        this.bodyWeightKg = bodyWeightKg;
-        this.bodyWeightLbs = bodyWeightLbs;
-        this.heightUnit = heightUnit;
-        this.weightUnit = weightUnit;
-        this.heightCm = heightCm;
-        this.heightIn = heightIn;
-    }
-
-
-    //viene settato così perchè viene inizializzato all'interno del realtime database
-    public User(){
-        this.linkImgProfile = "";
-        this.name = "";
-        this.surname = "";
-        this.gender = Gender.NOT_SPECIFIED;
-        this.bodyWeightKg = 0;
-        this.bodyWeightLbs = 0;
-        this.heightUnit = HeightUnit.CM;
-        this.weightUnit = WeightUnit.KG;
-        this.heightCm = 0;
-        this.heightIn = 0;
-        this.dateBirth= "";
-    }
-    public HeightUnit getHeightUnit() {
-        return heightUnit;
-    }
-
-    public void setHeightUnit(HeightUnit heightUnit) {
-        this.heightUnit = heightUnit;
-    }
-
-    public WeightUnit getWeightUnit() {
-        return weightUnit;
-    }
-
-    public void setWeightUnit(WeightUnit weightUnit) {
-        this.weightUnit = weightUnit;
-    }
-
-    public int getHeightCm() {
-        return heightCm;
-    }
-
-    public void setHeightCm(int heightCm) {
-        this.heightCm = heightCm;
-    }
-
-    public double getHeightIn() {
-        return heightIn;
-    }
-
-    public void setHeightIn(double heightIn) {
-        this.heightIn = heightIn;
-    }
-
-
-    public String getLinkImgProfile() {
-        return linkImgProfile;
-    }
-
-    public void setLinkImgProfile(String linkImgProfile) {
-        this.linkImgProfile = linkImgProfile;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
+        this.urlImage = urlImageProfile;
+        this.birthDate = birthDate;
+        this.weight = weight;
+        this.height = height;
     }
 
     public String getName() {
@@ -148,31 +62,45 @@ public class User {
         this.surname = surname;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
 
-    public String getDateBirth() {
-        return dateBirth;
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 
     public void setDateBirth(String dateBirth) {
-        this.dateBirth = dateBirth;
+        this.birthDate = birthDate;
     }
 
-    public int getBodyWeightKg() {
-        return bodyWeightKg;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setBodyWeightKg(int bodyWeightKg) {
-        this.bodyWeightKg = bodyWeightKg;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
-    public double getBodyWeightLbs() {
-        return bodyWeightLbs;
+    public int getHeight() {
+        return height;
     }
 
-    public void setBodyWeightLbs(double bodyWeightLbs) {
-        this.bodyWeightLbs = bodyWeightLbs;
+    public void setHeight(int height) {
+        this.height = height;
     }
-
 
 }
 
