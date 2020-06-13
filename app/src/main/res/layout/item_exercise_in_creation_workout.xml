@@ -28,7 +28,7 @@
             android:background="@color/colorOnSurface" />
 
         <!-- Title, secondary and supporting text -->
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtExerciseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

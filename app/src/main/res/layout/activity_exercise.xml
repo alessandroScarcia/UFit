@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/gradient_bottom_to_top_black" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtExerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:backgroundTint="@color/colorPrimary"
             tools:layout_editor_absoluteX="@dimen/standard_margin">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtExerciseDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

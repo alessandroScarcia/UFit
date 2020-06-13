@@ -138,7 +138,7 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter 
     public void onBindExerciseItemViewAtPosition(iSearchListAdapter.View.Item holder, int position) {
         holder.setName(searchExerciseResultList.get(position).getName());
         // TODO setImage
-        holder.setPosition(position);
+        holder.setId(searchExerciseResultList.get(position).getExerciseId());
     }
 
     @Override
