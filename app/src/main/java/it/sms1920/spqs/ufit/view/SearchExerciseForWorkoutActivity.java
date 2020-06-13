@@ -1,8 +1,9 @@
 package it.sms1920.spqs.ufit.view;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,6 +13,9 @@ import it.sms1920.spqs.ufit.contract.iSearchForWorkout;
 import it.sms1920.spqs.ufit.presenter.SearchExerciseForWorkoutPresenter;
 
 public class SearchExerciseForWorkoutActivity extends AppCompatActivity implements iSearchForWorkout.View {
+
+    public static final int CODE_SUCCESSFUL = 0;
+    public static final int CODE_NOT_SUCCESSFUL = 1;
 
     private Toolbar toolbar;
     private RecyclerView rvSearchResult;
@@ -39,12 +43,19 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
 
         rvSearchResult = findViewById(R.id.rvSearchResult);
 
-        adapter = new SearchListAdapter(R.layout.item_exercise_in_creation_workout);
+        adapter = new SearchListAdapter(R.layout.item_exercise_vertical);
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO Dialog to pick reps and loads
+                Intent intent = new Intent();
+                TextView id = view.findViewById(R.id.txtExerciseName);
+                intent.putExtra("exerciseId", id.getText().toString());
+//                intent.putExtra("exerciseReps", new ArrayList<Integer>());
+//                intent.putExtra("exerciseLoads", new ArrayList<Float>());
+                setResult(CODE_SUCCESSFUL, intent);
+                finish();
 
-                Log.d("TAG", String.valueOf(rvSearchResult.getChildLayoutPosition(view)));
             }
         });
 
@@ -55,6 +66,8 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
 
     @Override
     public void back() {
+        Intent intent = new Intent();
+        setResult(CODE_NOT_SUCCESSFUL, intent);
         finish();
         overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
     }

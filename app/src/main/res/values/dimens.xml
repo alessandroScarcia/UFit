@@ -75,4 +75,9 @@
 
     <dimen name="search_bar_text_size">20sp</dimen>
     <dimen name="search_bar_padding_top">10dp</dimen>
+
+    <dimen name="exercise_detail_text_size">22sp</dimen>
+    <dimen name="exercise_detail_text_size_small">20sp</dimen>
+
+    <dimen name="exercise_detail_table_size_middle">50dp</dimen>
 </resources>

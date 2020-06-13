@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.presenter;
 
+import java.util.ArrayList;
+
 import it.sms1920.spqs.ufit.contract.iCreatingWorkout;
 
 public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
@@ -20,5 +22,10 @@ public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
     @Override
     public void onAddIconClicked() {
         view.startSearchExerciseForWorkout(PICK_EXERCISE);
+    }
+
+    @Override
+    public void onAddExerciseSuccessfulDone(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        view.communicateNewExerciseToAdapter(exerciseId,reps,loads);
     }
 }

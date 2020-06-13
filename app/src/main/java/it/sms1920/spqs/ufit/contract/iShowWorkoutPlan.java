@@ -6,6 +6,5 @@ public interface iShowWorkoutPlan {
     }
 
     interface Presenter {
-
     }
 }

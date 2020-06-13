@@ -7,8 +7,33 @@
     android:orientation="vertical"
     tools:context=".CreatingWorkoutActivity">
 
-    <include android:id="@+id/tool_bar"
+    <include
+        android:id="@+id/tool_bar"
         layout="@layout/partial_tool_bar" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/workout_plan_name"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!-- Separator -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/big_standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/big_standard_margin"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:background="?android:attr/listDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lstExercises"

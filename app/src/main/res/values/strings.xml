@@ -19,7 +19,9 @@
 
     <string name="loading">Loading&#8230;</string>
 
-    <string name="new_workout_plan">New Workout Plan</string>
+
+    <string name="new_workout_plan">Create new Workout Plan</string>
+    <string name="workout_plan_name">Workout plan name</string>
 
 
     <!-- Profile -->

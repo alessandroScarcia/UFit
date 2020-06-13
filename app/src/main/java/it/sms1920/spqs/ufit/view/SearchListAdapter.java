@@ -20,6 +20,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
     /*
         Resource ID indicating layout to use in binding. Required at least something like below:
         Required: TextView with "txtExerciseName" as ID
+                  TextView with "txtExerciseId" as ID
                   ImageView with "imgExercise" as ID
     */
     private int layoutItemID;
@@ -71,12 +72,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
     public class ExerciseHolder extends RecyclerView.ViewHolder implements iSearchListAdapter.View.Item {
 
         TextView name;
+        TextView id;
         ImageView image;
 
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.txtExerciseName);
             image = itemView.findViewById(R.id.imgExercise);
+            id = itemView.findViewById(R.id.txtExerciseId);
             itemView.setOnClickListener(myClickListener);
         }
 
@@ -100,7 +103,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
         @Override
         public void setId(int Id) {
-            this.name.setHint(String.valueOf(Id));
+            this.id.setText(String.valueOf(Id));
         }
     }
 }

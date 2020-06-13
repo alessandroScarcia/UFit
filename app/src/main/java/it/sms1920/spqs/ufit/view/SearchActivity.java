@@ -1,6 +1,5 @@
 package it.sms1920.spqs.ufit.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -79,7 +78,7 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
         // Setting adapter to the recycler view for search result
 
 
-        adapter = new SearchListAdapter(R.layout.item_exercise);
+        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal);
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,9 +124,10 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
         GridLayoutManager layoutManager = (GridLayoutManager) rvSearchResult.getLayoutManager();
         View view = layoutManager.findViewByPosition(position);
         TextView txtName = view.findViewById(R.id.txtExerciseName);
+        TextView txtId = view.findViewById(R.id.txtExerciseId);
 
-        if (!txtName.getText().toString().equals("") && !txtName.getHint().toString().equals("")) {
-            startExerciseActivity(Integer.parseInt(txtName.getHint().toString()), txtName.getText().toString());
+        if (!txtName.getText().toString().equals("") && !txtId.getText().toString().equals("")) {
+            startExerciseActivity(Integer.parseInt(txtId.getText().toString()), txtName.getText().toString());
         }
     }
 

@@ -68,8 +68,9 @@
 
     <!--Reset Password-->
     <string name="send_email">Invia</string>
-    <string name="new_workout_plan">Nuova scheda d\'allenamento</string>
+    <string name="new_workout_plan">Crea una nuova scheda d\'allenamento</string>
     <string name="search_here">Cerca qui</string>
+    <string name="workout_plan_name">Nome scheda d\'allenamento</string>
 </resources>
 
 
