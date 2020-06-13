@@ -1,13 +1,12 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EEEEEE">
+    android:layout_height="wrap_content"
+    android:background="#EEEEEE"
+    android:id="@+id/tab_weight">
 
     <LinearLayout
-        android:id="@+id/tab_weight"
-        android:name="tab_weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EEEEEE"
@@ -56,7 +55,7 @@
                         android:textColor="@color/gray"
                         android:textSize="18sp" />
 
-                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                    <TextView
                         android:id="@+id/weightInput"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -64,7 +63,6 @@
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical|center_horizontal"
-                        android:inputType="numberSigned|numberDecimal"
                         android:lines="1"
                         android:maxWidth="100dp"
                         android:maxLines="1"
@@ -72,6 +70,25 @@
                         android:textColor="@android:color/black"
                         android:textSize="30sp"
                         tools:text="70.5" />
+
+
+                    <TextView
+                        android:id="@+id/weightDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
 
                     <ImageButton
                         android:id="@+id/weightDetailsButton"
@@ -120,20 +137,39 @@
                         android:textColor="@color/gray"
                         android:textSize="18sp" />
 
-                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                    <TextView
                         android:id="@+id/fatInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center|clip_vertical"
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:inputType="number|numberSigned|numberDecimal"
                         android:lines="1"
                         android:maxWidth="100dp"
                         android:maxLines="1"
+                        android:text=" - "
                         android:textColor="@android:color/black"
                         android:textSize="30sp"
                         tools:text="50.9" />
+
+
+                    <TextView
+                        android:id="@+id/fatDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
 
                     <ImageButton
                         android:id="@+id/fatDetailsButton"
@@ -191,20 +227,37 @@
                         android:textColor="@color/gray"
                         android:textSize="18sp" />
 
-                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                    <TextView
                         android:id="@+id/musclesInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center|clip_vertical"
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:inputType="numberSigned|numberDecimal"
                         android:lines="1"
                         android:maxWidth="100dp"
                         android:maxLines="1"
+                        android:text=" - "
                         android:textColor="@android:color/black"
                         android:textSize="30sp"
                         tools:text="20.2" />
+
+                    <TextView
+                        android:id="@+id/musclesDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
 
                     <ImageButton
                         android:id="@+id/musclesDetailsButton"
@@ -252,20 +305,37 @@
                         android:textColor="@color/gray"
                         android:textSize="18sp" />
 
-                    <it.sms1920.spqs.ufit.utils.EditableInputView.EditableInputViewWithDate
+                    <TextView
                         android:id="@+id/waterInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center"
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:inputType="numberSigned|numberDecimal"
                         android:lines="1"
                         android:maxWidth="100dp"
                         android:maxLines="1"
+                        android:text=" - "
                         android:textColor="@android:color/black"
                         android:textSize="30sp"
                         tools:text="20.5" />
+
+                    <TextView
+                        android:id="@+id/waterDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
 
                     <ImageButton
                         android:id="@+id/waterDetailsButton"
@@ -336,7 +406,7 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/imcValue"
+                            android:id="@+id/bmiValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical|center_horizontal"
@@ -387,6 +457,7 @@
                             android:maxLines="1"
                             android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
+                            android:text="-"
                             tools:text="20" />
 
                         <TextView
@@ -489,4 +560,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
