@@ -5,10 +5,6 @@ public class SearchExerciseResult implements Comparable<SearchExerciseResult> {
     private String name;
     private String imageUrl;
 
-    public SearchExerciseResult(int exerciseId) {
-        this.exerciseId = exerciseId;
-    }
-
     public SearchExerciseResult(int exerciseId, String name, String imageUrl) {
         this.exerciseId = exerciseId;
         this.name = name;
