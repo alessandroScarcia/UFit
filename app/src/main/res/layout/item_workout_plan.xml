@@ -24,8 +24,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-            <!-- Title, secondary and supporting text -->
-        <TextView
+        <!-- Title, secondary and supporting text -->
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvWorkoutPlanName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -66,32 +66,30 @@
         </com.google.android.material.button.MaterialButton>
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <!--LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
 
-        <!--LinearLayout
+        <com.google.android.material.button.MaterialButton
+            style="?attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal">
+            android:layout_marginEnd="8dp"
+            android:text="action 1" />
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="action 1" />
+        <com.google.android.material.button.MaterialButton
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="action 2" />
+    </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="action 2" />
-        </LinearLayout>
-
-    </LinearLayout-->
+</LinearLayout-->
 
     <!-- Buttons -->
 </com.google.android.material.card.MaterialCardView>

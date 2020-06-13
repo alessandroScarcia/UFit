@@ -72,7 +72,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
         TextView name;
         ImageView image;
-        int position;
 
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,11 +96,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         public void setImage(Image image) {
             //TODO image fetch
             this.image.setImageResource(R.drawable.img_exercise);
-        }
-
-        @Override
-        public void setPosition(int position) {
-            this.name.setHint(String.valueOf(position));
         }
 
         @Override
