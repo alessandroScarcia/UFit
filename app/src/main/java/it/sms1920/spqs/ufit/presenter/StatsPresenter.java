@@ -63,13 +63,14 @@ public class StatsPresenter implements iStatsFragment.Presenter {
      */
     @Override
     public float calculateBMI(float weight) {
-        User user = new User();
         float BMI = 0 ;
-
-        if (user.getHeightCm() != 0) {
-            float heightM = (float) user.getHeightCm() / 10;
-            BMI = weight / (heightM * heightM);
-        }
+//        User user = new User();
+//
+//
+//        if (user.getHeight() != 0) {
+//            float heightM = (float) user.getHeight() / 10;
+//            BMI = weight / (heightM * heightM);
+//        }
 
         return BMI;
     }

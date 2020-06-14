@@ -29,18 +29,16 @@
                 android:text="@string/myBodyStats" />
 
         </com.google.android.material.tabs.TabLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+
         <LinearLayout
             android:id="@+id/container_stats"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/plans_tab_items_height"
-            android:layout_marginBottom="@dimen/plans_tab_items_height"
             android:orientation="vertical">
 
 
         </LinearLayout>
-    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
