@@ -70,6 +70,41 @@
     <string name="send_email">Invia</string>
     <string name="new_workout_plan">Nuova scheda d\'allenamento</string>
     <string name="search_here">Cerca qui</string>
+
+    <!--Stats strings-->
+    <string name="edit_value" >Modifica Valore</string>
+    <string name="global_cancel" >Cancella</string>
+    <string name="add_label" >Aggiungi</string>
+
+
+    <string name="weightLabel">Peso(kg)</string>
+    <string name="fatLabel" >Grasso(%)</string>
+    <string name="bonesLabel" >Ossa(%)</string>
+    <string name="waterLabel">Acqua(%)</string>
+    <string name="musclesLabel" >Muscoli(%)</string>
+
+    <string name="indexLabel">Indice</string>
+    <string name="imcLabel">BMI</string>
+    <string name="rfmLabel" >RFM</string>
+    <string name="ffmiLabel" >FFMI</string>
+
+
+    <string name="DateLabel" >Data</string>
+    <string name="MeasureLabel" >Carico(Kg)</string>
+    <string name="MesureHint" >Inserisci carico qui</string>
+    <string name="measureLabel">Inserisci carico qui</string>
+    <string name="sizeTableLabel" >Misurazioni acquisite</string>
+
+
+    <string name="myGeneralStats" >Stato generale</string>
+    <string name="myBodyStats" >Misurazioni corporee</string>
+
+
+
+
+
+
+
 </resources>
 
 

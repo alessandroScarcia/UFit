@@ -24,6 +24,8 @@ public interface iProfile {
         void updatePassword();
 
         void choosePic();
+
+        void startChangeProfileInfoFragment();
     }
 
     interface Presenter {
@@ -55,5 +57,9 @@ public interface iProfile {
         void onBecomeTrainer();
 
         void onUpdateInfo();
+
+        void onClickChangeProfileInfo();
+
+
     }
 }

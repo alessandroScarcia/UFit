@@ -1,0 +1,170 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_bodytracking_details"
+    android:name="tab_bodytracking_details"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:gravity="top"
+    android:orientation="vertical">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EEEEEE"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/addMeasureCardView"
+                style="@style/CardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <Button
+                        android:id="@+id/buttonAddWeight"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="false"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="1dp"
+
+                        android:gravity="center_vertical|center"
+                        android:text="+"
+                        android:textSize="24sp" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutup"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/buttonAddWeight"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:text="@string/DateLabel" />
+
+                        <EditText
+                            android:id="@+id/profilEditDate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_weight="10"
+                            android:inputType="none"
+                            android:nextFocusDown="@+id/editWeight" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutdown"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutup"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/buttonAddWeight"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="40"
+                            android:text="@string/measureLabel" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editWeight"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="10"
+                                android:hint="@string/MesureHint"
+                                android:inputType="numberDecimal" />
+
+                            <!--com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/buttonAddWeight"
+                                android:layout_width="250dp"
+                                android:layout_height="250dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="40"
+                                android:background="@color/background"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:minHeight="?attr/actionBarSize"
+                                android:text="+"
+                                app:backgroundTint="@color/launcher_background" /-->
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                style="@style/CardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/weightChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dip"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#FFFFFF" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/sizeTableLabel" />
+
+            <include layout="@layout/bodymeasure_rowheader" />
+
+            <TextView
+                android:id="@+id/listWeightProfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:fastScrollEnabled="false"
+                android:isScrollContainer="false"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

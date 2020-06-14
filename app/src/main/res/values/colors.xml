@@ -23,4 +23,5 @@
     <color name="colorAccent">#B652C6</color>
 
     <color name="cardGradient">#121212</color>
+    <color name="gray">#636363</color>
 </resources>

@@ -82,4 +82,12 @@
         <item name="hintTextColor">@color/colorTransparent</item>
     </style>
 
+
+    <style name="CardViewStyle" parent="CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+
 </resources>

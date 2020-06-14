@@ -272,6 +272,7 @@
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangeProfileInfo"
                 style="@style/CustomMaterialButton"
                 android:layout_width="match_parent"
                 android:text="Modifica Profilo">
