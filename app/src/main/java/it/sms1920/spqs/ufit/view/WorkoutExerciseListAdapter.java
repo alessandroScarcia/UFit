@@ -2,12 +2,10 @@ package it.sms1920.spqs.ufit.view;
 
 import android.app.Activity;
 import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import it.sms1920.spqs.ufit.presenter.WorkoutExerciseListAdapterPresenter;
 class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseListAdapter.ExerciseHolder> implements iWorkoutExerciseListAdapter.View {
 
     Activity activity;
-    WorkoutExerciseListAdapterPresenter presenter;
+    iWorkoutExerciseListAdapter.Presenter presenter;
 
     /*
             Resource ID indicating layout to use in binding. Required at least something like below:
@@ -81,17 +79,26 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         TextView name;
         TextView id;
         ImageView image;
-        LinearLayout details;
+        RecyclerView series;
+        ExerciseSeriesRepsListAdapter adapter;
 
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
+
+            adapter = new ExerciseSeriesRepsListAdapter();
+            series = itemView.findViewById(R.id.rvSeries);
+            // adapter.setMyClickListener();
+            series.setAdapter(adapter);
+            series.setLayoutManager(new LinearLayoutManager(activity));
+
             name = itemView.findViewById(R.id.txtExerciseName);
             image = itemView.findViewById(R.id.imgExercise);
             id = itemView.findViewById(R.id.txtExerciseId);
-            details = itemView.findViewById(R.id.lytSeries);
+
             itemView.setOnClickListener(myClickListener);
 
         }
+
 
         @Override
         public void setName(String name) {
@@ -117,24 +124,42 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         }
 
         @Override
-        public void setDetails(ArrayList<Integer> reps, ArrayList<Float> loads) {
-            LayoutInflater inflater = activity.getLayoutInflater();
-            Log.d("EHEHEH VEDIAMO UN PO", "setDetails: " + reps.size());
-            for (int i = 0; i < reps.size(); i++) {
-                View view = inflater.inflate(R.layout.partial_exercise_details, details, false);
-
-                TextView txtSeries = view.findViewById(R.id.series);
-                TextView txtReps = view.findViewById(R.id.reps);
-                TextView txtLoads = view.findViewById(R.id.loads);
-
-                txtSeries.setText(String.valueOf(i + 1));
-                txtReps.setText(String.valueOf(reps.get(i)));
-                txtLoads.setText(String.valueOf(loads.get(i)));
-
-                details.addView(view);
-            }
-
+        public void addSerie(int reps, float loads) {
+            adapter.addSerieToList(reps, loads);
         }
+
+        public void setSeriesList(ArrayList<Integer> reps, ArrayList<Float> loads) {
+            adapter.setSeriesList(reps, loads);
+        }
+
+//        @Override
+//        public void setDetails(ArrayList<Integer> reps, ArrayList<Float> loads) {
+//
+//
+//
+//
+//            //            LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
+//            //LayoutInflater inflater = activity.getLayoutInflater();
+//
+//            Log.d("EHEHEH VEDIAMO UN PO", "setDetails: " + reps + " " + loads);
+//
+//
+//
+//            for (int i = 0; i < reps.size(); i++) {
+//                View view = inflater.inflate(R.layout.partial_exercise_details, this.details, false);
+//
+//                TextView txtSeries = view.findViewById(R.id.series);
+//                TextView txtReps = view.findViewById(R.id.reps);
+//                TextView txtLoads = view.findViewById(R.id.loads);
+//
+//                txtSeries.setText(String.valueOf(i + 1));
+//                txtReps.setText(String.valueOf(reps.get(i)));
+//                txtLoads.setText(String.valueOf(loads.get(i)));
+//                details.addView(view);
+//                Log.d("EHEHEH VEDIAMO UN PO", "setDetails: " + i);
+//    }
+//
+//}
     }
 
 

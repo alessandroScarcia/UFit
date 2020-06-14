@@ -13,7 +13,8 @@ public interface iWorkoutExerciseListAdapter {
             void setName(String name);
             void setImage(Image image);
             void setId(int Id);
-            void setDetails(ArrayList<Integer> reps, ArrayList<Float> loads);
+            //void setDetails(ArrayList<Integer> reps, ArrayList<Float> loads);
+            void addSerie(int reps, float loads);
         }
     }
 

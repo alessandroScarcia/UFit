@@ -1,7 +1,10 @@
 package it.sms1920.spqs.ufit.presenter;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import it.sms1920.spqs.ufit.contract.iWorkoutExerciseListAdapter;
 
@@ -35,7 +38,7 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
     iWorkoutExerciseListAdapter.View view;
 
 
-    ArrayList<Esercizio> esercizios;
+    List<Esercizio> esercizios;
 
 
     public WorkoutExerciseListAdapterPresenter(iWorkoutExerciseListAdapter.View view) {
@@ -44,7 +47,13 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
         ArrayList<Integer> reps = new ArrayList<>();
         ArrayList<Float> loads = new ArrayList<>();
 
+        reps.add(2);
+        loads.add(2f);
+
         esercizios = new ArrayList<>();
+
+        esercizios.add(new Esercizio("pippo", reps, loads));
+        esercizios.add(new Esercizio("pippo", reps, loads));
         esercizios.add(new Esercizio("pippo", reps, loads));
 
         view.callNotifyDataSetChanged();
@@ -53,8 +62,12 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
 
     @Override
     public void onBindExerciseItemViewAtPosition(iWorkoutExerciseListAdapter.View.Item holder, int position) {
-        holder.setName(esercizios.get(position).getNome());
-        holder.setDetails(esercizios.get(position).reps, esercizios.get(position).loads);
+        Esercizio temp = esercizios.get(position);
+        holder.setName(temp.getNome());
+        for (int i = 0; i < temp.getReps().size(); i++) {
+
+            holder.addSerie(temp.getReps().get(i), temp.getLoads().get(i));
+        }
     }
 
     @Override
@@ -64,7 +77,7 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
 
     @Override
     public void onNewExerciseAdded(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        esercizios.add( new Esercizio(exerciseId, reps, loads));
+        esercizios.add(new Esercizio(exerciseId, reps, loads));
         view.callNotifyDataSetChanged();
     }
 }

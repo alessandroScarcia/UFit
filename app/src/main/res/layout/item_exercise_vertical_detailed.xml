@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/standard_margin"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -108,6 +108,10 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSeries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <!-- Exercises list -->
 
