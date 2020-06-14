@@ -131,7 +131,6 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
         menu.findItem(R.id.nav_stats).setChecked(true);
         menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
-
     }
 
     @Override
