@@ -8,7 +8,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import it.sms1920.spqs.ufit.model.User;
+
 import it.sms1920.spqs.ufit.model.UserStats;
 
 @Dao
