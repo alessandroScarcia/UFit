@@ -1,29 +1,26 @@
 package it.sms1920.spqs.ufit.contract;
 
-import android.net.Uri;
-
-import java.util.Date;
-
 import it.sms1920.spqs.ufit.model.User;
 
 public interface iProfile {
 
     interface View {
-        void updatePic(String urlImage);
 
-        void updateName(String name);
+        void showImagePicture(String urlImage);
 
-        void updateEmail(String email);
+        void showName(String name);
 
-        void updateHeight(int height);
+        void showEmail(String email);
 
-        void updateWeight(int weight);
+        void showHeight(int height);
 
-        void updateSurname(String surname);
+        void showWeight(int weight);
 
-        void updatePassword();
+        void showSurname(String surname);
 
-        void choosePic();
+        void showGender(User.Gender gender);
+
+        void showBirthDate(String birthDate);
 
         void startChangeProfileInfoFragment();
     }
@@ -32,31 +29,8 @@ public interface iProfile {
 
         String TABLE_USER = "User";
 
-        void onPasswordChanged(String newPassword);//chiedi la vecchia password
 
-        void onEmailChanged(String newEmail);//chiedi la vecchia email
-
-        void onNameChanged(String newName);
-
-        void onHeightChanged(int newHeight);
-
-        void onSurnameChanged(String newSurname);
-
-        void onBirthDateChanged(Date newDate);
-
-        void onPicProfileUploaded();
-
-        void uploadPicOnStorage(final Uri imageUri);
-
-        void onPicProfileChanged();
-
-        void onGenderChanged(User.Gender newGender);
-
-        void onWeightChanged(int newWeight);
-
-        void onBecomeTrainer();
-
-        void onUpdateInfo();
+        void onShowProfileInfo();
 
         void onClickChangeProfileInfo();
 

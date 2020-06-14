@@ -40,7 +40,7 @@
                     app:cardElevation="1dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgProfile1"
+                        android:id="@+id/imgChangeProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -61,13 +61,13 @@
 
                     <!-- Name -->
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/txtNameLayout1"
+                        android:id="@+id/txtNameLayout"
                         style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtName1"
+                            android:id="@+id/txtName"
                             style="@style/CustomMaterialEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -78,13 +78,13 @@
 
                     <!-- Surname -->
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/txtSurnameLayout1"
+                        android:id="@+id/txtSurnameLayout"
                         style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtSurname1"
+                            android:id="@+id/txtSurname"
                             style="@style/CustomMaterialEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
 
                 <!-- Data di nascita -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtDateLayout1"
+                    android:id="@+id/txtDateLayout"
                     style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
 
                 <!-- Gender -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtGenderLayout1"
+                    android:id="@+id/txtGenderLayout"
                     style="@style/CustomMaterialOutlinedEditTextDenseLayoutDropDown"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <AutoCompleteTextView
-                        android:id="@+id/txtGender1"
+                        android:id="@+id/txtGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
@@ -174,7 +174,7 @@
                 android:orientation="horizontal">
                 <!-- Height -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtHeightLayout1"
+                    android:id="@+id/txtHeightLayout"
                     style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
                     app:suffixText="cm">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtHeight1"
+                        android:id="@+id/txtHeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/height" />
@@ -203,17 +203,18 @@
 
                 <!-- Weight -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtWeightLayout1"
+                    android:id="@+id/txtWeightLayout"
                     style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/smaller_standard_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/view2"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:suffixText="kg">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtWeight1"
+                        android:id="@+id/txtWeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/weight" />
@@ -232,34 +233,21 @@
                 android:background="?android:attr/listDivider" />
 
             <!-- Email -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtEmailLayout1"
-                style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtEmail1"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblChangeEmail"
                     style="@style/CustomMaterialEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtPasswordLayout1"
-                style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPassword1"
-                    style="@style/CustomMaterialEditText"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/password" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:inputType="textPassword"
+                    android:text="@string/password" />
+
 
             <!-- Separator -->
             <View
