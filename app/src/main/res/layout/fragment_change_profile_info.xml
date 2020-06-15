@@ -40,7 +40,7 @@
                     app:cardElevation="1dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgProfile"
+                        android:id="@+id/imgChangeProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -60,21 +60,37 @@
                     android:orientation="vertical">
 
                     <!-- Name -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txtNameLayout"
+                        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/lblName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/name"/>
-
-                    <!-- Surname -->
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/lblSurname"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtName"
                             style="@style/CustomMaterialEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/surname"/>
+                            android:hint="@string/name"
+                            android:inputType="none"
+                            app:boxStrokeColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
+                    <!-- Surname -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txtSurnameLayout"
+                        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtSurname"
+                            style="@style/CustomMaterialEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/surname"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -106,6 +122,8 @@
                     android:hint="@string/date"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+
                 <!-- middle Separator -->
                 <View
                     android:id="@+id/view"
@@ -116,32 +134,54 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:hint="@string/gender"
-                    app:layout_constraintTop_toBottomOf="@+id/lblBirthDate" />
-
                 <!-- Gender -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtGenderLayout"
+                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutDropDown"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/smaller_standard_margin"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/txtGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/gender"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- riga di Peso e altezza -->
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:orientation="horizontal">
                 <!-- Height -->
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblHeight"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtHeightLayout"
+                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/height"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginEnd="@dimen/smaller_standard_margin"
+                    app:layout_constraintEnd_toStartOf="@+id/view2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:suffixText="cm">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/height" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Separator -->
                 <View
@@ -153,19 +193,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblWeight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/weight"
-                    app:layout_constraintTop_toBottomOf="@+id/lblHeight" />
-
                 <!-- Weight -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtWeightLayout"
+                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/smaller_standard_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:suffixText="kg">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/weight" />
+
+                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Separator -->
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -177,19 +226,20 @@
 
             <!-- Email -->
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblEmail"
+                    android:id="@+id/lblChangeEmail"
+                    style="@style/CustomMaterialEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email" />
 
             <!-- Password -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="@string/password" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lblPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:text="@string/password" />
 
             <!-- Separator -->
             <View
@@ -202,10 +252,10 @@
                 android:background="?android:attr/listDivider" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnChangeProfileInfo"
+                android:id="@+id/btnApplyChange"
                 style="@style/CustomMaterialButton"
                 android:layout_width="match_parent"
-                android:text="Modifica Profilo">
+                android:text="applica modifiche">
 
             </com.google.android.material.button.MaterialButton>
 

@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.presenter;
 
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ import static it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorTy
 
 public class RegistrationPresenter implements iRegistration.Presenter {
     private iRegistration.View view;
-    static final String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$&+,:;=?#|'<>.^*()%!-])[A-Za-z\\d@$&+,:;=?#|'<>.^*()%!-]{6,}$";
+    static final String PASSWORD_REGEX = "(?=.*[A-Z][a-z])(?=.*\\d)(?=.*[@$&+,:;=?#|'<>.^*()%!-])[A-Za-z\\d@$&+,:;=?#|'<>.^*()%!-]{6,}$";
 
     public RegistrationPresenter(iRegistration.View view) {
         this.view = view;
@@ -49,10 +50,11 @@ public class RegistrationPresenter implements iRegistration.Presenter {
         else if (TextUtils.isEmpty(passwordField))
             view.setInputError(PASSWORD_FIELD_EMPTY); // password vuota
         else if (!passwordField.matches(PASSWORD_REGEX))
-            view.setInputError(PASSWORD_FORMAT_NOT_VALID); // formato password
+            view.setInputError(PASSWORD_FORMAT_NOT_VALID);// formato password
         else if (!passwordField.equals(confirmPasswordField))
             view.setInputError(PASSWORDS_NOT_MATCHING); // password non corrispondono
         else bool = true;
+
         return bool;
     }
 
@@ -80,7 +82,10 @@ public class RegistrationPresenter implements iRegistration.Presenter {
                                     System.out.println(Arrays.toString(e.getStackTrace()));
                                 }
                             } else {
+                                Log.i("pippo","sono qui");
                                 returnSignUpResult(SIGNUP_SUCCESSFUL);
+
+
                             }
                         }
                     });

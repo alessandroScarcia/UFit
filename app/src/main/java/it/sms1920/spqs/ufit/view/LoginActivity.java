@@ -1,7 +1,5 @@
 package it.sms1920.spqs.ufit.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.iLogin;
 import it.sms1920.spqs.ufit.presenter.LoginPresenter;
 
@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity implements iLogin.View {
         setSupportActionBar(toolbar);
 
 
-        txtEmail = findViewById(R.id.txtEmail);
-        txtPassword = findViewById(R.id.txtPassword);
+        txtEmail = findViewById(R.id.lblEmail);
+        txtPassword = findViewById(R.id.lblPassword);
 
         txtEmailLayout = findViewById(R.id.txtEmailLayout);
         txtPasswordLayout = findViewById(R.id.txtPasswordLayout);

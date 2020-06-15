@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.appcompat.widget.Toolbar;
 import it.sms1920.spqs.ufit.contract.iRegistration;
 import it.sms1920.spqs.ufit.contract.iRegistration.Presenter.AuthResultType;
 import it.sms1920.spqs.ufit.contract.iRegistration.Presenter.InputErrorType;
@@ -44,9 +44,9 @@ public class RegistrationActivity extends AppCompatActivity implements iRegistra
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
 
-        txtEmail = findViewById(R.id.txtEmail);
+        txtEmail = findViewById(R.id.lblEmail);
         txtEmailLayout = findViewById(R.id.txtEmailLayout);
-        txtPassword = findViewById(R.id.txtPassword);
+        txtPassword = findViewById(R.id.lblPassword);
         txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
         txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
         txtConfirmPasswordLayout = findViewById(R.id.txtConfirmPasswordLayout);
