@@ -1,43 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".CreatingWorkoutActivity">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/partial_tool_bar" />
-
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
-        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/partial_tool_bar" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/workout_plan_name"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginHorizontal="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/workout_plan_name" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- Separator -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="@dimen/big_standard_margin"
-        android:layout_marginTop="@dimen/standard_margin"
-        android:layout_marginEnd="@dimen/big_standard_margin"
-        android:layout_marginBottom="@dimen/standard_margin"
-        android:background="?android:attr/listDivider" />
+        <!-- Separator -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/big_standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/big_standard_margin"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:background="?android:attr/listDivider" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lstExercises"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lstExercises"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnApply"
+        style="@style/CustomMaterialFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:src="@drawable/ic_done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

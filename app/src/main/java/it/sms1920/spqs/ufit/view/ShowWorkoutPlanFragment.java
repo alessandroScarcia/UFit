@@ -24,7 +24,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements iShowWorkoutPla
 
     private iShowWorkoutPlan.Presenter presenter;
     private ExerciseSetsAdapter adapter;
-    private int workoutPlanId;
+    private String workoutPlanId;
 
     public ShowWorkoutPlanFragment() {
         // Required empty public constructor
@@ -37,10 +37,10 @@ public class ShowWorkoutPlanFragment extends Fragment implements iShowWorkoutPla
      * @param workoutPlanId ID of the workout plan to be shown in the fragment
      * @return A new instance of fragment ShowWorkoutPlanFragment.
      */
-    public static ShowWorkoutPlanFragment newInstance(int workoutPlanId) {
+    public static ShowWorkoutPlanFragment newInstance(String workoutPlanId) {
         ShowWorkoutPlanFragment fragment = new ShowWorkoutPlanFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_WORKOUT_PLAN_ID, workoutPlanId);
+        args.putString(ARG_WORKOUT_PLAN_ID, workoutPlanId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,7 +49,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements iShowWorkoutPla
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            workoutPlanId = getArguments().getInt(ARG_WORKOUT_PLAN_ID);
+            workoutPlanId = getArguments().getString(ARG_WORKOUT_PLAN_ID);
         }
 
         presenter = new ShowWorkoutPlan(this);

@@ -5,7 +5,7 @@ public interface iWorkoutPlans {
 
         void callNotifyDataSetChanged();
 
-        void showWorkoutPlanDetail(int workoutPlanId);
+        void showWorkoutPlanDetail(String workoutPlanId);
 
         interface Item {
             void setName(String name);

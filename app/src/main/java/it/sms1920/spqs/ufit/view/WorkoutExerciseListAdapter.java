@@ -8,19 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.iWorkoutExerciseListAdapter;
+import it.sms1920.spqs.ufit.model.Exercise;
+import it.sms1920.spqs.ufit.model.ExerciseSetItem;
 import it.sms1920.spqs.ufit.presenter.WorkoutExerciseListAdapterPresenter;
 
 class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseListAdapter.ExerciseHolder> implements iWorkoutExerciseListAdapter.View {
 
-    Activity activity;
+    AppCompatActivity activity;
     iWorkoutExerciseListAdapter.Presenter presenter;
-    boolean editable = false;
+    boolean editable;
 
     /*
             Resource ID indicating layout to use in binding. Required at least something like below:
@@ -41,7 +46,7 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
 
     public WorkoutExerciseListAdapter(int layoutItemID, boolean editable, Activity activity) {
         this.layoutItemID = layoutItemID;
-        this.activity = activity;
+        this.activity = (AppCompatActivity) activity;
         this.editable = editable;
         presenter = new WorkoutExerciseListAdapterPresenter(this);
     }
@@ -68,24 +73,39 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
     }
 
 
-    void addNewExercise(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        presenter.onNewExerciseAdded(exerciseId, reps, loads);
+    void addNewExercise(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        presenter.onNewExerciseAdded(exerciseId, exerciseName, reps, loads);
     }
 
 
     /*
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
      */
-    public class ExerciseHolder extends RecyclerView.ViewHolder implements iWorkoutExerciseListAdapter.View.Item {
+    public class ExerciseHolder extends RecyclerView.ViewHolder implements iWorkoutExerciseListAdapter.View.Item, EditExerciseDialog.DialogListener {
 
         TextView name;
         TextView id;
         ImageView image;
         RecyclerView series;
         ExerciseSeriesRepsListAdapter adapter;
+        MaterialButton btnEdit;
+        EditExerciseDialog.DialogListener dialogListener;
 
-        public ExerciseHolder(@NonNull View itemView) {
+        public ExerciseHolder(@NonNull final View itemView) {
             super(itemView);
+
+            if (!editable) {
+                dialogListener = this;
+                btnEdit = itemView.findViewById(R.id.btnEdit);
+                btnEdit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TextView lblId = itemView.findViewById(R.id.txtExerciseId);
+                        EditExerciseDialog dialogBox = new EditExerciseDialog(lblId.getText().toString(), dialogListener);
+                        dialogBox.show(activity.getSupportFragmentManager(), "Dialog");
+                    }
+                });
+            }
 
             series = itemView.findViewById(R.id.rvSeries);
             adapter = new ExerciseSeriesRepsListAdapter(editable);
@@ -121,8 +141,8 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         }
 
         @Override
-        public void setId(int Id) {
-            this.id.setText(String.valueOf(Id));
+        public void setId(String id) {
+            this.id.setText(id);
         }
 
         @Override
@@ -130,38 +150,35 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
             adapter.addSerieToList(reps, loads);
         }
 
-        public void setSeriesList(ArrayList<Integer> reps, ArrayList<Float> loads) {
-            adapter.setSeriesList(reps, loads);
+        @Override
+        public void saveData(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
+            ArrayList<ExerciseSetItem> serieList = new ArrayList<>();
+            for (int i = 0; i < reps.size(); i++)
+                serieList.add(new ExerciseSetItem(reps.get(i), loads.get(i)));
+
+            adapter.setSeriesList(serieList);
+            setName(exerciseName);
+
+            notifyDataSetChanged();
         }
 
-//        @Override
-//        public void setDetails(ArrayList<Integer> reps, ArrayList<Float> loads) {
-//
-//
-//
-//
-//            //            LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
-//            //LayoutInflater inflater = activity.getLayoutInflater();
-//
-//            Log.d("EHEHEH VEDIAMO UN PO", "setDetails: " + reps + " " + loads);
-//
-//
-//
-//            for (int i = 0; i < reps.size(); i++) {
-//                View view = inflater.inflate(R.layout.partial_exercise_details, this.details, false);
-//
-//                TextView txtSeries = view.findViewById(R.id.series);
-//                TextView txtReps = view.findViewById(R.id.reps);
-//                TextView txtLoads = view.findViewById(R.id.loads);
-//
-//                txtSeries.setText(String.valueOf(i + 1));
-//                txtReps.setText(String.valueOf(reps.get(i)));
-//                txtLoads.setText(String.valueOf(loads.get(i)));
-//                details.addView(view);
-//                Log.d("EHEHEH VEDIAMO UN PO", "setDetails: " + i);
-//    }
-//
-//}
+        @Override
+        public ArrayList<ExerciseSetItem> getList() {
+            ArrayList<ExerciseSetItem> list = new ArrayList<>();
+            TextView reps;
+            TextView load;
+
+            for (int i = 0; i < series.getChildCount(); i++) {
+                reps = series.getChildAt(i).findViewById(R.id.reps);
+                load = series.getChildAt(i).findViewById(R.id.loads);
+                list.add(new ExerciseSetItem(
+                        Integer.parseInt(reps.getText().toString()),
+                        Float.parseFloat(load.getText().toString())));
+            }
+
+
+            return list;
+        }
     }
 
 

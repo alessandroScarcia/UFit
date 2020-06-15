@@ -10,6 +10,12 @@ public class SearchExerciseForWorkoutPresenter implements iSearchForWorkout.Pres
         this.view = view;
     }
 
+
+    @Override
+    public void onQueryTextChanged(final String keyword) {
+        view.notifyQueryTextChangedToAdapter(keyword.trim());
+    }
+
     @Override
     public void onBackPressed() {
         view.back();

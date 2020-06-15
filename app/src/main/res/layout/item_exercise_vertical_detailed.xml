@@ -8,113 +8,144 @@
     android:layout_margin="8dp"
     android:backgroundTint="@color/colorWhite">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
-
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgExercise"
-                android:layout_width="@dimen/item_workout_creation_exercise_card_image_width"
-                android:layout_height="@dimen/item_workout_creation_exercise_card_image_height"
-                android:scaleType="fitCenter"
-                android:src="@drawable/img_exercise" />
-
-            <ImageView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:background="@color/colorOnSurface" />
-
-            <!-- Title, secondary and supporting text -->
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtExerciseName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto"
-                android:maxLines="1"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/item_exercise_card_text_size" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtExerciseId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lytSeries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/standard_margin"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="8dp"
-                android:background="@color/colorOnSurface" />
-
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reps"
-                    android:textSize="@dimen/exercise_detail_text_size_small"
-                    app:layout_constraintEnd_toStartOf="@+id/textView4"
-                    app:layout_constraintHorizontal_bias="0.5"
+                <ImageView
+                    android:id="@+id/imgExercise"
+                    android:layout_width="@dimen/item_workout_creation_exercise_card_image_width"
+                    android:layout_height="@dimen/item_workout_creation_exercise_card_image_height"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_exercise"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Serie"
-                    android:textSize="@dimen/exercise_detail_text_size_small"
-                    app:layout_constraintEnd_toStartOf="@+id/textView2"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:background="@color/colorOnSurface"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgExercise"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView2"
+                <!-- Title, secondary and supporting text -->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtExerciseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loads"
-                    android:textSize="@dimen/exercise_detail_text_size_small"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
+                    android:maxLines="1"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/item_exercise_card_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtExerciseId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEdit"
+                    style="@style/CustomMaterialButtonIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    app:icon="@drawable/ic_pencil_pressed"
+                    app:iconSize="@dimen/icon_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSeries"
+            <LinearLayout
+                android:id="@+id/lytSeries"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <!-- Exercises list -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="8dp"
+                    android:background="@color/colorOnSurface" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reps"
+                        android:textSize="@dimen/exercise_detail_text_size_small"
+                        app:layout_constraintEnd_toStartOf="@+id/textView4"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Serie"
+                        android:textSize="@dimen/exercise_detail_text_size_small"
+                        app:layout_constraintEnd_toStartOf="@+id/textView2"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loads"
+                        android:textSize="@dimen/exercise_detail_text_size_small"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView4"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSeries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!-- Exercises list -->
+
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

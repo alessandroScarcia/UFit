@@ -23,10 +23,10 @@ public class ExerciseSetsList implements iShowWorkoutPlanAdapter.Presenter {
     private iShowWorkoutPlanAdapter.View view;
 
     private DatabaseReference mDatabase;
-    private int workoutPlanId;
+    private String workoutPlanId;
     private List<ExerciseSetItem> exerciseSetList;
 
-    public ExerciseSetsList(iShowWorkoutPlanAdapter.View view, int workoutPlanId) {
+    public ExerciseSetsList(iShowWorkoutPlanAdapter.View view, String workoutPlanId) {
         this.view = view;
         this.workoutPlanId = workoutPlanId;
 
@@ -35,7 +35,7 @@ public class ExerciseSetsList implements iShowWorkoutPlanAdapter.Presenter {
     }
 
     private void loadExerciseSetList() {
-        Query mExeriseSetListQuery = mDatabase.child("WorkoutPlanExerciseSets").orderByKey().equalTo(String.valueOf(workoutPlanId));
+        Query mExeriseSetListQuery = mDatabase.child("WorkoutPlanExerciseSets").orderByKey().equalTo(workoutPlanId);
 
         mExeriseSetListQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

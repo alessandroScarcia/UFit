@@ -8,7 +8,7 @@ public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
 
 
     private final static int PICK_EXERCISE = 1;
-    private  iCreatingWorkout.View view;
+    private iCreatingWorkout.View view;
 
     public CreatingWorkoutPresenter(iCreatingWorkout.View view) {
         this.view = view;
@@ -25,7 +25,7 @@ public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
     }
 
     @Override
-    public void onAddExerciseSuccessfulDone(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        view.communicateNewExerciseToAdapter(exerciseId,reps,loads);
+    public void onAddExerciseSuccessfulDone(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        view.communicateNewExerciseToAdapter(exerciseId, exerciseName, reps, loads);
     }
 }

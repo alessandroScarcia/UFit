@@ -6,6 +6,9 @@ import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
     private WorkoutExerciseListAdapter adapter;
     private Toolbar toolbar;
     private RecyclerView rvExerciseList;
+    private FloatingActionButton btnDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,15 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
         rvExerciseList.setLayoutManager(new LinearLayoutManager(this));
 
 
+        btnDone = findViewById(R.id.btnApply);
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO saving data
+                Toast.makeText(CreatingWorkoutActivity.this, "Saving data not implemented yet", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -99,8 +112,8 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
     }
 
     @Override
-    public void communicateNewExerciseToAdapter(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        adapter.addNewExercise(exerciseId, reps, loads);
+    public void communicateNewExerciseToAdapter(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        adapter.addNewExercise(exerciseId, exerciseName, reps, loads);
     }
 
     @Override
@@ -109,17 +122,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
 
 
         if (requestCode == 1 && resultCode == 0) { //CODESUCCESSFUL) { // se il codice di richiesta è uguale a quello usato
-            ArrayList<Integer> reps = new ArrayList<>();//(ArrayList<Integer>) data.getSerializableExtra("exerciseReps");
-            ArrayList<Float> loads = new ArrayList<>();//(ArrayList<Float>) data.getSerializableExtra("exerciseLoads");
-
-            reps.add(3);
-            reps.add(2);
-
-            loads.add(10f);
-            loads.add(10f);
 
             presenter.onAddExerciseSuccessfulDone(
                     data.getStringExtra("exerciseId"),
+                    data.getStringExtra("exerciseName"),
                     (ArrayList<Integer>) data.getSerializableExtra("exerciseReps"),
                     (ArrayList<Float>) data.getSerializableExtra("exerciseLoads")
             );
@@ -127,4 +133,5 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
             // non succede niente
         }
     }
+
 }

@@ -94,7 +94,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
 
 
     @Override
-    public void insertShowWorkoutPlanFragment(int workoutPlanId) {
+    public void insertShowWorkoutPlanFragment(String workoutPlanId) {
         ShowWorkoutPlanFragment showWorkoutPlanFragment = ShowWorkoutPlanFragment.newInstance(workoutPlanId);
 
         this.getActivity().getSupportFragmentManager().beginTransaction()

@@ -19,20 +19,34 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import it.sms1920.spqs.ufit.contract.iExerciseDialog;
+import it.sms1920.spqs.ufit.model.ExerciseSetItem;
+import it.sms1920.spqs.ufit.presenter.EditExerciseDialogPresenter;
+import it.sms1920.spqs.ufit.presenter.ExerciseSetsList;
 
-public class EditExerciseDialog extends AppCompatDialogFragment {
+public class EditExerciseDialog extends AppCompatDialogFragment implements iExerciseDialog.View {
 
     private DialogListener listener;
     private String exerciseId;
     private ArrayList<Integer> reps;
     private ArrayList<Float> loads;
-    RecyclerView rv;
-    ExerciseSeriesRepsListAdapter adapter;
+    private RecyclerView rv;
+    private ExerciseSeriesRepsListAdapter adapter;
+    private View view;
+    private TextView lblName;
+    private iExerciseDialog.Presenter presenter;
 
-    public EditExerciseDialog(String exerciseId) {
+
+    public EditExerciseDialog(String exerciseId, DialogListener listener) {
         reps = new ArrayList<>();
         loads = new ArrayList<>();
         this.exerciseId = exerciseId;
+        try {
+            this.listener = listener;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("must implement ExampleDialogListener");
+        }
+
     }
 
     @NonNull
@@ -40,10 +54,20 @@ public class EditExerciseDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_edit_exercise, null);
+        presenter = new EditExerciseDialogPresenter(this);
+
+        view = inflater.inflate(R.layout.dialog_edit_exercise, null);
+        lblName = view.findViewById(R.id.txtExerciseName);
+
+
+        presenter.onExerciseNameRequested(exerciseId);
 
         rv = view.findViewById(R.id.rvSeries);
         adapter = new ExerciseSeriesRepsListAdapter(true);
+
+        if ( listener.getList() != null )
+            adapter.setSeriesList( listener.getList() );
+
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -74,7 +98,7 @@ public class EditExerciseDialog extends AppCompatDialogFragment {
                         loads = adapter.getLoads();
 
 
-                        listener.saveData(exerciseId,reps, loads);
+                        listener.saveData(exerciseId, presenter.getExerciseName(),reps, loads);
                     }
                 });
 
@@ -86,16 +110,17 @@ public class EditExerciseDialog extends AppCompatDialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try {
-            listener = (DialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +
-                    "must implement ExampleDialogListener");
-        }
+
+    }
+
+    @Override
+    public void setExerciseName(String name) {
+        lblName.setText(name);
     }
 
     interface DialogListener {
-        void saveData(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads);
+        void saveData(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads);
+        ArrayList<ExerciseSetItem> getList();
     }
 
 

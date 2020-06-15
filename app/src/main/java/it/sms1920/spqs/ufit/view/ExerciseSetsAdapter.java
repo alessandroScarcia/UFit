@@ -12,7 +12,7 @@ import it.sms1920.spqs.ufit.presenter.ExerciseSetsList;
 public class ExerciseSetsAdapter extends RecyclerView.Adapter<ExerciseSetsAdapter.ExerciseSetDetailsHolder> implements iShowWorkoutPlanAdapter.View {
     private iShowWorkoutPlanAdapter.Presenter presenter;
 
-    public ExerciseSetsAdapter(int workoutPlanId) {
+    public ExerciseSetsAdapter(String workoutPlanId) {
         presenter = new ExerciseSetsList(this, workoutPlanId);
     }
 

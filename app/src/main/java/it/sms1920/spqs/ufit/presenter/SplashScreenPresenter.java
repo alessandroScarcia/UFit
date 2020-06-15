@@ -5,9 +5,11 @@ import android.content.Context;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import it.sms1920.spqs.ufit.contract.iSplashScreen;
 import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
+import it.sms1920.spqs.ufit.model.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.PicassoSingleton;
 
 public class SplashScreenPresenter implements iSplashScreen.Presenter {
@@ -45,6 +47,7 @@ public class SplashScreenPresenter implements iSplashScreen.Presenter {
     @Override
     public void onStartApp() {
         sessionAnonymously();
+        FirebaseDbSingleton.getDatabase();
         view.startApp();
 
     }

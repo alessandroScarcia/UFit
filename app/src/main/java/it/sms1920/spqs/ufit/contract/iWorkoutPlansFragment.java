@@ -8,7 +8,7 @@ public interface iWorkoutPlansFragment {
 
         void addNewPlan();
 
-        void insertShowWorkoutPlanFragment(int workoutPlanId);
+        void insertShowWorkoutPlanFragment(String workoutPlanId);
     }
 
     interface Presenter {

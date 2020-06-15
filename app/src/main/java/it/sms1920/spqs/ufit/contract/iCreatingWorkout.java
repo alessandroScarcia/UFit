@@ -9,7 +9,7 @@ public interface iCreatingWorkout {
 
         void startSearchExerciseForWorkout(int requestCode);
 
-        void communicateNewExerciseToAdapter(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads);
+        void communicateNewExerciseToAdapter(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads);
     }
 
     interface Presenter {
@@ -17,7 +17,7 @@ public interface iCreatingWorkout {
 
         void onAddIconClicked();
 
-        void onAddExerciseSuccessfulDone(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads);
+        void onAddExerciseSuccessfulDone(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads);
     }
 
 }

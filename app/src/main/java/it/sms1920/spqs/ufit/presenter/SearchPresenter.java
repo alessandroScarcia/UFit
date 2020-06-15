@@ -1,5 +1,3 @@
-//TODO rinominare il nome di sto file in qualcosa di più azzeccato
-
 package it.sms1920.spqs.ufit.presenter;
 
 import it.sms1920.spqs.ufit.contract.iSearch;

@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.sms1920.spqs.ufit.contract.iExerciseSeriesRepsListAdapter;
+import it.sms1920.spqs.ufit.model.ExerciseSetItem;
 
 public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRepsListAdapter.Presenter {
 
 
     iExerciseSeriesRepsListAdapter.View view;
 
-    private class Vector3s {
-        String x; // Serie
-        String y; // Reps
-        String z; // Loads
+    private class Vector2s {
+        String x; // Reps
+        String y; // Loads
 
-        public Vector3s(String x, String y, String z) {
+        public Vector2s(String x, String y) {
             this.x = x;
             this.y = y;
-            this.z = z;
         }
     }
 
-    List<Vector3s> list;
+    List<Vector2s> list;
 
     public ExerciseSeriesRepsListAdapterPresenter(iExerciseSeriesRepsListAdapter.View view) {
         this.view = view;
@@ -31,9 +30,8 @@ public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRe
 
     @Override
     public void onBindItemViewAtPosition(iExerciseSeriesRepsListAdapter.View.Item holder, int position) {
-        holder.setSerie(list.get(position).x);
-        holder.setReps(list.get(position).y);
-        holder.setLoad(list.get(position).z);
+        holder.setReps(list.get(position).x);
+        holder.setLoad(list.get(position).y);
     }
 
     @Override
@@ -43,20 +41,18 @@ public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRe
 
     @Override
     public void onSerieAdded(int reps, float loads) {
-        list.add(new Vector3s(
-                String.valueOf(getSeriesCount()),
+        list.add(new Vector2s(
                 String.valueOf(reps),
                 String.valueOf(loads)));
     }
 
     @Override
-    public void setSeriesList(ArrayList<Integer> reps, ArrayList<Float> loads) {
+    public void setSeriesList(ArrayList<ExerciseSetItem> seriesList) {
         list.clear();
-        for (int i = 0; i < reps.size(); i++) {
-            list.add(new Vector3s(
-                    String.valueOf(i + 1),
-                    String.valueOf(reps.get(i)),
-                    String.valueOf(loads.get(i))
+        for (int i = 0; i < seriesList.size(); i++) {
+            list.add(new Vector2s(
+                    String.valueOf(seriesList.get(i).getReps()),
+                    String.valueOf(seriesList.get(i).getLoad())
             ));
         }
         view.callNotifyDatasetChanged();
@@ -67,13 +63,14 @@ public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRe
             list.remove(position);
             view.callNotifyItemRemoved(position);
             view.callNotifyItemRangeChanged(position, list.size());
+            view.callNotifyDatasetChanged();
     }
 
     @Override
     public ArrayList<Integer> getReps() {
         ArrayList<Integer> reps = new ArrayList<>();
-        for (Vector3s serie : list) {
-            reps.add(Integer.valueOf(serie.y)); // reps
+        for (Vector2s serie : list) {
+            reps.add(Integer.valueOf(serie.x /* reps */));
         }
         return reps;
     }
@@ -81,8 +78,8 @@ public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRe
     @Override
     public ArrayList<Float> getLoads() {
         ArrayList<Float> loads = new ArrayList<>();
-        for (Vector3s serie : list) {
-            loads.add(Float.valueOf(serie.z)); // reps
+        for (Vector2s serie : list) {
+            loads.add(Float.valueOf(serie.y /* loads */));
         }
         return loads;
     }

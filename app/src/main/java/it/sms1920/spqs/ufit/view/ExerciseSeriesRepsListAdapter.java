@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.iExerciseSeriesRepsListAdapter;
+import it.sms1920.spqs.ufit.model.ExerciseSetItem;
 import it.sms1920.spqs.ufit.presenter.ExerciseSeriesRepsListAdapterPresenter;
 
 class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesRepsListAdapter.RowHolder> implements iExerciseSeriesRepsListAdapter.View {
@@ -63,8 +64,8 @@ class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesR
         presenter.onSerieAdded(reps, loads);
     }
 
-    void setSeriesList(ArrayList<Integer> reps, ArrayList<Float> loads) {
-        presenter.setSeriesList(reps, loads);
+    void setSeriesList(ArrayList<ExerciseSetItem> list) {
+        presenter.setSeriesList(list);
     }
 
     @Override
@@ -117,7 +118,7 @@ class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesR
                 reps = itemView.findViewById(R.id.reps);
                 load = itemView.findViewById(R.id.loads);
             }
-
+            serie.setText(String.valueOf(getItemCount()));
             // TODO itemView.setOnClickListener(myClickListener);
 
         }

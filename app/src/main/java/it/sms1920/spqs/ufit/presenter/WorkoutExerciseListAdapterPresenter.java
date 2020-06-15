@@ -1,37 +1,35 @@
 package it.sms1920.spqs.ufit.presenter;
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import it.sms1920.spqs.ufit.contract.iWorkoutExerciseListAdapter;
+import it.sms1920.spqs.ufit.model.ExerciseSetItem;
 
 public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseListAdapter.Presenter {
 
 
-    class Esercizio {
+    static class Esercizio {
+        String id;
         String nome;
-        ArrayList<Integer> reps;
-        ArrayList<Float> loads;
+        ArrayList<ExerciseSetItem> lstSet;
 
-        public Esercizio(String nome, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        public Esercizio(String id, String nome, ArrayList<ExerciseSetItem> lstSet) {
+            this.id = id;
             this.nome = nome;
-            this.reps = reps;
-            this.loads = loads;
+            this.lstSet = lstSet;
+        }
+
+        public ArrayList<ExerciseSetItem> getLstSet() {
+            return lstSet;
         }
 
         public String getNome() {
             return nome;
         }
 
-        public ArrayList<Integer> getReps() {
-            return reps;
-        }
-
-        public ArrayList<Float> getLoads() {
-            return loads;
+        public String getId() {
+            return id;
         }
     }
 
@@ -44,17 +42,7 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
     public WorkoutExerciseListAdapterPresenter(iWorkoutExerciseListAdapter.View view) {
         this.view = view;
 
-        ArrayList<Integer> reps = new ArrayList<>();
-        ArrayList<Float> loads = new ArrayList<>();
-
-        reps.add(2);
-        loads.add(2f);
-
         esercizios = new ArrayList<>();
-
-        esercizios.add(new Esercizio("pippo", reps, loads));
-        esercizios.add(new Esercizio("pippo", reps, loads));
-        esercizios.add(new Esercizio("pippo", reps, loads));
 
         view.callNotifyDataSetChanged();
 
@@ -64,9 +52,10 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
     public void onBindExerciseItemViewAtPosition(iWorkoutExerciseListAdapter.View.Item holder, int position) {
         Esercizio temp = esercizios.get(position);
         holder.setName(temp.getNome());
-        for (int i = 0; i < temp.getReps().size(); i++) {
+        holder.setId(temp.getId());
+        for (int i = 0; i < temp.getLstSet().size(); i++) {
 
-            holder.addSerie(temp.getReps().get(i), temp.getLoads().get(i));
+            holder.addSerie(temp.getLstSet().get(i).getReps(), temp.getLstSet().get(i).getLoad());
         }
     }
 
@@ -76,8 +65,13 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
     }
 
     @Override
-    public void onNewExerciseAdded(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        esercizios.add(new Esercizio(exerciseId, reps, loads));
+    public void onNewExerciseAdded(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        ArrayList<ExerciseSetItem> lstSet = new ArrayList<>();
+
+        for (int i = 0; i < reps.size(); i++)
+            lstSet.add(new ExerciseSetItem(reps.get(i), loads.get(i)));
+
+        esercizios.add(new Esercizio(exerciseId, exerciseName, lstSet));
         view.callNotifyDataSetChanged();
     }
 }

@@ -12,7 +12,7 @@ public interface iWorkoutExerciseListAdapter {
         interface Item {
             void setName(String name);
             void setImage(Image image);
-            void setId(int Id);
+            void setId(String id);
             //void setDetails(ArrayList<Integer> reps, ArrayList<Float> loads);
             void addSerie(int reps, float loads);
         }
@@ -21,7 +21,7 @@ public interface iWorkoutExerciseListAdapter {
     interface Presenter {
         void onBindExerciseItemViewAtPosition(View.Item holder, int position);
         int getExerciseCount();
-        void onNewExerciseAdded(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads);
+        void onNewExerciseAdded(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads);
     }
 
 }

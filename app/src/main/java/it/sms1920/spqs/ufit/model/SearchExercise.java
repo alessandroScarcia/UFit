@@ -172,5 +172,12 @@ public class SearchExercise {
         return exerciseDetailedList;
     }
 
+    public void getExerciseById(String id){
+        exerciseMap.clear();
+        exerciseTranslationList.clear();
+        List<String> listId = new ArrayList<>();
+        listId.add(id);
+        fetchExerciseMapWithId(listId);
+    }
 
 }

@@ -53,7 +53,7 @@ public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapte
     }
 
     @Override
-    public void showWorkoutPlanDetail(int workoutPlanId) {
+    public void showWorkoutPlanDetail(String workoutPlanId) {
         parentFragment.insertShowWorkoutPlanFragment(workoutPlanId);
     }
 

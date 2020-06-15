@@ -1,7 +1,7 @@
 package it.sms1920.spqs.ufit.model;
 
 public class WorkoutPlan {
-    private int workoutPlanId;
+    private String workoutPlanId;
     private String name;
     private String userOwnerId;
     private int exerciseListId;
@@ -10,7 +10,7 @@ public class WorkoutPlan {
     public WorkoutPlan() {
     }
 
-    public int getWorkoutPlanId() {
+    public String getWorkoutPlanId() {
         return workoutPlanId;
     }
 
