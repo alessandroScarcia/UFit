@@ -102,8 +102,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         }
 
         @Override
-        public void setId(int Id) {
-            this.id.setText(String.valueOf(Id));
+        public void setId(String id) {
+            this.id.setText(id);
         }
     }
 }
