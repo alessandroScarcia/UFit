@@ -60,37 +60,21 @@
                     android:orientation="vertical">
 
                     <!-- Name -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/txtNameLayout"
-                        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtName"
-                            style="@style/CustomMaterialEditText"
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/lblName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/name"
-                            android:inputType="none"
-                            app:boxStrokeColor="@color/colorPrimary" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:hint="@string/name"/>
 
                     <!-- Surname -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/txtSurnameLayout"
-                        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtSurname"
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/lblSurname"
                             style="@style/CustomMaterialEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/surname"
-                            android:inputType="none" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:hint="@string/surname"/>
+
 
                 </LinearLayout>
 
@@ -114,23 +98,13 @@
                 android:orientation="horizontal">
 
                 <!-- Data di nascita -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtDateLayout"
-                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/smaller_standard_margin"
-                    app:layout_constraintEnd_toStartOf="@+id/view"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/date"
-                        android:inputType="none" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/date"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- middle Separator -->
                 <View
@@ -142,54 +116,32 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Gender -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtGenderLayout"
-                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutDropDown"
-                    android:layout_width="0dp"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblGender"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/smaller_standard_margin"
-                    app:boxStrokeColor="@color/colorPrimary"
-                    app:hintTextColor="@color/colorPrimary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/view"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginTop="1dp"
+                    android:hint="@string/gender"
+                    app:layout_constraintTop_toBottomOf="@+id/lblBirthDate" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/txtGender"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:hint="@string/gender"
-                        android:inputType="none" />
+                <!-- Gender -->
 
-                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- riga di Peso e altezza -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:orientation="horizontal">
                 <!-- Height -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtHeightLayout"
-                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                    android:layout_width="0dp"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblHeight"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/smaller_standard_margin"
-                    app:layout_constraintEnd_toStartOf="@+id/view2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:suffixText="cm">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtHeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/height" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="@string/height"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Separator -->
                 <View
@@ -201,27 +153,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Weight -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtWeightLayout"
-                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                    android:layout_width="0dp"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblWeight"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/smaller_standard_margin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/view2"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:hint="@string/weight"
+                    app:layout_constraintTop_toBottomOf="@+id/lblHeight" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtWeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/weight" />
+                <!-- Weight -->
 
-                </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Separator -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -232,34 +176,20 @@
                 android:background="?android:attr/listDivider" />
 
             <!-- Email -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtEmailLayout"
-                style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtEmail"
-                    style="@style/CustomMaterialEditText"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtPasswordLayout"
-                style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtPassword"
-                    style="@style/CustomMaterialEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lblPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="@string/password" />
 
             <!-- Separator -->
             <View

@@ -28,14 +28,14 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="workouts">Workouts</string>
-
+    <string name="image">Image</string>
     <string name="email">E-Mail</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="squat">Squat</string>
     <string name="add_exercise_to_plan">Add to your plan</string>
     <string name="gender">Gender</string>
-    <string name="date">Date of birth</string>
+    <string name="date">Birthdate</string>
     <!--Stats strings-->
     <string name="edit_value" >Modifica Valore</string>
     <string name="global_cancel" >Cancella</string>
@@ -66,17 +66,6 @@
         <item>Not specified</item>
     </string-array>
 
-    <string-array name="weight_units">
-        <item>kg</item>
-        <item>lb</item>
-    </string-array>
-
-    <string-array name="height_untis">
-        <item>cm</item>
-        <item>in</item>
-    </string-array>
-
-
     <!-- Login -->
     <string name="login">Login</string>
     <string name="forgot_password">Forgot password.</string>
@@ -101,6 +90,16 @@
 
     <string name="myGeneralStats" >Stato generale</string>
     <string name="myBodyStats" >Misurazioni corporee</string>
+
+
+    <string name="armMeasure" >Arm Measure</string>
+    <string name="chestMeasure" >Chest Measure</string>
+    <string name="waistMeasure" >Waist Measure</string>
+    <string name="tightMeasure" >Tight Measure</string>
+    <string name="calveMeasure" >Calve Measure</string>
+
+
+    <string name="error_value_message" >Insert a valid value</string>
 
 
 

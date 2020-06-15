@@ -10,10 +10,7 @@ import java.util.Random;
 
 import it.sms1920.spqs.ufit.contract.iStatsFragment;
 import it.sms1920.spqs.ufit.model.Stats;
-import it.sms1920.spqs.ufit.model.User;
 import it.sms1920.spqs.ufit.model.UserStats;
-
-import static java.sql.Types.NULL;
 
 
 public class StatsPresenter implements iStatsFragment.Presenter {
@@ -86,13 +83,19 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         return FFMI;
     }
 
+    /**
+     * @param ID userStats to add into the database
+     */
     @Override
-    public boolean addNewIdStats(int ID) {
+    public void addNewIdStats(int ID) {
         userStats.setIdUserStats(ID);
         Stats.localDatabase.userStatsDAO().addUserStats(userStats);
-        return true;
     }
 
+    /**
+     * The function gets all the userStats into the localdatabase and assign all value inside the
+     * static User
+     */
     @Override
     public void getData() {
         List<UserStats> listUsersStats = Stats.localDatabase.userStatsDAO().getUsersStats();
@@ -100,6 +103,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         UserStats getUserStats = new UserStats();
 
         for (UserStats usrStats : listUsersStats) {
+            //get the values of general stats from the room
             int id = usrStats.getIdUserStats();
             float weight = usrStats.getWeight();
             float fat = usrStats.getFat();
@@ -110,7 +114,19 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             String dateDetectionMuscle = usrStats.getDateMuscleDetection();
             String dateDetectionWater = usrStats.getDateWaterDetection();
 
+            //get the values of muscle stats
+            float arm = usrStats.getArmMeasure();
+            float chest = usrStats.getChestMeasure();
+            float waist = usrStats.getWaistMeasure();
+            float tight = usrStats.getTightMeasure();
+            float calve = usrStats.getCalveMeasure();
+            String dateDetectionArm = usrStats.getDateArmDetection();
+            String dateDetectionChest = usrStats.getDateChestDetection();
+            String dateDetectionWaist = usrStats.getDateWaistDetection();
+            String dateDetectionTight = usrStats.getDateTightDetection();
+            String dateDetectionCalve = usrStats.getDateCalveDetection();
 
+            //assign the general stats in scope object
             getUserStats.setIdUserStats(id);
             getUserStats.setWeight(weight);
             getUserStats.setFat(fat);
@@ -120,8 +136,22 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             getUserStats.setDateFatDetection(dateDetectionFat);
             getUserStats.setDateWaterDetection(dateDetectionWater);
             getUserStats.setDateMuscleDetection(dateDetectionMuscle);
+
+            //assign the muscle stats in scope object
+            getUserStats.setArmMeasure(arm);
+            getUserStats.setChestMeasure(chest);
+            getUserStats.setWaistMeasure(waist);
+            getUserStats.setTightMeasure(tight);
+            getUserStats.setCalveMeasure(calve);
+            getUserStats.setDateArmDetection(dateDetectionArm);
+            getUserStats.setDateChestDetection(dateDetectionChest);
+            getUserStats.setDateWaistDetection(dateDetectionWaist);
+            getUserStats.setDateTightDetection(dateDetectionTight);
+            getUserStats.setDateCalveDetection(dateDetectionCalve);
+
         }
 
+        //copy the general object into the static object
         userStats = getUserStats;
     }
 
@@ -174,9 +204,49 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     public boolean checkExistUserStats() {
         if (userStats.getWeight() == NULL_STATS && userStats.getFat() == NULL_STATS &&
                 userStats.getMuscle() == NULL_STATS && userStats.getWater() == NULL_STATS) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    @Override
+    public void updateArm(int idUserStats, float value, String date) {
+        userStats.setIdUserStats(idUserStats);
+        userStats.setArmMeasure(value);
+        userStats.setDateArmDetection(date);
+        Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+    }
+
+    @Override
+    public void updateChest(int idUserStats, float value, String date) {
+        userStats.setIdUserStats(idUserStats);
+        userStats.setChestMeasure(value);
+        userStats.setDateChestDetection(date);
+        Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+    }
+
+    @Override
+    public void updateWaist(int idUserStats, float value, String date) {
+        userStats.setIdUserStats(idUserStats);
+        userStats.setWaistMeasure(value);
+        userStats.setDateWaistDetection(date);
+        Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+    }
+
+    @Override
+    public void updateTight(int idUserStats, float value, String date) {
+        userStats.setIdUserStats(idUserStats);
+        userStats.setTightMeasure(value);
+        userStats.setDateTightDetection(date);
+        Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+    }
+
+    @Override
+    public void updateCalve(int idUserStats, float value, String date) {
+        userStats.setIdUserStats(idUserStats);
+        userStats.setCalveMeasure(value);
+        userStats.setDateCalveDetection(date);
+        Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
 
 }

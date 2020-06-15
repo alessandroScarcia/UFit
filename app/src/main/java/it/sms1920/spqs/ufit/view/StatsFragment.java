@@ -40,6 +40,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
     LinearLayout containerLayout;
     Context context;
 
+    //declaration of all the text view inside the 2 different tab content
     private TextView weight;
     private TextView fat;
     private TextView water;
@@ -48,6 +49,18 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
     private TextView fatDate;
     private TextView waterDate;
     private TextView muscleDate;
+    private TextView arm;
+    private TextView armDate;
+    private TextView chest;
+    private TextView chestDate;
+    private TextView waist;
+    private TextView waistDate;
+    private TextView tight;
+    private TextView tightDate;
+    private TextView calve;
+    private TextView calveDate;
+
+    
     private TextView BMI;
     private TextView FFMI;
 
@@ -69,7 +82,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
         containerLayout.addView(child);
 
         //set date of the room inside the text views
-        setViewsData(view);
+        setViewsDataGeneralStats(view);
 
         //set options of tab menu
         tlStats = view.findViewById(R.id.tlStats);
@@ -82,7 +95,9 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
 
                 //if the activity show the content of the first tab the data are set
                 if (tab.getPosition() == 0) {
-                    setViewsData(view);
+                    setViewsDataGeneralStats(view);
+                }else if(tab.getPosition() == 1){
+                    setViewsDataMuscleStats(view);
                 }
 
             }
@@ -94,7 +109,11 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                setViewsData(view);
+                if (tab.getPosition() == 0) {
+                    setViewsDataGeneralStats(view);
+                }else if(tab.getPosition() == 1){
+                    setViewsDataMuscleStats(view);
+                }
             }
         });
 
@@ -131,7 +150,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
     @Override
     public void showBodyStats() {
         containerLayout.removeAllViewsInLayout();
-        View child = getLayoutInflater().inflate(R.layout.muscle_stats, null);
+        View child = getLayoutInflater().inflate(R.layout.muscle_measurment, null);
         containerLayout.addView(child);
     }
 
@@ -165,8 +184,17 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
             presenter.updateWater(StatsPresenter.userStats.getIdUserStats(), value, date);
         } else if (textViewValue == muscle) {
             presenter.updateMuscle(StatsPresenter.userStats.getIdUserStats(), value, date);
+        }else if(textViewValue == arm){
+            presenter.updateArm(StatsPresenter.userStats.getIdUserStats(), value, date);
+        }else if(textViewValue == chest){
+            presenter.updateChest(StatsPresenter.userStats.getIdUserStats(), value, date);
+        }else if(textViewValue == waist){
+            presenter.updateWaist(StatsPresenter.userStats.getIdUserStats(), value, date);
+        }else if(textViewValue == tight){
+            presenter.updateTight(StatsPresenter.userStats.getIdUserStats(), value, date);
+        }else if(textViewValue == calve){
+            presenter.updateCalve(StatsPresenter.userStats.getIdUserStats(), value, date);
         }
-
     }
 
     private void setFFMITextView() {
@@ -191,7 +219,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
     }
 
 
-    public void setViewsData(View view) {
+    public void setViewsDataGeneralStats(View view) {
         presenter = new StatsPresenter(this);
         context = getActivity();
 
@@ -204,7 +232,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
 //      Toast.makeText(context, StatsPresenter.userStats.getIdUserStats() + " " + StatsPresenter.userStats.getWeight(), Toast.LENGTH_SHORT).show();
 
         //this check is useful for the first insert
-        if (!presenter.checkExistUserStats()) {
+        if (presenter.checkExistUserStats()) {
             presenter.addNewUserStats();
         }
 
@@ -277,5 +305,104 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
         }
     }
 
+
+    public void setViewsDataMuscleStats(View view) {
+        presenter = new StatsPresenter(this);
+        context = getActivity();
+
+        //setting database for the session
+        presenter.setDatabase(context);
+
+        //get data from database
+        presenter.getData();
+
+//      Toast.makeText(context, StatsPresenter.userStats.getIdUserStats() + " " + StatsPresenter.userStats.getWeight(), Toast.LENGTH_SHORT).show();
+
+        //this check is useful for the first insert
+        if (presenter.checkExistUserStats()) {
+            presenter.addNewUserStats();
+        }
+
+
+        chest = view.findViewById(R.id.chestInput);
+        chestDate = view.findViewById(R.id.chestDateInput);
+
+
+        //text view of weight show the dialog box
+        chest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we pass to the dialog box the text view to update at the end of the insertion
+                openDialog(chest, chestDate);
+            }
+        });
+
+        arm = view.findViewById(R.id.bicepsInput);
+        armDate = view.findViewById(R.id.bicepsDateInput);
+        arm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we pass to the dialog box the text view to update at the end of the insertion
+                openDialog(arm, armDate);
+            }
+        });
+
+        waist = view.findViewById(R.id.waistInput);
+        waistDate = view.findViewById(R.id.waistDateInput);
+        waist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we pass to the dialog box the text view to update at the end of the insertion
+                openDialog(waist, waistDate);
+            }
+        });
+
+        tight = view.findViewById(R.id.tightInput);
+        tightDate = view.findViewById(R.id.tightDateInput);
+        tight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we pass to the dialog box the text view to update at the end of the insertion
+                openDialog(tight, tightDate);
+            }
+        });
+
+
+        calve = view.findViewById(R.id.calveInput);
+        calveDate = view.findViewById(R.id.calveDateInput);
+        calve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we pass to the dialog box the text view to update at the end of the insertion
+                openDialog(calve, calveDate);
+            }
+        });
+
+        if (StatsPresenter.userStats.getArmMeasure() != NULL) {
+            arm.setText(String.valueOf(StatsPresenter.userStats.getArmMeasure()));
+            armDate.setText(String.valueOf(StatsPresenter.userStats.getDateArmDetection()));
+        }
+
+        if (StatsPresenter.userStats.getChestMeasure() != NULL) {
+            chest.setText(String.valueOf(StatsPresenter.userStats.getChestMeasure()));
+            chestDate.setText(String.valueOf(StatsPresenter.userStats.getDateChestDetection()));
+            setFFMITextView();
+        }
+
+        if (StatsPresenter.userStats.getWaistMeasure() != NULL) {
+            waist.setText(String.valueOf(StatsPresenter.userStats.getWaistMeasure()));
+            waistDate.setText(String.valueOf(StatsPresenter.userStats.getDateWaistDetection()));
+        }
+
+        if (StatsPresenter.userStats.getTightMeasure() != NULL) {
+            tight.setText(String.valueOf(StatsPresenter.userStats.getTightMeasure()));
+            tightDate.setText(String.valueOf(StatsPresenter.userStats.getDateTightDetection()));
+        }
+
+        if (StatsPresenter.userStats.getCalveMeasure() != NULL) {
+            calve.setText(String.valueOf(StatsPresenter.userStats.getCalveMeasure()));
+            calveDate.setText(String.valueOf(StatsPresenter.userStats.getDateCalveDetection()));
+        }
+    }
 
 }

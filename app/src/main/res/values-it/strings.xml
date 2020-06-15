@@ -8,6 +8,7 @@
     <string name="trainer">Trainer</string>
     <string name="stats">Statistiche</string>
     <string name="profile">Profilo</string>
+    <string name="image">Image</string>
 
     <string name="myPlans">Le mie schede</string>
     <string name="trainerPlans">Schede del trainer</string>
@@ -37,15 +38,6 @@
         <item>Non specificato</item>
     </string-array>
 
-    <string-array name="weight_units">
-        <item>kg</item>
-        <item>lb</item>
-    </string-array>
-
-    <string-array name="height_untis">
-        <item>cm</item>
-        <item>in</item>
-    </string-array>
 
     <!-- Login -->
     <string name="login">Accedi</string>
@@ -101,10 +93,14 @@
 
 
 
+    <string name="armMeasure" >Arm Measure</string>
+    <string name="chestMeasure" >Chest Measure</string>
+    <string name="waistMeasure" >Waist Measure</string>
+    <string name="tightMeasure" >Tight Measure</string>
+    <string name="calveMeasure" >Calve Measure</string>
 
 
-
-
+    <string name="error_value_message" >Insert a valid value</string>
 </resources>
 
 

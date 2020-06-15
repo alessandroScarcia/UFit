@@ -84,5 +84,6 @@ public class LauncherManager implements iLauncher.Presenter {
     public void onLogOutIconClicked() {
         view.resetActivity();
         FirebaseAuthSingleton.getFirebaseAuth().signOut();
+        FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
     }
 }

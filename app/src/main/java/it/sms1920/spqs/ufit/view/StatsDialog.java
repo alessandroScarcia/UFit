@@ -16,7 +16,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Calendar;
+
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT;
 
 
 public class StatsDialog extends AppCompatDialogFragment {
@@ -36,11 +40,22 @@ public class StatsDialog extends AppCompatDialogFragment {
     public TextView textViewValue;
     public TextView textViewDate;
 
+
+    /**
+     * Construct od the Stats Dialog
+     * @param textViewValue textView that will contain the value of the parameter setted
+     * @param textViewDate textView that will contain the date of the parameter setted
+     */
     public StatsDialog(TextView textViewValue, TextView textViewDate) {
         this.textViewValue = textViewValue;
         this.textViewDate = textViewDate;
     }
 
+    /**
+     * When the dialog is created the layout show 2 editText inside it. One of them use datePicker
+     * @param savedInstanceState
+     * @return builder.create()
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -57,25 +72,32 @@ public class StatsDialog extends AppCompatDialogFragment {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
                         statValue = Integer.parseInt(statsValueEditText.getText().toString());
+                        } catch (NumberFormatException e) {
+//                            Snackbar.make(getContext(), R.string.error_value_message, LENGTH_SHORT)
+//                                    .show();
+                            statValue = 0;
+                        }
                         statDate = statsDateEditText.getText().toString();
-//                        String password = statsDateEditText.getText().toString();
-//                        listener = (ExampleDialogListener) getActivity();
-//                        StatsPresenter.value = statValue;
                         listener.applyTexts(statValue, statDate, textViewValue, textViewDate);
                     }
                 });
 
         statsValueEditText = view.findViewById(R.id.stats_value);
+
+        //setting options of DatePicker
         statsDateEditText = view.findViewById(R.id.stats_date);
         statsDateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //the instance of calendar is necessary to set current date inside the DatePicker
                 calendar = Calendar.getInstance();
                 year = calendar.get(Calendar.YEAR);
                 mounth = calendar.get(Calendar.MONTH);
                 dayOfMounth = calendar.get(Calendar.DAY_OF_MONTH);
-//                presenter.onCreateDialog(savedInstanceState);
+
                 datePickerDialog = new DatePickerDialog(getTargetFragment().getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             @SuppressLint("SetTextI18n")
@@ -92,6 +114,9 @@ public class StatsDialog extends AppCompatDialogFragment {
 
     }
 
+    /**
+     * Method called when a fragment is first attached to its context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -103,6 +128,11 @@ public class StatsDialog extends AppCompatDialogFragment {
         }
     }
 
+
+    /**
+     * Interface used to pass the data taked from the tewxt view of the dialog into the text
+     * view of the fragment
+     */
     public interface ExampleDialogListener {
         void applyTexts(float value, String date, TextView textViewValue, TextView textViewDate);
     }

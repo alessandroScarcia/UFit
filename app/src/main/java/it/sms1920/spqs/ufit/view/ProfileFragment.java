@@ -1,14 +1,9 @@
 package it.sms1920.spqs.ufit.view;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -25,37 +19,25 @@ import com.squareup.picasso.Picasso;
 import it.sms1920.spqs.ufit.contract.iProfile;
 import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
 
-import static android.app.Activity.RESULT_OK;
-
 
 public class ProfileFragment extends Fragment implements iProfile.View {
 
     private iProfile.Presenter presenter;
 
     private ImageView imgProfilePicture;
-
-    private TextInputLayout txtNameLayout;
-    private TextInputLayout txtSurnameLayout;
-    private TextInputLayout txtDateLayout;
-    private TextInputLayout txtGenderLayout;
-    private TextInputLayout txtHeightLayout;
-    private TextInputLayout txtWeightLayout;
-    private TextInputLayout txtEmailLayout;
-    private TextInputLayout txtPasswordLayout;
-
-    private TextInputEditText txtName;
-    private TextInputEditText txtSurname;
-    //private Datepicker
-    private AutoCompleteTextView txtGender;
-    private TextInputEditText txtHeight;
-    private TextInputEditText txtWeight;
-    private TextInputEditText txtUserEmail;
-    private TextInputEditText txtUserPassword;
+    private Bundle bundle;
 
     private MaterialButton btnChangeProfileInfo;
 
+    private MaterialTextView lblName;
+    private MaterialTextView lblSurname;
+    private MaterialTextView lblBirthDate;
+    private MaterialTextView lblHeight;
+    private MaterialTextView lblWeight;
+    private MaterialTextView lblEmail;
+    private MaterialTextView lblPassword;
+    private MaterialTextView lblGender;
 
-    private ArrayAdapter<CharSequence> adapterGender;
 
 
     @Nullable
@@ -63,47 +45,22 @@ public class ProfileFragment extends Fragment implements iProfile.View {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        bundle = new Bundle();
 
-        /*
-        Initializing view items
-                */
         imgProfilePicture = view.findViewById(R.id.imgProfile);
-        txtNameLayout = view.findViewById(R.id.txtNameLayout);
-        txtSurnameLayout = view.findViewById(R.id.txtSurnameLayout);
-        txtHeightLayout = view.findViewById(R.id.txtHeightLayout);
-        txtWeightLayout = view.findViewById(R.id.txtWeightLayout);
-        txtEmailLayout = view.findViewById(R.id.txtEmailLayout);
-        txtPasswordLayout = view.findViewById(R.id.txtPasswordLayout);
-        txtName = view.findViewById(R.id.txtName);
-        txtSurname = view.findViewById(R.id.txtSurname);
-        txtGender = view.findViewById(R.id.txtGender);
-        txtHeight = view.findViewById(R.id.txtHeight);
-        txtWeight = view.findViewById(R.id.txtWeight);
-        txtUserEmail = view.findViewById(R.id.txtEmail);
-        txtUserPassword = view.findViewById(R.id.txtPassword);
+
+        lblName = view.findViewById(R.id.lblName);
+        lblSurname = view.findViewById(R.id.lblSurname);
+        lblBirthDate = view.findViewById(R.id.lblBirthDate);
+        lblEmail = view.findViewById(R.id.lblEmail);
+        lblPassword = view.findViewById(R.id.lblPassword);
+        lblHeight = view.findViewById(R.id.lblHeight);
+        lblWeight = view.findViewById(R.id.lblWeight);
+        lblGender = view.findViewById(R.id.lblGender);
+
+
+
         btnChangeProfileInfo = view.findViewById(R.id.btnChangeProfileInfo);
-
-        /*
-            Setting gender list to drop down menu
-         */
-        adapterGender = ArrayAdapter.createFromResource(view.getContext(), R.array.genders, android.R.layout.simple_spinner_item);
-        adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        txtGender.setAdapter(adapterGender);
-
-        // TODO datepicker
-
-        presenter = new ProfilePresenter(ProfileFragment.this);
-
-        presenter.onUpdateInfo(); // TODO mettere uno splash per ingannare il caricamento
-
-        imgProfilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.onPicProfileChanged();
-            }
-        });
-
-
 
         btnChangeProfileInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,43 +69,71 @@ public class ProfileFragment extends Fragment implements iProfile.View {
             }
         });
 
+        /*
+            Setting gender list to drop down menu
+         */
+      /*  adapterGender = ArrayAdapter.createFromResource(view.getContext(), R.array.genders, android.R.layout.simple_spinner_item);
+        adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txtGender.setAdapter(adapterGender);*/
+
+        // TODO datepicker
+
+        presenter = new ProfilePresenter(ProfileFragment.this);
+
+        presenter.onShowProfileInfo(); // TODO mettere uno splash per ingannare il caricamento
+
+
         return view;
     }
 
 
-    @Override
-    public void updateName(String name) {
-        txtName.setText(name);
+   @Override
+    public void showName(String name) {
+        lblName.setText(name);
+        bundle.putString(String.valueOf(R.string.name),name);
     }
 
     @Override
-    public void updateEmail(String email) {
-        txtUserEmail.setText(email);
+    public void showEmail(String email) {
+        lblEmail.setText(email);
+        bundle.putString(String.valueOf(R.string.email),email);
     }
 
     @Override
-    public void updateHeight(int height) {
-        txtHeight.setText(String.valueOf(height));
+    public void showHeight(int height) {
+        lblHeight.setText(String.valueOf(height)+ "cm");
+        bundle.putInt(String.valueOf(R.string.height),height);
+
+
     }
 
     @Override
-    public void updateWeight(int weight) {
-        txtWeight.setText(String.valueOf(weight));
+    public void showWeight(int weight) {
+        lblWeight.setText(String.valueOf(weight)+ "kg");
+        bundle.putInt(String.valueOf(R.string.weight),weight);
     }
 
     @Override
-    public void updateSurname(String surname) {
-        txtSurname.setText(surname);
+    public void showSurname(String surname) {
+        lblSurname.setText(surname);
+        bundle.putString(String.valueOf(R.string.surname),surname);
     }
 
     @Override
-    public void updatePassword() {
-        txtUserPassword.setText(R.string.password);
-        txtUserPassword.setTransformationMethod(new PasswordTransformationMethod());
+    public void showGender(String gender) {
+        lblGender.setText(gender);
+        bundle.putString(String.valueOf(R.string.gender),gender);
     }
 
     @Override
-    public void updatePic(final String urlImage) {
+    public void showBirthDate(String birthDate) {
+        lblBirthDate.setText(birthDate);
+        bundle.putString(String.valueOf(R.string.date),birthDate);
+    }
+
+
+    @Override
+    public void showImagePicture(final String urlImage) {
 
 
         Picasso.get().load(urlImage).networkPolicy(NetworkPolicy.OFFLINE).into(imgProfilePicture, new Callback() {
@@ -163,43 +148,24 @@ public class ProfileFragment extends Fragment implements iProfile.View {
             }
         });
 
+        bundle.putString(String.valueOf(R.string.image), urlImage);
     }
 
-    public void choosePic() {
-        Intent i = new Intent(
-                Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, 1);
-    }
+
 
     @Override
     public void startChangeProfileInfoFragment() {
 
-        Bundle bundle = new Bundle();
-
-        bundle.putString("name",txtName.getText().toString());
-        bundle.putString(String.valueOf(R.string.email),txtUserEmail.getText().toString());
-        bundle.putString(String.valueOf(R.string.surname),txtSurname.getText().toString());
-        bundle.putString(String.valueOf(R.string.gender),txtSurname.getText().toString());
+        bundle.putString(String.valueOf(R.string.email),lblEmail.getText().toString());
 
         ChangeProfileInfoFragment changeProfileInfoFragment = new ChangeProfileInfoFragment();
         changeProfileInfoFragment.setArguments(bundle);
 
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, changeProfileInfoFragment).commit();
 
-
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Uri imageUri;
 
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            presenter.uploadPicOnStorage(imageUri);
-        }
-    }
 
 }
 

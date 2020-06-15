@@ -2,15 +2,24 @@ package it.sms1920.spqs.ufit.contract;
 
 import android.content.Context;
 
+/**
+ * Contract used to set the content inside the fragment of the Stats
+ */
 public interface iStatsFragment {
+
+    /**
+     * Interface used to show the different content of the view (in base of the tab selected)
+     */
     interface View {
         void showGeneralStats();
 
         void showBodyStats();
-
-
     }
 
+
+    /**
+     * Interface used to elaborate the date from the View and the database used in the model
+     */
     interface Presenter {
         void onTabSelectedAtPostition(int position);
 
@@ -20,7 +29,7 @@ public interface iStatsFragment {
 
         float calculateFFMI(float weight, float bodyFat);
 
-        boolean addNewIdStats(int ID);
+        void addNewIdStats(int ID);
 
         void getData();
 
@@ -37,5 +46,15 @@ public interface iStatsFragment {
         void addNewUserStats();
 
         boolean checkExistUserStats();
+
+        void updateArm(int idUserStats, float value, String date);
+
+        void updateChest(int idUserStats, float value, String date);
+
+        void updateWaist(int idUserStats, float value, String date);
+
+        void updateTight(int idUserStats, float value, String date);
+
+        void updateCalve(int idUserStats, float value, String date);
     }
 }
