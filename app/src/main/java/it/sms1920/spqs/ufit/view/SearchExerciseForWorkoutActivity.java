@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.contract.iSearchForWorkout;
 import it.sms1920.spqs.ufit.presenter.SearchExerciseForWorkoutPresenter;
 
-public class SearchExerciseForWorkoutActivity extends AppCompatActivity implements iSearchForWorkout.View {
+public class SearchExerciseForWorkoutActivity extends AppCompatActivity implements iSearchForWorkout.View, EditExerciseDialog.DialogListener {
 
     public static final int CODE_SUCCESSFUL = 0;
     public static final int CODE_NOT_SUCCESSFUL = 1;
@@ -48,13 +50,10 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
             @Override
             public void onClick(View view) {
                 // TODO Dialog to pick reps and loads
-                Intent intent = new Intent();
-                TextView id = view.findViewById(R.id.txtExerciseName);
-                intent.putExtra("exerciseId", id.getText().toString());
-//                intent.putExtra("exerciseReps", new ArrayList<Integer>());
-//                intent.putExtra("exerciseLoads", new ArrayList<Float>());
-                setResult(CODE_SUCCESSFUL, intent);
-                finish();
+                TextView id =view.findViewById(R.id.txtExerciseName);
+                EditExerciseDialog dialogBox = new EditExerciseDialog(id.getText().toString());
+                dialogBox.show(getSupportFragmentManager(), "Dialog");
+
 
             }
         });
@@ -70,5 +69,15 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
         setResult(CODE_NOT_SUCCESSFUL, intent);
         finish();
         overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+    }
+
+    @Override
+    public void saveData(String exerciseId, ArrayList<Integer> reps, ArrayList<Float> loads) {
+        Intent intent = new Intent();
+        intent.putExtra("exerciseId", exerciseId);
+        intent.putExtra("exerciseReps", reps);
+        intent.putExtra("exerciseLoads", loads);
+        setResult(CODE_SUCCESSFUL, intent);
+        finish();
     }
 }

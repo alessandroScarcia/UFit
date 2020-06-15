@@ -7,7 +7,10 @@ import java.util.ArrayList;
 public interface iExerciseSeriesRepsListAdapter {
     interface View{
 
+        void callNotifyItemRemoved(int position);
+        void callNotifyItemRangeChanged(int position, int range);
         void callNotifyDatasetChanged();
+        void onItemRemoved(int position);
 
         interface Item {
             void setSerie(String serie);
@@ -21,5 +24,8 @@ public interface iExerciseSeriesRepsListAdapter {
         int getSeriesCount();
         void onSerieAdded(int reps, float loads);
         void setSeriesList(ArrayList<Integer> reps, ArrayList<Float> loads);
+        void removeItemAt(int position);
+        ArrayList<Integer> getReps();
+        ArrayList<Float> getLoads();
     }
 }

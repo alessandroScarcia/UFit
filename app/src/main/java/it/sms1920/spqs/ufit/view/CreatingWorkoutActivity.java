@@ -2,17 +2,11 @@ package it.sms1920.spqs.ufit.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.google.android.material.card.MaterialCardView;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
@@ -52,11 +46,12 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
             }
         });
 
-        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_vertical_detailed, this);
+        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_vertical_detailed, false, this);
 
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO Dialog modify reps and loads
                 View lytSeries = view.findViewById(R.id.lytSeries);
                 if (lytSeries.getVisibility() == GONE)
                     lytSeries.setVisibility(View.VISIBLE);
@@ -125,8 +120,8 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
 
             presenter.onAddExerciseSuccessfulDone(
                     data.getStringExtra("exerciseId"),
-                    reps,
-                    loads
+                    (ArrayList<Integer>) data.getSerializableExtra("exerciseReps"),
+                    (ArrayList<Float>) data.getSerializableExtra("exerciseLoads")
             );
         } else {
             // non succede niente

@@ -20,6 +20,7 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
 
     Activity activity;
     iWorkoutExerciseListAdapter.Presenter presenter;
+    boolean editable = false;
 
     /*
             Resource ID indicating layout to use in binding. Required at least something like below:
@@ -38,9 +39,10 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         this.myClickListener = myClickListener;
     }
 
-    public WorkoutExerciseListAdapter(int layoutItemID, Activity activity) {
+    public WorkoutExerciseListAdapter(int layoutItemID, boolean editable, Activity activity) {
         this.layoutItemID = layoutItemID;
         this.activity = activity;
+        this.editable = editable;
         presenter = new WorkoutExerciseListAdapterPresenter(this);
     }
 
@@ -85,8 +87,8 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
 
-            adapter = new ExerciseSeriesRepsListAdapter();
             series = itemView.findViewById(R.id.rvSeries);
+            adapter = new ExerciseSeriesRepsListAdapter(editable);
             // adapter.setMyClickListener();
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
