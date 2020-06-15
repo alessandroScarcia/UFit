@@ -31,7 +31,7 @@ import it.sms1920.spqs.ufit.presenter.ChangeProfileInfoPresenter;
 import static android.app.Activity.RESULT_OK;
 
 
-public class ChangeProfileInfoFragment extends Fragment implements iChangeProfileInfo.View{
+public class ChangeProfileInfoFragment extends Fragment implements iChangeProfileInfo.View, ChangeEmailDialog.ChangeEmailDialogListener {
 
 
     private ChangeProfileInfoPresenter presenter;
@@ -67,8 +67,6 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
     int day;
 
     Calendar calendar;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,14 +141,14 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         lblChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   presenter.onEmailChanged();
+                openChangeEmailDialog();
             }
         });
 
         lblChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  presenter.onPasswordChanged();
+
             }
         });
 
@@ -192,6 +190,11 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         updatePic(urlImage);
     }
 
+    private void openChangeEmailDialog(){
+        ChangeEmailDialog changeEmailDialog = new ChangeEmailDialog();
+        changeEmailDialog.setTargetFragment(this, 1);
+        changeEmailDialog.show(getFragmentManager(),"ChangeEmailDialog");
+    }
     @Override
     public void choosePic() {
         Intent i = new Intent(
@@ -259,4 +262,8 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         return txtGender.getText().toString();
    }
 
+    @Override
+    public void applyChangeEmail(String currentPassword, String newEmail) {
+        presenter.onEmailChanged(currentPassword,newEmail);
+    }
 }

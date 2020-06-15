@@ -35,7 +35,7 @@ public interface iChangeProfileInfo {
 
         void onUpdateInfo();
 
-        void onEmailChanged(String newEmail);
+        void onEmailChanged(String currentPassword, String newEmail);
 
 
         void uploadPicOnStorage(final Uri imageUri);

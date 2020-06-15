@@ -8,12 +8,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -81,28 +84,56 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
 
 
     @Override
-    public void onEmailChanged(String newEmail) {
-        firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void onEmailChanged(String currentPassword, final String newEmail) {
+        AuthCredential credential = EmailAuthProvider.getCredential(firebaseUser.getEmail(), currentPassword);
+
+        firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (!task.isSuccessful()) {
-                    try {
-                        throw task.getException();
-                    } catch (FirebaseAuthInvalidCredentialsException e) {
-                        e.printStackTrace();
-                    } catch (FirebaseAuthUserCollisionException e) {
-                        e.printStackTrace();
-                    } catch (FirebaseAuthInvalidUserException e) {
-                        e.printStackTrace();
-                    } catch (FirebaseAuthRecentLoginRequiredException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
+                if (task.isSuccessful()) {//vado a controllare se esiste già
+                    FirebaseAuthSingleton.getFirebaseAuth().fetchSignInMethodsForEmail(newEmail)
+                            .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                    if (task.isSuccessful()) {
 
+                                            if (task.getResult().getSignInMethods().size() == 1) {
+                                                //esiste già
+                                            } else {//email disponibile
+                                                firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (!task.isSuccessful()) {
+                                                            try {
+                                                                throw task.getException();
+                                                            } catch (FirebaseAuthInvalidCredentialsException e) {
+                                                                e.printStackTrace();
+                                                            } catch (FirebaseAuthUserCollisionException e) {
+                                                                e.printStackTrace();
+                                                            } catch (FirebaseAuthInvalidUserException e) {
+                                                                e.printStackTrace();
+                                                            } catch (FirebaseAuthRecentLoginRequiredException e) {
+                                                                e.printStackTrace();
+                                                            } catch (Exception e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                    }
+                                }
+
+                            });
+
+
+                } else {
+                    //reautenticazione fallita
                 }
+
             }
+
+
         });
     }
 
@@ -141,7 +172,6 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
     public void onPicProfileChanged() {
         view.choosePic();
     }
-
 
 
     @Override

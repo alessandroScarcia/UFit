@@ -2,7 +2,6 @@ package it.sms1920.spqs.ufit.presenter;
 
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 
 import androidx.annotation.NonNull;
@@ -82,10 +81,7 @@ public class RegistrationPresenter implements iRegistration.Presenter {
                                     System.out.println(Arrays.toString(e.getStackTrace()));
                                 }
                             } else {
-                                Log.i("pippo","sono qui");
                                 returnSignUpResult(SIGNUP_SUCCESSFUL);
-
-
                             }
                         }
                     });
