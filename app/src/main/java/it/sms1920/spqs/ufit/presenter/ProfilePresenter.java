@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.presenter;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -11,7 +13,6 @@ import com.google.firebase.database.ValueEventListener;
 import it.sms1920.spqs.ufit.contract.iProfile;
 import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.FirebaseDbSingleton;
-import it.sms1920.spqs.ufit.model.User;
 
 import static it.sms1920.spqs.ufit.model.User.BIRTH_DATE_FIELD;
 import static it.sms1920.spqs.ufit.model.User.GENDER_FIELD;
@@ -62,8 +63,10 @@ public class ProfilePresenter implements iProfile.Presenter {
                         if (dataSnapshot.hasChild(IMG_URL_FIELD))
                             view.showImagePicture(dataSnapshot.child(IMG_URL_FIELD).getValue().toString());
 
-                        if (dataSnapshot.hasChild(GENDER_FIELD))
-                            view.showGender((User.Gender) dataSnapshot.child(GENDER_FIELD).getValue());
+                        if (dataSnapshot.hasChild(GENDER_FIELD)) {
+                            Log.i("pippo", "quaddd");
+                            view.showGender(dataSnapshot.child(GENDER_FIELD).getValue().toString());
+                        }
 
                         if (dataSnapshot.hasChild(BIRTH_DATE_FIELD))
                             view.showBirthDate(dataSnapshot.child(BIRTH_DATE_FIELD).getValue().toString());

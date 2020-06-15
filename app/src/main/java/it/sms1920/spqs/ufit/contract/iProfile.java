@@ -1,7 +1,5 @@
 package it.sms1920.spqs.ufit.contract;
 
-import it.sms1920.spqs.ufit.model.User;
-
 public interface iProfile {
 
     interface View {
@@ -18,7 +16,7 @@ public interface iProfile {
 
         void showSurname(String surname);
 
-        void showGender(User.Gender gender);
+        void showGender(String gender);
 
         void showBirthDate(String birthDate);
 

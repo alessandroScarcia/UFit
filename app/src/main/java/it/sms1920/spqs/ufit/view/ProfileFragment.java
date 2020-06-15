@@ -17,7 +17,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import it.sms1920.spqs.ufit.contract.iProfile;
-import it.sms1920.spqs.ufit.model.User;
 import it.sms1920.spqs.ufit.presenter.ProfilePresenter;
 
 
@@ -102,7 +101,7 @@ public class ProfileFragment extends Fragment implements iProfile.View {
 
     @Override
     public void showHeight(int height) {
-        lblHeight.setText(String.valueOf(height));
+        lblHeight.setText(String.valueOf(height)+ "cm");
         bundle.putInt(String.valueOf(R.string.height),height);
 
 
@@ -110,7 +109,7 @@ public class ProfileFragment extends Fragment implements iProfile.View {
 
     @Override
     public void showWeight(int weight) {
-        lblWeight.setText(String.valueOf(weight));
+        lblWeight.setText(String.valueOf(weight)+ "kg");
         bundle.putInt(String.valueOf(R.string.weight),weight);
     }
 
@@ -121,9 +120,9 @@ public class ProfileFragment extends Fragment implements iProfile.View {
     }
 
     @Override
-    public void showGender(User.Gender gender) {
-        lblBirthDate.setText(gender.toString());
-        bundle.putString(String.valueOf(R.string.gender),gender.toString());
+    public void showGender(String gender) {
+        lblGender.setText(gender);
+        bundle.putString(String.valueOf(R.string.gender),gender);
     }
 
     @Override

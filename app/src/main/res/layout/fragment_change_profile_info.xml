@@ -114,23 +114,15 @@
                 android:orientation="horizontal">
 
                 <!-- Data di nascita -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtDateLayout"
-                    style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/smaller_standard_margin"
-                    app:layout_constraintEnd_toStartOf="@+id/view"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txtDate1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/date"
-                        android:inputType="none" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/lblBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/date"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
 
                 <!-- middle Separator -->
                 <View

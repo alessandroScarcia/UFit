@@ -8,28 +8,30 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import it.sms1920.spqs.ufit.contract.iChangeProfileInfo;
+import it.sms1920.spqs.ufit.model.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.FirebaseDbSingleton;
-import it.sms1920.spqs.ufit.model.User;
 
+import static it.sms1920.spqs.ufit.model.User.BIRTH_DATE_FIELD;
+import static it.sms1920.spqs.ufit.model.User.GENDER_FIELD;
+import static it.sms1920.spqs.ufit.model.User.HEIGHT_FIELD;
 import static it.sms1920.spqs.ufit.model.User.IMG_URL_FIELD;
 import static it.sms1920.spqs.ufit.model.User.JPG;
+import static it.sms1920.spqs.ufit.model.User.NAME_FIELD;
 import static it.sms1920.spqs.ufit.model.User.PATH_STORAGE_PIC;
+import static it.sms1920.spqs.ufit.model.User.SURNAME_FIELD;
+import static it.sms1920.spqs.ufit.model.User.WEIGHT_FIELD;
 
 public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter {
     private iChangeProfileInfo.View view;
@@ -40,6 +42,7 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
 
     public ChangeProfileInfoPresenter(iChangeProfileInfo.View view) {
         this.database = FirebaseDbSingleton.getDatabase().getReference(TABLE_USER);
+        firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
         this.view = view;
     }
 
@@ -47,18 +50,6 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
     @Override
     public void onShowAllProfileInfo() {
         view.showAllProfileInfo();
-    }
-
-    @Override
-    public void onGenderChanged(User.Gender newGender) {
-        /*database.child("gender").setValue(newGender);
-        view.updateGender(newGender);*/
-    }
-
-    @Override
-    public void onWeightChanged(int newWeight) {
-         /*database.child("weight").setValue(newWeight);
-        view.updateGender(newWeight);*/
     }
 
 
@@ -115,27 +106,10 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
         });
     }
 
-    @Override
-    public void onNameChanged(String newName) {
-         /*database.child("name").setValue(newName);
-        view.updateGender(newName);*/
-    }
-
-    @Override
-    public void onSurnameChanged(String newSurname) {
-         /*database.child("surname").setValue(newSurname);
-        view.updateGender(newSurname);*/
-    }
-
-    @Override
-    public void onBirthDateChanged(String newDate) {
-        /*database.child("birthDate").setValue(newDate);
-        view.updateGender(newDate);*/
-    }
 
     @Override
     public void uploadPicOnStorage(Uri imageUri) {
-        final String nameFile = FirebaseAuth.getInstance().getUid();
+        final String nameFile = firebaseUser.getUid();
 
         final StorageReference riversRef = mStorageRef.child(PATH_STORAGE_PIC + nameFile + JPG);
 
@@ -160,66 +134,30 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
                     }
                 });
 
-       view.updatePic(imageUri.toString());
+        view.updatePic(imageUri.toString());
     }
 
     @Override
     public void onPicProfileChanged() {
-           view.choosePic();
+        view.choosePic();
     }
 
-    //TODO da decidere dove vanno messe le costanti dei nomi dei percorsi e degi attributi delle tabelle
-    @Override
-    public void onHeightChanged(int newHeight) {
-         /*database.child("height").setValue(newHeight);
-        view.updateGender(newHeight);*/
-    }
 
-    @Override
-    public void onBecomeTrainer() {
-
-    }
 
     @Override
     public void onUpdateInfo() {
 
         database.keepSynced(true);
 
-        database.child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        database = database.child(firebaseUser.getUid());
 
-                       /* if (dataSnapshot.hasChild(NAME_FIELD))
-                            view.updateName(dataSnapshot.child(NAME_FIELD).getValue().toString());
+        database.child(NAME_FIELD).setValue(view.updateName());
+        database.child(SURNAME_FIELD).setValue(view.updateSurname());
+        database.child(BIRTH_DATE_FIELD).setValue(view.updateBirthDate());
+        database.child(HEIGHT_FIELD).setValue(view.updateHeight());
+        database.child(WEIGHT_FIELD).setValue(view.updateWeight());
+        database.child(GENDER_FIELD).setValue(view.updateGender());
 
-                        if (dataSnapshot.hasChild(SURNAME_FIELD))
-                            view.updateSurname(dataSnapshot.child(SURNAME_FIELD).getValue().toString());
-
-                        view.updateEmail(firebaseUser.getEmail());
-                        view.updatePassword();
-
-                        if (dataSnapshot.hasChild(HEIGHT_FIELD))
-                            view.updateHeight(Integer.parseInt(dataSnapshot.child(HEIGHT_FIELD).getValue().toString()));
-
-                        if (dataSnapshot.hasChild(WEIGHT_FIELD))
-                            view.updateWeight(Integer.parseInt(dataSnapshot.child(WEIGHT_FIELD).getValue().toString()));
-
-                        if (dataSnapshot.hasChild(IMG_URL_FIELD))
-                            view.updatePic(dataSnapshot.child(IMG_URL_FIELD).getValue().toString());*/
-                /*if( dataSnapshot.hasChild(GENDER_FIELD))
-                    view.updateGender(dataSnapshot.child(GENDER_FIELD).getValue().toString());
-                if(dataSnapshot.hasChild(BIRTH_DATE_FIELD))
-                    view.updateBirthDate(dataSnapshot.child(BIRTH_DATE_FIELD).getValue());*/
-
-                    }
-
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
     }
 
 }

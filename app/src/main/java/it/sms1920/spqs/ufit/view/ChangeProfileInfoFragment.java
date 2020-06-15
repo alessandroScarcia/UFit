@@ -1,14 +1,15 @@
 package it.sms1920.spqs.ufit.view;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -21,6 +22,8 @@ import com.google.android.material.textview.MaterialTextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
 
 import it.sms1920.spqs.ufit.contract.iChangeProfileInfo;
 import it.sms1920.spqs.ufit.presenter.ChangeProfileInfoPresenter;
@@ -44,17 +47,26 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
 
     private TextInputEditText txtName;
     private TextInputEditText txtSurname;
-    //private Datepicker
-    private AutoCompleteTextView txtGender;
     private TextInputEditText txtHeight;
     private TextInputEditText txtWeight;
 
+    private DatePickerDialog birthDateDialog;
+
+    private AutoCompleteTextView txtGender;
+
     private MaterialTextView lblChangePassword;
     private MaterialTextView lblChangeEmail;
+    private MaterialTextView lblBirthDate;
 
     private MaterialButton bntApplyChangeInfo;
 
     private ArrayAdapter<CharSequence> adapterGender;
+
+    int year;
+    int month;
+    int day;
+
+    Calendar calendar;
 
 
 
@@ -81,6 +93,9 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
 
         lblChangeEmail = view.findViewById(R.id.lblChangeEmail);
         lblChangePassword = view.findViewById(R.id.lblChangePassword);
+        lblBirthDate = view.findViewById(R.id.lblBirthDate);
+
+
 
         bntApplyChangeInfo = view.findViewById(R.id.btnApplyChange);
 
@@ -91,13 +106,58 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         adapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         txtGender.setAdapter(adapterGender);
 
+
+
         presenter = new ChangeProfileInfoPresenter(ChangeProfileInfoFragment.this);
         presenter.onShowAllProfileInfo();
+
 
         imgChangeProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.onPicProfileChanged();
+            }
+        });
+
+        lblBirthDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               calendar = Calendar.getInstance();
+
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                birthDateDialog = new DatePickerDialog(ChangeProfileInfoFragment.this.getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        lblBirthDate.setText(day+"/"+month+"/"+year);
+                    }
+                }, year, month, day);
+
+                birthDateDialog.show();
+            }
+        });
+
+
+        lblChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   presenter.onEmailChanged();
+            }
+        });
+
+        lblChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  presenter.onPasswordChanged();
+            }
+        });
+
+        bntApplyChangeInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onUpdateInfo();
             }
         });
 
@@ -108,27 +168,28 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
     public void showAllProfileInfo() {
         Bundle bundle = getArguments();
 
-
-
         String name = bundle.getString(String.valueOf(R.string.name));
         String email = bundle.getString(String.valueOf(R.string.email));
         String surname = bundle.getString(String.valueOf(R.string.surname));
+
         String birthDate = bundle.getString(String.valueOf(R.string.date));
         String gender = bundle.getString(String.valueOf(R.string.gender));
+
         int height = bundle.getInt(String.valueOf(R.string.height));
         int weight = bundle.getInt(String.valueOf(R.string.weight));
         String urlImage = bundle.getString(String.valueOf(R.string.image));
 
 
+        lblBirthDate.setText(birthDate);
         txtName.setText(name);
         lblChangeEmail.setText(email);
         txtSurname.setText(surname);
         txtGender.setText(gender);
         txtHeight.setText(String.valueOf(height));
         txtWeight.setText(String.valueOf(weight));
-        Log.i("pippo","sono qua");
 
-        Picasso.get().load(urlImage).networkPolicy(NetworkPolicy.OFFLINE).into(imgChangeProfilePicture);
+
+        updatePic(urlImage);
     }
 
     @Override
@@ -167,5 +228,35 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         });
 
     }
+
+    @Override
+    public String updateName() {
+        return txtName.getText().toString();
+    }
+
+    @Override
+    public String updateSurname() {
+        return txtSurname.getText().toString();
+    }
+
+    @Override
+    public int updateHeight() {
+        return Integer.parseInt(txtHeight.getText().toString());
+    }
+
+    @Override
+    public int updateWeight() {
+        return Integer.parseInt(txtHeight.getText().toString());
+    }
+
+    @Override
+    public String updateBirthDate() {
+        return lblBirthDate.getText().toString();
+   }
+
+   @Override
+    public String updateGender(){
+        return txtGender.getText().toString();
+   }
 
 }
