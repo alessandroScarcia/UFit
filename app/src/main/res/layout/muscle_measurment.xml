@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="#EEEEEE"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/bicepsImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_arm_measure" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/armMeasure"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/bicepsInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="70.5" />
+
+
+                    <TextView
+                        android:id="@+id/bicepsDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="#EEEEEE"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/chestImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_chest_measure" />
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/chestMeasure"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/chestInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="70.5" />
+
+
+                    <TextView
+                        android:id="@+id/chestDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="#EEEEEE"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/waistImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_waist_measure" />
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/waistMeasure"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/waistInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="70.5" />
+
+
+                    <TextView
+                        android:id="@+id/waistDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="#EEEEEE"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/tightImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_tight_measure" />
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/tightMeasure"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tightInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="70.5" />
+
+
+                    <TextView
+                        android:id="@+id/tightDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="#EEEEEE"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/calveImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:adjustViewBounds="false"
+                        android:background="@color/colorWhite"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_calve_measure" />
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:minWidth="70dp"
+                android:minHeight="70dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="18sp"
+                        android:autoSizeMinTextSize="14sp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:gravity="center_horizontal"
+                        android:lines="1"
+                        android:text="@string/calveMeasure"
+                        android:textColor="@color/gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/calveInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        tools:text="70.5" />
+
+
+                    <TextView
+                        android:id="@+id/calveDateInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal|center|clip_vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:text=" - "
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        tools:text="70.5" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

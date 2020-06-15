@@ -103,6 +103,16 @@
     <string name="myBodyStats" >Misurazioni corporee</string>
 
 
+    <string name="armMeasure" >Arm Measure</string>
+    <string name="chestMeasure" >Chest Measure</string>
+    <string name="waistMeasure" >Waist Measure</string>
+    <string name="tightMeasure" >Tight Measure</string>
+    <string name="calveMeasure" >Calve Measure</string>
+
+
+    <string name="error_value_message" >Insert a valid value</string>
+
+
 
     <string name="search_here">Search here</string>
     <!-- TODO: Remove or change this placeholder text -->

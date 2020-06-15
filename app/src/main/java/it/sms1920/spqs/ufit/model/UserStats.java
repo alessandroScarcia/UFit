@@ -6,6 +6,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
+/**
+ * Class that contains the Stats of the user. This Class is based on room
+ */
 @Entity(tableName = "userStats")
 public class UserStats {
 
@@ -35,6 +38,116 @@ public class UserStats {
 
     @ColumnInfo(name = "dateWaterDetection")
     private String dateWaterDetection;
+
+    @ColumnInfo(name = "armMeasure")
+    private float armMeasure;
+
+    @ColumnInfo(name = "chestMeasure")
+    private float chestMeasure;
+
+    @ColumnInfo(name = "waistMeasure")
+    private float waistMeasure;
+
+    @ColumnInfo(name = "tightMeasure")
+    private float tightMeasure;
+
+    @ColumnInfo(name = "calveMeasure")
+    private float calveMeasure;
+
+    @ColumnInfo(name = "dateArmDetection")
+    private String dateArmDetection;
+
+    @ColumnInfo(name = "dateChestDetection")
+    private String dateChestDetection;
+
+    @ColumnInfo(name = "dateWaistDetection")
+    private String dateWaistDetection;
+
+    @ColumnInfo(name = "dateTightDetection")
+    private String dateTightDetection;
+
+    @ColumnInfo(name = "dateCalveDetection")
+    private String dateCalveDetection;
+
+    public float getArmMeasure() {
+        return armMeasure;
+    }
+
+    public void setArmMeasure(float armMeasure) {
+        this.armMeasure = armMeasure;
+    }
+
+    public float getChestMeasure() {
+        return chestMeasure;
+    }
+
+    public void setChestMeasure(float chestMeasure) {
+        this.chestMeasure = chestMeasure;
+    }
+
+    public float getWaistMeasure() {
+        return waistMeasure;
+    }
+
+    public void setWaistMeasure(float waistMeasure) {
+        this.waistMeasure = waistMeasure;
+    }
+
+    public float getTightMeasure() {
+        return tightMeasure;
+    }
+
+    public void setTightMeasure(float tightMeasure) {
+        this.tightMeasure = tightMeasure;
+    }
+
+    public float getCalveMeasure() {
+        return calveMeasure;
+    }
+
+    public void setCalveMeasure(float calveMeasure) {
+        this.calveMeasure = calveMeasure;
+    }
+
+    public String getDateArmDetection() {
+        return dateArmDetection;
+    }
+
+    public void setDateArmDetection(String dateArmDetection) {
+        this.dateArmDetection = dateArmDetection;
+    }
+
+    public String getDateChestDetection() {
+        return dateChestDetection;
+    }
+
+    public void setDateChestDetection(String dateChestDetection) {
+        this.dateChestDetection = dateChestDetection;
+    }
+
+    public String getDateWaistDetection() {
+        return dateWaistDetection;
+    }
+
+    public void setDateWaistDetection(String dateWaistDetection) {
+        this.dateWaistDetection = dateWaistDetection;
+    }
+
+    public String getDateTightDetection() {
+        return dateTightDetection;
+    }
+
+    public void setDateTightDetection(String dateTightDetection) {
+        this.dateTightDetection = dateTightDetection;
+    }
+
+    public String getDateCalveDetection() {
+        return dateCalveDetection;
+    }
+
+    public void setDateCalveDetection(String dateCalveDetection) {
+        this.dateCalveDetection = dateCalveDetection;
+    }
 
     public int getIdUserStats() {
         return idUserStats;
