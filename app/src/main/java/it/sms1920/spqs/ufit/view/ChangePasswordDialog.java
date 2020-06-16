@@ -16,43 +16,49 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 
-public class ChangeEmailDialog extends AppCompatDialogFragment {
+public class ChangePasswordDialog extends AppCompatDialogFragment {
 
-    public interface ChangeEmailDialogListener {
-        void applyChangeEmail(String currentPassword, String newEmail);
+    private ChangePasswordDialog.ChangePasswordDialogListener listener;
+
+    private TextInputLayout txtCurentPasswordLayout;
+    private TextInputLayout txtNewPasswordLayout;
+
+    private TextInputEditText txtCurrentPassword;
+    private TextInputEditText txtNewPassword;
+
+    public interface ChangePasswordDialogListener {
+        void applyChangePassword(String currentPassword, String newPassword);
 
     }
 
-    private TextInputLayout txtCurrentPasswordLayout;
-    private TextInputLayout txtNewEmailLayout;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
-    private TextInputEditText txtCurrentPassword;
-    private TextInputEditText txtNewEmail;
-
-    private ChangeEmailDialogListener listener;
-
-
-
+        try {
+            listener = (ChangePasswordDialog.ChangePasswordDialogListener) getTargetFragment();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "must implement ChangeEmailDialogListener");
+        }
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_change_email_dialog, null);
+        View view = inflater.inflate(R.layout.layout_change_password_dialog, null);
 
+        txtCurentPasswordLayout = view.findViewById(R.id.txtCurrPasswordLayout);
+        txtNewPasswordLayout = view.findViewById(R.id.txtNewEmailLayout);
 
-        txtCurrentPasswordLayout = view.findViewById(R.id.txtCurrentPasswordLayout);
-        txtCurrentPassword = view.findViewById(R.id.txtCurrentPassword);
-
-
-        txtNewEmailLayout = view.findViewById(R.id.txtNewEmailLayout);
-        txtNewEmail = view.findViewById(R.id.txtNewEmail);
-
+        txtCurrentPassword = view.findViewById(R.id.txtCurrPassword);
+        txtNewPassword = view.findViewById(R.id.txtNewPassword);
 
         builder.setView(view)
-                .setTitle("Change Email")
+                .setTitle("Change Password")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -63,27 +69,13 @@ public class ChangeEmailDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String currentPassword = txtCurrentPassword.getText().toString();
-                        String newEmail = txtNewEmail.getText().toString();
+                        String newPassword = txtNewPassword.getText().toString();
 
-                        listener.applyChangeEmail(currentPassword,newEmail);
+                        listener.applyChangePassword(currentPassword,newPassword);
                     }
                 });
 
 
         return builder.create();
     }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        try {
-            listener = (ChangeEmailDialogListener) getTargetFragment();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "must implement ChangeEmailDialogListener");
-        }
-    }
-
-
-
 }

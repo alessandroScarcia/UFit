@@ -29,6 +29,7 @@ public class ProfileFragment extends Fragment implements iProfile.View {
 
     private MaterialButton btnChangeProfileInfo;
 
+
     private MaterialTextView lblName;
     private MaterialTextView lblSurname;
     private MaterialTextView lblBirthDate;

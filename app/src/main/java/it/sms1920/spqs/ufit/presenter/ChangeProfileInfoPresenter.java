@@ -57,29 +57,44 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
 
 
     @Override
-    public void onPasswordChanged(String newPassword) {
-        firebaseUser.updatePassword(newPassword)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (!task.isSuccessful()) {
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                e.printStackTrace();
-                            } catch (FirebaseAuthInvalidUserException e) {
-                                e.printStackTrace();
-                            } catch (FirebaseAuthRecentLoginRequiredException e) {
-                                e.printStackTrace();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
+    public void onPasswordChanged(String currentPassword, final String newPassword) {
+        AuthCredential credential = EmailAuthProvider.getCredential(firebaseUser.getEmail(), currentPassword);
 
-                        }
-                    }
+        firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {//vado a controllare se esiste già
 
-                });
+                    firebaseUser.updatePassword(newPassword)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (!task.isSuccessful()) {
+                                        try {
+                                            throw task.getException();
+                                        } catch (FirebaseAuthWeakPasswordException e) {
+                                            e.printStackTrace();
+                                        } catch (FirebaseAuthInvalidUserException e) {
+                                            e.printStackTrace();
+                                        } catch (FirebaseAuthRecentLoginRequiredException e) {
+                                            e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        //password cambiata
+                                    }
+                                }
+
+                            });
+
+
+                } else {
+                    //reautenticazione fallita
+                }
+
+            }
+        });
     }
 
 
@@ -97,30 +112,32 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
                                 public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
                                     if (task.isSuccessful()) {
 
-                                            if (task.getResult().getSignInMethods().size() == 1) {
-                                                //esiste già
-                                            } else {//email disponibile
-                                                firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (!task.isSuccessful()) {
-                                                            try {
-                                                                throw task.getException();
-                                                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                                                e.printStackTrace();
-                                                            } catch (FirebaseAuthUserCollisionException e) {
-                                                                e.printStackTrace();
-                                                            } catch (FirebaseAuthInvalidUserException e) {
-                                                                e.printStackTrace();
-                                                            } catch (FirebaseAuthRecentLoginRequiredException e) {
-                                                                e.printStackTrace();
-                                                            } catch (Exception e) {
-                                                                e.printStackTrace();
-                                                            }
+                                        if (task.getResult().getSignInMethods().size() == 1) {
+                                            //esiste già
+                                        } else {//email disponibile
+                                            firebaseUser.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (!task.isSuccessful()) {
+                                                        try {
+                                                            throw task.getException();
+                                                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                                                            e.printStackTrace();
+                                                        } catch (FirebaseAuthUserCollisionException e) {
+                                                            e.printStackTrace();
+                                                        } catch (FirebaseAuthInvalidUserException e) {
+                                                            e.printStackTrace();
+                                                        } catch (FirebaseAuthRecentLoginRequiredException e) {
+                                                            e.printStackTrace();
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
                                                         }
+                                                    } else {
+                                                        view.updateEmail(newEmail);
                                                     }
-                                                });
-                                            }
+                                                }
+                                            });
+                                        }
                                     }
                                 }
 
@@ -171,6 +188,29 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
     @Override
     public void onPicProfileChanged() {
         view.choosePic();
+    }
+
+    @Override
+    public void onDeleteProfile(String currentPassword) {
+        AuthCredential credential = EmailAuthProvider.getCredential(firebaseUser.getEmail(), currentPassword);
+
+        firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {//vado a controllare se esiste già
+                    firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                        }
+                    });
+
+                } else {
+                    //reautenticazione fallita
+                }
+
+            }
+        });
     }
 
 
