@@ -255,10 +255,13 @@
                 android:id="@+id/btnApplyChange"
                 style="@style/CustomMaterialButton"
                 android:layout_width="match_parent"
-                android:text="applica modifiche">
+                android:text="applica modifiche"/>
 
-            </com.google.android.material.button.MaterialButton>
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteProfile"
+                style="@style/CustomMaterialButton"
+                android:layout_width="match_parent"
+                android:text="Cancella Profilo"/>
 
         </LinearLayout>
 

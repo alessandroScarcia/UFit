@@ -11,6 +11,8 @@ public interface iChangeProfileInfo {
 
         void updatePic(final String urlImage);
 
+        void updateEmail(String newEmail);
+
         String updateName();
 
         String updateSurname();
@@ -23,7 +25,6 @@ public interface iChangeProfileInfo {
 
         String updateGender();
 
-
     }
 
     interface Presenter {
@@ -31,17 +32,17 @@ public interface iChangeProfileInfo {
 
         String TABLE_USER = "User";
 
-        void onPasswordChanged(String newPassword);
+        void onPasswordChanged(String currentPassword, String newPassword);
 
         void onUpdateInfo();
 
         void onEmailChanged(String currentPassword, String newEmail);
 
-
         void uploadPicOnStorage(final Uri imageUri);
 
         void onPicProfileChanged();
 
+        void onDeleteProfile(String currentPassword);
 
 
     }

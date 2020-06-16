@@ -31,7 +31,8 @@ import it.sms1920.spqs.ufit.presenter.ChangeProfileInfoPresenter;
 import static android.app.Activity.RESULT_OK;
 
 
-public class ChangeProfileInfoFragment extends Fragment implements iChangeProfileInfo.View, ChangeEmailDialog.ChangeEmailDialogListener {
+public class ChangeProfileInfoFragment extends Fragment implements iChangeProfileInfo.View, ChangePasswordDialog.ChangePasswordDialogListener,
+        ChangeEmailDialog.ChangeEmailDialogListener, DeleteProfileDialog.DeleteProfileDialogListener {
 
 
     private ChangeProfileInfoPresenter presenter;
@@ -59,6 +60,7 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
     private MaterialTextView lblBirthDate;
 
     private MaterialButton bntApplyChangeInfo;
+    private MaterialButton btnDeleteProfile;
 
     private ArrayAdapter<CharSequence> adapterGender;
 
@@ -96,7 +98,7 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
 
 
         bntApplyChangeInfo = view.findViewById(R.id.btnApplyChange);
-
+        btnDeleteProfile = view.findViewById(R.id.btnDeleteProfile);
         /*
             Setting gender list to drop down menu
          */
@@ -148,7 +150,7 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         lblChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openChangePasswordDialog();
             }
         });
 
@@ -159,7 +161,21 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
             }
         });
 
+        btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDeleteDialog();
+            }
+        });
+
         return view;
+    }
+
+    private void openChangePasswordDialog() {
+        ChangePasswordDialog changePasswordDialog = new ChangePasswordDialog();
+        changePasswordDialog.setTargetFragment(this, 1);
+        changePasswordDialog.show(getFragmentManager(),"ChangeEmailDialog");
+
     }
 
     @Override
@@ -190,6 +206,12 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         updatePic(urlImage);
     }
 
+
+    private void openDeleteDialog(){
+        DeleteProfileDialog deleteProfileDialog = new DeleteProfileDialog();
+        deleteProfileDialog.setTargetFragment(this, 1);
+        deleteProfileDialog.show(getFragmentManager(),"DeleteProfileDialog");
+    }
     private void openChangeEmailDialog(){
         ChangeEmailDialog changeEmailDialog = new ChangeEmailDialog();
         changeEmailDialog.setTargetFragment(this, 1);
@@ -233,6 +255,11 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
     }
 
     @Override
+    public void updateEmail(String newEmail) {
+        lblChangeEmail.setText(newEmail);
+    }
+
+    @Override
     public String updateName() {
         return txtName.getText().toString();
     }
@@ -262,8 +289,20 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         return txtGender.getText().toString();
    }
 
+
+
     @Override
     public void applyChangeEmail(String currentPassword, String newEmail) {
         presenter.onEmailChanged(currentPassword,newEmail);
+    }
+
+    @Override
+    public void applyChangePassword(String currentPassword, String newPassword) {
+        presenter.onPasswordChanged(currentPassword,newPassword);
+    }
+
+    @Override
+    public void applyDelete(String currentPassword) {
+        presenter.onDeleteProfile(currentPassword);
     }
 }
