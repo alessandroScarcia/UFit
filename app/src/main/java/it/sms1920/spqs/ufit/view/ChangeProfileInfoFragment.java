@@ -96,7 +96,6 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
         lblBirthDate = view.findViewById(R.id.lblBirthDate);
 
 
-
         bntApplyChangeInfo = view.findViewById(R.id.btnApplyChange);
         btnDeleteProfile = view.findViewById(R.id.btnDeleteProfile);
         /*
@@ -260,36 +259,35 @@ public class ChangeProfileInfoFragment extends Fragment implements iChangeProfil
     }
 
     @Override
-    public String updateName() {
-        return txtName.getText().toString();
+    public void updateName(String name) {
+        txtName.setText(name);
     }
 
     @Override
-    public String updateSurname() {
-        return txtSurname.getText().toString();
+    public void updateSurname(String surname) {
+        txtSurname.setText(surname);
     }
 
     @Override
-    public int updateHeight() {
-        return Integer.parseInt(txtHeight.getText().toString());
+    public void updateHeight(int height) {
+        txtHeight.setText(height);
     }
 
     @Override
-    public int updateWeight() {
-        return Integer.parseInt(txtHeight.getText().toString());
+    public void updateWeight(int weight) {
+        txtWeight.setText(String.valueOf(weight));
     }
 
     @Override
-    public String updateBirthDate() {
-        return lblBirthDate.getText().toString();
+    public void updateBirthDate(String date) {
+        lblBirthDate.setText(date);
    }
 
    @Override
-    public String updateGender(){
-        return txtGender.getText().toString();
+    public void updateGender(String gender) {
+        txtGender.setText(gender);
+
    }
-
-
 
     @Override
     public void applyChangeEmail(String currentPassword, String newEmail) {

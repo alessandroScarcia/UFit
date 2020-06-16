@@ -13,17 +13,17 @@ public interface iChangeProfileInfo {
 
         void updateEmail(String newEmail);
 
-        String updateName();
+        void updateName(String name);
 
-        String updateSurname();
+        void updateSurname(String surname);
 
-        int updateHeight();
+        void updateHeight(int height);
 
-        int updateWeight();
+        void updateWeight(int weight);
 
-        String updateBirthDate();
+        void updateBirthDate(String date);
 
-        String updateGender();
+        void updateGender(String gender);
 
     }
 

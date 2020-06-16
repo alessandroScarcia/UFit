@@ -69,7 +69,6 @@ public class ChangeEmailDialog extends AppCompatDialogFragment {
                     }
                 });
 
-
         return builder.create();
     }
 

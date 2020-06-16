@@ -17,7 +17,10 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -219,15 +222,40 @@ public class ChangeProfileInfoPresenter implements iChangeProfileInfo.Presenter 
 
         database.keepSynced(true);
 
-        database = database.child(firebaseUser.getUid());
+        database.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        database.child(NAME_FIELD).setValue(view.updateName());
-        database.child(SURNAME_FIELD).setValue(view.updateSurname());
-        database.child(BIRTH_DATE_FIELD).setValue(view.updateBirthDate());
-        database.child(HEIGHT_FIELD).setValue(view.updateHeight());
-        database.child(WEIGHT_FIELD).setValue(view.updateWeight());
-        database.child(GENDER_FIELD).setValue(view.updateGender());
+                        if (dataSnapshot.hasChild(NAME_FIELD))
+                            view.updateName(dataSnapshot.child(NAME_FIELD).getValue().toString());
+
+                        if (dataSnapshot.hasChild(SURNAME_FIELD))
+                            view.updateSurname(dataSnapshot.child(SURNAME_FIELD).getValue().toString());
+
+                        view.updateEmail(firebaseUser.getEmail());
+
+                        if (dataSnapshot.hasChild(HEIGHT_FIELD))
+                            view.updateHeight(Integer.parseInt(dataSnapshot.child(HEIGHT_FIELD).getValue().toString()));
+
+                        if (dataSnapshot.hasChild(WEIGHT_FIELD))
+                            view.updateWeight(Integer.parseInt(dataSnapshot.child(WEIGHT_FIELD).getValue().toString()));
+
+                        if (dataSnapshot.hasChild(IMG_URL_FIELD))
+                            view.updatePic(dataSnapshot.child(IMG_URL_FIELD).getValue().toString());
+                        if (dataSnapshot.hasChild(GENDER_FIELD))
+                            view.updateGender(dataSnapshot.child(GENDER_FIELD).getValue().toString());
+                        if (dataSnapshot.hasChild(BIRTH_DATE_FIELD))
+                            view.updateBirthDate(dataSnapshot.child(BIRTH_DATE_FIELD).getValue().toString());
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
     }
-
 }
