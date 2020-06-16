@@ -1,12 +1,9 @@
 package it.sms1920.spqs.ufit.view;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,10 +16,13 @@ import it.sms1920.spqs.ufit.contract.iExerciseSeriesRepsListAdapter;
 import it.sms1920.spqs.ufit.model.ExerciseSetItem;
 import it.sms1920.spqs.ufit.presenter.ExerciseSeriesRepsListAdapterPresenter;
 
-class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesRepsListAdapter.RowHolder> implements iExerciseSeriesRepsListAdapter.View {
 
-    iExerciseSeriesRepsListAdapter.Presenter presenter;
-    boolean editable;
+class ExerciseSeriesRepsListAdapter
+        extends RecyclerView.Adapter<ExerciseSeriesRepsListAdapter.RowHolder>
+        implements iExerciseSeriesRepsListAdapter.View {
+
+    private iExerciseSeriesRepsListAdapter.Presenter presenter;
+    private boolean editable;
 
     public ExerciseSeriesRepsListAdapter(boolean editable) {
         presenter = new ExerciseSeriesRepsListAdapterPresenter(this);
@@ -32,21 +32,14 @@ class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesR
     @NonNull
     @Override
     public RowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        int layoutID = R.layout.partial_exercise_details;
 
-        return new ExerciseSeriesRepsListAdapter.RowHolder(
-                LayoutInflater.from(parent.getContext()).inflate(
-                        (editable ? R.layout.partial_exercise_details_editable : R.layout.partial_exercise_details),
-                        parent,
-                        false));
+        if (editable) {
+            layoutID = R.layout.partial_exercise_details_editable;
+        }
 
-    }
-
-    ArrayList<Integer> getReps() {
-        return presenter.getReps();
-    }
-
-    ArrayList<Float> getLoads() {
-        return presenter.getLoads();
+        return new ExerciseSeriesRepsListAdapter.RowHolder(LayoutInflater.from(parent.getContext())
+                .inflate(layoutID, parent, false));
     }
 
     @Override
@@ -57,15 +50,6 @@ class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesR
     @Override
     public int getItemCount() {
         return presenter.getSeriesCount();
-    }
-
-
-    void addSerieToList(int reps, float loads) {
-        presenter.onSerieAdded(reps, loads);
-    }
-
-    void setSeriesList(ArrayList<ExerciseSetItem> list) {
-        presenter.setSeriesList(list);
     }
 
     @Override
@@ -88,18 +72,39 @@ class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesR
         presenter.removeItemAt(position);
     }
 
-    /*
+    public ArrayList<Integer> getReps() {
+        return presenter.getReps();
+    }
+
+    public ArrayList<Float> getLoads() {
+        return presenter.getLoads();
+    }
+
+    public void addSerieToList(int reps, float loads) {
+        presenter.onSerieAdded(reps, loads);
+    }
+
+    public void setSeriesList(ArrayList<ExerciseSetItem> list) {
+        presenter.setSeriesList(list);
+    }
+
+    /**
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
      */
-    public class RowHolder extends RecyclerView.ViewHolder implements iExerciseSeriesRepsListAdapter.View.Item {
+    public class RowHolder
+            extends RecyclerView.ViewHolder
+            implements iExerciseSeriesRepsListAdapter.View.Item {
 
-        TextView serie;
-        TextView reps;
-        TextView load;
-        MaterialButton btnRemove;
+        private TextView reps;
 
-        TextInputEditText txtReps;
-        TextInputEditText txtLoads;
+        // Variables for not editable row
+        private TextView serie;
+        private TextView load;
+
+        // Variables for editable row
+        private MaterialButton btnRemove;
+        private TextInputEditText txtReps;
+        private TextInputEditText txtLoads;
 
         public RowHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,29 +124,24 @@ class ExerciseSeriesRepsListAdapter extends RecyclerView.Adapter<ExerciseSeriesR
                 load = itemView.findViewById(R.id.loads);
             }
             serie.setText(String.valueOf(getItemCount()));
-            // TODO itemView.setOnClickListener(myClickListener);
-
-        }
-
-        @Override
-        public void setSerie(String serie) {
-            this.serie.setText(serie);
         }
 
         @Override
         public void setReps(String reps) {
-            if (editable)
+            if (editable) {
                 this.txtReps.setText(reps);
-            else
+            } else {
                 this.reps.setText(reps);
+            }
         }
 
         @Override
         public void setLoad(String load) {
-            if (editable)
+            if (editable) {
                 this.txtLoads.setText(load);
-            else
+            } else {
                 this.load.setText(load);
+            }
         }
     }
 }

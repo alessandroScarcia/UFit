@@ -172,6 +172,12 @@ public class SearchExercise {
         return exerciseDetailedList;
     }
 
+
+    /**
+     * Using this method will fill the result list with the only 1 correspondent exercise having the
+     * given ID, fetching by the correct language with "fetchExerciseTranslationList()" method
+     * @param id ID of the needed exercise
+     */
     public void getExerciseById(String id){
         exerciseMap.clear();
         exerciseTranslationList.clear();

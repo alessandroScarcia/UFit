@@ -16,7 +16,6 @@ public class SplashScreenActivity extends AppCompatActivity implements iSplashSc
 
     private SplashScreenPresenter presenter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,20 +23,16 @@ public class SplashScreenActivity extends AppCompatActivity implements iSplashSc
 
         Context context = this;
 
-        presenter = new SplashScreenPresenter(SplashScreenActivity.this, context );
+        presenter = new SplashScreenPresenter(SplashScreenActivity.this, context);
 
         presenter.onStartApp();
-
     }
 
     @Override
     public void startApp() {
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 startActivity(new Intent(SplashScreenActivity.this, LauncherActivity.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

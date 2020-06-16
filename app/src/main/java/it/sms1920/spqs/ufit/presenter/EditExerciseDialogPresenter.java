@@ -8,9 +8,9 @@ import it.sms1920.spqs.ufit.model.SearchExercise;
 
 public class EditExerciseDialogPresenter implements iSearchClient, iExerciseDialog.Presenter {
 
-    iExerciseDialog.View view;
-    SearchExercise mSearch;
-    String exerciseName;
+    private iExerciseDialog.View view;
+    private SearchExercise mSearch;
+    private String exerciseName;
 
     public EditExerciseDialogPresenter(iExerciseDialog.View view) {
         this.view = view;

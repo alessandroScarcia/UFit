@@ -94,6 +94,12 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        presenter.onBackPressed();
+    }
+
     @Override
     public void back() {
         Intent intent = new Intent();
@@ -116,6 +122,7 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
         intent.putExtra("exerciseLoads", loads);
         setResult(CODE_SUCCESSFUL, intent);
         finish();
+        overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
     }
 
     @Override
