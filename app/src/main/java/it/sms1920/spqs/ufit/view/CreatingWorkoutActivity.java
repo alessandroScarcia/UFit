@@ -2,7 +2,7 @@ package it.sms1920.spqs.ufit.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,8 +27,6 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
     private CreatingWorkoutPresenter presenter;
     private WorkoutExerciseListAdapter adapter;
     private Toolbar toolbar;
-    private RecyclerView rvExerciseList;
-    private FloatingActionButton btnDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +48,12 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
             }
         });
 
+        // Setting recycler view adapter for not editable exercises
         adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_vertical_detailed, false, this);
-
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Dialog modify reps and loads
+                // Configuration of card expansion/compression
                 View lytSeries = view.findViewById(R.id.lytSeries);
                 if (lytSeries.getVisibility() == GONE)
                     lytSeries.setVisibility(View.VISIBLE);
@@ -64,12 +62,13 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
             }
         });
 
-        rvExerciseList = findViewById(R.id.lstExercises);
+        // Setting recycler view
+        RecyclerView rvExerciseList = findViewById(R.id.lstExercises);
         rvExerciseList.setAdapter(adapter);
         rvExerciseList.setLayoutManager(new LinearLayoutManager(this));
 
-
-        btnDone = findViewById(R.id.btnApply);
+        // Button to confirm the workout creation
+        FloatingActionButton btnDone = findViewById(R.id.btnApply);
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +81,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar.
+        // This adds items to the action bar: only Add button will be visible
         getMenuInflater().inflate(R.menu.tool_bar, menu);
         toolbar.getMenu().findItem(R.id.add).setVisible(true);
         return true;
@@ -105,6 +104,11 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
         super.onBackPressed();
     }
 
+    /**
+     * Starting new activity waiting for result. Handled by overriding "onActivityResult"
+     *
+     * @param requestCode formal request code to send by Intent to new activity.
+     */
     @Override
     public void startSearchExerciseForWorkout(int requestCode) {
         startActivityForResult(new Intent(CreatingWorkoutActivity.this, SearchExerciseForWorkoutActivity.class), requestCode);
@@ -116,22 +120,30 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
         adapter.addNewExercise(exerciseId, exerciseName, reps, loads);
     }
 
+    /**
+     * Handling result from activity started by "startSearchExerciseFroWorkout"
+     *
+     * @param requestCode request code sent to new activity
+     * @param resultCode  result code received from new activity
+     * @param data        Intent object received: contains all info sent back from new activity
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (requestCode == 1 && resultCode == 0) { //CODESUCCESSFUL) { // se il codice di richiesta è uguale a quello usato
-
-            presenter.onAddExerciseSuccessfulDone(
-                    data.getStringExtra("exerciseId"),
-                    data.getStringExtra("exerciseName"),
-                    (ArrayList<Integer>) data.getSerializableExtra("exerciseReps"),
-                    (ArrayList<Float>) data.getSerializableExtra("exerciseLoads")
-            );
-        } else {
-            // non succede niente
-        }
+        Log.d("AAAA", "onActivityResult: " + requestCode + " " + resultCode);
+        // This check if request code received is equal to request code received, and result code is positive.
+        if (requestCode == 1){
+            if (resultCode == 0) {
+                presenter.onAddExerciseSuccessfulDone(
+                        data.getStringExtra("exerciseId"),
+                        data.getStringExtra("exerciseName"),
+                        (ArrayList<Integer>) data.getSerializableExtra("exerciseReps"),
+                        (ArrayList<Float>) data.getSerializableExtra("exerciseLoads")
+                );
+            } else {
+                // DO NOTHING
+            }
+        }  // Here there could be an else statement for handler the negative result
     }
 
 }
