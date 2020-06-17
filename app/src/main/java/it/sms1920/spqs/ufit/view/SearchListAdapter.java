@@ -10,6 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
+import org.apache.commons.lang3.StringUtils;
+
 import it.sms1920.spqs.ufit.contract.iSearchListAdapter;
 import it.sms1920.spqs.ufit.presenter.SearchListAdapterPresenter;
 
@@ -91,20 +95,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
         @Override
         public void setName(String name) {
-            if (name == null || name.length() == 0) {
-                name = "";
-            } else if (name.length() == 1) {
-                name = name.toUpperCase();
-            } else {
-                name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-            }
-            this.name.setText(name);
+            this.name.setText(StringUtils.capitalize(name));
         }
 
         @Override
-        public void setImage(Image image) {
-            //TODO image fetch
-            this.image.setImageResource(R.drawable.img_exercise);
+        public void setImage(String imageUrl) {
+            Picasso.get().load(imageUrl).into(image);
         }
 
         @Override

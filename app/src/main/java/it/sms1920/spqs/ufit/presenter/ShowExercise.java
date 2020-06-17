@@ -45,7 +45,7 @@ public class ShowExercise implements iExercise.Presenter, iSearchClient {
             ExerciseDetailed exercise = exerciseDetailedList.get(0);
 
             view.setName(exercise.getName());
-            view.setDescription(exercise.getDescription());
+            view.setTvExerciseDescription(exercise.getDescription());
             view.setMuscleList(exercise.getMuscleList());
             view.setImage(exercise.getImageUrl());
         }

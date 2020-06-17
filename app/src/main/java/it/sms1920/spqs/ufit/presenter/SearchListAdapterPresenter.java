@@ -7,6 +7,7 @@ import it.sms1920.spqs.ufit.contract.iSearchClient;
 import it.sms1920.spqs.ufit.contract.iSearchListAdapter;
 import it.sms1920.spqs.ufit.model.ExerciseDetailed;
 import it.sms1920.spqs.ufit.model.SearchExercise;
+import it.sms1920.spqs.ufit.view.ExerciseActivity;
 
 /**
  * Presenter for SearchListAdapter View.
@@ -35,9 +36,11 @@ public class SearchListAdapterPresenter implements iSearchListAdapter.Presenter,
 
     @Override
     public void onBindExerciseItemViewAtPosition(iSearchListAdapter.View.Item holder, int position) {
-        holder.setName(exerciseDetailedList.get(position).getName());
-        // TODO setImage
-        holder.setId(exerciseDetailedList.get(position).getExerciseId());
+        ExerciseDetailed exercise = exerciseDetailedList.get(position);
+
+        holder.setName(exercise.getName());
+        holder.setImage(exercise.getImageUrl());
+        holder.setId(exercise.getExerciseId());
     }
 
     @Override
