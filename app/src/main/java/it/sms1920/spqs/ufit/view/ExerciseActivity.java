@@ -1,11 +1,19 @@
 package it.sms1920.spqs.ufit.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -14,11 +22,13 @@ import it.sms1920.spqs.ufit.presenter.ShowExercise;
 
 
 public class ExerciseActivity extends AppCompatActivity implements iExercise.View {
-
+    private static final String TAG = ExerciseActivity.class.getCanonicalName();
     private iExercise.Presenter presenter;
 
-    private TextView description;
     private Toolbar toolbar;
+    private ImageView ivExerciseImage;
+    private TextView tvExerciseDescription;
+    private TextView tvMuscleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +51,9 @@ public class ExerciseActivity extends AppCompatActivity implements iExercise.Vie
 
         presenter = new ShowExercise(this);
 
-        description = findViewById(R.id.txtExerciseDescription);
+        ivExerciseImage = findViewById(R.id.ivExerciseImage);
+        tvExerciseDescription = findViewById(R.id.tvExerciseDescription);
+        tvMuscleList = findViewById(R.id.tvMuscleList);
 
         presenter.onCreateCompleted(getIntent());
     }
@@ -53,22 +65,29 @@ public class ExerciseActivity extends AppCompatActivity implements iExercise.Vie
 
     @Override
     public void setName(String name) {
-        this.toolbar.setTitle(name);
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description.setText(description);
+        this.toolbar.setTitle(StringUtils.capitalize(name));
     }
 
     @Override
     public void setImage(String imageUrl) {
-        // TODO implement image setter
+        Log.d(TAG, "imageUrl: " + imageUrl);
+        Picasso.get().load(imageUrl).into(ivExerciseImage);
+    }
+
+    @Override
+    public void setTvExerciseDescription(String tvExerciseDescription) {
+        this.tvExerciseDescription.setText(StringUtils.capitalize(tvExerciseDescription));
     }
 
     @Override
     public void setMuscleList(List<String> muscleList) {
-        // TODO implement muscle list setter
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String muscle : muscleList) {
+            stringBuilder.append("\t\u25CF ")
+                    .append(StringUtils.capitalize(muscle))
+                    .append("\n");
+        }
+        tvMuscleList.setText(stringBuilder.toString());
     }
 
     @Override

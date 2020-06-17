@@ -11,7 +11,7 @@ public interface iSearchListAdapter {
         interface Item {
             void setName(String name);
 
-            void setImage(Image image);
+            void setImage(String imageUrl);
 
             void setId(String id);
         }

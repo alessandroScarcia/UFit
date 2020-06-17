@@ -97,15 +97,18 @@
     <string name="armMeasure" >Arm Measure</string>
     <string name="chestMeasure" >Chest Measure</string>
     <string name="waistMeasure" >Waist Measure</string>
-    <string name="tightMeasure" >Tight Measure</string>
-    <string name="calveMeasure" >Calve Measure</string>
+    <string name="tightMeasure">Tight Measure</string>
+    <string name="calveMeasure">Calve Measure</string>
 
 
-    <string name="error_value_message" >Insert a valid value</string>
-
+    <string name="error_value_message">Insert a valid value</string>
 
 
     <string name="search_here">Search here</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" tools:ignore="MissingTranslation">Hello blank fragment</string>
+    <string name="muscles_involved">Muscles Involved</string>
+    <string name="description">Description</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
 </resources>

@@ -8,7 +8,7 @@ public interface iExercise {
     interface View {
         void setName(String name);
 
-        void setDescription(String description);
+        void setTvExerciseDescription(String tvExerciseDescription);
 
         void setImage(String imageUrl);
 
