@@ -9,16 +9,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
 import it.sms1920.spqs.ufit.contract.iExercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
+import it.sms1920.spqs.ufit.StringUtils;
 
 
 public class ExerciseActivity extends AppCompatActivity implements iExercise.View {

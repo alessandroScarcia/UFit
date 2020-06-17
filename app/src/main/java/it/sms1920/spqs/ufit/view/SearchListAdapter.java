@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import org.apache.commons.lang3.StringUtils;
-
 import it.sms1920.spqs.ufit.contract.iSearchListAdapter;
 import it.sms1920.spqs.ufit.presenter.SearchListAdapterPresenter;
+import it.sms1920.spqs.ufit.StringUtils;
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ExerciseHolder> implements iSearchListAdapter.View {
 
