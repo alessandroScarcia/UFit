@@ -51,7 +51,7 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
                 presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(v));
             }
         };
-        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, itemClickListener);
+        adapter = new SearchListAdapter(R.layout.item_exercise_vertical, itemClickListener);
 
         rvSearchResult = findViewById(R.id.rvSearchResult);
         TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);

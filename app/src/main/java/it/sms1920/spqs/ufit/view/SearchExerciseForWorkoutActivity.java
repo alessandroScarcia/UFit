@@ -79,7 +79,7 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
 
         rvSearchResult = findViewById(R.id.rvSearchResult);
 
-        adapter = new SearchListAdapter(R.layout.item_exercise_vertical);
+        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal);
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

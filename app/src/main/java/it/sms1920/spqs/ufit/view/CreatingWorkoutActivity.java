@@ -49,7 +49,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
         });
 
         // Setting recycler view adapter for not editable exercises
-        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_vertical_detailed, false, this);
+        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_horizontal_detailed, false, this);
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

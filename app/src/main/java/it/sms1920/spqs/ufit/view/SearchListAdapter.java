@@ -31,6 +31,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
      */
     private View.OnClickListener myClickListener;
 
+    private boolean selectable = false;
 
     public SearchListAdapter(int layoutItemId) {
         presenter = new SearchListAdapterPresenter(this);
@@ -40,6 +41,18 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
     public SearchListAdapter(int layoutItemId, View.OnClickListener clickListener) {
         this(layoutItemId);
         this.myClickListener = clickListener;
+    }
+
+    public SearchListAdapter(int layoutItemId, boolean selectable) {
+        presenter = new SearchListAdapterPresenter(this);
+        this.layoutItemId = layoutItemId;
+        this.selectable = selectable;
+    }
+
+    public SearchListAdapter(int layoutItemId, View.OnClickListener clickListener, boolean selectable) {
+        this(layoutItemId);
+        this.myClickListener = clickListener;
+        this.selectable = selectable;
     }
 
     @NonNull
