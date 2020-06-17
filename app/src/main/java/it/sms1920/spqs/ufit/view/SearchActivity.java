@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import it.sms1920.spqs.ufit.contract.iSearch;
 import it.sms1920.spqs.ufit.presenter.SearchPresenter;
 
@@ -23,7 +24,6 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
 
     private SearchPresenter presenter;
     private SearchListAdapter adapter;
-    private Toolbar toolbar;
     private RecyclerView rvSearchResult;
 
     @Override
@@ -34,10 +34,8 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
         presenter = new SearchPresenter(this);
 
         // Setting toolbar
-        toolbar = findViewById(R.id.tool_bar);
-
+        Toolbar toolbar = findViewById(R.id.tool_bar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +44,18 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
             }
         });
 
-        final TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
-        final TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
+        // OnClickListener for items of RecyclerView
+        View.OnClickListener itemClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(v));
+            }
+        };
+        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, itemClickListener);
+
+        rvSearchResult = findViewById(R.id.rvSearchResult);
+        TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
+        TextInputLayout txtSearchFieldLayout = findViewById(R.id.txtSearchFieldLayout);
 
         txtSearchFieldLayout.setStartIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +63,6 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
                 presenter.onBackPressed();
             }
         });
-
 
         txtSearchField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,19 +81,7 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
             }
         });
 
-        rvSearchResult = findViewById(R.id.rvSearchResult);
         // Setting adapter to the recycler view for search result
-
-
-        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal);
-        adapter.setMyClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(view));
-            }
-        });
-
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -95,14 +90,6 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
     @Override
     public void onBackPressed() {
         presenter.onBackPressed();
-    }
-
-    public void startExerciseActivity(int exerciseId, String exerciseName) {
-        Intent intent = new Intent(this, ExerciseActivity.class);
-        intent.putExtra("exerciseId", exerciseId);
-        intent.putExtra("exerciseName", exerciseName);
-        startActivity(intent);
-        this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
 
     @Override
@@ -118,17 +105,27 @@ public class SearchActivity extends AppCompatActivity implements iSearch.View {
 
     @Override
     public void showExercise(int position) {
-        /*
-            Extract single view item from recycler view with used LayoutManager method "findViewByPosition"
-         */
+        // Extract single view item from recycler view with used LayoutManager method "findViewByPosition"
         GridLayoutManager layoutManager = (GridLayoutManager) rvSearchResult.getLayoutManager();
-        View view = layoutManager.findViewByPosition(position);
-        TextView txtName = view.findViewById(R.id.txtExerciseName);
-        TextView txtId = view.findViewById(R.id.txtExerciseId);
 
-        if (!txtName.getText().toString().equals("") && !txtId.getText().toString().equals("")) {
-            startExerciseActivity(Integer.parseInt(txtId.getText().toString()), txtName.getText().toString());
+        if (layoutManager != null) {
+            View view = layoutManager.findViewByPosition(position);
+
+            if (view != null) {
+                TextView txtId = view.findViewById(R.id.txtExerciseId);
+
+                if (!txtId.getText().toString().equals("")) {
+                    startExerciseActivity(txtId.getText().toString());
+                }
+            }
         }
+    }
+
+    public void startExerciseActivity(String exerciseId) {
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        intent.putExtra("exerciseId", exerciseId);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
 
 }

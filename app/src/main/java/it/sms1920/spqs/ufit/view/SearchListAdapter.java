@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import it.sms1920.spqs.ufit.contract.iSearchListAdapter;
 import it.sms1920.spqs.ufit.presenter.SearchListAdapterPresenter;
 
@@ -23,7 +24,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
                   TextView with "txtExerciseId" as ID
                   ImageView with "imgExercise" as ID
     */
-    private int layoutItemID;
+    private int layoutItemId;
 
     /*
         Listener to apply for each item "setOnClickListener" in list
@@ -31,15 +32,20 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
     private View.OnClickListener myClickListener;
 
 
-    public SearchListAdapter(int layoutItemID) {
+    public SearchListAdapter(int layoutItemId) {
         presenter = new SearchListAdapterPresenter(this);
-        this.layoutItemID = layoutItemID;
+        this.layoutItemId = layoutItemId;
+    }
+
+    public SearchListAdapter(int layoutItemId, View.OnClickListener clickListener) {
+        this(layoutItemId);
+        this.myClickListener = clickListener;
     }
 
     @NonNull
     @Override
     public ExerciseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ExerciseHolder(LayoutInflater.from(parent.getContext()).inflate(layoutItemID, parent, false));
+        return new ExerciseHolder(LayoutInflater.from(parent.getContext()).inflate(layoutItemId, parent, false));
     }
 
     @Override
@@ -61,8 +67,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         presenter.onQueryTextChanged(keyword);
     }
 
-    public void setMyClickListener(View.OnClickListener listener) {
-        this.myClickListener = listener;
+    public void setMyClickListener(View.OnClickListener clickListener) {
+        this.myClickListener = clickListener;
     }
 
 

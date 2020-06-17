@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.List;
+
 import it.sms1920.spqs.ufit.contract.iExercise;
 import it.sms1920.spqs.ufit.presenter.ShowExercise;
 
@@ -14,9 +17,8 @@ public class ExerciseActivity extends AppCompatActivity implements iExercise.Vie
 
     private iExercise.Presenter presenter;
 
-    private TextView name;
     private TextView description;
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,6 @@ public class ExerciseActivity extends AppCompatActivity implements iExercise.Vie
 
         presenter = new ShowExercise(this);
 
-        name = findViewById(R.id.txtExerciseName);
         description = findViewById(R.id.txtExerciseDescription);
 
         presenter.onCreateCompleted(getIntent());
@@ -53,12 +54,6 @@ public class ExerciseActivity extends AppCompatActivity implements iExercise.Vie
     @Override
     public void setName(String name) {
         this.toolbar.setTitle(name);
-        this.name.setText(name);
-    }
-
-    @Override
-    public void setDescription() {
-        description.setText(this.getString(R.string.loading));
     }
 
     @Override
@@ -67,8 +62,13 @@ public class ExerciseActivity extends AppCompatActivity implements iExercise.Vie
     }
 
     @Override
-    public void setImage() {
+    public void setImage(String imageUrl) {
         // TODO implement image setter
+    }
+
+    @Override
+    public void setMuscleList(List<String> muscleList) {
+        // TODO implement muscle list setter
     }
 
     @Override

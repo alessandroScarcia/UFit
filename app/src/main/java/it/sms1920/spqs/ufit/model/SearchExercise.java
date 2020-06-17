@@ -76,6 +76,48 @@ public class SearchExercise {
         });
     }
 
+
+    /**
+     * Using this method will fill the result list with the only 1 correspondent exercise having the
+     * given ID, fetching by the correct language with "fetchExerciseTranslationList()" method
+     *
+     * @param id ID of the needed exercise
+     */
+    public void getExerciseById(String id) {
+        exerciseMap.clear();
+        exerciseTranslationList.clear();
+        List<String> listId = new ArrayList<>();
+        listId.add(id);
+        fetchExerciseMapWithId(listId);
+    }
+
+    /**
+     * This method must be called by iSearchClient when they are notified for ResultReady to retrive
+     * the list of results.
+     *
+     * @return list of Exercises fetched from Firebase Realtime Database
+     */
+    public List<ExerciseDetailed> getExerciseResultList() {
+        List<ExerciseDetailed> exerciseDetailedList = new ArrayList<>();
+        for (ExerciseTranslation et : exerciseTranslationList) {
+            Exercise exercise = exerciseMap.get(et.getExerciseId());
+            if (exercise != null) {
+                ExerciseDetailed er = new ExerciseDetailed();
+                er.setExerciseId(et.getExerciseId());
+                er.setName(et.getName());
+                er.setDescription(et.getDescription());
+                er.setMuscleList(et.getMuscleList());
+                er.setImageUrl(exercise.getImageUrl());
+                er.setVideoUrl(exercise.getVideoUrl());
+
+                exerciseDetailedList.add(er);
+            }
+        }
+
+        Log.d(TAG, exerciseDetailedList.toString());
+        return exerciseDetailedList;
+    }
+
     /**
      * This method fetches from Exercise items having id corresponding to an element inside
      * 'exerciseIdList'
@@ -143,47 +185,6 @@ public class SearchExercise {
                 Log.d(TAG, databaseError.getMessage());
             }
         });
-    }
-
-    /**
-     * This method must be called by iSearchClient when they are notified for ResultReady to retrive
-     * the list of results.
-     *
-     * @return list of Exercises fetched from Firebase Realtime Database
-     */
-    public List<ExerciseDetailed> getExerciseResultList() {
-        List<ExerciseDetailed> exerciseDetailedList = new ArrayList<>();
-        for (ExerciseTranslation et : exerciseTranslationList) {
-            Exercise exercise = exerciseMap.get(et.getExerciseId());
-            if (exercise != null) {
-                ExerciseDetailed er = new ExerciseDetailed();
-                er.setExerciseId(et.getExerciseId());
-                er.setName(et.getName());
-                er.setDescription(et.getDescription());
-                er.setMuscleList(et.getMuscleList());
-                er.setImageUrl(exercise.getImageUrl());
-                er.setVideoUrl(exercise.getVideoUrl());
-
-                exerciseDetailedList.add(er);
-            }
-        }
-
-        Log.d(TAG, exerciseDetailedList.toString());
-        return exerciseDetailedList;
-    }
-
-
-    /**
-     * Using this method will fill the result list with the only 1 correspondent exercise having the
-     * given ID, fetching by the correct language with "fetchExerciseTranslationList()" method
-     * @param id ID of the needed exercise
-     */
-    public void getExerciseById(String id){
-        exerciseMap.clear();
-        exerciseTranslationList.clear();
-        List<String> listId = new ArrayList<>();
-        listId.add(id);
-        fetchExerciseMapWithId(listId);
     }
 
 }
