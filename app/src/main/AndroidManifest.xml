@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="it.sms1920.spqs.ufit.view">
+    package="it.sms1920.spqs.ufit.launcher">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchExerciseForWorkoutActivity" />
-        <activity android:name=".CreatingWorkoutActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.workoutplan.create.SearchExerciseForWorkoutActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="it.sms1920.spqs.ufit.launcher.splashscreen.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,13 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ExerciseActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.userprofile.resetpassword.ResetPasswordActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.userprofile.registration.RegistrationActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.search.SearchActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.exercise.ExerciseActivity" />
         <activity
-            android:name=".LauncherActivity"
+            android:name="it.sms1920.spqs.ufit.launcher.LauncherActivity"
             android:windowSoftInputMode="adjustPan" />
     </application>
 

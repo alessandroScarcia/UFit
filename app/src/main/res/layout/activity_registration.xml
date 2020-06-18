@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:theme="@style/CustomMaterialComponent"
-    tools:context="RegistrationActivity">
+    tools:context="it.sms1920.spqs.ufit.launcher.userprofile.registration.RegistrationActivity">
 
     <ScrollView
         android:layout_width="match_parent"

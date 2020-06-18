@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:theme="@style/CustomMaterialComponent"
-    tools:context="SearchActivity">
+    tools:context="it.sms1920.spqs.ufit.launcher.search.SearchActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchBar"

@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="LauncherActivity"
+    tools:context="it.sms1920.spqs.ufit.launcher.LauncherActivity"
     android:theme="@style/CustomMaterialComponent"
     android:background="@color/colorWhite">
 
