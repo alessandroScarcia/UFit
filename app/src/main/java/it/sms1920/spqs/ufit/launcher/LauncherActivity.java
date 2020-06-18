@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
+import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.R;
@@ -186,5 +187,7 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
         toolbar.getMenu().findItem(R.id.search).setVisible(false);
         toolbar.getMenu().findItem(R.id.add).setVisible(false);
     }
+
+
 
 }
