@@ -1,6 +1,9 @@
 package it.sms1920.spqs.ufit.launcher.userstats;
 
 import android.content.Context;
+import android.widget.TextView;
+
+import it.sms1920.spqs.ufit.model.room.UserStats;
 
 /**
  * Contract used to set the content inside the fragment of the Stats
@@ -14,6 +17,47 @@ public interface iStatsFragment {
         void showGeneralStats();
 
         void showBodyStats();
+
+
+        TextView getWeight();
+
+        TextView getFat();
+
+        TextView getWater();
+
+        TextView getMuscle();
+
+        TextView getWeightDate();
+
+        TextView getFatDate();
+
+        TextView getWaterDate();
+
+        TextView getMuscleDate();
+
+        TextView getArm();
+
+        TextView getArmDate();
+
+        TextView getChest();
+
+        TextView getChestDate();
+
+        TextView getWaist();
+
+        TextView getWaistDate();
+
+        TextView getTight();
+
+        TextView getTightDate();
+
+        TextView getCalve();
+
+        TextView getCalveDate();
+
+        TextView getBMI();
+
+        TextView getFFMI();
     }
 
 
@@ -56,5 +100,18 @@ public interface iStatsFragment {
         void updateTight(int idUserStats, float value, String date);
 
         void updateCalve(int idUserStats, float value, String date);
+
+        void setGeneralStats();
+
+        void setBodyStats();
+
+        void initializeDatabase(Context context);
+
+
+        UserStats getUserStats();
+
+        void setBMITextView();
+
+        void setFFMITextView();
     }
 }

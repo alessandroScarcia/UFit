@@ -12,53 +12,62 @@
 
 package it.sms1920.spqs.ufit.launcher.userstats;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Calendar;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
 import static java.sql.Types.NULL;
 
 
-public class StatsFragment extends Fragment implements iStatsFragment.View, StatsDialog.ExampleDialogListener {
+public class StatsFragment extends Fragment implements iStatsFragment.View{
     private static final String TAG = StatsFragment.class.getCanonicalName();
-    private iStatsFragment.Presenter presenter;
+    private static iStatsFragment.Presenter presenter;
     private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
 
     //declaration of all the text view inside the 2 different tab content
-    private TextView weight;
-    private TextView fat;
-    private TextView water;
-    private TextView muscle;
+    private static TextView weight;
+    private static TextView fat;
+    private static TextView water;
+    private static TextView muscle;
     private TextView weightDate;
     private TextView fatDate;
     private TextView waterDate;
     private TextView muscleDate;
-    private TextView arm;
+    private static TextView arm;
     private TextView armDate;
-    private TextView chest;
+    private static TextView chest;
     private TextView chestDate;
-    private TextView waist;
+    private static TextView waist;
     private TextView waistDate;
-    private TextView tight;
+    private static TextView tight;
     private TextView tightDate;
-    private TextView calve;
+    private static TextView calve;
     private TextView calveDate;
-
     
     private TextView BMI;
     private TextView FFMI;
@@ -79,6 +88,12 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
         containerLayout = view.findViewById(R.id.container_stats);
         View child = getLayoutInflater().inflate(R.layout.general_stats, null);
         containerLayout.addView(child);
+
+        presenter = new StatsPresenter(this);
+        context = getActivity();
+
+        presenter.initializeDatabase(context);
+
 
         //set date of the room inside the text views
         setViewsDataGeneralStats(view);
@@ -162,73 +177,43 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
      * @param textViewValue
      * @param textViewDate
      */
-    @Override
-    public void applyTexts(float value, String date, TextView textViewValue, TextView textViewDate) {
+
+    public static void applyTexts(float value, String date, TextView textViewValue, TextView textViewDate) {
         textViewValue.setText(String.valueOf(value));
         textViewDate.setText(date);
 
         if (textViewValue == weight) {
-//            Toast.makeText(context, StatsPresenter.userStats.getIdUserStats() + " " + value + " " + date, Toast.LENGTH_SHORT).show();
-            presenter.updateWeight(StatsPresenter.userStats.getIdUserStats(), value, date);
+//            Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + value + " " + date, Toast.LENGTH_SHORT).show();
+            presenter.updateWeight(presenter.getUserStats().getIdUserStats(), value, date);
 
             //with the weight is possible calculate the BMI
-            setBMITextView();
+            presenter.setBMITextView();
         } else if (textViewValue == fat) {
-            presenter.updateFat(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateFat(presenter.getUserStats().getIdUserStats(), value, date);
 
             //with the percentage of fat we can calculate the FFMI
-            setFFMITextView();
+            presenter.setFFMITextView();
 
         } else if (textViewValue == water) {
-            presenter.updateWater(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateWater(presenter.getUserStats().getIdUserStats(), value, date);
         } else if (textViewValue == muscle) {
-            presenter.updateMuscle(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateMuscle(presenter.getUserStats().getIdUserStats(), value, date);
         }else if(textViewValue == arm){
-            presenter.updateArm(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateArm(presenter.getUserStats().getIdUserStats(), value, date);
         }else if(textViewValue == chest){
-            presenter.updateChest(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateChest(presenter.getUserStats().getIdUserStats(), value, date);
         }else if(textViewValue == waist){
-            presenter.updateWaist(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateWaist(presenter.getUserStats().getIdUserStats(), value, date);
         }else if(textViewValue == tight){
-            presenter.updateTight(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateTight(presenter.getUserStats().getIdUserStats(), value, date);
         }else if(textViewValue == calve){
-            presenter.updateCalve(StatsPresenter.userStats.getIdUserStats(), value, date);
+            presenter.updateCalve(presenter.getUserStats().getIdUserStats(), value, date);
         }
-    }
-
-    private void setFFMITextView() {
-        String weightControlValue = weight.getText().toString();
-
-        //check if weight is a number to calculate the FFMI(if the text view contains a value)
-        if (weightControlValue.matches("\\d+(?:\\.\\d+)?")) {
-            float FFMIValue = presenter.calculateFFMI(Float.parseFloat(weight.getText().toString()),
-                    Float.parseFloat(fat.getText().toString()));
-            FFMI.setText(String.valueOf(FFMIValue));
-        }
-    }
-
-    private void setBMITextView() {
-        float BMIValue = presenter.calculateBMI(Float.parseFloat(weight.getText().toString()));
-        BMI.setText(String.valueOf(BMIValue));
-    }
-
-
-    public void callRemoveRecordStats(int id) {
-        presenter.deleteRecordStats(id);
     }
 
 
     public void setViewsDataGeneralStats(View view) {
-        presenter = new StatsPresenter(this);
-        context = getActivity();
-
-        //setting database for the session
-        presenter.setDatabase(context);
-
-        //get data from database
-        presenter.getData();
-
-//      Toast.makeText(context, StatsPresenter.userStats.getIdUserStats() + " " + StatsPresenter.userStats.getWeight(), Toast.LENGTH_SHORT).show();
+//      Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + presenter.getUserStats().getWeight(), Toast.LENGTH_SHORT).show();
 
         //this check is useful for the first insert
         if (presenter.checkExistUserStats()) {
@@ -281,41 +266,12 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
             }
         });
 
-        if (StatsPresenter.userStats.getWeight() != NULL) {
-            weight.setText(String.valueOf(StatsPresenter.userStats.getWeight()));
-            weightDate.setText(String.valueOf(StatsPresenter.userStats.getDateWeightDetection()));
-            setBMITextView();
-        }
-
-        if (StatsPresenter.userStats.getFat() != NULL) {
-            fat.setText(String.valueOf(StatsPresenter.userStats.getFat()));
-            fatDate.setText(String.valueOf(StatsPresenter.userStats.getDateFatDetection()));
-            setFFMITextView();
-        }
-
-        if (StatsPresenter.userStats.getWater() != NULL) {
-            water.setText(String.valueOf(StatsPresenter.userStats.getWater()));
-            waterDate.setText(String.valueOf(StatsPresenter.userStats.getDateWaterDetection()));
-        }
-
-        if (StatsPresenter.userStats.getMuscle() != NULL) {
-            muscle.setText(String.valueOf(StatsPresenter.userStats.getMuscle()));
-            muscleDate.setText(String.valueOf(StatsPresenter.userStats.getDateMuscleDetection()));
-        }
+        presenter.setGeneralStats();
     }
 
 
     public void setViewsDataMuscleStats(View view) {
-        presenter = new StatsPresenter(this);
-        context = getActivity();
-
-        //setting database for the session
-        presenter.setDatabase(context);
-
-        //get data from database
-        presenter.getData();
-
-//      Toast.makeText(context, StatsPresenter.userStats.getIdUserStats() + " " + StatsPresenter.userStats.getWeight(), Toast.LENGTH_SHORT).show();
+//      Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + presenter.getUserStats().getWeight(), Toast.LENGTH_SHORT).show();
 
         //this check is useful for the first insert
         if (presenter.checkExistUserStats()) {
@@ -377,31 +333,190 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Stat
             }
         });
 
-        if (StatsPresenter.userStats.getArmMeasure() != NULL) {
-            arm.setText(String.valueOf(StatsPresenter.userStats.getArmMeasure()));
-            armDate.setText(String.valueOf(StatsPresenter.userStats.getDateArmDetection()));
+        presenter.setBodyStats();
+    }
+
+    public TextView getWeight() {
+        return weight;
+    }
+
+    public TextView getFat() {
+        return fat;
+    }
+
+    public TextView getWater() {
+        return water;
+    }
+
+    public TextView getMuscle() {
+        return muscle;
+    }
+
+    public TextView getWeightDate() {
+        return weightDate;
+    }
+
+    public TextView getFatDate() {
+        return fatDate;
+    }
+
+    public TextView getWaterDate() {
+        return waterDate;
+    }
+
+    public TextView getMuscleDate() {
+        return muscleDate;
+    }
+
+    public TextView getArm() {
+        return arm;
+    }
+
+    public TextView getArmDate() {
+        return armDate;
+    }
+
+    public TextView getChest() {
+        return chest;
+    }
+
+    public TextView getChestDate() {
+        return chestDate;
+    }
+
+    public TextView getWaist() {
+        return waist;
+    }
+
+    public TextView getWaistDate() {
+        return waistDate;
+    }
+
+    public TextView getTight() {
+        return tight;
+    }
+
+    public TextView getTightDate() {
+        return tightDate;
+    }
+
+    public TextView getCalve() {
+        return calve;
+    }
+
+    public TextView getCalveDate() {
+        return calveDate;
+    }
+
+    public TextView getBMI() {
+        return BMI;
+    }
+
+    public TextView getFFMI() {
+        return FFMI;
+    }
+
+
+
+
+
+
+
+
+
+    public static class StatsDialog extends AppCompatDialogFragment {
+
+        //        private ExampleDialogListener listener;
+        private EditText statsValueEditText;
+        private EditText statsDateEditText;
+        private DatePickerDialog datePickerDialog;
+        public float statValue;
+        public String statDate;
+
+        int year;
+        int mounth;
+        int dayOfMounth;
+        Calendar calendar;
+
+        public TextView textViewValue;
+        public TextView textViewDate;
+
+
+        /**
+         * Construct od the Stats Dialog
+         * @param textViewValue textView that will contain the value of the parameter setted
+         * @param textViewDate textView that will contain the date of the parameter setted
+         */
+        public StatsDialog(TextView textViewValue, TextView textViewDate) {
+            this.textViewValue = textViewValue;
+            this.textViewDate = textViewDate;
         }
 
-        if (StatsPresenter.userStats.getChestMeasure() != NULL) {
-            chest.setText(String.valueOf(StatsPresenter.userStats.getChestMeasure()));
-            chestDate.setText(String.valueOf(StatsPresenter.userStats.getDateChestDetection()));
-            setFFMITextView();
-        }
+        /**
+         * When the dialog is created the layout show 2 editText inside it. One of them use datePicker
+         * @param savedInstanceState
+         * @return builder.create()
+         */
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View view = inflater.inflate(R.layout.layout_dialog, null);
 
-        if (StatsPresenter.userStats.getWaistMeasure() != NULL) {
-            waist.setText(String.valueOf(StatsPresenter.userStats.getWaistMeasure()));
-            waistDate.setText(String.valueOf(StatsPresenter.userStats.getDateWaistDetection()));
-        }
+            builder.setView(view)
+                    .setTitle("Inserisci Dati")
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            try {
+                                statValue = Float.parseFloat(statsValueEditText.getText().toString());
+                            } catch (NumberFormatException e) {
+//                            Snackbar.make(getContext(), R.string.error_value_message, LENGTH_SHORT)
+//                                    .show();
+                                statValue = 0;
+                            }
+                            statDate = statsDateEditText.getText().toString();
+                            applyTexts(statValue, statDate, textViewValue, textViewDate);
+                        }
+                    });
 
-        if (StatsPresenter.userStats.getTightMeasure() != NULL) {
-            tight.setText(String.valueOf(StatsPresenter.userStats.getTightMeasure()));
-            tightDate.setText(String.valueOf(StatsPresenter.userStats.getDateTightDetection()));
-        }
+            statsValueEditText = view.findViewById(R.id.stats_value);
 
-        if (StatsPresenter.userStats.getCalveMeasure() != NULL) {
-            calve.setText(String.valueOf(StatsPresenter.userStats.getCalveMeasure()));
-            calveDate.setText(String.valueOf(StatsPresenter.userStats.getDateCalveDetection()));
+            //setting options of DatePicker
+            statsDateEditText = view.findViewById(R.id.stats_date);
+            statsDateEditText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //the instance of calendar is necessary to set current date inside the DatePicker
+                    calendar = Calendar.getInstance();
+                    year = calendar.get(Calendar.YEAR);
+                    mounth = calendar.get(Calendar.MONTH);
+                    dayOfMounth = calendar.get(Calendar.DAY_OF_MONTH);
+
+                    datePickerDialog = new DatePickerDialog(getTargetFragment().getContext(),
+                            new DatePickerDialog.OnDateSetListener() {
+                                @SuppressLint("SetTextI18n")
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                    statsDateEditText.setText(dayOfMonth + "/" + month + "/" + year);
+                                }
+                            }, year, mounth, dayOfMounth);
+                    datePickerDialog.show();
+                }
+            });
+
+            return builder.create();
+
         }
     }
+
+
+
 
 }
