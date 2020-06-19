@@ -9,6 +9,7 @@ import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
+import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 
 public class SplashScreenPresenter implements SplashScreenContract.Presenter {
 
@@ -31,6 +32,7 @@ public class SplashScreenPresenter implements SplashScreenContract.Presenter {
 
     @Override
     public void onStartApp() {
+        FirebaseDbSingleton.initialize();
         startAnonymousSession();
         view.startApp();
     }
