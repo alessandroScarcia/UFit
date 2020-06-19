@@ -21,7 +21,8 @@ public interface iWorkoutExerciseListAdapter {
     interface Presenter {
         void onBindExerciseItemViewAtPosition(View.Item holder, int position);
         int getExerciseCount();
-        void onNewExerciseAdded(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads);
+        void onNewExercisesAdded(ArrayList<String> exerciseId);
+        ArrayList<String> onExercisesIdRequested();
     }
 
 }

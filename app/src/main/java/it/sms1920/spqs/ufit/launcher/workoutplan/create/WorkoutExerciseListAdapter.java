@@ -39,6 +39,9 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
      */
     private View.OnClickListener myClickListener;
 
+
+
+
     public void setMyClickListener(View.OnClickListener myClickListener) {
         this.myClickListener = myClickListener;
     }
@@ -48,6 +51,7 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
         presenter = new WorkoutExerciseListAdapterPresenter(this);
+
     }
 
     @NonNull
@@ -72,9 +76,10 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
     }
 
 
-    void addNewExercise(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        presenter.onNewExerciseAdded(exerciseId, exerciseName, reps, loads);
+    void addNewExercises(ArrayList<String> exercisesId) {
+        presenter.onNewExercisesAdded(exercisesId);
     }
+
 
 
     /*
@@ -92,6 +97,10 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
 
         public ExerciseHolder(@NonNull final View itemView) {
             super(itemView);
+
+
+
+
 
             if (!editable) {
                 dialogListener = this;
@@ -180,5 +189,8 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         }
     }
 
+    ArrayList<String> getExercisesIdList(){
+        return presenter.onExercisesIdRequested();
+    }
 
 }

@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -18,27 +19,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
-import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 import it.sms1920.spqs.ufit.launcher.search.SearchListAdapter;
 
-public class SearchExerciseForWorkoutActivity extends AppCompatActivity implements iSearchForWorkout.View, EditExerciseDialog.DialogListener {
+public class SearchExerciseForWorkoutActivity extends AppCompatActivity implements iSearchForWorkout.View, SearchListAdapter.Manager/*, EditExerciseDialog.DialogListener*/ {
 
     public static final int CODE_SUCCESSFUL = 0;
     public static final int CODE_NOT_SUCCESSFUL = 1;
 
     private Toolbar toolbar;
     private RecyclerView rvSearchResult;
-    private SearchExerciseForWorkoutPresenter presenter;
+    private iSearchForWorkout.Presenter presenter;
     private SearchListAdapter adapter;
     private EditExerciseDialog.DialogListener dialogListener;
+    private FloatingActionButton btnDone;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_exercise_for_workout);
 
+
         presenter = new SearchExerciseForWorkoutPresenter(this);
-        dialogListener = this;
+        //dialogListener = this;
 
         // Setting toolbar
         toolbar = findViewById(R.id.tool_bar);
@@ -78,20 +81,38 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
             }
         });
 
+
         rvSearchResult = findViewById(R.id.rvSearchResult);
 
-        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal);
+        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, true, this);
         adapter.setMyClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TextView lblId = view.findViewById(R.id.txtExerciseId);
-                EditExerciseDialog dialogBox = new EditExerciseDialog(lblId.getText().toString(), dialogListener);
-                dialogBox.show(getSupportFragmentManager(), "Dialog");
+
+                ArrayList<String> exercisesId = new ArrayList<>();
+                exercisesId.add(lblId.getText().toString());
+
+                presenter.onExerciseSelectionEnded(exercisesId);
             }
         });
 
+        adapter.setItemsSelection((ArrayList<String>) getIntent().getSerializableExtra("exercisesId"));
+
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(this));
+
+        btnDone = findViewById(R.id.btnDone);
+        btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onExerciseSelectionEnded(adapter.getSelectedItems());
+            }
+        });
+
+        if (!adapter.getSelectedItems().isEmpty()){
+            btnDone.show();
+        }
 
     }
 
@@ -115,19 +136,21 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
     }
 
     @Override
-    public void saveData(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
+    public void sendResultBack(ArrayList<String> exercisesId) {
         Intent intent = new Intent();
-        intent.putExtra("exerciseId", exerciseId);
-        intent.putExtra("exerciseName", exerciseName);
-        intent.putExtra("exerciseReps", reps);
-        intent.putExtra("exerciseLoads", loads);
+        intent.putExtra("exercisesId", exercisesId);
         setResult(CODE_SUCCESSFUL, intent);
         finish();
         overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
     }
 
+
     @Override
-    public ArrayList<ExerciseSetItem> getList() {
-        return null;
+    public void notifySelectionMode(boolean activated) {
+        if (activated) {
+            btnDone.show();
+        } else {
+            btnDone.hide();
+        }
     }
 }

@@ -1,11 +1,77 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import it.sms1920.spqs.ufit.model.firebase.database.Exercise;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
+import it.sms1920.spqs.ufit.model.search.ExerciseDetailed;
+import it.sms1920.spqs.ufit.model.search.SearchExercise;
+import it.sms1920.spqs.ufit.model.search.iSearchClient;
 
-public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseListAdapter.Presenter {
+public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseListAdapter.Presenter, iSearchClient {
+
+    SearchExercise mSearch;
+    iWorkoutExerciseListAdapter.View view;
+
+
+    List<Esercizio> esercizios;
+
+
+    public WorkoutExerciseListAdapterPresenter(iWorkoutExerciseListAdapter.View view) {
+        this.view = view;
+
+        esercizios = new ArrayList<>();
+
+        mSearch = new SearchExercise(this);
+
+        view.callNotifyDataSetChanged();
+
+    }
+
+
+    @Override
+    public void notifyResultListReady() {
+        esercizios.clear();
+        for (ExerciseDetailed exercise : mSearch.getExerciseResultList()) {
+            esercizios.add(new Esercizio(exercise.getExerciseId(), exercise.getName(), new ArrayList<ExerciseSetItem>()));
+        }
+
+        view.callNotifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onBindExerciseItemViewAtPosition(iWorkoutExerciseListAdapter.View.Item holder, int position) {
+        Esercizio temp = esercizios.get(position);
+        holder.setName(temp.getNome());
+        holder.setId(temp.getId());
+        for (ExerciseSetItem serie : temp.getLstSet()) {
+            holder.addSerie(serie.getReps(), serie.getLoad());
+        }
+    }
+
+    @Override
+    public int getExerciseCount() {
+        return esercizios.size();
+    }
+
+    @Override
+    public void onNewExercisesAdded(ArrayList<String> exercisesId) {
+        mSearch.getExerciseByIdList(exercisesId);
+    }
+
+    @Override
+    public ArrayList<String> onExercisesIdRequested() {
+        ArrayList<String> list = new ArrayList<>();
+
+        for (Esercizio exercise : esercizios) {
+            list.add(exercise.getId());
+        }
+        return list;
+    }
 
 
     static class Esercizio {
@@ -30,47 +96,5 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
         public String getId() {
             return id;
         }
-    }
-
-    iWorkoutExerciseListAdapter.View view;
-
-
-    List<Esercizio> esercizios;
-
-
-    public WorkoutExerciseListAdapterPresenter(iWorkoutExerciseListAdapter.View view) {
-        this.view = view;
-
-        esercizios = new ArrayList<>();
-
-        view.callNotifyDataSetChanged();
-
-    }
-
-    @Override
-    public void onBindExerciseItemViewAtPosition(iWorkoutExerciseListAdapter.View.Item holder, int position) {
-        Esercizio temp = esercizios.get(position);
-        holder.setName(temp.getNome());
-        holder.setId(temp.getId());
-        for (int i = 0; i < temp.getLstSet().size(); i++) {
-
-            holder.addSerie(temp.getLstSet().get(i).getReps(), temp.getLstSet().get(i).getLoad());
-        }
-    }
-
-    @Override
-    public int getExerciseCount() {
-        return esercizios.size();
-    }
-
-    @Override
-    public void onNewExerciseAdded(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        ArrayList<ExerciseSetItem> lstSet = new ArrayList<>();
-
-        for (int i = 0; i < reps.size(); i++)
-            lstSet.add(new ExerciseSetItem(reps.get(i), loads.get(i)));
-
-        esercizios.add(new Esercizio(exerciseId, exerciseName, lstSet));
-        view.callNotifyDataSetChanged();
     }
 }
