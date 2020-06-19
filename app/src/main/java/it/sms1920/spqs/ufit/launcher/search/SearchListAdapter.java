@@ -1,5 +1,10 @@
 package it.sms1920.spqs.ufit.launcher.search;
 
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.sms1920.spqs.ufit.model.util.StringUtils;
 import it.sms1920.spqs.ufit.launcher.R;
@@ -33,6 +43,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
     private View.OnClickListener myClickListener;
 
     private boolean selectable = false;
+    private Set<String> selectedItems;
+    private boolean selectionMode;
+
+    private Manager viewManager;
 
     public SearchListAdapter(int layoutItemId) {
         presenter = new SearchListPresenter(this);
@@ -44,17 +58,15 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         this.myClickListener = clickListener;
     }
 
-    public SearchListAdapter(int layoutItemId, boolean selectable) {
+    public SearchListAdapter(int layoutItemId, boolean selectable, Manager viewManager) {
         presenter = new SearchListPresenter(this);
         this.layoutItemId = layoutItemId;
         this.selectable = selectable;
+        selectedItems = new HashSet<>();
+        selectionMode = false;
+        this.viewManager = viewManager;
     }
 
-    public SearchListAdapter(int layoutItemId, View.OnClickListener clickListener, boolean selectable) {
-        this(layoutItemId);
-        this.myClickListener = clickListener;
-        this.selectable = selectable;
-    }
 
     @NonNull
     @Override
@@ -64,7 +76,11 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseHolder holder, int position) {
-        presenter.onBindExerciseItemViewAtPosition(holder, position);
+        if (selectable) {
+            presenter.onBindSelectableExerciseItemViewAtPosition(holder, position);
+        } else {
+            presenter.onBindExerciseItemViewAtPosition(holder, position);
+        }
     }
 
     @Override
@@ -77,6 +93,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         notifyDataSetChanged();
     }
 
+    @Override
+    public void initializeSelectedItemSet(ArrayList<String> exercisesId) {
+        selectedItems = new HashSet<>(exercisesId);
+    }
+
+    @Override
+    public ArrayList<String> getSelectedItems() {
+        return new ArrayList<>(selectedItems);
+    }
+
+
     public void onQueryTextChanged(final String keyword) {
         presenter.onQueryTextChanged(keyword);
     }
@@ -85,6 +112,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         this.myClickListener = clickListener;
     }
 
+    public void setItemsSelection(ArrayList<String> exercisesId) {
+        presenter.onItemsSelectionUpdateRequested(exercisesId);
+    }
 
     /*
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
@@ -94,13 +124,53 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         TextView name;
         TextView id;
         ImageView image;
+        View lyt;
 
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
+            lyt = itemView.findViewById(R.id.lytExerciseSelection);
             name = itemView.findViewById(R.id.txtExerciseName);
             image = itemView.findViewById(R.id.imgExercise);
             id = itemView.findViewById(R.id.txtExerciseId);
             itemView.setOnClickListener(myClickListener);
+
+            if (selectable) {
+                itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        if (!selectionMode) {
+                            selectionMode = true;
+                        }
+                        viewManager.notifySelectionMode(true);
+                        return false;
+                    }
+                });
+
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String exerciseId = id.getText().toString();
+                        if (selectionMode) {
+
+                            if (selectedItems.contains(exerciseId)) {
+                                selectedItems.remove(exerciseId);
+                                selectionMode = !selectedItems.isEmpty();
+                                lyt.setVisibility(View.GONE);
+                            } else {
+                                selectedItems.add(exerciseId);
+                                lyt.setVisibility(View.VISIBLE);
+                            }
+                        } else {
+                            if (myClickListener != null) {
+                                myClickListener.onClick(view);
+                            }
+                        }
+                        viewManager.notifySelectionMode(selectionMode);
+                    }
+                });
+            }
+
         }
 
         @Override
@@ -117,5 +187,15 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         public void setId(String id) {
             this.id.setText(id);
         }
+
+        @Override
+        public void markSelected() {
+            lyt.setVisibility(View.VISIBLE);
+            selectionMode = true;
+        }
+    }
+
+    public interface Manager {
+        void notifySelectionMode(boolean activated);
     }
 }

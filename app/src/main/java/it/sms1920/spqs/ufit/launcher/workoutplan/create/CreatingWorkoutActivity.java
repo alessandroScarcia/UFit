@@ -19,10 +19,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
+import it.sms1920.spqs.ufit.model.search.SearchExercise;
 
 import static android.view.View.GONE;
 
-public class CreatingWorkoutActivity extends AppCompatActivity implements iCreatingWorkout.View {
+public class CreatingWorkoutActivity extends AppCompatActivity implements CreatingWorkoutContract.View {
 
     private CreatingWorkoutPresenter presenter;
     private WorkoutExerciseListAdapter adapter;
@@ -111,13 +112,15 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
      */
     @Override
     public void startSearchExerciseForWorkout(int requestCode) {
-        startActivityForResult(new Intent(CreatingWorkoutActivity.this, SearchExerciseForWorkoutActivity.class), requestCode);
+        Intent intent = new Intent(CreatingWorkoutActivity.this, SearchExerciseForWorkoutActivity.class);
+        intent.putExtra("exercisesId", adapter.getExercisesIdList());
+        startActivityForResult(intent, requestCode);
         overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
 
     @Override
-    public void communicateNewExerciseToAdapter(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        adapter.addNewExercise(exerciseId, exerciseName, reps, loads);
+    public void communicateNewExercisesToAdapter(ArrayList<String> exerciseId) {
+        adapter.addNewExercises(exerciseId);
     }
 
     /**
@@ -132,13 +135,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements iCreat
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("AAAA", "onActivityResult: " + requestCode + " " + resultCode);
         // This check if request code received is equal to request code received, and result code is positive.
-        if (requestCode == 1){
+        if (requestCode == 1) {
             if (resultCode == 0) {
-                presenter.onAddExerciseSuccessfulDone(
-                        data.getStringExtra("exerciseId"),
-                        data.getStringExtra("exerciseName"),
-                        (ArrayList<Integer>) data.getSerializableExtra("exerciseReps"),
-                        (ArrayList<Float>) data.getSerializableExtra("exerciseLoads")
+                presenter.onAddExercisesSuccessfulDone(
+                        (ArrayList<String>) data.getSerializableExtra("exercisesId")
                 );
             } else {
                 // DO NOTHING

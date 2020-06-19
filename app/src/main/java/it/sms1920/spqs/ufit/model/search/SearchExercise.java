@@ -93,6 +93,23 @@ public class SearchExercise {
         fetchExerciseMapWithId(listId);
     }
 
+
+
+    /**
+     * Using this method will fill the result list with the correspondent exercises having the
+     * given IDs, fetching by the correct language with "fetchExerciseTranslationList()" method
+     *
+     * @param ids ID list of the needed exercise
+     */
+    public void getExerciseByIdList(ArrayList<String> ids) {
+        exerciseMap.clear();
+        exerciseTranslationList.clear();
+        fetchExerciseMapWithId(ids);
+    }
+
+
+
+
     /**
      * This method must be called by iSearchClient when they are notified for ResultReady to retrive
      * the list of results.

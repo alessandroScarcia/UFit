@@ -2,13 +2,13 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
 import java.util.ArrayList;
 
-public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
+public class CreatingWorkoutPresenter implements CreatingWorkoutContract.Presenter {
 
 
     private final static int PICK_EXERCISE = 1;
-    private iCreatingWorkout.View view;
+    private CreatingWorkoutContract.View view;
 
-    public CreatingWorkoutPresenter(iCreatingWorkout.View view) {
+    public CreatingWorkoutPresenter(CreatingWorkoutContract.View view) {
         this.view = view;
     }
 
@@ -23,7 +23,7 @@ public class CreatingWorkoutPresenter implements iCreatingWorkout.Presenter {
     }
 
     @Override
-    public void onAddExerciseSuccessfulDone(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
-        view.communicateNewExerciseToAdapter(exerciseId, exerciseName, reps, loads);
+    public void onAddExercisesSuccessfulDone(ArrayList<String> exercisesId) {
+        view.communicateNewExercisesToAdapter(exercisesId);
     }
 }

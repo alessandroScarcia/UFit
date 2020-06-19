@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.search;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +33,20 @@ public class SearchListPresenter implements SearchListContract.Presenter, iSearc
         searchExercise.getExerciseWithNameStarting(keyword);
     }
 
+    @Override
+    public void onBindSelectableExerciseItemViewAtPosition(SearchListContract.View.Item holder, int position) {
+        ExerciseDetailed exercise = exerciseDetailedList.get(position);
+        if (view.getSelectedItems().contains(exercise.getExerciseId())) {
+            holder.markSelected();
+        }
+        holder.setName(exercise.getName());
+        holder.setImage(exercise.getImageUrl());
+        holder.setId(exercise.getExerciseId());
+    }
 
     @Override
     public void onBindExerciseItemViewAtPosition(SearchListContract.View.Item holder, int position) {
         ExerciseDetailed exercise = exerciseDetailedList.get(position);
-
         holder.setName(exercise.getName());
         holder.setImage(exercise.getImageUrl());
         holder.setId(exercise.getExerciseId());
@@ -44,6 +55,12 @@ public class SearchListPresenter implements SearchListContract.Presenter, iSearc
     @Override
     public int getExerciseCount() {
         return exerciseDetailedList.size();
+    }
+
+    @Override
+    public void onItemsSelectionUpdateRequested(ArrayList<String> exercisesId) {
+        view.initializeSelectedItemSet(exercisesId);
+        view.callNotifyDataSetChanged();
     }
 
     @Override
