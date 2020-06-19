@@ -11,23 +11,20 @@ import java.util.Random;
 import it.sms1920.spqs.ufit.model.room.Stats;
 import it.sms1920.spqs.ufit.model.room.UserStats;
 
+import static java.sql.Types.NULL;
+
 
 public class StatsPresenter implements iStatsFragment.Presenter {
     private static final float NULL_STATS = 0;
     private Stats statsModel;
     private final iStatsFragment.View view;
-    public static UserStats userStats;
+    public UserStats userStats;
 
     public StatsPresenter(iStatsFragment.View view) {
         this.view = view;
     }
 
 
-    /**
-     * Function used to show the correct content in frame layout
-     *
-     * @param position
-     */
     @Override
     public void onTabSelectedAtPosition(int position) {
         if (position == 0) {
@@ -48,7 +45,6 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     public void setDatabase(Context context) {
         statsModel = new Stats(this);
         statsModel.createDatabase(context);
-        userStats = new UserStats();
     }
 
     /**
@@ -161,6 +157,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         Stats.localDatabase.userStatsDAO().deleteUserStats(userStats);
     }
 
+
     @Override
     public void updateWeight(int id, float weight, String dateWeightDetection) {
         userStats.setIdUserStats(id);
@@ -247,5 +244,95 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         userStats.setDateCalveDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
+
+    @Override
+    public void setGeneralStats() {
+        if (userStats.getWeight() != NULL) {
+            view.getWeight().setText(String.valueOf(userStats.getWeight()));
+            view.getWeightDate().setText(String.valueOf(userStats.getDateWeightDetection()));
+            setBMITextView();
+        }
+
+        if (userStats.getFat() != NULL) {
+            view.getFat().setText(String.valueOf(userStats.getFat()));
+            view.getFatDate().setText(String.valueOf(userStats.getDateFatDetection()));
+            setFFMITextView();
+        }
+
+        if (userStats.getWater() != NULL) {
+            view.getWater().setText(String.valueOf(userStats.getWater()));
+            view.getWaterDate().setText(String.valueOf(userStats.getDateWaterDetection()));
+        }
+
+        if (userStats.getMuscle() != NULL) {
+            view.getMuscle().setText(String.valueOf(userStats.getMuscle()));
+            view.getMuscleDate().setText(String.valueOf(userStats.getDateMuscleDetection()));
+        }
+    }
+
+    @Override
+    public void setBodyStats() {
+        if (userStats.getArmMeasure() != NULL) {
+            view.getArm().setText(String.valueOf(userStats.getArmMeasure()));
+            view.getArmDate().setText(String.valueOf(userStats.getDateArmDetection()));
+        }
+
+        if (userStats.getChestMeasure() != NULL) {
+            view.getChest().setText(String.valueOf(userStats.getChestMeasure()));
+            view.getChestDate().setText(String.valueOf(userStats.getDateChestDetection()));
+
+        }
+
+        if (userStats.getWaistMeasure() != NULL) {
+            view.getWaist().setText(String.valueOf(userStats.getWaistMeasure()));
+            view.getWaistDate().setText(String.valueOf(userStats.getDateWaistDetection()));
+        }
+
+        if (userStats.getTightMeasure() != NULL) {
+            view.getTight().setText(String.valueOf(userStats.getTightMeasure()));
+            view.getTightDate().setText(String.valueOf(userStats.getDateTightDetection()));
+        }
+
+        if (userStats.getCalveMeasure() != NULL) {
+            view.getCalve().setText(String.valueOf(userStats.getCalveMeasure()));
+            view.getCalveDate().setText(String.valueOf(userStats.getDateCalveDetection()));
+        }
+    }
+
+    public void setFFMITextView() {
+        String weightControlValue = view.getWeight().getText().toString();
+
+        //check if weight is a number to calculate the FFMI(if the text view contains a value)
+        if (weightControlValue.matches("\\d+(?:\\.\\d+)?")) {
+            float FFMIValue = calculateFFMI(Float.parseFloat(view.getWeight().getText().toString()),
+                    Float.parseFloat(view.getFat().getText().toString()));
+            view.getFFMI().setText(String.valueOf(FFMIValue));
+        }
+    }
+
+    @Override
+    public void initializeDatabase(Context context) {
+        //setting database for the session
+        setDatabase(context);
+
+        //get data from database
+        getData();
+    }
+
+
+    public void setBMITextView() {
+        float BMIValue = calculateBMI(Float.parseFloat(view.getWeight().getText().toString()));
+        view.getBMI().setText(String.valueOf(BMIValue));
+    }
+
+
+//    public void callRemoveRecordStats(int id) {
+//        deleteRecordStats(id);
+//    }
+
+    public UserStats getUserStats() {
+        return userStats;
+    }
+
 
 }
