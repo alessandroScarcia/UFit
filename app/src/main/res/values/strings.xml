@@ -106,6 +106,10 @@
     <string name="calveMeasure">Calve Measure</string>
 
 
+    <string name="insertTitleAdvice">Insert a title for your advice</string>
+    <string name="insertDescriptionAdvice">Insert a description for your advice</string>
+
+
     <string name="error_value_message">Insert a valid value</string>
 
 

@@ -417,13 +417,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
     }
 
 
-
-
-
-
-
-
-
     public static class StatsDialog extends AppCompatDialogFragment {
 
         //        private ExampleDialogListener listener;
