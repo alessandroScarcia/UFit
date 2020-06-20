@@ -6,13 +6,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
-
-
 public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHolder> implements iAdvice.View {
 
     private iAdvice.Presenter presenter;
@@ -98,7 +95,5 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHold
             this.adviceId = adviceId;
         }
 
-
     }
-
 }

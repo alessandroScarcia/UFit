@@ -1,6 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.userstats;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.TextView;
 
 import it.sms1920.spqs.ufit.model.room.UserStats;
@@ -18,46 +19,45 @@ public interface iStatsFragment {
 
         void showBodyStats();
 
+        void setWeight(String valueOf);
 
-        TextView getWeight();
+        void setWeightDate(String valueOf);
 
-        TextView getFat();
+        void setFat(String valueOf);
 
-        TextView getWater();
+        void setFatDate(String valueOf);
 
-        TextView getMuscle();
+        void setWater(String valueOf);
 
-        TextView getWeightDate();
+        void setWaterDate(String valueOf);
 
-        TextView getFatDate();
+        void setMuscle(String valueOf);
 
-        TextView getWaterDate();
+        void setMuscleDate(String valueOf);
 
-        TextView getMuscleDate();
+        void setArm(String valueOf);
 
-        TextView getArm();
+        void setArmDate(String valueOf);
 
-        TextView getArmDate();
+        void setChest(String valueOf);
 
-        TextView getChest();
+        void setChestDate(String valueOf);
 
-        TextView getChestDate();
+        void setWaist(String valueOf);
 
-        TextView getWaist();
+        void setWaistDate(String valueOf);
 
-        TextView getWaistDate();
+        void setTight(String valueOf);
 
-        TextView getTight();
+        void setCalve(String valueOf);
 
-        TextView getTightDate();
+        void setTightDate(String valueOf);
 
-        TextView getCalve();
+        void setCalveDate(String valueOf);
 
-        TextView getCalveDate();
+        void setFFMI(String valueOf);
 
-        TextView getBMI();
-
-        TextView getFFMI();
+        void setBMI(String valueOf);
     }
 
 
@@ -77,29 +77,29 @@ public interface iStatsFragment {
 
         void getData();
 
-        void deleteRecordStats(int id);
+//        void deleteRecordStats(int id);
 
-        void updateWeight(int idUserStats, float weight, String dateWeightDetection);
+        void updateWeight(float weight, String dateWeightDetection);
 
-        void updateFat(int idUserStats, float fat, String dateFatDetection);
+        void updateFat(float fat, String dateFatDetection);
 
-        void updateWater(int idUserStats, float water, String dateWaterDetection);
+        void updateWater(float water, String dateWaterDetection);
 
-        void updateMuscle(int idUserStats, float muscle, String dateMuscleDetection);
+        void updateMuscle(float muscle, String dateMuscleDetection);
 
         void addNewUserStats();
 
         boolean checkExistUserStats();
 
-        void updateArm(int idUserStats, float value, String date);
+        void updateArm(float value, String date);
 
-        void updateChest(int idUserStats, float value, String date);
+        void updateChest(float value, String date);
 
-        void updateWaist(int idUserStats, float value, String date);
+        void updateWaist(float value, String date);
 
-        void updateTight(int idUserStats, float value, String date);
+        void updateTight(float value, String date);
 
-        void updateCalve(int idUserStats, float value, String date);
+        void updateCalve(float value, String date);
 
         void setGeneralStats();
 
@@ -108,10 +108,5 @@ public interface iStatsFragment {
         void initializeDatabase(Context context);
 
 
-        UserStats getUserStats();
-
-        void setBMITextView();
-
-        void setFFMITextView();
     }
 }
