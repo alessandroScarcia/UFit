@@ -17,12 +17,17 @@
 
     <string name="addTo">Add to…</string>
 
+    <string name="serie">Serie</string>
+    <string name="reps">Reps</string>
+    <string name="loads">Loads</string>
+
     <string name="loading">Loading&#8230;</string>
 
 
     <string name="new_workout_plan">Create new Workout Plan</string>
     <string name="workout_plan_name">Workout plan name</string>
-
+    <string name="x">x</string>
+    <string name="kg">kg</string>
 
     <!-- Profile -->
     <string name="name">Name</string>
@@ -111,4 +116,11 @@
     <string name="description">Description</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
+
+
+
+
+    <!-- Image content descriptions -->
+    <string name="imgExercise">Exercise image</string>
+
 </resources>

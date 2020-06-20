@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity">
 
     <LinearLayout
+        android:id="@+id/lytContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -43,6 +45,8 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+
+            android:background="@color/lightGray"
             android:id="@+id/lstExercises"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

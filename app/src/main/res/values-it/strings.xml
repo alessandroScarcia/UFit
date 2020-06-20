@@ -38,16 +38,6 @@
         <item>Non specificato</item>
     </string-array>
 
-    <string-array name="weight_units">
-        <item>kg</item>
-        <item>lb</item>
-    </string-array>
-
-    <string-array name="height_untis">
-        <item>cm</item>
-        <item>in</item>
-    </string-array>
-
     <!-- Login -->
     <string name="login">Accedi</string>
     <string name="forgot_password">Recupera password.</string>
@@ -115,6 +105,12 @@
     <string name="description">Descrizione</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
+    <string name="serie">Serie</string>
+    <string name="reps">Ripetizioni</string>
+    <string name="loads">Carichi</string>
+    <string name="imgExercise">Immagine esercizio</string>
+    <string name="x">x</string>
+    <string name="kg">kg</string>
 
 
 </resources>

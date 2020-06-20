@@ -1,13 +1,18 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
+import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -50,23 +55,13 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         });
 
         // Setting recycler view adapter for not editable exercises
-        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_horizontal_detailed, false, this);
-        adapter.setMyClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Configuration of card expansion/compression
-                View lytSeries = view.findViewById(R.id.lytSeries);
-                if (lytSeries.getVisibility() == GONE)
-                    lytSeries.setVisibility(View.VISIBLE);
-                else
-                    lytSeries.setVisibility(GONE);
-            }
-        });
+        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
 
         // Setting recycler view
         RecyclerView rvExerciseList = findViewById(R.id.lstExercises);
         rvExerciseList.setAdapter(adapter);
         rvExerciseList.setLayoutManager(new LinearLayoutManager(this));
+
 
         // Button to confirm the workout creation
         FloatingActionButton btnDone = findViewById(R.id.btnApply);
@@ -135,12 +130,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("AAAA", "onActivityResult: " + requestCode + " " + resultCode);
         // This check if request code received is equal to request code received, and result code is positive.
-        if (requestCode == 1) {
+        if (requestCode == 1 && data != null) {
             if (resultCode == 0) {
-                presenter.onAddExercisesSuccessfulDone(
-                        (ArrayList<String>) data.getSerializableExtra("exercisesId")
-                );
-            } else {
+                presenter.onAddExercisesSuccessfulDone( data.getStringArrayListExtra("exercisesId") );
+            //} else {
                 // DO NOTHING
             }
         }  // Here there could be an else statement for handler the negative result

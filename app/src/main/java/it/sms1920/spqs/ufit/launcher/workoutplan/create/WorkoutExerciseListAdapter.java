@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
+import static android.view.View.GONE;
+
 class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseListAdapter.ExerciseHolder> implements iWorkoutExerciseListAdapter.View {
 
     AppCompatActivity activity;
@@ -38,8 +40,6 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         Listener to apply for each item "setOnClickListener" in list
      */
     private View.OnClickListener myClickListener;
-
-
 
 
     public void setMyClickListener(View.OnClickListener myClickListener) {
@@ -71,15 +71,29 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
     }
 
     @Override
+    public void callNotifyItemRemoved(int position) {
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void callNotifyItemRangeChanged(int position, int range) {
+        notifyItemRangeChanged(position, range);
+    }
+
+    @Override
     public void callNotifyDataSetChanged() {
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemRemoved(int position) {
+        presenter.removeItemAt(position);
     }
 
 
     void addNewExercises(ArrayList<String> exercisesId) {
         presenter.onNewExercisesAdded(exercisesId);
     }
-
 
 
     /*
@@ -91,35 +105,61 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         TextView id;
         ImageView image;
         RecyclerView series;
+        MaterialButton btnRemove;
+        MaterialButton btnAdd;
+        MaterialButton btnToggleExpansion;
+
         ExerciseSeriesRepsListAdapter adapter;
-        MaterialButton btnEdit;
-        EditExerciseDialog.DialogListener dialogListener;
+        //EditExerciseDialog.DialogListener dialogListener;
 
         public ExerciseHolder(@NonNull final View itemView) {
             super(itemView);
 
+            btnToggleExpansion = itemView.findViewById(R.id.btnToggleExpand);
+            btnToggleExpansion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MaterialButton btnToggle = view.findViewById(R.id.btnToggleExpand);
 
-
-
-
-            if (!editable) {
-                dialogListener = this;
-                btnEdit = itemView.findViewById(R.id.btnEdit);
-                btnEdit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        TextView lblId = itemView.findViewById(R.id.txtExerciseId);
-                        EditExerciseDialog dialogBox = new EditExerciseDialog(lblId.getText().toString(), dialogListener);
-                        dialogBox.show(activity.getSupportFragmentManager(), "Dialog");
+                    View lytSeries = itemView.findViewById(R.id.lytSeries);
+                    if (lytSeries.getVisibility() == GONE) {
+                        lytSeries.setVisibility(View.VISIBLE);
+                        btnToggle.setIcon(activity.getDrawable(R.drawable.ic_arrow_up_black));
+                    } else {
+                        lytSeries.setVisibility(GONE);
+                        btnToggle.setIcon(activity.getDrawable(R.drawable.ic_arrow_down_black));
                     }
-                });
-            }
+                }
+
+
+            });
+
+            //dialogListener = this;
+            btnRemove = itemView.findViewById(R.id.btnRemove);
+            btnRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemRemoved(getAdapterPosition());
+                }
+            });
+
 
             series = itemView.findViewById(R.id.rvSeries);
             adapter = new ExerciseSeriesRepsListAdapter(editable);
             // adapter.setMyClickListener();
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
+
+
+            btnAdd = itemView.findViewById(R.id.addSerie);
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    adapter.addSerieToList(0, 0);
+                    adapter.callNotifyDatasetChanged();
+                }
+            });
+
 
             name = itemView.findViewById(R.id.txtExerciseName);
             image = itemView.findViewById(R.id.imgExercise);
@@ -189,7 +229,7 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         }
     }
 
-    ArrayList<String> getExercisesIdList(){
+    ArrayList<String> getExercisesIdList() {
         return presenter.onExercisesIdRequested();
     }
 

@@ -59,6 +59,14 @@ public class WorkoutExerciseListAdapterPresenter implements iWorkoutExerciseList
     }
 
     @Override
+    public void removeItemAt(int position) {
+        esercizios.remove(position);
+        view.callNotifyItemRemoved(position);
+        view.callNotifyItemRangeChanged(position, esercizios.size());
+        view.callNotifyDataSetChanged();
+    }
+
+    @Override
     public void onNewExercisesAdded(ArrayList<String> exercisesId) {
         mSearch.getExerciseByIdList(exercisesId);
     }

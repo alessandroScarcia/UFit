@@ -7,7 +7,10 @@ import java.util.ArrayList;
 public interface iWorkoutExerciseListAdapter {
 
     interface View {
+        void callNotifyItemRemoved(int position);
+        void callNotifyItemRangeChanged(int position, int range);
         void callNotifyDataSetChanged();
+        void onItemRemoved(int position);
 
         interface Item {
             void setName(String name);
@@ -21,6 +24,7 @@ public interface iWorkoutExerciseListAdapter {
     interface Presenter {
         void onBindExerciseItemViewAtPosition(View.Item holder, int position);
         int getExerciseCount();
+        void removeItemAt(int position);
         void onNewExercisesAdded(ArrayList<String> exerciseId);
         ArrayList<String> onExercisesIdRequested();
     }
