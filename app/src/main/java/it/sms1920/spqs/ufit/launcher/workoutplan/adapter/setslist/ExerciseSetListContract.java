@@ -1,10 +1,10 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.create;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
 import java.util.ArrayList;
 
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
-public interface iExerciseSeriesRepsListAdapter {
+public interface ExerciseSetListContract {
     interface View {
         void callNotifyItemRemoved(int position);
         void callNotifyItemRangeChanged(int position, int range);

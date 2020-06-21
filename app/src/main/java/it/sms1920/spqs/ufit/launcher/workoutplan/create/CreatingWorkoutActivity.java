@@ -1,18 +1,12 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
-import android.animation.LayoutTransition;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -22,11 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import it.sms1920.spqs.ufit.launcher.R;
-import it.sms1920.spqs.ufit.model.search.SearchExercise;
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExerciseListAdapter;
 
-import static android.view.View.GONE;
+import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.PICK_EXERCISE;
+import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.RESULT_SUCCESSFUL;
 
 public class CreatingWorkoutActivity extends AppCompatActivity implements CreatingWorkoutContract.View {
 
@@ -107,7 +101,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
      */
     @Override
     public void startSearchExerciseForWorkout(int requestCode) {
-        Intent intent = new Intent(CreatingWorkoutActivity.this, SearchExerciseForWorkoutActivity.class);
+        Intent intent = new Intent(CreatingWorkoutActivity.this, SelectExercisesActivity.class);
         intent.putExtra("exercisesId", adapter.getExercisesIdList());
         startActivityForResult(intent, requestCode);
         overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
@@ -128,15 +122,12 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("AAAA", "onActivityResult: " + requestCode + " " + resultCode);
-        // This check if request code received is equal to request code received, and result code is positive.
-        if (requestCode == 1 && data != null) {
-            if (resultCode == 0) {
+
+        if (requestCode == PICK_EXERCISE && data != null) {
+            if (resultCode == RESULT_SUCCESSFUL) {
                 presenter.onAddExercisesSuccessfulDone( data.getStringArrayListExtra("exercisesId") );
-            //} else {
-                // DO NOTHING
             }
-        }  // Here there could be an else statement for handler the negative result
+        }//else { DO nothing }
     }
 
 }

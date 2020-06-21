@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="it.sms1920.spqs.ufit.launcher.workoutplan.create.SearchExerciseForWorkoutActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.workoutplan.create.SelectExercisesActivity" />
         <activity android:name="it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity" />
         <activity
             android:name="it.sms1920.spqs.ufit.launcher.splashscreen.SplashScreenActivity"

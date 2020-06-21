@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.create;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist;
 
 import android.app.Activity;
 import android.media.Image;
@@ -18,14 +18,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist.ExerciseSetListAdapter;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
+import it.sms1920.spqs.ufit.model.util.StringUtils;
 
 import static android.view.View.GONE;
 
-class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseListAdapter.ExerciseHolder> implements iWorkoutExerciseListAdapter.View {
+public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseListAdapter.ExerciseHolder> implements WorkoutExerciseListContract.View {
 
-    AppCompatActivity activity;
-    iWorkoutExerciseListAdapter.Presenter presenter;
+    private AppCompatActivity activity;
+    private WorkoutExerciseListContract.Presenter presenter;
     boolean editable;
 
     /*
@@ -50,7 +52,7 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         this.layoutItemID = layoutItemID;
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
-        presenter = new WorkoutExerciseListAdapterPresenter(this);
+        presenter = new WorkoutExerciseListPresenter(this);
 
     }
 
@@ -91,15 +93,19 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
     }
 
 
-    void addNewExercises(ArrayList<String> exercisesId) {
+    public void addNewExercises(ArrayList<String> exercisesId) {
         presenter.onNewExercisesAdded(exercisesId);
     }
 
 
+    public ArrayList<String> getExercisesIdList() {
+        return presenter.onExercisesIdRequested();
+    }
+
     /*
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
      */
-    public class ExerciseHolder extends RecyclerView.ViewHolder implements iWorkoutExerciseListAdapter.View.Item, EditExerciseDialog.DialogListener {
+    public class ExerciseHolder extends RecyclerView.ViewHolder implements WorkoutExerciseListContract.View.Item/*, EditExerciseDialog.DialogListener*/ {
 
         TextView name;
         TextView id;
@@ -109,8 +115,7 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         MaterialButton btnAdd;
         MaterialButton btnToggleExpansion;
 
-        ExerciseSeriesRepsListAdapter adapter;
-        //EditExerciseDialog.DialogListener dialogListener;
+        ExerciseSetListAdapter adapter;
 
         public ExerciseHolder(@NonNull final View itemView) {
             super(itemView);
@@ -134,7 +139,6 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
 
             });
 
-            //dialogListener = this;
             btnRemove = itemView.findViewById(R.id.btnRemove);
             btnRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -145,18 +149,13 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
 
 
             series = itemView.findViewById(R.id.rvSeries);
-            adapter = new ExerciseSeriesRepsListAdapter(editable);
-            // adapter.setMyClickListener();
-            series.setAdapter(adapter);
-            series.setLayoutManager(new LinearLayoutManager(activity));
 
 
             btnAdd = itemView.findViewById(R.id.addSerie);
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    adapter.addSerieToList(0, 0);
-                    adapter.callNotifyDatasetChanged();
+                    addSerie(0, 0);
                 }
             });
 
@@ -169,17 +168,16 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
 
         }
 
+        public void setExerciseSetsAdapter(int position){
+            adapter = new ExerciseSetListAdapter(editable, presenter.onSetsListRequested(position));
+
+            series.setAdapter(adapter);
+            series.setLayoutManager(new LinearLayoutManager(activity));
+        }
 
         @Override
         public void setName(String name) {
-            if (name == null || name.length() == 0) {
-                name = "";
-            } else if (name.length() == 1) {
-                name = name.toUpperCase();
-            } else {
-                name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-            }
-            this.name.setText(name);
+            this.name.setText(StringUtils.capitalize(name));
         }
 
         @Override
@@ -194,43 +192,16 @@ class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseLis
         }
 
         @Override
+        public void setExerciseSets(ArrayList<ExerciseSetItem> exerciseSets) {
+            adapter.setSeriesList(exerciseSets);
+        }
+
+        @Override
         public void addSerie(int reps, float loads) {
             adapter.addSerieToList(reps, loads);
         }
-
-        @Override
-        public void saveData(String exerciseId, String exerciseName, ArrayList<Integer> reps, ArrayList<Float> loads) {
-            ArrayList<ExerciseSetItem> serieList = new ArrayList<>();
-            for (int i = 0; i < reps.size(); i++)
-                serieList.add(new ExerciseSetItem(reps.get(i), loads.get(i)));
-
-            adapter.setSeriesList(serieList);
-            setName(exerciseName);
-
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public ArrayList<ExerciseSetItem> getList() {
-            ArrayList<ExerciseSetItem> list = new ArrayList<>();
-            TextView reps;
-            TextView load;
-
-            for (int i = 0; i < series.getChildCount(); i++) {
-                reps = series.getChildAt(i).findViewById(R.id.reps);
-                load = series.getChildAt(i).findViewById(R.id.loads);
-                list.add(new ExerciseSetItem(
-                        Integer.parseInt(reps.getText().toString()),
-                        Float.parseFloat(load.getText().toString())));
-            }
-
-
-            return list;
-        }
     }
 
-    ArrayList<String> getExercisesIdList() {
-        return presenter.onExercisesIdRequested();
-    }
+
 
 }

@@ -1,22 +1,27 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.create;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
-public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRepsListAdapter.Presenter {
+public class ExerciseSetListPresenter implements ExerciseSetListContract.Presenter {
 
-    private iExerciseSeriesRepsListAdapter.View view;
+    private ExerciseSetListContract.View view;
     private List<ExerciseSetItem> list;
 
-    public ExerciseSeriesRepsListAdapterPresenter(iExerciseSeriesRepsListAdapter.View view) {
+    public ExerciseSetListPresenter(ExerciseSetListContract.View view) {
         this.view = view;
-        list = new ArrayList<>();
+        this.list = new ArrayList<>();
+    }
+
+    public ExerciseSetListPresenter(ExerciseSetListContract.View view, List<ExerciseSetItem> list) {
+        this.view = view;
+        this.list = list;
     }
 
     @Override
-    public void onBindItemViewAtPosition(iExerciseSeriesRepsListAdapter.View.Item holder, int position) {
+    public void onBindItemViewAtPosition(ExerciseSetListContract.View.Item holder, int position) {
         holder.setReps(String.valueOf(list.get(position).getReps()));
         holder.setLoad(String.valueOf(list.get(position).getLoad()));
     }
@@ -29,6 +34,7 @@ public class ExerciseSeriesRepsListAdapterPresenter implements iExerciseSeriesRe
     @Override
     public void onSerieAdded(int reps, float loads) {
         list.add(new ExerciseSetItem(reps, loads));
+        view.callNotifyDatasetChanged();
     }
 
     @Override

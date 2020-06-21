@@ -13,6 +13,9 @@ public interface CreatingWorkoutContract {
     }
 
     interface Presenter {
+        int PICK_EXERCISE = 1;
+        int RESULT_SUCCESSFUL = 0;
+
         void onBackPressed();
 
         void onAddIconClicked();
