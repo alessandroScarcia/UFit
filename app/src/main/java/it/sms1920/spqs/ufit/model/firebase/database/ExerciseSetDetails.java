@@ -5,11 +5,22 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 public class ExerciseSetDetails {
-    private int exerciseId;
+    private String exerciseId;
+    private String exerciseName;
     private List<ExerciseSetItem> exerciseSetItems;
 
-    public int getExerciseId() {
+    public ExerciseSetDetails(String exerciseId, String exerciseName, List<ExerciseSetItem> exerciseSetItems) {
+        this.exerciseId = exerciseId;
+        this.exerciseName = exerciseName;
+        this.exerciseSetItems = exerciseSetItems;
+    }
+
+    public String getExerciseId() {
         return exerciseId;
+    }
+
+    public String getExerciseName() {
+        return exerciseName;
     }
 
     public List<ExerciseSetItem> getExerciseSetItems() {

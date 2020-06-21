@@ -21,16 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.search.SearchListAdapter;
 
-public class SearchExerciseForWorkoutActivity extends AppCompatActivity implements iSearchForWorkout.View, SearchListAdapter.Manager/*, EditExerciseDialog.DialogListener*/ {
+import static it.sms1920.spqs.ufit.launcher.workoutplan.create.SelectExercisesContract.Presenter.CODE_NOT_SUCCESSFUL;
+import static it.sms1920.spqs.ufit.launcher.workoutplan.create.SelectExercisesContract.Presenter.CODE_SUCCESSFUL;
 
-    public static final int CODE_SUCCESSFUL = 0;
-    public static final int CODE_NOT_SUCCESSFUL = 1;
+public class SelectExercisesActivity
+        extends AppCompatActivity
+        implements SelectExercisesContract.View, SearchListAdapter.Manager{
 
-    private Toolbar toolbar;
-    private RecyclerView rvSearchResult;
-    private iSearchForWorkout.Presenter presenter;
+
+    private SelectExercisesContract.Presenter presenter;
     private SearchListAdapter adapter;
-    private EditExerciseDialog.DialogListener dialogListener;
     private FloatingActionButton btnDone;
 
 
@@ -39,12 +39,10 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_exercise_for_workout);
 
-
-        presenter = new SearchExerciseForWorkoutPresenter(this);
-        //dialogListener = this;
+        presenter = new SelectExercisesPresenter(this);
 
         // Setting toolbar
-        toolbar = findViewById(R.id.tool_bar);
+        Toolbar toolbar = findViewById(R.id.tool_bar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -82,7 +80,7 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
         });
 
 
-        rvSearchResult = findViewById(R.id.rvSearchResult);
+        RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
 
         adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, true, this);
         adapter.setMyClickListener(new View.OnClickListener() {
@@ -97,7 +95,7 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
             }
         });
 
-        adapter.setItemsSelection((ArrayList<String>) getIntent().getSerializableExtra("exercisesId"));
+        adapter.setItemsSelection(getIntent().getStringArrayListExtra("exercisesId"));
 
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(this));
@@ -110,7 +108,7 @@ public class SearchExerciseForWorkoutActivity extends AppCompatActivity implemen
             }
         });
 
-        if (!adapter.getSelectedItems().isEmpty()){
+        if (!adapter.getSelectedItems().isEmpty()) {
             btnDone.show();
         }
 

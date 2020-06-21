@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.create;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,15 +18,15 @@ import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
 
-class ExerciseSeriesRepsListAdapter
-        extends RecyclerView.Adapter<ExerciseSeriesRepsListAdapter.RowHolder>
-        implements iExerciseSeriesRepsListAdapter.View {
+public class ExerciseSetListAdapter
+        extends RecyclerView.Adapter<ExerciseSetListAdapter.RowHolder>
+        implements ExerciseSetListContract.View {
 
-    private iExerciseSeriesRepsListAdapter.Presenter presenter;
+    private ExerciseSetListContract.Presenter presenter;
     private boolean editable;
 
-    public ExerciseSeriesRepsListAdapter(boolean editable) {
-        presenter = new ExerciseSeriesRepsListAdapterPresenter(this);
+    public ExerciseSetListAdapter(boolean editable, List<ExerciseSetItem> serie) {
+        presenter = new ExerciseSetListPresenter(this, serie);
         this.editable = editable;
     }
 
@@ -38,7 +39,7 @@ class ExerciseSeriesRepsListAdapter
             layoutID = R.layout.partial_exercise_details_editable;
         }
 
-        return new ExerciseSeriesRepsListAdapter.RowHolder(LayoutInflater.from(parent.getContext())
+        return new ExerciseSetListAdapter.RowHolder(LayoutInflater.from(parent.getContext())
                 .inflate(layoutID, parent, false));
     }
 
@@ -93,7 +94,7 @@ class ExerciseSeriesRepsListAdapter
      */
     public class RowHolder
             extends RecyclerView.ViewHolder
-            implements iExerciseSeriesRepsListAdapter.View.Item {
+            implements ExerciseSetListContract.View.Item {
 
         private TextView reps;
 

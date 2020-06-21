@@ -2,11 +2,11 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
 import java.util.ArrayList;
 
-public class SearchExerciseForWorkoutPresenter implements iSearchForWorkout.Presenter {
+public class SelectExercisesPresenter implements SelectExercisesContract.Presenter {
 
-    private iSearchForWorkout.View view;
+    private SelectExercisesContract.View view;
 
-    public SearchExerciseForWorkoutPresenter(iSearchForWorkout.View view) {
+    public SelectExercisesPresenter(SelectExercisesContract.View view) {
         this.view = view;
     }
 

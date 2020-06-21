@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class CreatingWorkoutPresenter implements CreatingWorkoutContract.Presenter {
 
-
-    private final static int PICK_EXERCISE = 1;
     private CreatingWorkoutContract.View view;
 
     public CreatingWorkoutPresenter(CreatingWorkoutContract.View view) {
