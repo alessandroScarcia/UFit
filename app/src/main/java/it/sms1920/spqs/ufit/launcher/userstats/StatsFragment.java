@@ -88,14 +88,9 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         containerLayout = view.findViewById(R.id.container_stats);
         View child = getLayoutInflater().inflate(R.layout.general_stats, null);
         containerLayout.addView(child);
-
-        presenter = new StatsPresenter(this);
         context = getActivity();
+        presenter = new StatsPresenter(this,context);
 
-        presenter.initializeDatabase(context);
-
-
-        //set date of the room inside the text views
         setViewsDataGeneralStats(view);
 
         //set options of tab menu
@@ -182,44 +177,31 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         textViewValue.setText(String.valueOf(value));
         textViewDate.setText(date);
 
+
         if (textViewValue == weight) {
 //            Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + value + " " + date, Toast.LENGTH_SHORT).show();
-            presenter.updateWeight(presenter.getUserStats().getIdUserStats(), value, date);
-
-            //with the weight is possible calculate the BMI
-            presenter.setBMITextView();
+            presenter.updateWeight(value, date);
         } else if (textViewValue == fat) {
-            presenter.updateFat(presenter.getUserStats().getIdUserStats(), value, date);
-
-            //with the percentage of fat we can calculate the FFMI
-            presenter.setFFMITextView();
-
+            presenter.updateFat(value, date);
         } else if (textViewValue == water) {
-            presenter.updateWater(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateWater(value, date);
         } else if (textViewValue == muscle) {
-            presenter.updateMuscle(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateMuscle(value, date);
         }else if(textViewValue == arm){
-            presenter.updateArm(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateArm(value, date);
         }else if(textViewValue == chest){
-            presenter.updateChest(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateChest(value, date);
         }else if(textViewValue == waist){
-            presenter.updateWaist(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateWaist(value, date);
         }else if(textViewValue == tight){
-            presenter.updateTight(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateTight(value, date);
         }else if(textViewValue == calve){
-            presenter.updateCalve(presenter.getUserStats().getIdUserStats(), value, date);
+            presenter.updateCalve(value, date);
         }
     }
 
-
     public void setViewsDataGeneralStats(View view) {
 //      Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + presenter.getUserStats().getWeight(), Toast.LENGTH_SHORT).show();
-
-        //this check is useful for the first insert
-        if (presenter.checkExistUserStats()) {
-            presenter.addNewUserStats();
-        }
-
 
         weight = view.findViewById(R.id.weightInput);
         BMI = view.findViewById(R.id.bmiValue);
@@ -272,12 +254,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
 
     public void setViewsDataMuscleStats(View view) {
 //      Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + presenter.getUserStats().getWeight(), Toast.LENGTH_SHORT).show();
-
-        //this check is useful for the first insert
-        if (presenter.checkExistUserStats()) {
-            presenter.addNewUserStats();
-        }
-
 
         chest = view.findViewById(R.id.chestInput);
         chestDate = view.findViewById(R.id.chestDateInput);
@@ -336,86 +312,84 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         presenter.setBodyStats();
     }
 
-    public TextView getWeight() {
-        return weight;
+    public void setWeight(String weightValue) {
+        weight.setText(weightValue);
     }
 
-    public TextView getFat() {
-        return fat;
+    public void setFat(String fatValue) {
+        fat.setText(fatValue);
     }
 
-    public TextView getWater() {
-        return water;
+    public void setWater(String waterValue) {
+        water.setText(waterValue);    }
+
+    public void setMuscle(String muscleValue) {
+        muscle.setText(muscleValue);
     }
 
-    public TextView getMuscle() {
-        return muscle;
+    public void setWeightDate(String weightDateValue) {
+        weightDate.setText(weightDateValue);
     }
 
-    public TextView getWeightDate() {
-        return weightDate;
+    public void setFatDate(String fatDateValue) {
+        fatDate.setText(fatDateValue);
     }
 
-    public TextView getFatDate() {
-        return fatDate;
+    public void setWaterDate(String waterDateValue) {
+        waterDate.setText(waterDateValue);
     }
 
-    public TextView getWaterDate() {
-        return waterDate;
+    public void setMuscleDate(String muscleDateValue) {
+        muscleDate.setText(muscleDateValue);
     }
 
-    public TextView getMuscleDate() {
-        return muscleDate;
+    public void setArm(String armValue) {
+        arm.setText(armValue);
     }
 
-    public TextView getArm() {
-        return arm;
+    public void setArmDate(String armDateValue) {
+        armDate.setText(armDateValue);
     }
 
-    public TextView getArmDate() {
-        return armDate;
+    public void setChest(String chestValue) {
+        chest.setText(chestValue);
     }
 
-    public TextView getChest() {
-        return chest;
+    public void setChestDate(String chestDateValue) {
+        chestDate.setText(chestDateValue);
     }
 
-    public TextView getChestDate() {
-        return chestDate;
+    public  void setWaist(String waistValue) {
+        waist.setText(waistValue);
     }
 
-    public TextView getWaist() {
-        return waist;
+    public void setWaistDate(String waistDateValue) {
+        waistDate.setText(waistDateValue);
     }
 
-    public TextView getWaistDate() {
-        return waistDate;
+    public  void setTight(String tightValue) {
+        tight.setText(tightValue);
     }
 
-    public TextView getTight() {
-        return tight;
+    public void setTightDate(String tightDateValue) {
+        tightDate.setText(tightDateValue);
     }
 
-    public TextView getTightDate() {
-        return tightDate;
+    public  void setCalve(String calveValue) {
+        calve.setText(calveValue);
     }
 
-    public TextView getCalve() {
-        return calve;
+    public void setCalveDate(String calveDateValue) {
+        calveDate.setText(calveDateValue);
     }
 
-    public TextView getCalveDate() {
-        return calveDate;
+    public void setBMI(String BMIValue) {
+        BMI.setText(BMIValue);
     }
 
-    public TextView getBMI() {
-        return BMI;
+    public void setFFMI(String FFMIValue) {
+        FFMI.setText(FFMIValue);
     }
-
-    public TextView getFFMI() {
-        return FFMI;
-    }
-
 
     public static class StatsDialog extends AppCompatDialogFragment {
 

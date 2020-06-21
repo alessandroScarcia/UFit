@@ -20,8 +20,17 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     private final iStatsFragment.View view;
     public UserStats userStats;
 
-    public StatsPresenter(iStatsFragment.View view) {
+    public StatsPresenter(iStatsFragment.View view, Context context) {
         this.view = view;
+
+
+        initializeDatabase(context);
+
+        //this check is useful for the first insert
+        if (checkExistUserStats()) {
+            addNewUserStats();
+        }
+
     }
 
 
@@ -159,32 +168,33 @@ public class StatsPresenter implements iStatsFragment.Presenter {
 
 
     @Override
-    public void updateWeight(int id, float weight, String dateWeightDetection) {
-        userStats.setIdUserStats(id);
+    public void updateWeight(float weight, String dateWeightDetection) {
         userStats.setWeight(weight);
         userStats.setDateWeightDetection(dateWeightDetection);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+        //with the weight is possible calculate the BMI
+        setBMITextView(weight);
     }
 
     @Override
-    public void updateFat(int id, float fat, String dateFatDetection) {
-        userStats.setIdUserStats(id);
+    public void updateFat(float fat, String dateFatDetection) {
         userStats.setFat(fat);
         userStats.setDateFatDetection(dateFatDetection);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+        //with the percentage of fat we can calculate the FFMI
+        setFFMITextView(fat);
     }
 
     @Override
-    public void updateWater(int id, float water, String dateWaterDetection) {
-        userStats.setIdUserStats(id);
+    public void updateWater(float water, String dateWaterDetection) {
         userStats.setWater(water);
         userStats.setDateWaterDetection(dateWaterDetection);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
 
     @Override
-    public void updateMuscle(int id, float muscle, String dateMuscleDetection) {
-        userStats.setIdUserStats(id);
+    public void updateMuscle(float muscle, String dateMuscleDetection) {
+
         userStats.setMuscle(muscle);
         userStats.setDateMuscleDetection(dateMuscleDetection);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
@@ -206,40 +216,36 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
     @Override
-    public void updateArm(int idUserStats, float value, String date) {
-        userStats.setIdUserStats(idUserStats);
+    public void updateArm(float value, String date) {
         userStats.setArmMeasure(value);
         userStats.setDateArmDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
 
     @Override
-    public void updateChest(int idUserStats, float value, String date) {
-        userStats.setIdUserStats(idUserStats);
+    public void updateChest(float value, String date) {
+
         userStats.setChestMeasure(value);
         userStats.setDateChestDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
 
     @Override
-    public void updateWaist(int idUserStats, float value, String date) {
-        userStats.setIdUserStats(idUserStats);
+    public void updateWaist(float value, String date) {
         userStats.setWaistMeasure(value);
         userStats.setDateWaistDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
 
     @Override
-    public void updateTight(int idUserStats, float value, String date) {
-        userStats.setIdUserStats(idUserStats);
+    public void updateTight(float value, String date) {
         userStats.setTightMeasure(value);
         userStats.setDateTightDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
     }
 
     @Override
-    public void updateCalve(int idUserStats, float value, String date) {
-        userStats.setIdUserStats(idUserStats);
+    public void updateCalve(float value, String date) {
         userStats.setCalveMeasure(value);
         userStats.setDateCalveDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
@@ -248,65 +254,64 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     @Override
     public void setGeneralStats() {
         if (userStats.getWeight() != NULL) {
-            view.getWeight().setText(String.valueOf(userStats.getWeight()));
-            view.getWeightDate().setText(String.valueOf(userStats.getDateWeightDetection()));
-            setBMITextView();
+            view.setWeight(String.valueOf(userStats.getWeight()));
+            view.setWeightDate(String.valueOf(userStats.getDateWeightDetection()));
+            setBMITextView(userStats.getWeight());
         }
 
         if (userStats.getFat() != NULL) {
-            view.getFat().setText(String.valueOf(userStats.getFat()));
-            view.getFatDate().setText(String.valueOf(userStats.getDateFatDetection()));
-            setFFMITextView();
+            view.setFat(String.valueOf(userStats.getFat()));
+            view.setFatDate(String.valueOf(userStats.getDateFatDetection()));
+            setFFMITextView(userStats.getFat());
         }
 
         if (userStats.getWater() != NULL) {
-            view.getWater().setText(String.valueOf(userStats.getWater()));
-            view.getWaterDate().setText(String.valueOf(userStats.getDateWaterDetection()));
+            view.setWater(String.valueOf(userStats.getWater()));
+            view.setWaterDate(String.valueOf(userStats.getDateWaterDetection()));
         }
 
         if (userStats.getMuscle() != NULL) {
-            view.getMuscle().setText(String.valueOf(userStats.getMuscle()));
-            view.getMuscleDate().setText(String.valueOf(userStats.getDateMuscleDetection()));
+            view.setMuscle(String.valueOf(userStats.getMuscle()));
+            view.setMuscleDate(String.valueOf(userStats.getDateMuscleDetection()));
         }
     }
 
     @Override
     public void setBodyStats() {
         if (userStats.getArmMeasure() != NULL) {
-            view.getArm().setText(String.valueOf(userStats.getArmMeasure()));
-            view.getArmDate().setText(String.valueOf(userStats.getDateArmDetection()));
+            view.setArm(String.valueOf(userStats.getArmMeasure()));
+            view.setArmDate(String.valueOf(userStats.getDateArmDetection()));
         }
 
         if (userStats.getChestMeasure() != NULL) {
-            view.getChest().setText(String.valueOf(userStats.getChestMeasure()));
-            view.getChestDate().setText(String.valueOf(userStats.getDateChestDetection()));
+            view.setChest(String.valueOf(userStats.getChestMeasure()));
+            view.setChestDate(String.valueOf(userStats.getDateChestDetection()));
 
         }
 
         if (userStats.getWaistMeasure() != NULL) {
-            view.getWaist().setText(String.valueOf(userStats.getWaistMeasure()));
-            view.getWaistDate().setText(String.valueOf(userStats.getDateWaistDetection()));
+            view.setWaist(String.valueOf(userStats.getWaistMeasure()));
+            view.setWaistDate(String.valueOf(userStats.getDateWaistDetection()));
         }
 
         if (userStats.getTightMeasure() != NULL) {
-            view.getTight().setText(String.valueOf(userStats.getTightMeasure()));
-            view.getTightDate().setText(String.valueOf(userStats.getDateTightDetection()));
+            view.setTight(String.valueOf(userStats.getTightMeasure()));
+            view.setTightDate(String.valueOf(userStats.getDateTightDetection()));
         }
 
         if (userStats.getCalveMeasure() != NULL) {
-            view.getCalve().setText(String.valueOf(userStats.getCalveMeasure()));
-            view.getCalveDate().setText(String.valueOf(userStats.getDateCalveDetection()));
+            view.setCalve(String.valueOf(userStats.getCalveMeasure()));
+            view.setCalveDate(String.valueOf(userStats.getDateCalveDetection()));
         }
     }
 
-    public void setFFMITextView() {
-        String weightControlValue = view.getWeight().getText().toString();
+    public void setFFMITextView(float fat) {
+        String fatControlValue = String.valueOf(fat);
 
         //check if weight is a number to calculate the FFMI(if the text view contains a value)
-        if (weightControlValue.matches("\\d+(?:\\.\\d+)?")) {
-            float FFMIValue = calculateFFMI(Float.parseFloat(view.getWeight().getText().toString()),
-                    Float.parseFloat(view.getFat().getText().toString()));
-            view.getFFMI().setText(String.valueOf(FFMIValue));
+        if (fatControlValue.matches("\\d+(?:\\.\\d+)?")) {
+            float FFMIValue = calculateFFMI(userStats.getWeight(), fat);
+            view.setFFMI(String.valueOf(FFMIValue));
         }
     }
 
@@ -320,9 +325,9 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
 
-    public void setBMITextView() {
-        float BMIValue = calculateBMI(Float.parseFloat(view.getWeight().getText().toString()));
-        view.getBMI().setText(String.valueOf(BMIValue));
+    public void setBMITextView(float weight) {
+        float BMIValue = calculateBMI(weight);
+        view.setBMI(String.valueOf(BMIValue));
     }
 
 
