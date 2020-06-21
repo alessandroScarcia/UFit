@@ -29,6 +29,7 @@
         <activity android:name="it.sms1920.spqs.ufit.launcher.userprofile.registration.RegistrationActivity" />
         <activity android:name="it.sms1920.spqs.ufit.launcher.search.SearchActivity" />
         <activity android:name="it.sms1920.spqs.ufit.launcher.exercise.ExerciseActivity" />
+        <activity android:name="it.sms1920.spqs.ufit.launcher.home.WebViewActivity" />
         <activity
             android:name="it.sms1920.spqs.ufit.launcher.LauncherActivity"
             android:windowSoftInputMode="adjustPan" />
