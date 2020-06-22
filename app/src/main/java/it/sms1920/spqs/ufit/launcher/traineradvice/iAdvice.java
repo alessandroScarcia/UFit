@@ -1,6 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.traineradvice;
 
 
+import it.sms1920.spqs.ufit.model.firebase.database.Advice;
 
 public interface iAdvice {
     interface View {
@@ -20,6 +21,8 @@ public interface iAdvice {
 
             void setAdviceId(String adviceId);
         }
+
+        void setRandomAdvice(String title, String description);
     }
 
     interface Presenter {
@@ -32,6 +35,8 @@ public interface iAdvice {
         void addNewAdviceItem(String title, String description, String author);
 
         void onPersonalAdviceRequired();
+
+        void getRandomAdvice();
 
 
     }

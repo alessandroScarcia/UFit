@@ -24,8 +24,10 @@ public class AdviceList implements iAdvice.Presenter {
     private static final int ID_LENGHT = 8;
     private final iAdvice.View view;
 
-    private List<Advice> adviceList = new ArrayList<>();
+    private List<Advice> adviceList;
     private Random RANDOM = new Random();
+
+
 
     public String randomId(int len) {
         StringBuilder sb = new StringBuilder(len);
@@ -40,10 +42,47 @@ public class AdviceList implements iAdvice.Presenter {
 
     public AdviceList(iAdvice.View view) {
         this.view = view;
-
+        adviceList= new ArrayList<>();
         loadAdviceList();
     }
 
+    @Override
+    public void getRandomAdvice(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Advice");
+
+//        Query mRandomAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo("-1").startAt(1).endAt(4);
+        Query zone1Ref = mDatabase.orderByChild("author").equalTo("-1");
+        Log.d(TAG, String.valueOf(adviceList.size()));
+        zone1Ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Advice adviceR = dataSnapshot.getValue(Advice.class);
+//                Log.d(TAG, adviceR.getTitle());
+//                saveRandomAdvice(adviceR);
+                adviceList.clear();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "loadPersonalTrainerAdvice->onDataChange:" + child.getKey());
+
+                    Advice temp = child.getValue(Advice.class);
+                    if (temp != null) {
+                        Log.d(TAG, temp.getTitle());
+                        adviceList.add(temp);
+                    }
+                }
+                Random random =  new Random();
+                saveRandomAdvice(adviceList.get(random.nextInt(adviceList.size())));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    public void saveRandomAdvice(Advice advice){
+        view.setRandomAdvice(advice.getTitle(),advice.getDescription());
+    }
 
 
     @Override
@@ -73,7 +112,6 @@ public class AdviceList implements iAdvice.Presenter {
 
     @Override
     public void onPersonalAdviceRequired() {
-
     }
 
     @Override
@@ -108,7 +146,7 @@ public class AdviceList implements iAdvice.Presenter {
 
                     Advice temp = child.getValue(Advice.class);
                     if (temp != null) {
-                        Log.d(TAG, temp.toString());
+                        Log.d(TAG, temp.getTitle());
                         adviceList.add(temp);
                     }
                 }

@@ -48,6 +48,11 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHold
         presenter.addNewAdviceItem(title,description,"-1");
     }
 
+    @Override
+    public void setRandomAdvice(String title, String description) {
+
+    }
+
     public class AdviceHolder extends RecyclerView.ViewHolder implements iAdvice.View.Item {
         private TextView tvTitle;
         private TextView tvDescription;
