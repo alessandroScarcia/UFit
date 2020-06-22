@@ -4,10 +4,18 @@ public class WorkoutPlan {
     private String workoutPlanId;
     private String name;
     private String userOwnerId;
-    private int exerciseListId;
+    private String exerciseListId;
     private String trainerId;
 
     public WorkoutPlan() {
+    }
+
+    public WorkoutPlan(String workoutPlanId, String name, String userOwnerId, String exerciseListId, String trainerId) {
+        this.workoutPlanId = workoutPlanId;
+        this.name = name;
+        this.userOwnerId = userOwnerId;
+        this.exerciseListId = exerciseListId;
+        this.trainerId = trainerId;
     }
 
     public String getWorkoutPlanId() {
@@ -22,7 +30,7 @@ public class WorkoutPlan {
         return userOwnerId;
     }
 
-    public int getExerciseListId() {
+    public String getExerciseListId() {
         return exerciseListId;
     }
 

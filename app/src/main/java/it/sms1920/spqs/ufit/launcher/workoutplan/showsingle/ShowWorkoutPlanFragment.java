@@ -11,18 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import it.sms1920.spqs.ufit.launcher.R;
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExercisesListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ShowWorkoutPlanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowWorkoutPlanFragment extends Fragment implements iShowWorkoutPlan.View {
+public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlanContract.View {
     private final static String TAG = ShowWorkoutPlanFragment.class.getCanonicalName();
     private static final String ARG_WORKOUT_PLAN_ID = "workoutPlanId";
 
-    private iShowWorkoutPlan.Presenter presenter;
-    private ExerciseSetsAdapter adapter;
+    private ShowWorkoutPlanContract.Presenter presenter;
+    private WorkoutExercisesListAdapter adapter;
     private String workoutPlanId;
 
     public ShowWorkoutPlanFragment() {
@@ -51,8 +52,9 @@ public class ShowWorkoutPlanFragment extends Fragment implements iShowWorkoutPla
             workoutPlanId = getArguments().getString(ARG_WORKOUT_PLAN_ID);
         }
 
-        presenter = new ShowWorkoutPlan(this);
-        adapter = new ExerciseSetsAdapter(workoutPlanId);
+        presenter = new ShowWorkoutPlanPresenter(this);
+        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, getActivity(), workoutPlanId);
+        //adapter = new ExerciseSetsAdapter(workoutPlanId);
     }
 
     @Override

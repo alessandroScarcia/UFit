@@ -1,9 +1,9 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.showlist;
 
-public class WorkoutPlansPresenter implements iWorkoutPlansFragment.Presenter {
-    private final iWorkoutPlansFragment.View view;
+public class WorkoutPlansPresenter implements WorkoutPlansContract.Presenter {
+    private final WorkoutPlansContract.View view;
 
-    public WorkoutPlansPresenter(iWorkoutPlansFragment.View view) {
+    public WorkoutPlansPresenter(WorkoutPlansContract.View view) {
         this.view = view;
     }
 

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +25,10 @@ import it.sms1920.spqs.ufit.model.util.StringUtils;
 
 import static android.view.View.GONE;
 
-public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExerciseListAdapter.ExerciseHolder> implements WorkoutExerciseListContract.View {
+public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExercisesListAdapter.ExerciseHolder> implements WorkoutExercisesListContract.View {
 
     private AppCompatActivity activity;
-    private WorkoutExerciseListContract.Presenter presenter;
+    private WorkoutExercisesListContract.Presenter presenter;
     boolean editable;
 
     /*
@@ -48,18 +49,29 @@ public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExer
         this.myClickListener = myClickListener;
     }
 
-    public WorkoutExerciseListAdapter(int layoutItemID, boolean editable, Activity activity) {
+    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity) {
         this.layoutItemID = layoutItemID;
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
-        presenter = new WorkoutExerciseListPresenter(this);
+        presenter = new WorkoutExercisesListPresenter(this);
 
+    }
+
+    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, String workoutPlanId) {
+        this.layoutItemID = layoutItemID;
+        this.activity = (AppCompatActivity) activity;
+        this.editable = editable;
+        presenter = new WorkoutExercisesListPresenter(this, workoutPlanId);
+    }
+
+    public void saveCurrentWorkoutPlan(String name){
+        presenter.onSaveCurrentWorkoutPlanRequested(name);
     }
 
     @NonNull
     @Override
     public ExerciseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new WorkoutExerciseListAdapter.ExerciseHolder(LayoutInflater.from(parent.getContext()).inflate(layoutItemID, parent, false));
+        return new WorkoutExercisesListAdapter.ExerciseHolder(LayoutInflater.from(parent.getContext()).inflate(layoutItemID, parent, false));
     }
 
     @Override
@@ -105,7 +117,7 @@ public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExer
     /*
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
      */
-    public class ExerciseHolder extends RecyclerView.ViewHolder implements WorkoutExerciseListContract.View.Item/*, EditExerciseDialog.DialogListener*/ {
+    public class ExerciseHolder extends RecyclerView.ViewHolder implements WorkoutExercisesListContract.View.Item/*, EditExerciseDialog.DialogListener*/ {
 
         TextView name;
         TextView id;
@@ -155,7 +167,7 @@ public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExer
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addSerie(0, 0);
+                    addExerciseSet(0, 0);
                 }
             });
 
@@ -168,9 +180,8 @@ public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExer
 
         }
 
-        public void setExerciseSetsAdapter(int position){
+        public void setExerciseSetsAdapter(int position, List<ExerciseSetItem> exerciseSets){
             adapter = new ExerciseSetListAdapter(editable, presenter.onSetsListRequested(position));
-
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
         }
@@ -192,12 +203,12 @@ public class WorkoutExerciseListAdapter extends RecyclerView.Adapter<WorkoutExer
         }
 
         @Override
-        public void setExerciseSets(ArrayList<ExerciseSetItem> exerciseSets) {
+        public void setExerciseSets(List<ExerciseSetItem> exerciseSets) {
             adapter.setSeriesList(exerciseSets);
         }
 
         @Override
-        public void addSerie(int reps, float loads) {
+        public void addExerciseSet(int reps, float loads) {
             adapter.addSerieToList(reps, loads);
         }
     }

@@ -9,6 +9,10 @@ public class ExerciseSetDetails {
     private String exerciseName;
     private List<ExerciseSetItem> exerciseSetItems;
 
+    public ExerciseSetDetails(){
+
+    }
+
     public ExerciseSetDetails(String exerciseId, String exerciseName, List<ExerciseSetItem> exerciseSetItems) {
         this.exerciseId = exerciseId;
         this.exerciseName = exerciseName;

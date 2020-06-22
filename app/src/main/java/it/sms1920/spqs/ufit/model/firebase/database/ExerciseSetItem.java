@@ -6,6 +6,10 @@ public class ExerciseSetItem {
     private int reps;
     private float load;
 
+    public ExerciseSetItem(){
+
+    }
+
     public ExerciseSetItem(int reps, float load) {
         this.reps = reps;
         this.load = load;

@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.showlist;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
+import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
-public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapter.WorkoutPlanHolder> implements iWorkoutPlans.View {
-    private static final String TAG = WorkoutPlansAdapter.class.getCanonicalName();
+public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansListAdapter.WorkoutPlanHolder> implements WorkoutPlansListContract.View {
+    private static final String TAG = WorkoutPlansListAdapter.class.getCanonicalName();
 
-    private iWorkoutPlans.Presenter presenter;
+    private WorkoutPlansListContract.Presenter presenter;
 
     private WorkoutPlansFragment parentFragment;
 
-    public WorkoutPlansAdapter(WorkoutPlansFragment parentFragment) {
-        presenter = new WorkoutPlansList(this);
+    public WorkoutPlansListAdapter(WorkoutPlansFragment parentFragment) {
+        presenter = new WorkoutPlansListPresenter(this);
         this.parentFragment = parentFragment;
     }
 
@@ -56,7 +57,7 @@ public class WorkoutPlansAdapter extends RecyclerView.Adapter<WorkoutPlansAdapte
         parentFragment.insertShowWorkoutPlanFragment(workoutPlanId);
     }
 
-    public class WorkoutPlanHolder extends RecyclerView.ViewHolder implements iWorkoutPlans.View.Item {
+    public class WorkoutPlanHolder extends RecyclerView.ViewHolder implements WorkoutPlansListContract.View.Item {
         private TextView tvName;
         private int position;
 

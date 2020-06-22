@@ -1,6 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
@@ -21,7 +22,7 @@ public interface ExerciseSetListContract {
         void onBindItemViewAtPosition(View.Item holder, int position);
         int getSeriesCount();
         void onSerieAdded(int reps, float loads);
-        void setSeriesList(ArrayList<ExerciseSetItem> list);
+        void setSeriesList(List<ExerciseSetItem> list);
         void removeItemAt(int position);
         ArrayList<Integer> getReps();
         ArrayList<Float> getLoads();

@@ -38,7 +38,7 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
     }
 
     @Override
-    public void setSeriesList(ArrayList<ExerciseSetItem> seriesList) {
+    public void setSeriesList(List<ExerciseSetItem> seriesList) {
         list.clear();
         list.addAll(seriesList);
         view.callNotifyDatasetChanged();

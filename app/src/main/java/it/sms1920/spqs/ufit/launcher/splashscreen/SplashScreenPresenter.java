@@ -1,10 +1,10 @@
 package it.sms1920.spqs.ufit.launcher.splashscreen;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -14,11 +14,9 @@ import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 public class SplashScreenPresenter implements SplashScreenContract.Presenter {
 
     private SplashScreenContract.View view;
-    private Context context;
 
     public SplashScreenPresenter(SplashScreenContract.View view, Context context) {
         this.view = view;
-        this.context = context;
 
         Picasso instance =
                 new Picasso.Builder(context)
@@ -33,21 +31,21 @@ public class SplashScreenPresenter implements SplashScreenContract.Presenter {
     @Override
     public void onStartApp() {
         FirebaseDbSingleton.initialize();
-        startAnonymousSession();
+        startSession();
         view.startApp();
     }
 
-    private void startAnonymousSession() {
+    private void startSession() {
         FirebaseUser firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
-
         if (firebaseUser == null) {
-            FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously()
-                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser().getUid();
-                        }
-                    });
+            FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
         }
+
+        DatabaseReference workoutPlanRef = FirebaseDbSingleton.getInstance().getReference("WorkoutPlan");
+        Log.d("TAG", "startSession: " + workoutPlanRef);
+        workoutPlanRef.keepSynced(true);
+
+        DatabaseReference exerciseSetsRef = FirebaseDbSingleton.getInstance().getReference("WorkoutPlanExerciseSets");
+        exerciseSetsRef.keepSynced(true);
     }
 }

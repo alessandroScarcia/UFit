@@ -85,7 +85,7 @@ public class ExerciseSetListAdapter
         presenter.onSerieAdded(reps, loads);
     }
 
-    public void setSeriesList(ArrayList<ExerciseSetItem> list) {
+    public void setSeriesList(List<ExerciseSetItem> list) {
         presenter.setSeriesList(list);
     }
 

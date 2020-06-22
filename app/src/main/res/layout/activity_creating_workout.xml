@@ -20,6 +20,7 @@
             layout="@layout/partial_tool_bar" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtWorkoutNameLayout"
             style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
             android:layout_marginTop="@dimen/standard_margin">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtWorkoutName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/workout_plan_name" />

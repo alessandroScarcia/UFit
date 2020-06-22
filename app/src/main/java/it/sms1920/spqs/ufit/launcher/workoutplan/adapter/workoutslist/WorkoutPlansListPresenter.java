@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.showlist;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
 import android.util.Log;
 
@@ -14,17 +14,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
+import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.WorkoutPlan;
 
-public class WorkoutPlansList implements iWorkoutPlans.Presenter {
-    private static final String TAG = WorkoutPlansList.class.getCanonicalName();
-    private final iWorkoutPlans.View view;
+public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Presenter {
+    private static final String TAG = WorkoutPlansListPresenter.class.getCanonicalName();
+    private final WorkoutPlansListContract.View view;
 
     private List<WorkoutPlan> workoutPlans = new ArrayList<>();
     private List<WorkoutPlan> personalWorkoutPlans = new ArrayList<>();
     private List<WorkoutPlan> trainerWorkoutPlans = new ArrayList<>();
 
-    public WorkoutPlansList(iWorkoutPlans.View view) {
+    public WorkoutPlansListPresenter(WorkoutPlansListContract.View view) {
         this.view = view;
 
         loadWorkoutPlans();
@@ -36,7 +38,7 @@ public class WorkoutPlansList implements iWorkoutPlans.Presenter {
     }
 
     @Override
-    public void onBindWorkoutPlanItemListViewAtPosition(iWorkoutPlans.View.Item holder, int position) {
+    public void onBindWorkoutPlanItemListViewAtPosition(WorkoutPlansListContract.View.Item holder, int position) {
         // TODO add data creation or data last workout execution bind
         WorkoutPlan itemData = workoutPlans.get(position);
         Log.d(TAG, itemData.getName());
@@ -52,33 +54,28 @@ public class WorkoutPlansList implements iWorkoutPlans.Presenter {
     @Override
     public void onPersonalWorkoutPlansRequired() {
         workoutPlans = personalWorkoutPlans;
-        Log.d(TAG, workoutPlans.toString());
         view.callNotifyDataSetChanged();
     }
 
     @Override
     public void onTrainerWorkoutPlansRequired() {
         workoutPlans = trainerWorkoutPlans;
-        Log.d(TAG, workoutPlans.toString());
         view.callNotifyDataSetChanged();
     }
 
     private void loadWorkoutPlans() {
-        Log.d(TAG, "loadWorkoutPlans");
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        // TODO add reference to local user
-        Query mPersonalWorkoutPlansQuery = mDatabase.child("WorkoutPlan").orderByChild("userOwnerId").equalTo("0");
+        Query mPersonalWorkoutPlansQuery = FirebaseDbSingleton.getInstance().getReference()
+                .child("WorkoutPlan")
+                .orderByChild("userOwnerId")
+                .equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid());
 
         mPersonalWorkoutPlansQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "loadPersonalWorkoutPlans->onDataChange:" + child.getKey());
-
                     WorkoutPlan temp = child.getValue(WorkoutPlan.class);
                     if (temp != null) {
-                        Log.d(TAG, temp.toString());
                         if (temp.getTrainerId() == null) {
                             personalWorkoutPlans.add(temp);
                         } else {

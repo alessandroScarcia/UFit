@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class CreatingWorkoutPresenter implements CreatingWorkoutContract.Presenter {
@@ -23,5 +25,10 @@ public class CreatingWorkoutPresenter implements CreatingWorkoutContract.Present
     @Override
     public void onAddExercisesSuccessfulDone(ArrayList<String> exercisesId) {
         view.communicateNewExercisesToAdapter(exercisesId);
+    }
+
+    @Override
+    public void onSaveDataRequested() {
+        view.saveData();
     }
 }

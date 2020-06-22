@@ -8,7 +8,7 @@ import java.util.List;
 import it.sms1920.spqs.ufit.model.firebase.database.Exercise;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
-public interface WorkoutExerciseListContract {
+public interface WorkoutExercisesListContract {
 
     interface View {
         void callNotifyItemRemoved(int position);
@@ -20,16 +20,17 @@ public interface WorkoutExerciseListContract {
             void setName(String name);
             void setImage(Image image);
             void setId(String id);
-            void setExerciseSets(ArrayList<ExerciseSetItem> exerciseSets);
+            void setExerciseSets(List<ExerciseSetItem> exerciseSets);
 
-            void setExerciseSetsAdapter(int position);
+            void setExerciseSetsAdapter(int position, List<ExerciseSetItem> exerciseSets);
 
-            void addSerie(int reps, float loads);
+            void addExerciseSet(int reps, float loads);
         }
     }
 
     interface Presenter {
 
+        void onSaveCurrentWorkoutPlanRequested(String name);
         void onBindExerciseItemViewAtPosition(View.Item holder, int position);
         int getExerciseCount();
         void removeItemAt(int position);

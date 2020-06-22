@@ -10,6 +10,8 @@ public interface CreatingWorkoutContract {
         void startSearchExerciseForWorkout(int requestCode);
 
         void communicateNewExercisesToAdapter(ArrayList<String> exercisesId);
+
+        void saveData();
     }
 
     interface Presenter {
@@ -21,6 +23,8 @@ public interface CreatingWorkoutContract {
         void onAddIconClicked();
 
         void onAddExercisesSuccessfulDone(ArrayList<String> exercisesId);
+
+        void onSaveDataRequested();
     }
 
 }

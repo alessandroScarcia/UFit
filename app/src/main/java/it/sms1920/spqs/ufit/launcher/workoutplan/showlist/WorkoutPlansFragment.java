@@ -16,15 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist.WorkoutPlansListAdapter;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showsingle.ShowWorkoutPlanFragment;
 
-public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragment.View {
+public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContract.View {
     private static final String TAG = WorkoutPlansFragment.class.getCanonicalName();
-    private iWorkoutPlansFragment.Presenter presenter;
+    private WorkoutPlansContract.Presenter presenter;
 
-    private WorkoutPlansAdapter adapter;
+    private WorkoutPlansListAdapter adapter;
 
     private TabLayout tlWorkoutPlans;
     private FloatingActionButton fabAdd;
@@ -33,7 +36,7 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new WorkoutPlansPresenter(this);
-        adapter = new WorkoutPlansAdapter(this);
+        adapter = new WorkoutPlansListAdapter(this);
     }
 
     @Nullable
@@ -98,10 +101,21 @@ public class WorkoutPlansFragment extends Fragment implements iWorkoutPlansFragm
     public void insertShowWorkoutPlanFragment(String workoutPlanId) {
         ShowWorkoutPlanFragment showWorkoutPlanFragment = ShowWorkoutPlanFragment.newInstance(workoutPlanId);
 
-        this.getActivity().getSupportFragmentManager().beginTransaction()
+        Objects.requireNonNull(this.getActivity()).getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, showWorkoutPlanFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: " + " AZWEGNAAA");
+        if (resultCode == 0) {
+
+            adapter.callNotifyDataSetChanged();
+        }
+
     }
 
     @Override

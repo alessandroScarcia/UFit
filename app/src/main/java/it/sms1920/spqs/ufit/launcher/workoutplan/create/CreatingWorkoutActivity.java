@@ -2,14 +2,18 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,16 +21,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.launcher.R;
-import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExerciseListAdapter;
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExercisesListAdapter;
 
 import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.PICK_EXERCISE;
 import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.RESULT_SUCCESSFUL;
+import static it.sms1920.spqs.ufit.launcher.workoutplan.create.SelectExercisesContract.Presenter.CODE_SUCCESSFUL;
 
 public class CreatingWorkoutActivity extends AppCompatActivity implements CreatingWorkoutContract.View {
+    private final String TAG = this.getClass().getCanonicalName();
 
     private CreatingWorkoutPresenter presenter;
-    private WorkoutExerciseListAdapter adapter;
+    private WorkoutExercisesListAdapter adapter;
     private Toolbar toolbar;
+    private TextInputEditText txtName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +55,11 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
             }
         });
 
+        txtName = findViewById(R.id.txtWorkoutName);
+
+
         // Setting recycler view adapter for not editable exercises
-        adapter = new WorkoutExerciseListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
+        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
 
         // Setting recycler view
         RecyclerView rvExerciseList = findViewById(R.id.lstExercises);
@@ -62,8 +72,8 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO saving data
-                Toast.makeText(CreatingWorkoutActivity.this, "Saving data not implemented yet", Toast.LENGTH_SHORT).show();
+                presenter.onSaveDataRequested();
+                Log.d(TAG, "onClick: save");
             }
         });
 
@@ -80,12 +90,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.add:
-                presenter.onAddIconClicked();
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.add) {
+            presenter.onAddIconClicked();
         }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -112,6 +120,15 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         adapter.addNewExercises(exerciseId);
     }
 
+    @Override
+    public void saveData() {
+        adapter.saveCurrentWorkoutPlan(Objects.requireNonNull(txtName.getText()).toString());
+        Intent intent = new Intent();
+        setResult(CODE_SUCCESSFUL, intent);
+        finish();
+        //overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+    }
+
     /**
      * Handling result from activity started by "startSearchExerciseFroWorkout"
      *
@@ -125,7 +142,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
         if (requestCode == PICK_EXERCISE && data != null) {
             if (resultCode == RESULT_SUCCESSFUL) {
-                presenter.onAddExercisesSuccessfulDone( data.getStringArrayListExtra("exercisesId") );
+                presenter.onAddExercisesSuccessfulDone(data.getStringArrayListExtra("exercisesId"));
             }
         }//else { DO nothing }
     }

@@ -1,6 +1,6 @@
-package it.sms1920.spqs.ufit.launcher.workoutplan.showlist;
+package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
-public interface iWorkoutPlans {
+public interface WorkoutPlansListContract {
     interface View {
 
         void callNotifyDataSetChanged();
@@ -17,7 +17,7 @@ public interface iWorkoutPlans {
     interface Presenter {
         void onItemClicked(int position);
 
-        void onBindWorkoutPlanItemListViewAtPosition(iWorkoutPlans.View.Item holder, int position);
+        void onBindWorkoutPlanItemListViewAtPosition(WorkoutPlansListContract.View.Item holder, int position);
 
         int getWorkoutPlansCount();
 

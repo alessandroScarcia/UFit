@@ -1,6 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.showlist;
 
-public interface iWorkoutPlansFragment {
+public interface WorkoutPlansContract {
     interface View {
         void showPersonalWorkoutPlans();
 
