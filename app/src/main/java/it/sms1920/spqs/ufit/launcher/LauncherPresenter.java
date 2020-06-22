@@ -4,19 +4,19 @@ import com.google.firebase.auth.FirebaseUser;
 
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 
-import static it.sms1920.spqs.ufit.launcher.iLauncher.View.FragType;
-import static it.sms1920.spqs.ufit.launcher.iLauncher.View.FragType.HOME;
-import static it.sms1920.spqs.ufit.launcher.iLauncher.View.FragType.PLANS;
-import static it.sms1920.spqs.ufit.launcher.iLauncher.View.FragType.PROFILE;
-import static it.sms1920.spqs.ufit.launcher.iLauncher.View.FragType.STATS;
-import static it.sms1920.spqs.ufit.launcher.iLauncher.View.FragType.TRAINER;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.HOME;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PLANS;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PROFILE;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.STATS;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.TRAINER;
 
-public class LauncherManager implements iLauncher.Presenter {
+public class LauncherPresenter implements LauncherContract.Presenter {
 
-    private iLauncher.View view;
+    private LauncherContract.View view;
     private FragType currentFragment = HOME;
 
-    public LauncherManager(iLauncher.View view) {
+    public LauncherPresenter(LauncherContract.View view) {
         this.view = view;
     }
 
@@ -45,25 +45,21 @@ public class LauncherManager implements iLauncher.Presenter {
         currentFragment = STATS;
     }
 
+    /**
+     * Method called whenever user wants to access profile section.
+     * Firstly is checked if user is logged in. If he is, profile information are shown.
+     * Otherwise user must decide to Login or Register an account.
+     */
     @Override
     public void onProfileIconClicked() {
-
         FirebaseUser firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
-        if (firebaseUser != null) {
-
-            if (!firebaseUser.isAnonymous()) {//se è già loggato
-
-                view.insertProfileFragment();
-                currentFragment = PROFILE;
-
-            }else
-
-                view.startLoginActivity();
-
-        } else
-            view.startLoginActivity();
-
+        if (firebaseUser == null || firebaseUser.isAnonymous()) {
+            view.insertChooseFragment();
+        } else {
+            view.insertProfileFragment();
+            currentFragment = PROFILE;
+        }
     }
 
     @Override
@@ -76,7 +72,9 @@ public class LauncherManager implements iLauncher.Presenter {
         if (currentFragment != HOME) {
             view.insertHomeFragment();
             currentFragment = HOME;
-        } else view.endActivity();
+        } else {
+            view.endActivity();
+        }
     }
 
     @Override

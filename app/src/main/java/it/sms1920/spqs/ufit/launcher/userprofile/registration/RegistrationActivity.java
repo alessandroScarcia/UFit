@@ -1,13 +1,9 @@
 package it.sms1920.spqs.ufit.launcher.userprofile.registration;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,14 +13,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import it.sms1920.spqs.ufit.launcher.userprofile.registration.RegistrationContract.Presenter.AuthResultType;
 import it.sms1920.spqs.ufit.launcher.userprofile.registration.RegistrationContract.Presenter.InputErrorType;
-import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 
 public class RegistrationActivity extends AppCompatActivity implements RegistrationContract.View {
 
     private RegistrationPresenter presenter;
-    Activity mContext = this;
 
     private TextInputEditText txtEmail;
     private TextInputLayout txtEmailLayout;
@@ -32,76 +26,19 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     private TextInputLayout txtPasswordLayout;
     private TextInputEditText txtConfirmPassword;
     private TextInputLayout txtConfirmPasswordLayout;
-    private Button btnSignup;
-    private TextView lblLogin;
-    private Toolbar toolbar;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        toolbar = findViewById(R.id.tool_bar);
+        presenter = new RegistrationPresenter(this);
+
+        // Toolbar setup
+        Toolbar toolbar = findViewById(R.id.tool_bar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-
-        txtEmail = findViewById(R.id.lblEmail);
-        txtEmailLayout = findViewById(R.id.txtEmailLayout);
-        txtPassword = findViewById(R.id.lblPassword);
-        txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
-        txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
-        txtConfirmPasswordLayout = findViewById(R.id.txtConfirmPasswordLayout);
-        btnSignup = findViewById(R.id.btnSignUp);
-        lblLogin = findViewById(R.id.lblLogin);
-
-        presenter = new RegistrationPresenter((RegistrationContract.View) mContext);
-
-        txtEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                txtEmailLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        txtPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                txtPasswordLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        txtConfirmPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                txtConfirmPasswordLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,29 +47,42 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
             }
         });
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        // layout views setup
+        txtEmail = findViewById(R.id.lblEmail);
+        txtEmailLayout = findViewById(R.id.txtEmailLayout);
+        txtPassword = findViewById(R.id.lblPassword);
+        txtPasswordLayout = findViewById(R.id.txtPasswordLayout);
+        txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
+        txtConfirmPasswordLayout = findViewById(R.id.txtConfirmPasswordLayout);
+        btnRegister = findViewById(R.id.btnSignUp);
+        Button btnLogin = findViewById(R.id.btnLogin);
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 txtEmailLayout.setError(null);
                 txtPasswordLayout.setError(null);
                 txtConfirmPasswordLayout.setError(null);
 
-                presenter.onSignUp(txtEmail.getText().toString(), txtPassword.getText().toString(),
-                        txtConfirmPassword.getText().toString());
+                if (txtEmail.getText() != null
+                        && txtPassword.getText() != null
+                        && txtConfirmPassword.getText() != null) {
 
+                    presenter.onRegisterButtonClicked(txtEmail.getText().toString(),
+                            txtPassword.getText().toString(),
+                            txtConfirmPassword.getText().toString());
+                }
             }
         });
 
-        lblLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onLoginRequest();
+                presenter.onLoginButtonClicked();
             }
         });
 
-
     }
-
 
     @Override
     public void setInputError(InputErrorType inputErrorType) {
@@ -156,18 +106,15 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     }
 
     @Override
-    public void setSignUpError(AuthResultType authResultType) {
-        switch (authResultType) {
-            case USER_ALREADY_EXISTS:
-                txtEmailLayout.setError(getString(R.string.email_already_exists));
-                break;
+    public void setRegistrationError(AuthResultType authResultType) {
+        if (authResultType == AuthResultType.USER_ALREADY_EXISTS) {
+            txtEmailLayout.setError(getString(R.string.email_already_exists));
         }
     }
 
     @Override
-    public void startLauncherActivity() {
+    public void endActivity() {
         finish();
-        startActivity(new Intent(RegistrationActivity.this, LauncherActivity.class));
     }
 
     @Override
@@ -175,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         txtEmail.setEnabled(enabled);
         txtPassword.setEnabled(enabled);
         txtConfirmPassword.setEnabled(enabled);
-        btnSignup.setEnabled(enabled);
+        btnRegister.setEnabled(enabled);
     }
 
     @Override

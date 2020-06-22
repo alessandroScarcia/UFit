@@ -1,12 +1,9 @@
 package it.sms1920.spqs.ufit.launcher;
 
 
-public interface iLauncher {
+public interface LauncherContract {
 
     interface View {
-
-        enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE}
-
         void insertHomeFragment();
 
         void insertPlansFragment();
@@ -19,11 +16,13 @@ public interface iLauncher {
 
         void startSearchActivity();
 
-        void startLoginActivity();
+        void insertChooseFragment();
 
         void endActivity();
 
         void resetActivity();
+
+        enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE}
     }
 
     interface Presenter {

@@ -64,7 +64,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
      */
     @Override
     public float calculateBMI(float weight) {
-        float BMI = 0 ;
+        float BMI = 0;
 //        User user = new User();
 //
 //
