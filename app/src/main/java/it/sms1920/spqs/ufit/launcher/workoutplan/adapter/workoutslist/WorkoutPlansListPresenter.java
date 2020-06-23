@@ -2,22 +2,23 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.WorkoutPlan;
 
+
+/**
+ *
+ */
 public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Presenter {
     private static final String TAG = WorkoutPlansListPresenter.class.getCanonicalName();
     private final WorkoutPlansListContract.View view;

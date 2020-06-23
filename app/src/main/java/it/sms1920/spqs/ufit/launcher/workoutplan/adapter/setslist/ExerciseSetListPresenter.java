@@ -20,9 +20,18 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
     private ExerciseSetListContract.View view;
     private List<ExerciseSetItem> list;
 
-    public ExerciseSetListPresenter(final ExerciseSetListContract.View view, String exerciseListId, final String exerciseId) {
+    /**
+     * Associated presenter to ExerciseSetListAdapter.
+     *
+     * @param view              a ref to correspondent adapter
+     * @param exerciseListId    exercise list id of WorkoutPlanExerciseSets child in firebase database
+     * @param exerciseId        exercise id
+     * @param setsListReference a reference to the sets list stored in WorkoutExerciseListPresenter in ExerciseSetDetails.exerciseSetItems ( myExercises.get(int).getExerciseSetItems variable ). Needs a cast to
+     */
+    public ExerciseSetListPresenter(final ExerciseSetListContract.View view, String exerciseListId, final String exerciseId, Object setsListReference) {
         this.view = view;
-        this.list = new ArrayList<>();
+        this.list = (List<ExerciseSetItem>) setsListReference;
+
 
         if (exerciseListId != null && exerciseId != null) {
             Query mExerciseSetListQuery = FirebaseDbSingleton.getInstance().getReference()
@@ -37,8 +46,7 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         for (DataSnapshot item : child.getChildren()) {
                             myChild = item.getValue(ExerciseSetDetails.class);
-                            Log.d("TAG", "onDataChanging: " + myChild);
-                            if (myChild.getExerciseId().equals(exerciseId)) {
+                            if (myChild != null && myChild.getExerciseId().equals(exerciseId)) {
                                 list = myChild.getExerciseSetItems();
                             }
                         }
@@ -55,7 +63,12 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
         }
     }
 
-
+    /**
+     * Definition how holder bind should go on
+     *
+     * @param holder   ViewHolder to manipulate
+     * @param position position in the list
+     */
     @Override
     public void onBindItemViewAtPosition(ExerciseSetListContract.View.Item holder, int position) {
         holder.setReps(String.valueOf(list.get(position).getReps()));
@@ -64,7 +77,12 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
 
     @Override
     public int getSeriesCount() {
-        return list.size();
+        int size = 0;
+        if (list != null) {
+            size = list.size();
+        }
+
+        return size;
     }
 
 

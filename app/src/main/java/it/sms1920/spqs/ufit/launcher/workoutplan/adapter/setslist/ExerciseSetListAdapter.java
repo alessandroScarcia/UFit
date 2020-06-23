@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +28,8 @@ public class ExerciseSetListAdapter
     private ExerciseSetListContract.Presenter presenter;
     private boolean editable;
 
-    public ExerciseSetListAdapter(boolean editable, String exerciseListId, String exerciseId) {
-        presenter = new ExerciseSetListPresenter(this, exerciseListId, exerciseId);
+    public ExerciseSetListAdapter(boolean editable, String exerciseListId, String exerciseId, Object setsListReference) {
+        presenter = new ExerciseSetListPresenter(this, exerciseListId, exerciseId, setsListReference);
         this.editable = editable;
     }
 
@@ -127,7 +128,7 @@ public class ExerciseSetListAdapter
                     @Override
                     public void onFocusChange(View view, boolean b) {
                         if (!b) { // if is focused out
-                            presenter.onUpdateRepsRequested(Integer.parseInt(txtReps.getText().toString()), getAdapterPosition());
+                            presenter.onUpdateRepsRequested(Integer.parseInt(Objects.requireNonNull(txtReps.getText()).toString()), getAdapterPosition());
                         }
                     }
                 });
@@ -135,7 +136,7 @@ public class ExerciseSetListAdapter
                     @Override
                     public void onFocusChange(View view, boolean b) {
                         if (!b) { // if is focused out
-                            presenter.onUpdateLoadsRequested(Float.parseFloat(txtLoads.getText().toString()), getAdapterPosition());
+                            presenter.onUpdateLoadsRequested(Float.parseFloat(Objects.requireNonNull(txtLoads.getText()).toString()), getAdapterPosition());
                         }
                     }
                 });

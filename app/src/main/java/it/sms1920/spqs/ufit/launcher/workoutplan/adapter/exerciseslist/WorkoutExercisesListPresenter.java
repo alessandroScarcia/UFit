@@ -32,8 +32,8 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
     SearchExercise mSearch;
 
     private DatabaseReference mDatabase;
-    private String exerciseListId;
-
+    private String exerciseListId = null;
+    private WorkoutPlan workoutPlan = null;
 
     public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view) {
         this.view = view;
@@ -61,13 +61,14 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         mExerciseListIdQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                WorkoutPlan workoutPlan = null;
 
                 // Fetching exercises from query result, adding them to a List<>
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     workoutPlan = child.getValue(WorkoutPlan.class);
                 }
-                exerciseListId = workoutPlan.getExerciseListId();
+                if (workoutPlan != null) {
+                    exerciseListId = workoutPlan.getExerciseListId();
+                }
 
                 loadExerciseList();
             }
@@ -94,6 +95,9 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     for (DataSnapshot item : child.getChildren()) {
                         myExercises.add(item.getValue(ExerciseSetDetails.class));
+                        if (myExercises.get(myExercises.size() - 1).getExerciseSetItems() == null){
+                            myExercises.get(myExercises.size() - 1).setExerciseSetItems(new ArrayList<ExerciseSetItem>());
+                        }
                     }
                 }
 
@@ -137,43 +141,27 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         view.callNotifyDataSetChanged();
     }
 
-    // TODO QUALCOSA QUA
     @Override
-    public void onSaveCurrentWorkoutPlanRequested(String name) {
+    public void onSaveNewWorkoutPlanRequested(String name) {
+        String workoutKey = mDatabase.child("WorkoutPlan").push().getKey();
+        String workoutSetsKey = mDatabase.child("WorkoutPlanExerciseSets").push().getKey();
 
-        if (exerciseListId == null) { // if is a new workout
+        WorkoutPlan workoutPlan = new WorkoutPlan(
+                workoutKey,
+                name,
+                FirebaseAuthSingleton.getFirebaseAuth().getUid(),
+                workoutSetsKey,
+                null);
 
-            String workoutKey = mDatabase.child("WorkoutPlan").push().getKey();
-            String workoutSetsKey = mDatabase.child("WorkoutPlanExerciseSets").push().getKey();
+        mDatabase.child("WorkoutPlan").child(Objects.requireNonNull(workoutKey)).setValue(workoutPlan);
+        mDatabase.child("WorkoutPlanExerciseSets").child(Objects.requireNonNull(workoutSetsKey)).setValue(myExercises);
+    }
 
-            WorkoutPlan workoutPlan = new WorkoutPlan(
-                    workoutKey,
-                    name,
-                    FirebaseAuthSingleton.getFirebaseAuth().getUid(),
-                    workoutSetsKey,
-                    null);
-
-            mDatabase.child("WorkoutPlan").child(Objects.requireNonNull(workoutKey)).setValue(workoutPlan);
-            mDatabase.child("WorkoutPlanExerciseSets").child(Objects.requireNonNull(workoutSetsKey)).setValue(myExercises);
-
-            Log.d(TAG, "onSaveCurrentWorkoutPlanRequested: " + myExercises);
-
-        } else { // if is an edit
-
-            DatabaseReference workoutRef = mDatabase.child("WorkoutPlanExerciseSets").child(exerciseListId);
-            Query mQuery = workoutRef.orderByKey().equalTo(exerciseListId);
-            mQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    mDatabase.child("WorkoutPlanExerciseSets").child(exerciseListId).setValue(myExercises);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
+    @Override
+    public void onSaveWorkoutPlanChangesRequested(String name) {
+        workoutPlan.setName(name);
+        mDatabase.child("WorkoutPlan").child(workoutPlan.getWorkoutPlanId()).setValue(workoutPlan);
+        mDatabase.child("WorkoutPlanExerciseSets").child(exerciseListId).setValue(myExercises);
     }
 
     @Override
@@ -181,7 +169,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         ExerciseSetDetails exercise = myExercises.get(position);
         holder.setName(exercise.getExerciseName());
         holder.setId(exercise.getExerciseId());
-        holder.setExerciseSetsAdapter(position, exerciseListId, myExercises.get(position).getExerciseId());
+        holder.setExerciseSetsAdapter(position, exerciseListId, myExercises.get(position).getExerciseId(), myExercises.get(position).getExerciseSetItems());
     }
 
     @Override

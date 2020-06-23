@@ -64,8 +64,8 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         presenter = new WorkoutExercisesListPresenter(this, workoutPlanId);
     }
 
-    public void saveCurrentWorkoutPlan(String name){
-        presenter.onSaveCurrentWorkoutPlanRequested(name);
+    public void createNewWorkoutPlan(String name){
+        presenter.onSaveNewWorkoutPlanRequested(name);
     }
 
     @NonNull
@@ -172,8 +172,8 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         }
 
         @Override
-        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId){
-            adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId);
+        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference){
+            adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId, setsListReference);
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
         }

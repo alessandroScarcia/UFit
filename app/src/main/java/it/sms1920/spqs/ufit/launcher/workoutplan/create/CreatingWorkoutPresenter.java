@@ -29,6 +29,10 @@ public class CreatingWorkoutPresenter implements CreatingWorkoutContract.Present
 
     @Override
     public void onSaveDataRequested() {
-        view.saveData();
+        if ( view.checkIfSavable()){
+            view.saveData();
+        } else {
+            view.showError();
+        }
     }
 }

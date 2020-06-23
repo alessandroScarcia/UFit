@@ -14,13 +14,14 @@ public interface WorkoutExercisesListContract {
         void callNotifyDataSetChanged();
         void onItemRemoved(int position);
 
+
         interface Item {
             void setName(String name);
             void setImage(Image image);
             void setId(String id);
             void setExerciseSets(List<ExerciseSetItem> exerciseSets);
 
-            void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId);
+            void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference);
 
             void addExerciseSet(int reps, float loads);
         }
@@ -28,7 +29,8 @@ public interface WorkoutExercisesListContract {
 
     interface Presenter {
 
-        void onSaveCurrentWorkoutPlanRequested(String name);
+        void onSaveWorkoutPlanChangesRequested(String name);
+        void onSaveNewWorkoutPlanRequested(String name);
         void onBindExerciseItemViewAtPosition(View.Item holder, int position);
         int getExerciseCount();
         void removeItemAt(int position);

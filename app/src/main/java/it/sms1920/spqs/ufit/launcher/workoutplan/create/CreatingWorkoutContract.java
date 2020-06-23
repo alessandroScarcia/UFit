@@ -6,11 +6,10 @@ public interface CreatingWorkoutContract {
 
     interface View {
         void back();
-
         void startSearchExerciseForWorkout(int requestCode);
-
         void communicateNewExercisesToAdapter(ArrayList<String> exercisesId);
-
+        boolean checkIfSavable();
+        void showError();
         void saveData();
     }
 

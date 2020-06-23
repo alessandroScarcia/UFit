@@ -2,7 +2,6 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -18,17 +16,13 @@ import java.util.Objects;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExercisesListAdapter;
-import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.PICK_EXERCISE;
 import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.RESULT_SUCCESSFUL;
-import static it.sms1920.spqs.ufit.launcher.workoutplan.create.SelectExercisesContract.Presenter.CODE_SUCCESSFUL;
 
 public class CreatingWorkoutActivity extends AppCompatActivity implements CreatingWorkoutContract.View {
     private final String TAG = this.getClass().getCanonicalName();
@@ -37,6 +31,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
     private WorkoutExercisesListAdapter adapter;
     private Toolbar toolbar;
     private TextInputEditText txtName;
+    private RecyclerView rvExerciseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +60,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
 
         // Setting recycler view
-        RecyclerView rvExerciseList = findViewById(R.id.lstExercises);
+        rvExerciseList = findViewById(R.id.lstExercises);
         rvExerciseList.setAdapter(adapter);
         rvExerciseList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -76,7 +71,6 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
             @Override
             public void onClick(View view) {
                 presenter.onSaveDataRequested();
-                Log.d(TAG, "onClick: save");
             }
         });
 
@@ -124,9 +118,26 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
     }
 
     @Override
+    public boolean checkIfSavable() {
+        boolean savable = true;
+
+        if (Objects.requireNonNull(txtName.getText()).toString().equals("") || Objects.requireNonNull(rvExerciseList.getAdapter()).getItemCount() == 0) {
+            savable = false;
+        }
+
+
+        return savable;
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this, "Dai un nome alla scheda e aggiungi almeno un esercizio", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void saveData() {
 
-        adapter.saveCurrentWorkoutPlan(txtName.getText().toString());
+        adapter.createNewWorkoutPlan(Objects.requireNonNull(txtName.getText()).toString());
         // TODO notify data set changed
         finish();
     }

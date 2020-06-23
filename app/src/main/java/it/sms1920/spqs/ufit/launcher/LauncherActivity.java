@@ -114,6 +114,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.search).setVisible(true);
         setMenuItemIcon(R.id.nav_home, R.drawable.ic_menu_home_selected);
         logo.setVisibility(View.VISIBLE);
+        toggleToolbarNavigationButton(false);
         setToolbarTitle("");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
@@ -124,6 +125,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_plans, R.drawable.ic_menu_plans_selected);
         logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
         setToolbarTitle("Workout Plans");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutPlansFragment()).commit();
 
@@ -135,6 +137,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
         logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
         setToolbarTitle("Personal Trainer");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
 
@@ -146,6 +149,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_stats, R.drawable.ic_menu_stats_selected);
         logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
         setToolbarTitle("Statistiche");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
     }
@@ -157,6 +161,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
         toolbar.getMenu().findItem(R.id.logout).setVisible(true);
         logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
         setToolbarTitle("Profile");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
     }
@@ -173,6 +178,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
         logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
         setToolbarTitle("Account");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChooseFragment()).commit();
     }
@@ -211,5 +217,16 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.setTitle(title);
     }
 
+    public void toggleToolbarNavigationButton(boolean active) {
+        if (active) {
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        } else {
+            toolbar.setNavigationIcon(null);
+        }
+    }
+
+    public void setToolbarNavigationButtonClickListener( View.OnClickListener clickListener ){
+        toolbar.setNavigationOnClickListener(clickListener);
+    }
 
 }
