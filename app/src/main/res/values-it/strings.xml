@@ -116,6 +116,8 @@
     <string name="x">x</string>
     <string name="kg">kg</string>
     <string name="choose_activity_text">Oh no! Non hai ancora effettuato l\'accesso con il tuo account! ☹</string>
+    <string name="password_reset_helper_text">Inserire l\'indirizzo di posta elettronica dell\'account per il quale si desidera reimpostare la password</string>
+    <string name="password_reset_email_sent">Ti abbiamo inviato una email per reimpostare la tua password.</string>
 </resources>
 
 
