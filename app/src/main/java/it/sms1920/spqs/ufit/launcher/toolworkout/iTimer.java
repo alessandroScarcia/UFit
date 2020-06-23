@@ -1,45 +1,57 @@
 package it.sms1920.spqs.ufit.launcher.toolworkout;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.progressindicator.ProgressIndicator;
 
 public interface iTimer {
 
     interface View{
-        TextView getTextViewCountDown();
-
-        Button getBtnStartStop();
-
-        Button getBtnReset();
-
-        ProgressIndicator getTimeProgressBar();
+        void setMaxProgressBar(int max);
 
         void showToast(String message);
 
-        Button getBtnIncrementSeconds();
 
-        Button getBtnIncrementMinutes();
+        void startCoundDownSound();
 
-        Button getBtnDecrementSeconds();
+        void setProgressBar(int progressionProgressBar);
 
-        Button getBtnDecrementMinutes();
+        void setTimeTextViewCountDown(String timeLeftFormatted);
+
+        void setVisibleBtnStartStop();
+
+        void startTimer(long timeLeftInMillis);
+
+        void pauseTimer();
+
+        void resumeCountDownPlayer(int value);
+
+        void resetPlayerCountDown();
+
+        void changeIconSoundSetting(boolean soundActive);
+
+        void setVisibleBtnTime();
     }
 
     interface Presenter{
+        void initProgressionProgressBar();
+        
+        void resetProgressionProgressBar();
 
-        void updateCountDownText();
+        void updateCountDownText(long millisUntilFinished);
 
 //        void updateCountDown(int seconds, int minutes);
 
         void resetTimer();
 
         void initializeTimer();
-
-        void startTimer();
-
+        
         void startPause(boolean running);
 
         boolean isTimerRunning();
@@ -51,5 +63,15 @@ public interface iTimer {
         void decrementSecondsTimer();
 
         void incrementSecondsTimer();
+
+        void finish();
+
+        void start();
+
+        void controllerSound();
+
+        void saveIstance(Context context);
+
+        void retriveIstance(Context context);
     }
 }

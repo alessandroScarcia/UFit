@@ -1,24 +1,22 @@
 package it.sms1920.spqs.ufit.launcher.toolworkout;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 
-
-import android.os.CountDownTimer;
-import android.view.View;
 import java.util.Locale;
-
 
 public class TimerPresenter implements iTimer.Presenter {
     private long initialTime;
     private final iTimer.View view;
     public int progressionProgressBar = 0;
     private long timeLeftInMillis;
-    private CountDownTimer countDownTimer;
+
     private boolean timerRunning = false;
 
     private int minutes;
     private int seconds;
 
-
+    private boolean soundActive = true;
     public TimerPresenter(iTimer.View view) {
         this.view = view;
     }
@@ -58,13 +56,19 @@ public class TimerPresenter implements iTimer.Presenter {
         if(timerRunning){
             pauseTimer();
         }else {
-            view.getTimeProgressBar().setMax(progressionProgressBar);
+            view.setMaxProgressBar(progressionProgressBar);
 
             //check if the user have setted the timer
             if(minutes == 0 && seconds == 0){
                 view.showToast("You must set the timer first");
             }else{
-                startTimer();
+                int initialSeconds = (int) ((initialTime / 1000) % 60);
+                if(seconds <= 5 && initialSeconds >= 5) {
+                    if(soundActive) {
+                        view.resumeCountDownPlayer(seconds);
+                    }
+                }
+                view.startTimer(timeLeftInMillis);
             }
         }
     }
@@ -85,14 +89,24 @@ public class TimerPresenter implements iTimer.Presenter {
     /**
      * Function used to update the text of th TextView that show the  every seconds
      */
-    public void updateCountDownText() {
+    public void updateCountDownText(long millisUntilFinished) {
+        timeLeftInMillis = millisUntilFinished;
         setTimeFromMillis(timeLeftInMillis);
+
+        startSoundCountDownEnd();
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
-        view.getTextViewCountDown().setText(timeLeftFormatted);
+        view.setTimeTextViewCountDown(timeLeftFormatted);
 
-        setProgressionProgressBar();
+        decrementProgressionProgressBar();
+    }
+
+    private void startSoundCountDownEnd() {
+        if(seconds == 5 && soundActive){
+            view.startCoundDownSound();
+//            view.showToast("avvio");
+        }
     }
 
 
@@ -100,10 +114,8 @@ public class TimerPresenter implements iTimer.Presenter {
      * Function that manage the pause event
      */
     private void pauseTimer() {
-        countDownTimer.cancel();
+        view.pauseTimer();
         timerRunning = false;
-        view.getBtnStartStop().setText("Start");
-        view.getBtnReset().setVisibility(View.VISIBLE);
     }
 
 
@@ -112,19 +124,21 @@ public class TimerPresenter implements iTimer.Presenter {
      */
     public void resetTimer() {
         setTimeFromMillis(initialTime);
-        view.getBtnReset().setVisibility(View.INVISIBLE);
-        view.getBtnStartStop().setVisibility(View.VISIBLE);
-        setVisibleBtnTime();
+        view.setVisibleBtnStartStop();
 
         //reset the time in the text view with the las value
         setTextViewTimer();
 
-        //reset and initializwe the progressbar
+        view.setVisibleBtnTime();
+
+        view.resetPlayerCountDown();
+
+        //reset and initialize the progressbar
         resetProgressionProgressBar();
         initProgressionProgressBar();
     }
 
-
+    @Override
     public void resetProgressionProgressBar(){
         progressionProgressBar = (int) (timeLeftInMillis / 1000);
     }
@@ -134,46 +148,10 @@ public class TimerPresenter implements iTimer.Presenter {
      */
     @Override
     public void initializeTimer() {
-        updateCountDownText();
+        updateCountDownText(timeLeftInMillis);
         initProgressionProgressBar();
     }
 
-    /**
-     * Function that manage the start event of the timer
-     */
-    public void startTimer() {
-        //set the countDown and the relatives methods
-        countDownTimer =  new CountDownTimer(timeLeftInMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
-                updateCountDownText();
-            }
-
-            @Override
-            public void onFinish() {
-                timerRunning = false;
-                view.getBtnStartStop().setText("Start");
-                view.getBtnStartStop().setVisibility(View.INVISIBLE);
-                view.getBtnReset().setVisibility(View.VISIBLE);
-                setVisibleBtnTime();
-
-            }
-        }.start();
-        timerRunning = true;
-        view.getBtnStartStop().setText("pause");
-
-        //set the buttons of the timer settings invisible
-        view.getBtnReset().setVisibility(View.INVISIBLE);
-        view.getBtnDecrementMinutes().setVisibility(View.INVISIBLE);
-        view.getBtnDecrementSeconds().setVisibility(View.INVISIBLE);
-        view.getBtnIncrementSeconds().setVisibility(View.INVISIBLE);
-        view.getBtnIncrementMinutes().setVisibility(View.INVISIBLE);
-
-        //set the progress bar
-        resetProgressionProgressBar();
-        initProgressionProgressBar();
-    }
 
     public boolean isTimerRunning() {
         return timerRunning;
@@ -181,26 +159,85 @@ public class TimerPresenter implements iTimer.Presenter {
 
     @Override
     public void incrementMinutesTimer() {
-        minutes++;
-        setTextViewTimer();
+        if (minutes < 99) {
+            minutes++;
+            setTextViewTimer();
+        }
     }
 
     @Override
     public void decrementMinutesTimer() {
-        minutes--;
-        setTextViewTimer();
+        if (minutes != 0){
+            minutes--;
+            setTextViewTimer();
+        }
     }
 
     @Override
     public void decrementSecondsTimer() {
-        seconds--;
-        setTextViewTimer();
+        if (seconds != 0) {
+            seconds--;
+            setTextViewTimer();
+        }
     }
 
     @Override
     public void incrementSecondsTimer() {
-        seconds++;
-        setTextViewTimer();
+        if (seconds < 59) {
+            seconds++;
+            setTextViewTimer();
+        }else{
+            minutes++;
+            seconds = 0;
+            setTextViewTimer();
+
+        }
+    }
+
+    @Override
+    public void finish() {
+        timerRunning = false;
+    }
+
+    @Override
+    public void start() {
+        timerRunning = true;
+    }
+
+    @Override
+    public void controllerSound() {
+        if(soundActive){
+            soundActive = false;
+        }else{
+            soundActive = true;
+        }
+
+        view.changeIconSoundSetting(soundActive);
+    }
+
+    @Override
+    public void saveIstance(Context context) {
+        SharedPreferences prefes = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefes.edit();
+        editor.putLong("millisLeft", timeLeftInMillis);
+        editor.putBoolean("timerRunning", timerRunning);
+        editor.putBoolean("soundActive", soundActive);
+        editor.putInt("progressionProgressBar", progressionProgressBar);
+
+        editor.apply();
+    }
+
+
+    @Override
+    public void retriveIstance(Context context) {
+        SharedPreferences prefes = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
+        timeLeftInMillis = prefes.getLong("millisLeft", timeLeftInMillis);
+        timerRunning = prefes.getBoolean("timerRunning", timerRunning);
+        soundActive = prefes.getBoolean("soundActive", soundActive);
+        progressionProgressBar = prefes.getInt("progressionProgressBar", progressionProgressBar);
+
+        startPause(false);
     }
 
 
@@ -209,7 +246,7 @@ public class TimerPresenter implements iTimer.Presenter {
      */
     public void setTextViewTimer(){
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-        view.getTextViewCountDown().setText(timeLeftFormatted);
+        view.setTimeTextViewCountDown(timeLeftFormatted);
         setTime(minutes,seconds);
     }
 
@@ -218,27 +255,19 @@ public class TimerPresenter implements iTimer.Presenter {
      * Initialize the progress bar
      */
     public void initProgressionProgressBar(){
-        view.getTimeProgressBar().setMax(progressionProgressBar);
-        view.getTimeProgressBar().setProgress(progressionProgressBar);
+        view.setMaxProgressBar(progressionProgressBar);
+        view.setProgressBar(progressionProgressBar);
     }
 
 
     /**
      * Update the progress of the ProgressBar
      */
-    public void setProgressionProgressBar(){
+    public void decrementProgressionProgressBar(){
         progressionProgressBar--;
-        view.getTimeProgressBar().setProgress(progressionProgressBar);
+        view.setProgressBar(progressionProgressBar);
     }
 
 
-    /**
-     * Set visible the buttons settings of the timer
-     */
-    public void setVisibleBtnTime(){
-        view.getBtnDecrementMinutes().setVisibility(View.VISIBLE);
-        view.getBtnDecrementSeconds().setVisibility(View.VISIBLE);
-        view.getBtnIncrementSeconds().setVisibility(View.VISIBLE);
-        view.getBtnIncrementMinutes().setVisibility(View.VISIBLE);
-    }
+
 }
