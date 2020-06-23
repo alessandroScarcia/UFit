@@ -88,6 +88,9 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
 
     @Override
     public void onSerieAdded(int reps, float loads) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         list.add(new ExerciseSetItem(reps, loads));
         view.callNotifyDatasetChanged();
     }

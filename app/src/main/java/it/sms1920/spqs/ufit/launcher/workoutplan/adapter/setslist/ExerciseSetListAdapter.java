@@ -124,20 +124,40 @@ public class ExerciseSetListAdapter
                     }
                 });
 
-                txtReps.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                txtReps.addTextChangedListener(new TextWatcher() {
                     @Override
-                    public void onFocusChange(View view, boolean b) {
-                        if (!b) { // if is focused out
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if (!Objects.requireNonNull(txtReps.getText()).toString().equals("")) {
                             presenter.onUpdateRepsRequested(Integer.parseInt(Objects.requireNonNull(txtReps.getText()).toString()), getAdapterPosition());
                         }
                     }
-                });
-                txtLoads.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
                     @Override
-                    public void onFocusChange(View view, boolean b) {
-                        if (!b) { // if is focused out
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                txtLoads.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if (!Objects.requireNonNull(txtLoads.getText()).toString().equals("")) {
                             presenter.onUpdateLoadsRequested(Float.parseFloat(Objects.requireNonNull(txtLoads.getText()).toString()), getAdapterPosition());
                         }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
                     }
                 });
 
