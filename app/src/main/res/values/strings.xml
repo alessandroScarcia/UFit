@@ -44,28 +44,28 @@
     <string name="gender">Gender</string>
     <string name="date">Birthdate</string>
     <!--Stats strings-->
-    <string name="edit_value" >Modifica Valore</string>
-    <string name="global_cancel" >Cancella</string>
-    <string name="add_label" >Aggiungi</string>
+    <string name="edit_value">Modifica Valore</string>
+    <string name="global_cancel">Cancella</string>
+    <string name="add_label">Aggiungi</string>
 
 
     <string name="weightLabel">Peso(kg)</string>
-    <string name="fatLabel" >Grasso(%)</string>
-    <string name="bonesLabel" >Ossa(%)</string>
+    <string name="fatLabel">Grasso(%)</string>
+    <string name="bonesLabel">Ossa(%)</string>
     <string name="waterLabel">Acqua(%)</string>
-    <string name="musclesLabel" >Muscoli(%)</string>
+    <string name="musclesLabel">Muscoli(%)</string>
 
     <string name="indexLabel">Indice</string>
     <string name="imcLabel">BMI</string>
-    <string name="rfmLabel" >RFM</string>
-    <string name="ffmiLabel" >FFMI</string>
+    <string name="rfmLabel">RFM</string>
+    <string name="ffmiLabel">FFMI</string>
 
 
-    <string name="DateLabel" >Data</string>
-    <string name="MeasureLabel" >Carico(Kg)</string>
-    <string name="MesureHint" >Inserisci carico qui</string>
+    <string name="DateLabel">Data</string>
+    <string name="MeasureLabel">Carico(Kg)</string>
+    <string name="MesureHint">Inserisci carico qui</string>
     <string name="measureLabel">Inserisci carico qui</string>
-    <string name="sizeTableLabel" >Misurazioni acquisite</string>
+    <string name="sizeTableLabel">Misurazioni acquisite</string>
 
     <string-array name="genders">
         <item>Male</item>
@@ -75,33 +75,32 @@
 
     <!-- Login -->
     <string name="login">Login</string>
-    <string name="forgot_password">Forgot password.</string>
-    <string name="not_registered_yet">Not registered yet? Sign-up.</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="not_registered_yet">Not registered yet?</string>
 
     <string name="email_empty">"Email can not be empty"</string>
     <string name="password_empty">"Password can not be empty"</string>
     <string name="email_not_valid">"This is not an email"</string>
 
-    <string name="password_not_match">"Password not match"</string>
-    <string name="email_not_exists">"This email doesn't exist in our database"</string>
+    <string name="wrong_credentials">"Email or password incorrect."</string>
 
 
     <!-- Reg -->
-    <string name="signup">Sign Up</string>
-    <string name="already_have_account">Already have an account? Login.</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have an account?</string>
     <string name="password_not_valid">"Needs at least 6 characters. Required: uppercase, lowercase, numbers and special chars"</string>
     <string name="passwords_not_equal">"Insert same password pls"</string>
     <string name="email_already_exists">Email already exists</string>
     <string name="send_email">Send</string>
 
 
-    <string name="myGeneralStats" >Stato generale</string>
-    <string name="myBodyStats" >Misurazioni corporee</string>
+    <string name="myGeneralStats">Stato generale</string>
+    <string name="myBodyStats">Misurazioni corporee</string>
 
 
-    <string name="armMeasure" >Arm Measure</string>
-    <string name="chestMeasure" >Chest Measure</string>
-    <string name="waistMeasure" >Waist Measure</string>
+    <string name="armMeasure">Arm Measure</string>
+    <string name="chestMeasure">Chest Measure</string>
+    <string name="waistMeasure">Waist Measure</string>
     <string name="tightMeasure">Tight Measure</string>
     <string name="calveMeasure">Calve Measure</string>
 
@@ -122,9 +121,8 @@
     <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
 
 
-
-
     <!-- Image content descriptions -->
     <string name="imgExercise">Exercise image</string>
+    <string name="choose_activity_text">Oh no! Looks like no account is logged in yet! ☹</string>
 
 </resources>

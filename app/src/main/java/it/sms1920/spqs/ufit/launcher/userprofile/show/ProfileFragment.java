@@ -40,7 +40,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     private MaterialTextView lblGender;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +57,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         lblHeight = view.findViewById(R.id.lblHeight);
         lblWeight = view.findViewById(R.id.lblWeight);
         lblGender = view.findViewById(R.id.lblGender);
-
 
 
         btnChangeProfileInfo = view.findViewById(R.id.btnChangeProfileInfo);
@@ -88,48 +86,48 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     }
 
 
-   @Override
+    @Override
     public void showName(String name) {
         lblName.setText(name);
-        bundle.putString(String.valueOf(R.string.name),name);
+        bundle.putString(String.valueOf(R.string.name), name);
     }
 
     @Override
     public void showEmail(String email) {
         lblEmail.setText(email);
-        bundle.putString(String.valueOf(R.string.email),email);
+        bundle.putString(String.valueOf(R.string.email), email);
     }
 
     @Override
     public void showHeight(int height) {
-        lblHeight.setText(String.valueOf(height)+ "cm");
-        bundle.putInt(String.valueOf(R.string.height),height);
+        lblHeight.setText(String.valueOf(height) + "cm");
+        bundle.putInt(String.valueOf(R.string.height), height);
 
 
     }
 
     @Override
     public void showWeight(int weight) {
-        lblWeight.setText(String.valueOf(weight)+ "kg");
-        bundle.putInt(String.valueOf(R.string.weight),weight);
+        lblWeight.setText(String.valueOf(weight) + "kg");
+        bundle.putInt(String.valueOf(R.string.weight), weight);
     }
 
     @Override
     public void showSurname(String surname) {
         lblSurname.setText(surname);
-        bundle.putString(String.valueOf(R.string.surname),surname);
+        bundle.putString(String.valueOf(R.string.surname), surname);
     }
 
     @Override
     public void showGender(String gender) {
         lblGender.setText(gender);
-        bundle.putString(String.valueOf(R.string.gender),gender);
+        bundle.putString(String.valueOf(R.string.gender), gender);
     }
 
     @Override
     public void showBirthDate(String birthDate) {
         lblBirthDate.setText(birthDate);
-        bundle.putString(String.valueOf(R.string.date),birthDate);
+        bundle.putString(String.valueOf(R.string.date), birthDate);
     }
 
 
@@ -153,11 +151,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     }
 
 
-
     @Override
     public void startChangeProfileInfoFragment() {
 
-        bundle.putString(String.valueOf(R.string.email),lblEmail.getText().toString());
+        bundle.putString(String.valueOf(R.string.email), lblEmail.getText().toString());
 
         ChangeProfileInfoFragment changeProfileInfoFragment = new ChangeProfileInfoFragment();
         changeProfileInfoFragment.setArguments(bundle);
@@ -165,7 +162,6 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, changeProfileInfoFragment).commit();
 
     }
-
 
 
 }
