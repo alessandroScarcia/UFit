@@ -6,11 +6,11 @@ public interface LoginContract {
 
         void setInputError(Presenter.InputErrorType inputErrorType);
 
-        void setSignInError(Presenter.AuthResultType authResultType);
+        void setLoginError(Presenter.AuthResultType authResultType);
 
-        void startLauncherActivity();
+        void endActivity();
 
-        void setEnabledUI(boolean enabled);
+        void setEnabledUi(boolean enabled);
     }
 
     interface Presenter {
@@ -21,17 +21,12 @@ public interface LoginContract {
             EMAIL_FORMAT_NOT_VALID,
         }
 
+        void onLoginButtonClicked(String email, String password);
+
         enum AuthResultType {
-            EMAILS_NOT_MATCH,
-            PASSWORDS_NOT_MATCH,
+            FAILURE,
             SUCCESS
         }
-
-        void onSignIn(String email, String password);
-
-        void returnSignInResult(AuthResultType check);
-
-        void signInSuccessful();
 
         void onBackPressed();
     }

@@ -5,9 +5,9 @@ public interface RegistrationContract {
 
         void setInputError(Presenter.InputErrorType inputErrorType);
 
-        void setSignUpError(Presenter.AuthResultType authResultType);
+        void setRegistrationError(Presenter.AuthResultType authResultType);
 
-        void startLauncherActivity();
+        void endActivity();
 
         void setEnabledUI(boolean enabled);
 
@@ -30,14 +30,10 @@ public interface RegistrationContract {
             USER_ALREADY_EXISTS
         }
 
-        void onSignUp(String email, String password, String confirmPassword);
+        void onRegisterButtonClicked(String email, String password, String confirmPassword);
 
-        void onLoginRequest();
+        void onLoginButtonClicked();
 
         void onBackPressed();
-
-        void returnSignUpResult(AuthResultType check);
-
-        void signUpSuccessful();
     }
 }

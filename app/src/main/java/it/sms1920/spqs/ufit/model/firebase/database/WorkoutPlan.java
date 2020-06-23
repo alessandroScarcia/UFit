@@ -1,8 +1,14 @@
 package it.sms1920.spqs.ufit.model.firebase.database;
 
 public class WorkoutPlan {
+    public static final String CHILD_NAME = "WorkoutPlan";
     private String workoutPlanId;
     private String name;
+
+    public void setUserOwnerId(String userOwnerId) {
+        this.userOwnerId = userOwnerId;
+    }
+
     private String userOwnerId;
     private String exerciseListId;
     private String trainerId;

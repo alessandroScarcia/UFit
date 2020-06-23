@@ -12,8 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
-import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
-import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceFragment;
+import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
@@ -21,9 +20,9 @@ import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.TrainerFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
-public class LauncherActivity extends AppCompatActivity implements iLauncher.View {
+public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
 
-    LauncherManager presenter;
+    LauncherPresenter presenter;
     Menu menu;
     Toolbar toolbar;
 
@@ -36,7 +35,7 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
         toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        presenter = new LauncherManager(this);
+        presenter = new LauncherPresenter(this);
 
 
         // Setting bottom bar
@@ -157,9 +156,12 @@ public class LauncherActivity extends AppCompatActivity implements iLauncher.Vie
     }
 
     @Override
-    public void startLoginActivity() {
-        startActivity(new Intent(LauncherActivity.this, LoginActivity.class));
-        finish();
+    public void insertChooseFragment() {
+        resetMenuIcons();
+        resetToolbarIcons();
+        menu.findItem(R.id.nav_profile).setChecked(true);
+        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_selected);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChooseFragment()).commit();
     }
 
     @Override
