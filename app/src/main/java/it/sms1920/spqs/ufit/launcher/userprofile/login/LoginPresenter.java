@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.WorkoutPlan;
+import it.sms1920.spqs.ufit.model.util.StringUtils;
 
 import static it.sms1920.spqs.ufit.launcher.userprofile.login.LoginContract.Presenter.AuthResultType.FAILURE;
 import static it.sms1920.spqs.ufit.launcher.userprofile.login.LoginContract.Presenter.AuthResultType.SUCCESS;
@@ -80,7 +81,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         if (TextUtils.isEmpty(emailField)) {
             view.setInputError(EMAIL_FIELD_EMPTY);
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailField).matches()) {
+        } else if (StringUtils.isEmail(emailField)) {
             view.setInputError(EMAIL_FORMAT_NOT_VALID);
         } else {
             emailCheck = true;

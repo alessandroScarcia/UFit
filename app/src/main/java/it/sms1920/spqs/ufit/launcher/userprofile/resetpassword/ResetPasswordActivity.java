@@ -2,8 +2,6 @@ package it.sms1920.spqs.ufit.launcher.userprofile.resetpassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,29 +10,31 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
-import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import it.sms1920.spqs.ufit.launcher.R;
 
 public class ResetPasswordActivity extends AppCompatActivity implements ResetPasswordContract.View {
+    private static final String TAG = ResetPasswordActivity.class.getCanonicalName();
 
     private ResetPasswordPresenter presenter;
-    Activity mContext = this;
 
+    private TextInputLayout txtEmailLayout;
+    private TextInputEditText txtEmail;
     private Button btnSendEmail;
-    private EditText txtEmail;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
-        toolbar = findViewById(R.id.tool_bar);
+
+        presenter = new ResetPasswordPresenter(this);
+
+        // setup toolbar
+        Toolbar toolbar = findViewById(R.id.tool_bar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-
-
-        presenter = new ResetPasswordPresenter((ResetPasswordContract.View) mContext);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,27 +42,41 @@ public class ResetPasswordActivity extends AppCompatActivity implements ResetPas
             }
         });
 
-        btnSendEmail = findViewById(R.id.btnSendEmail);
+        txtEmailLayout = findViewById(R.id.txtEmailLayout);
         txtEmail = findViewById(R.id.txtEmailReset);
+        btnSendEmail = findViewById(R.id.btnSendEmail);
 
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onResetPassword(txtEmail.getText().toString());
+                if (txtEmail.getText() != null) {
+                    presenter.onSendEmailButtonClicked(txtEmail.getText().toString());
+                }
             }
         });
 
     }
 
     @Override
-    public void showCheckMailBox() {
-        Toast.makeText(this, "Check Your Email box", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
+    public void showEmailSentMessage() {
+        Toast.makeText(this, getString(R.string.password_reset_email_sent), Toast.LENGTH_LONG).show();
+        closeActivity();
     }
 
     @Override
     public void closeActivity() {
         finish();
         overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
+    }
+
+    @Override
+    public void setEnabledUi(boolean enabled) {
+        btnSendEmail.setEnabled(enabled);
+        txtEmail.setEnabled(enabled);
+    }
+
+    @Override
+    public void setError() {
+        txtEmailLayout.setError(getString(R.string.email_not_valid));
     }
 }
