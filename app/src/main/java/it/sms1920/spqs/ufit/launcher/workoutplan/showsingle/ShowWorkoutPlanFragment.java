@@ -53,7 +53,9 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         super.onCreate(savedInstanceState);
 
         launcher = (LauncherActivity) getActivity();
-
+        if (launcher != null) {
+            launcher.showPlanClicked();
+        }
         if (getArguments() != null) {
             workoutPlanId = getArguments().getString(ARG_WORKOUT_PLAN_ID);
         }
@@ -76,6 +78,12 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        launcher.showPlanClosed();
+    }
+
+    @Override
     public void setToolbarTextEqualToName(String name) {
         if (launcher != null) {
             launcher.setToolbarTitle(name);
@@ -95,7 +103,9 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
 
     @Override
     public void hideToolbarNavigationButton() {
-
         launcher.toggleToolbarNavigationButton(false);
     }
+
+
+
 }

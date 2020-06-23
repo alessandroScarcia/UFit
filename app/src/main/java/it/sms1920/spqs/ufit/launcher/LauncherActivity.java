@@ -24,7 +24,7 @@ import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
 
-    private LauncherPresenter presenter;
+    private LauncherContract.Presenter presenter;
     private Menu menu;
     private Toolbar toolbar;
     private ImageView logo;
@@ -225,8 +225,15 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         }
     }
 
-    public void setToolbarNavigationButtonClickListener( View.OnClickListener clickListener ){
+    public void setToolbarNavigationButtonClickListener(View.OnClickListener clickListener) {
         toolbar.setNavigationOnClickListener(clickListener);
+    }
+
+    public void showPlanClicked() {
+        presenter.onShowPlanClicked();
+    }
+    public void showPlanClosed() {
+        presenter.onShowPlanClosed();
     }
 
 }

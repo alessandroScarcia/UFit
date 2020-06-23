@@ -8,6 +8,7 @@ import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.HOME;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PLANS;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PROFILE;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.SHOW_PLAN;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.STATS;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.TRAINER;
 
@@ -68,12 +69,21 @@ public class LauncherPresenter implements LauncherContract.Presenter {
     }
 
     @Override
+    public void onShowPlanClicked() {
+        currentFragment = SHOW_PLAN;
+    }
+
+    @Override
     public void onBackPressed() {
-        if (currentFragment != HOME) {
-            view.insertHomeFragment();
-            currentFragment = HOME;
-        } else {
-            view.endActivity();
+        switch (currentFragment){
+            case HOME:
+                view.endActivity();
+                break;
+            case SHOW_PLAN:
+                view.insertPlansFragment();
+                break;
+            default:
+                view.insertHomeFragment();
         }
     }
 
@@ -82,5 +92,10 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         view.resetActivity();
         FirebaseAuthSingleton.getFirebaseAuth().signOut();
         FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
+    }
+
+    @Override
+    public void onShowPlanClosed() {
+        currentFragment = PLANS;
     }
 }
