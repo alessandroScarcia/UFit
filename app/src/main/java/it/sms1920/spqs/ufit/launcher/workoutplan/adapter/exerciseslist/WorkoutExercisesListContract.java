@@ -11,8 +11,6 @@ import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 public interface WorkoutExercisesListContract {
 
     interface View {
-        void callNotifyItemRemoved(int position);
-        void callNotifyItemRangeChanged(int position, int range);
         void callNotifyDataSetChanged();
         void onItemRemoved(int position);
 
@@ -22,7 +20,7 @@ public interface WorkoutExercisesListContract {
             void setId(String id);
             void setExerciseSets(List<ExerciseSetItem> exerciseSets);
 
-            void setExerciseSetsAdapter(int position, List<ExerciseSetItem> exerciseSets);
+            void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId);
 
             void addExerciseSet(int reps, float loads);
         }

@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +27,8 @@ public class ExerciseSetListAdapter
     private ExerciseSetListContract.Presenter presenter;
     private boolean editable;
 
-    public ExerciseSetListAdapter(boolean editable, List<ExerciseSetItem> serie) {
-        presenter = new ExerciseSetListPresenter(this, serie);
+    public ExerciseSetListAdapter(boolean editable, String exerciseListId, String exerciseId) {
+        presenter = new ExerciseSetListPresenter(this, exerciseListId, exerciseId);
         this.editable = editable;
     }
 
@@ -120,6 +122,24 @@ public class ExerciseSetListAdapter
                         onItemRemoved(getAdapterPosition());
                     }
                 });
+
+                txtReps.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        if (!b) { // if is focused out
+                            presenter.onUpdateRepsRequested(Integer.parseInt(txtReps.getText().toString()), getAdapterPosition());
+                        }
+                    }
+                });
+                txtLoads.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        if (!b) { // if is focused out
+                            presenter.onUpdateLoadsRequested(Float.parseFloat(txtLoads.getText().toString()), getAdapterPosition());
+                        }
+                    }
+                });
+
             } else {
                 reps = itemView.findViewById(R.id.reps);
                 load = itemView.findViewById(R.id.loads);

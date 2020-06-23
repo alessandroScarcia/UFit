@@ -1,24 +1,60 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetDetails;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
+import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 
 public class ExerciseSetListPresenter implements ExerciseSetListContract.Presenter {
 
     private ExerciseSetListContract.View view;
     private List<ExerciseSetItem> list;
 
-    public ExerciseSetListPresenter(ExerciseSetListContract.View view) {
+    public ExerciseSetListPresenter(final ExerciseSetListContract.View view, String exerciseListId, final String exerciseId) {
         this.view = view;
         this.list = new ArrayList<>();
+
+        if (exerciseListId != null && exerciseId != null) {
+            Query mExerciseSetListQuery = FirebaseDbSingleton.getInstance().getReference()
+                    .child("WorkoutPlanExerciseSets")
+                    .orderByKey()
+                    .equalTo(exerciseListId);
+
+            mExerciseSetListQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ExerciseSetDetails myChild;
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        for (DataSnapshot item : child.getChildren()) {
+                            myChild = item.getValue(ExerciseSetDetails.class);
+                            Log.d("TAG", "onDataChanging: " + myChild);
+                            if (myChild.getExerciseId().equals(exerciseId)) {
+                                list = myChild.getExerciseSetItems();
+                            }
+                        }
+                    }
+                    view.callNotifyDatasetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
 
-    public ExerciseSetListPresenter(ExerciseSetListContract.View view, List<ExerciseSetItem> list) {
-        this.view = view;
-        this.list = list;
-    }
 
     @Override
     public void onBindItemViewAtPosition(ExerciseSetListContract.View.Item holder, int position) {
@@ -30,6 +66,7 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
     public int getSeriesCount() {
         return list.size();
     }
+
 
     @Override
     public void onSerieAdded(int reps, float loads) {
@@ -50,6 +87,16 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
         view.callNotifyItemRemoved(position);
         view.callNotifyItemRangeChanged(position, list.size());
         view.callNotifyDatasetChanged();
+    }
+
+    @Override
+    public void onUpdateRepsRequested(int newRep, int position) {
+        list.get(position).setReps(newRep);
+    }
+
+    @Override
+    public void onUpdateLoadsRequested(float newLoad, int position) {
+        list.get(position).setLoad(newLoad);
     }
 
     @Override

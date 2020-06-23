@@ -24,6 +24,8 @@ public interface ExerciseSetListContract {
         void onSerieAdded(int reps, float loads);
         void setSeriesList(List<ExerciseSetItem> list);
         void removeItemAt(int position);
+        void onUpdateRepsRequested(int newRep, int position);
+        void onUpdateLoadsRequested(float newLoad, int position);
         ArrayList<Integer> getReps();
         ArrayList<Float> getLoads();
     }

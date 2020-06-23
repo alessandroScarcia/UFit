@@ -108,17 +108,6 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult: " + " AZWEGNAAA");
-        if (resultCode == 0) {
-
-            adapter.callNotifyDataSetChanged();
-        }
-
-    }
-
-    @Override
     public void showPersonalWorkoutPlans() {
         adapter.showPersonalWorkoutPlans();
         fabAdd.show();

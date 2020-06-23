@@ -18,10 +18,13 @@ import java.util.Objects;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExercisesListAdapter;
+import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.PICK_EXERCISE;
 import static it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutContract.Presenter.RESULT_SUCCESSFUL;
@@ -122,11 +125,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
     @Override
     public void saveData() {
-        adapter.saveCurrentWorkoutPlan(Objects.requireNonNull(txtName.getText()).toString());
-        Intent intent = new Intent();
-        setResult(CODE_SUCCESSFUL, intent);
+
+        adapter.saveCurrentWorkoutPlan(txtName.getText().toString());
+        // TODO notify data set changed
         finish();
-        //overridePendingTransition(R.anim.idle, R.anim.exit_to_right);
     }
 
     /**

@@ -85,16 +85,6 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
     }
 
     @Override
-    public void callNotifyItemRemoved(int position) {
-        notifyItemRemoved(position);
-    }
-
-    @Override
-    public void callNotifyItemRangeChanged(int position, int range) {
-        notifyItemRangeChanged(position, range);
-    }
-
-    @Override
     public void callNotifyDataSetChanged() {
         notifyDataSetChanged();
     }
@@ -113,6 +103,7 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
     public ArrayList<String> getExercisesIdList() {
         return presenter.onExercisesIdRequested();
     }
+
 
     /*
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
@@ -180,8 +171,9 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
         }
 
-        public void setExerciseSetsAdapter(int position, List<ExerciseSetItem> exerciseSets){
-            adapter = new ExerciseSetListAdapter(editable, presenter.onSetsListRequested(position));
+        @Override
+        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId){
+            adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId);
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
         }
