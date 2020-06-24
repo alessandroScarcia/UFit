@@ -136,9 +136,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
     @Override
     public void saveData() {
-
         adapter.createNewWorkoutPlan(Objects.requireNonNull(txtName.getText()).toString());
         // TODO notify data set changed
+        Intent intent = new Intent();
+        setResult(0, intent);
         finish();
     }
 
