@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
+import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist.WorkoutPlansListAdapter;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.R;
@@ -31,12 +32,14 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
 
     private TabLayout tlWorkoutPlans;
     private FloatingActionButton fabAdd;
+    LauncherActivity launcher;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new WorkoutPlansPresenter(this);
         adapter = new WorkoutPlansListAdapter(this);
+        launcher = (LauncherActivity) getActivity();
     }
 
     @Nullable
@@ -93,9 +96,14 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
 
     @Override
     public void addNewPlan() {
-        startActivity(new Intent( getContext(), CreatingWorkoutActivity.class));
+        startActivityForResult(new Intent(getContext(), CreatingWorkoutActivity.class), 0);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        launcher.insertPlansFragment();
+    }
 
     @Override
     public void insertShowWorkoutPlanFragment(String workoutPlanId) {
