@@ -48,14 +48,14 @@ public class HomeFragment extends Fragment implements iAdvice.View {
         presenter.getRandomAdvice();
 
 
-        Button btnTimer = view.findViewById(R.id.btnTimerDialog);
-        btnTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialog();
-            }
-        });
+//   TODO     Button btnTimer = view.findViewById(R.id.btnTimerDialog);
+//        btnTimer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                openDialog();
+//            }
+//        });
 
         Button btnWebsite = view.findViewById(R.id.btnWebsite);
 

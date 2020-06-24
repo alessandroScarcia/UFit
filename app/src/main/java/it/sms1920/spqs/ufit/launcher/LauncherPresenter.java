@@ -80,9 +80,11 @@ public class LauncherPresenter implements LauncherContract.Presenter {
                 view.endActivity();
                 break;
             case SHOW_PLAN:
+                currentFragment = PLANS;
                 view.insertPlansFragment();
                 break;
             default:
+                currentFragment = HOME;
                 view.insertHomeFragment();
         }
     }

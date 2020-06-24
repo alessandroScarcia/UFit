@@ -30,41 +30,16 @@
             android:id="@+id/tvWorkoutPlanName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_standard_margin"
+            android:layout_marginBottom="@dimen/big_standard_margin"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
             android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:text="supporting text"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvWorkoutPlanName" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
-            style="?attr/borderlessButtonStyle"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginEnd="24dp"
-            app:icon="@drawable/ic_pencil_normal"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="@dimen/icon_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
 
-        </com.google.android.material.button.MaterialButton>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
