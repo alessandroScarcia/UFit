@@ -1,23 +1,12 @@
 package it.sms1920.spqs.ufit.launcher.userstats.strenght_test;
 
-import android.content.Context;
+
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import it.sms1920.spqs.ufit.launcher.R;
-import it.sms1920.spqs.ufit.model.firebase.database.Advice;
+
+
 
 
 public class StrenghtTestList implements iStrenghtTest.Presenter {
@@ -61,10 +50,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
         return setWeightList.size();
     }
 
-    @Override
-    public void addNewWeightItem(String reps, String weight) {
 
-    }
 
     @Override
     public void loadSetList() {

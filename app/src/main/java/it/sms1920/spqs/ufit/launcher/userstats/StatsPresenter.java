@@ -3,12 +3,8 @@
 package it.sms1920.spqs.ufit.launcher.userstats;
 
 import android.content.Context;
-
-
 import java.util.List;
 import java.util.Random;
-
-import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.model.room.Stats;
 import it.sms1920.spqs.ufit.model.room.UserStats;
 
@@ -17,14 +13,12 @@ import static java.sql.Types.NULL;
 
 public class StatsPresenter implements iStatsFragment.Presenter {
     private static final float NULL_STATS = 0;
-    private Stats statsModel;
     private final iStatsFragment.View view;
     public UserStats userStats;
-    private Context contextStats;
+
 
     public StatsPresenter(iStatsFragment.View view, Context context) {
         this.view = view;
-        contextStats = context;
         initializeDatabase(context);
 
         //this check is useful for the first insert
@@ -49,19 +43,19 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     /**
      * Setting database inside the model
      *
-     * @param context
+     * @param context context from the fragment
      */
     @Override
     public void setDatabase(Context context) {
-        statsModel = new Stats(this);
+        Stats statsModel = new Stats(this);
         statsModel.createDatabase(context);
     }
 
     /**
      * Function to calculate the BMI
      *
-     * @param weight
-     * @return
+     * @param weight parameter to calculate the BMI
+     * @return BMI
      */
     @Override
     public float calculateBMI(float weight) {
@@ -75,14 +69,13 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
     /**
-     * @param weight
-     * @param bodyFat
-     * @return
+     * @param weight weight of the user
+     * @param bodyFat fat of the user
+     * @return FFMI
      */
     @Override
     public float calculateFFMI(float weight, float bodyFat) {
-        float FFMI = weight * (1 - (bodyFat / 100));
-        return FFMI;
+        return weight * (1 - (bodyFat / 100));
     }
 
     /**
@@ -159,11 +152,11 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
 
-    public void deleteRecordStats(int id) {
-        UserStats userStats = new UserStats();
-        userStats.setIdUserStats(id);
-        Stats.localDatabase.userStatsDAO().deleteUserStats(userStats);
-    }
+//    public void deleteRecordStats(int id) {
+//        UserStats userStats = new UserStats();
+//        userStats.setIdUserStats(id);
+//        Stats.localDatabase.userStatsDAO().deleteUserStats(userStats);
+//    }
 
 
     @Override
@@ -207,11 +200,8 @@ public class StatsPresenter implements iStatsFragment.Presenter {
 
     @Override
     public boolean checkExistUserStats() {
-        if (userStats.getWeight() == NULL_STATS && userStats.getFat() == NULL_STATS &&
-                userStats.getMuscle() == NULL_STATS && userStats.getWater() == NULL_STATS) {
-            return true;
-        }
-        return false;
+        return userStats.getWeight() == NULL_STATS && userStats.getFat() == NULL_STATS &&
+                userStats.getMuscle() == NULL_STATS && userStats.getWater() == NULL_STATS;
     }
 
     @Override
@@ -312,23 +302,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             float FFMIValue = calculateFFMI(userStats.getWeight(), fat);
             view.setFFMI(String.valueOf(FFMIValue));
 
-            String strFFMIStatus;
-            if(FFMIValue < 17){
-                strFFMIStatus = contextStats.getString(R.string.ffmi_below_average);
-            }else if(FFMIValue >= 18 && FFMIValue <= 19){
-                strFFMIStatus = contextStats.getString(R.string.ffmi_average);
-            }else if(FFMIValue >= 20 && FFMIValue <= 21){
-                strFFMIStatus = contextStats.getString(R.string.ffmi_above_average);
-            }else if(FFMIValue == 22 ){
-                strFFMIStatus = contextStats.getString(R.string.ffmi_excellent);
-            }else if (FFMIValue >= 23 && FFMIValue <= 25){
-                strFFMIStatus = contextStats.getString(R.string.ffmi_superior);
-            }else if (FFMIValue >= 26 && FFMIValue <= 27){
-                strFFMIStatus = contextStats.getString(R.string.ffmi_sospicius);
-            }else {
-                strFFMIStatus = contextStats.getString(R.string.ffmi_not_natural);
-            }
-            view.setFFMIStatus(strFFMIStatus);
+            view.setFFMIStatus(FFMIValue);
 
         }
     }
@@ -346,25 +320,12 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     public void setBMITextView(float weight) {
         float BMIValue = calculateBMI(weight);
         view.setBMI(String.valueOf(BMIValue));
-        String strBMIStatus;
 
-       if(BMIValue < 16.5){
-           strBMIStatus = contextStats.getString(R.string.severe_low_weight);
-       }else if(BMIValue >= 16.5 && BMIValue <= 18.4){
-           strBMIStatus = contextStats.getString(R.string.low_weight);
-       }else if(BMIValue >= 18.5 && BMIValue <= 24.9){
-           strBMIStatus = contextStats.getString(R.string.normal);
-        }else if(BMIValue >= 25 && BMIValue <= 30){
-           strBMIStatus = contextStats.getString(R.string.overweight);
-        }else if (BMIValue >= 30.1 && BMIValue <= 34.9){
-           strBMIStatus = contextStats.getString(R.string.obesity_first_level);
-       }else if (BMIValue >= 35 && BMIValue <= 40){
-           strBMIStatus = contextStats.getString(R.string.obesity_second_level);
-       }else {
-           strBMIStatus = contextStats.getString(R.string.obesity_third_level);
-       }
-        view.setBMIStatus(strBMIStatus);
+
+        view.setBMIStatus(BMIValue);
     }
+
+
 //    public void callRemoveRecordStats(int id) {
 //        deleteRecordStats(id);
 //    }

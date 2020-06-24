@@ -4,8 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,11 +14,11 @@ public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapte
 
     private iStrenghtTest.Presenter presenter;
 
-    private StrenghtTestFragment parentFragment;
+//    private StrenghtTestFragment parentFragment;
 
-    public StrenghtTestAdapter(StrenghtTestFragment parentFragment) {
+    public StrenghtTestAdapter() {
         presenter = new StrenghtTestList(this);
-        this.parentFragment = parentFragment;
+//        this.parentFragment = parentFragment;
     }
 
     @NonNull
@@ -56,11 +54,9 @@ public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapte
     }
 
 
-
-    public class StrenghtHolder extends RecyclerView.ViewHolder implements iStrenghtTest.View.Item {
+    public static class StrenghtHolder extends RecyclerView.ViewHolder implements iStrenghtTest.View.Item {
         private TextView tvReps;
         private TextView tvWeight;
-        private int position;
 
 
         public StrenghtHolder(@NonNull final View itemView) {
@@ -83,7 +79,6 @@ public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapte
 
         @Override
         public void setPosition(int position) {
-            this.position = position;
         }
 
 

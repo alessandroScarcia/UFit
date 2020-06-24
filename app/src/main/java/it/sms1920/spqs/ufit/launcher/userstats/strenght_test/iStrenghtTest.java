@@ -22,14 +22,10 @@ public interface iStrenghtTest {
     }
 
     interface Presenter {
-        
 
         void onBindWeightItemListViewAtPosition(iStrenghtTest.View.Item holder, int position);
 
         int getWeightCount();
-
-        void addNewWeightItem(String reps, String weight);
-
 
         void loadSetList();
 

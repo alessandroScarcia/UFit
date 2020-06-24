@@ -124,7 +124,10 @@
     <!-- Image content descriptions -->
     <string name="imgExercise">Exercise image</string>
     <string name="choose_activity_text">Oh no! Looks like no account is logged in yet! ☹</string>
-    <string name="formulaBMI">Peso(kg) / (Altezza x Altezza(m))</string>
+
+
+
+    <string name="formulaBMI">weight(kg) / (height x height(m))</string>
     <string name="ffmiFormula">weight [kg] * (1 - (body fat [%]/ 100))</string>
     <string name="btnConnectionTrainer">Connect with your trainer</string>
     <string name="severe_low_weight">Severe underweight</string>
@@ -142,18 +145,18 @@
     <string name="ffmi_sospicius">Sospicius not natural</string>
     <string name="ffmi_not_natural">Obteined with steroids</string>
     <string name="RM">1 RM</string>
-    <string name="reps_3_2">3-2</string>
-    <string name="reps_5_4">5-4</string>
-    <string name="reps_7_6">7-6</string>
-    <string name="reps_9_8">9-8</string>
-    <string name="reps_11_10">11-10</string>
-    <string name="reps_13_12">13-12</string>
-    <string name="reps_15_14">15-14</string>
-    <string name="reps_17_16">17-16</string>
-    <string name="reps_18_19">19-18</string>
-    <string name="reps_20">20</string>
+    <string name="reps_3_2">3/2 reps</string>
+    <string name="reps_5_4">5/4 reps</string>
+    <string name="reps_7_6">7/6 reps</string>
+    <string name="reps_9_8">9/8 reps</string>
+    <string name="reps_11_10">11/10 reps</string>
+    <string name="reps_13_12">13/12 reps</string>
+    <string name="reps_15_14">15/14 reps</string>
+    <string name="reps_17_16">17/16 reps</string>
+    <string name="reps_18_19">19/18 reps</string>
+    <string name="reps_20">20 reps</string>
     <string name="selectReps">Select reps</string>
     <string name="insertWeight">Insert the weight of the exercise</string>
-    <string name="calculate">calculate</string>
+    <string name="calculate">Calculate</string>
 
 </resources>

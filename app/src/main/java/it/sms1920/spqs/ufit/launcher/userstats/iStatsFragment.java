@@ -1,10 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.userstats;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
 
-import it.sms1920.spqs.ufit.model.room.UserStats;
 
 /**
  * Contract used to set the content inside the fragment of the Stats
@@ -59,9 +56,9 @@ public interface iStatsFragment {
 
         void setBMI(String valueOf);
 
-        void setBMIStatus(String strBMIStatus);
+        void setBMIStatus(float strBMIStatus);
 
-        void setFFMIStatus(String strFFMIStatus);
+        void setFFMIStatus(float strFFMIStatus);
     }
 
 

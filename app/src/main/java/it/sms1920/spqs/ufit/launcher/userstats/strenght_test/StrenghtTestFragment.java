@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.userstats.strenght_test;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,20 +21,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.util.Objects;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
 
-public class StrenghtTestFragment extends Fragment implements iStrenghtTestFragment.View {
-//    private iStrenghtTestFragment.Presenter presenter;
+public class StrenghtTestFragment extends Fragment{
 
     private static StrenghtTestAdapter adapter;
 
-    private Button btnSelectReps;
+    @SuppressLint("StaticFieldLeak")
     private static EditText etInsertWeight;
 
 
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
 
     private static int checkIdRadioButton = 0;
@@ -41,8 +42,7 @@ public class StrenghtTestFragment extends Fragment implements iStrenghtTestFragm
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        presenter = new StrenghtTestPresenter(this);
-        adapter = new StrenghtTestAdapter(this);
+        adapter = new StrenghtTestAdapter();
     }
 
     @Nullable
@@ -50,7 +50,7 @@ public class StrenghtTestFragment extends Fragment implements iStrenghtTestFragm
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
         context = view.getContext();
-        btnSelectReps = view.findViewById(R.id.btnRepsDialog);
+        Button btnSelectReps = view.findViewById(R.id.btnRepsDialog);
 
         btnSelectReps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +67,6 @@ public class StrenghtTestFragment extends Fragment implements iStrenghtTestFragm
                 adapter.calculateWeight(checkIdRadioButton, etInsertWeight.getText().toString());
             }
         });
-
-
 
         etInsertWeight = view.findViewById(R.id.etWeightUsed);
 
@@ -88,6 +86,7 @@ public class StrenghtTestFragment extends Fragment implements iStrenghtTestFragm
     public void openDialog() {
         RepsChoiceDialog dialogBox = new RepsChoiceDialog();
         dialogBox.setTargetFragment(this, 1);
+        assert getFragmentManager() != null;
         dialogBox.show(getFragmentManager(), "example dialog");
     }
 
@@ -107,13 +106,14 @@ public class StrenghtTestFragment extends Fragment implements iStrenghtTestFragm
         /**
          * When the dialog is created the layout show 2 editText inside it to insert the title and
          * the description of the new advice
-         * @param savedInstanceState
+         * @param savedInstanceState istance of the dialog
          * @return builder.create()
          */
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+            LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
             View view = inflater.inflate(R.layout.layout_dialog_rep_choice, null);
 
             builder.setView(view)

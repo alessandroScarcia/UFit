@@ -39,42 +39,52 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
-import static java.sql.Types.NULL;
 
-
-public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener{
+public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = StatsFragment.class.getCanonicalName();
     private static iStatsFragment.Presenter presenter;
-    private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
 
     //declaration of all the text view inside the 2 different tab content
+    @SuppressLint("StaticFieldLeak")
     private static TextView weight;
+
+    @SuppressLint("StaticFieldLeak")
     private static TextView fat;
+
+    @SuppressLint("StaticFieldLeak")
     private static TextView water;
+
+    @SuppressLint("StaticFieldLeak")
     private static TextView muscle;
     private TextView weightDate;
     private TextView fatDate;
     private TextView waterDate;
     private TextView muscleDate;
+    @SuppressLint("StaticFieldLeak")
     private static TextView arm;
     private TextView armDate;
+    @SuppressLint("StaticFieldLeak")
     private static TextView chest;
     private TextView chestDate;
+    @SuppressLint("StaticFieldLeak")
     private static TextView waist;
     private TextView waistDate;
+    @SuppressLint("StaticFieldLeak")
     private static TextView tight;
     private TextView tightDate;
+    @SuppressLint("StaticFieldLeak")
     private static TextView calve;
     private TextView calveDate;
 
     public ImageButton imcHelp;
     public ImageButton ffmiHelp;
-    
+
     private TextView BMI;
     private TextView FFMI;
 
@@ -95,15 +105,16 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         //setting content of frame layout
         containerLayout = view.findViewById(R.id.container_stats);
-        View child = getLayoutInflater().inflate(R.layout.general_stats, null);
+        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.general_stats, null);
+
         containerLayout.addView(child);
         context = getActivity();
-        presenter = new StatsPresenter(this,context);
+        presenter = new StatsPresenter(this, context);
 
         setViewsDataGeneralStats(view);
 
         //set options of tab menu
-        tlStats = view.findViewById(R.id.tlStats);
+        TabLayout tlStats = view.findViewById(R.id.tlStats);
         tlStats.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
@@ -114,7 +125,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                 //if the activity show the content of the first tab the data are set
                 if (tab.getPosition() == 0) {
                     setViewsDataGeneralStats(view);
-                }else if(tab.getPosition() == 1){
+                } else if (tab.getPosition() == 1) {
                     setViewsDataMuscleStats(view);
                 }
 
@@ -129,12 +140,11 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             public void onTabReselected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
                     setViewsDataGeneralStats(view);
-                }else if(tab.getPosition() == 1){
+                } else if (tab.getPosition() == 1) {
                     setViewsDataMuscleStats(view);
                 }
             }
         });
-
 
 
         imcHelp = view.findViewById(R.id.imcHelp);
@@ -162,17 +172,16 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     }
 
 
-
-
     /**
      * Function used to show the dialog box set by the the class of StatsDialog
      *
-     * @param textViewValue
-     * @param textViewDate
+     * @param textViewValue textView that call the dialog and will receive the value
+     * @param textViewDate textView that call the dialog and will receive the date
      */
     public void openDialog(TextView textViewValue, TextView textViewDate) {
         StatsDialog dialogBox = new StatsDialog(textViewValue, textViewDate);
         dialogBox.setTargetFragment(this, 1);
+        assert getFragmentManager() != null;
         dialogBox.show(getFragmentManager(), "example dialog");
     }
 
@@ -182,7 +191,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showGeneralStats() {
         containerLayout.removeAllViewsInLayout();
-        View child = getLayoutInflater().inflate(R.layout.general_stats, null);
+        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.general_stats, null);
         containerLayout.addView(child);
     }
 
@@ -192,7 +201,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showBodyStats() {
         containerLayout.removeAllViewsInLayout();
-        View child = getLayoutInflater().inflate(R.layout.muscle_measurment, null);
+        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.muscle_measurment, null);
         containerLayout.addView(child);
     }
 
@@ -200,10 +209,10 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     /**
      * Function to update the data inserted in dialog box
      *
-     * @param value
-     * @param date
-     * @param textViewValue
-     * @param textViewDate
+     * @param value value from dialog
+     * @param date  date from dialog
+     * @param textViewValue textView to edit with the value
+     * @param textViewDate  textView to edit with the date
      */
 
     public static void applyTexts(float value, String date, TextView textViewValue, TextView textViewDate) {
@@ -219,15 +228,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             presenter.updateWater(value, date);
         } else if (textViewValue == muscle) {
             presenter.updateMuscle(value, date);
-        }else if(textViewValue == arm){
+        } else if (textViewValue == arm) {
             presenter.updateArm(value, date);
-        }else if(textViewValue == chest){
+        } else if (textViewValue == chest) {
             presenter.updateChest(value, date);
-        }else if(textViewValue == waist){
+        } else if (textViewValue == waist) {
             presenter.updateWaist(value, date);
-        }else if(textViewValue == tight){
+        } else if (textViewValue == tight) {
             presenter.updateTight(value, date);
-        }else if(textViewValue == calve){
+        } else if (textViewValue == calve) {
             presenter.updateCalve(value, date);
         }
     }
@@ -239,7 +248,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         BMI = view.findViewById(R.id.bmiValue);
         FFMI = view.findViewById(R.id.ffmiValue);
         weightDate = view.findViewById(R.id.weightDateInput);
-        tvBMIStatus =  view.findViewById(R.id.tvBMIStatus);
+        tvBMIStatus = view.findViewById(R.id.tvBMIStatus);
         tvFFMIStatus = view.findViewById(R.id.tvFFMIStatus);
 
         //text view of weight show the dialog box
@@ -354,7 +363,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     }
 
     public void setWater(String waterValue) {
-        water.setText(waterValue);    }
+        water.setText(waterValue);
+    }
 
     public void setMuscle(String muscleValue) {
         muscle.setText(muscleValue);
@@ -392,7 +402,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         chestDate.setText(chestDateValue);
     }
 
-    public  void setWaist(String waistValue) {
+    public void setWaist(String waistValue) {
         waist.setText(waistValue);
     }
 
@@ -400,7 +410,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         waistDate.setText(waistDateValue);
     }
 
-    public  void setTight(String tightValue) {
+    public void setTight(String tightValue) {
         tight.setText(tightValue);
     }
 
@@ -408,7 +418,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         tightDate.setText(tightDateValue);
     }
 
-    public  void setCalve(String calveValue) {
+    public void setCalve(String calveValue) {
         calve.setText(calveValue);
     }
 
@@ -420,12 +430,44 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         BMI.setText(BMIValue);
     }
 
-    public void setBMIStatus(String strBMIStatus) {
+    public void setBMIStatus(float BMIValue) {
+        String strBMIStatus;
+        if(BMIValue < 16.5){
+            strBMIStatus = getString(R.string.severe_low_weight);
+        }else if(BMIValue >= 16.5 && BMIValue <= 18.4){
+            strBMIStatus = getString(R.string.low_weight);
+        }else if(BMIValue >= 18.5 && BMIValue <= 24.9){
+            strBMIStatus = getString(R.string.normal);
+        }else if(BMIValue >= 25 && BMIValue <= 30){
+            strBMIStatus = getString(R.string.overweight);
+        }else if (BMIValue >= 30.1 && BMIValue <= 34.9){
+            strBMIStatus = getString(R.string.obesity_first_level);
+        }else if (BMIValue >= 35 && BMIValue <= 40){
+            strBMIStatus = getString(R.string.obesity_second_level);
+        }else {
+            strBMIStatus = getString(R.string.obesity_third_level);
+        }
         tvBMIStatus.setText(strBMIStatus);
     }
 
     @Override
-    public void setFFMIStatus(String strFFMIStatus) {
+    public void setFFMIStatus(float FFMIValue) {
+        String strFFMIStatus;
+        if(FFMIValue < 17){
+            strFFMIStatus = getString(R.string.ffmi_below_average);
+        }else if(FFMIValue >= 18 && FFMIValue <= 19){
+            strFFMIStatus = getString(R.string.ffmi_average);
+        }else if(FFMIValue >= 20 && FFMIValue <= 21){
+            strFFMIStatus = getString(R.string.ffmi_above_average);
+        }else if(FFMIValue == 22 ){
+            strFFMIStatus = getString(R.string.ffmi_excellent);
+        }else if (FFMIValue >= 23 && FFMIValue <= 25){
+            strFFMIStatus = getString(R.string.ffmi_superior);
+        }else if (FFMIValue >= 26 && FFMIValue <= 27){
+            strFFMIStatus = getString(R.string.ffmi_sospicius);
+        }else {
+            strFFMIStatus = getString(R.string.ffmi_not_natural);
+        }
         tvFFMIStatus.setText(strFFMIStatus);
     }
 
@@ -458,8 +500,9 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         /**
          * Construct od the Stats Dialog
+         *
          * @param textViewValue textView that will contain the value of the parameter setted
-         * @param textViewDate textView that will contain the date of the parameter setted
+         * @param textViewDate  textView that will contain the date of the parameter setted
          */
         public StatsDialog(TextView textViewValue, TextView textViewDate) {
             this.textViewValue = textViewValue;
@@ -468,13 +511,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         /**
          * When the dialog is created the layout show 2 editText inside it. One of them use datePicker
-         * @param savedInstanceState
+         *
+         * @param savedInstanceState istance of dialog
          * @return builder.create()
          */
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+            LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
             View view = inflater.inflate(R.layout.layout_dialog, null);
 
             builder.setView(view)
@@ -513,7 +558,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                     mounth = calendar.get(Calendar.MONTH);
                     dayOfMounth = calendar.get(Calendar.DAY_OF_MONTH);
 
-                    datePickerDialog = new DatePickerDialog(getTargetFragment().getContext(),
+                    datePickerDialog = new DatePickerDialog(Objects.requireNonNull
+                            (Objects.requireNonNull(getTargetFragment()).getContext()),
                             new DatePickerDialog.OnDateSetListener() {
                                 @SuppressLint("SetTextI18n")
                                 @Override
@@ -529,8 +575,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         }
     }
-
-
 
 
 }
