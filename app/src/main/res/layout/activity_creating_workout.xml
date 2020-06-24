@@ -47,7 +47,6 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-
             android:background="@color/lightGray"
             android:id="@+id/lstExercises"
             android:layout_width="match_parent"

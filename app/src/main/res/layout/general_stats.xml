@@ -2,15 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#EEEEEE"
-    android:id="@+id/tab_weight">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EEEEEE"
-        android:gravity="center"
+        android:background="@color/lightGray"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingLeft="0dp"
         android:paddingTop="0dp"
@@ -24,7 +22,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
@@ -34,9 +32,10 @@
                 android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -58,10 +57,9 @@
                     <TextView
                         android:id="@+id/weightInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center|clip_vertical"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="1"
                         android:gravity="center_vertical|center_horizontal"
                         android:lines="1"
                         android:maxWidth="100dp"
@@ -71,14 +69,12 @@
                         android:textSize="30sp"
                         tools:text="70.5" />
 
-
                     <TextView
                         android:id="@+id/weightDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center|clip_vertical"
                         android:layout_marginTop="5dp"
-                        android:layout_weight="1"
                         android:gravity="center_vertical|center_horizontal"
                         android:inputType="text"
                         android:lines="1"
@@ -104,9 +100,16 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:id="@+id/cardWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
@@ -185,7 +188,13 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:id="@+id/cardFat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
@@ -196,7 +205,8 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
@@ -272,9 +282,16 @@
                         app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:id="@+id/cardMuscle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -350,21 +367,27 @@
                         app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/cardWater"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="start"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_margin="5dp"
                 android:layout_weight="50"
@@ -422,9 +445,9 @@
                             android:layout_height="match_parent"
                             android:ellipsize="start"
                             android:gravity="center"
+                            android:text="@string/normal"
                             android:textSize="20sp"
                             android:textStyle="italic"
-                            android:text="@string/normal"
                             tools:text="normal" />
 
                         <ImageButton
@@ -457,9 +480,9 @@
                             android:gravity="center"
                             android:maxWidth="100dp"
                             android:maxLines="1"
+                            android:text="-"
                             android:textColor="@color/colorPrimary"
                             android:textSize="20sp"
-                            android:text="-"
                             tools:text="20" />
 
                         <TextView
@@ -535,9 +558,9 @@
 
                 </TableLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
@@ -557,7 +580,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

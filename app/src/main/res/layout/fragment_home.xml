@@ -1,146 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <!--    <com.google.android.material.card.MaterialCardView-->
+    <!--        android:id="@+id/lytRandomAdvice"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="@dimen/small_standard_margin"-->
+    <!--        android:layout_marginTop="@dimen/standard_margin"-->
+    <!--        android:background="@color/colorTransparent"-->
+    <!--        android:backgroundTint="@color/colorTransparent"-->
+
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:strokeColor="@color/colorTransparent"-->
+    <!--        app:strokeWidth="0dp">-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/small_standard_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="1dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="right">
-            <!-- Profile image-->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnTimerDialog"
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="@dimen/timer_icon_width"
-                android:layout_height="@dimen/timer_icon_height"
-                android:layout_marginEnd="16dp"
-                app:icon="@drawable/ic_baseline_timer_24"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconSize="@dimen/timer_icon_height"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.227" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitleRandomAdvice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView5"
-            android:layout_marginTop="20dp">
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/lytRandomAdvice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:strokeWidth="1dp">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/big_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
+            android:background="@color/colorOnSurface"
+            app:layout_constraintEnd_toEndOf="@+id/tvTitleRandomAdvice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleRandomAdvice" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <!-- Title, secondary and supporting text -->
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvDescriptionRandomAdvice"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="16dp"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvTitleRandomAdvice" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvTitleRandomAdvice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="24dp"
-                        android:text="Title advice"
-                        android:textAppearance="?attr/textAppearanceHeadline6"
-                        android:textColor="?android:attr/textColorSecondary"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Title, secondary and supporting text -->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDescriptionRandomAdvice"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/big_standard_margin"
             android:layout_marginTop="@dimen/standard_margin"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/imgProfileContainer"
-                android:layout_width="@dimen/wallpaper_home_width"
-                android:layout_height="@dimen/wallpaper_home_height"
-                app:cardCornerRadius="@dimen/profile_image_corner_radius"
-                app:cardElevation="1dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_home_wallpaper" />
-
-                    <Button
-                        android:id="@+id/btnWebsite"
-                        android:layout_width="200dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="117dp"
-                        android:layout_marginBottom="19dp"
-                        android:text="Visit Our Website" />
-                </RelativeLayout>
-
-                <!--            <com.google.android.material.button.MaterialButton-->
-                <!--                android:id="@+id/btnDeleteAdvice"-->
-                <!--                style="?attr/borderlessButtonStyle"-->
-                <!--                android:layout_width="@dimen/icon_size"-->
-                <!--                android:layout_height="@dimen/icon_size"-->
-                <!--                android:layout_marginEnd="16dp"-->
-                <!--                app:icon="@drawable/ic_deleter_forever"-->
-                <!--                app:iconGravity="textStart"-->
-                <!--                app:iconPadding="0dp"-->
-                <!--                app:iconSize="@dimen/icon_size"-->
-                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                app:layout_constraintTop_toTopOf="parent"-->
-                <!--                app:layout_constraintVertical_bias="0.227">-->
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/big_standard_margin"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleRandomAdvice"
+            android:layout_width="0dp" />
 
 
-                <!--            </com.google.android.material.button.MaterialButton>-->
 
-            </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    </com.google.android.material.card.MaterialCardView>-->
 
 
-        </LinearLayout>
+    <!--  TODO          <com.google.android.material.button.MaterialButton-->
+    <!--                android:id="@+id/btnTimerDialog"-->
+    <!--                style="?attr/borderlessButtonStyle"-->
+    <!--                android:layout_width="@dimen/timer_icon_width"-->
+    <!--                android:layout_height="@dimen/timer_icon_height"-->
+    <!--                android:layout_marginEnd="16dp"-->
+    <!--                app:icon="@drawable/ic_baseline_timer_24"-->
+    <!--                app:iconGravity="textStart"-->
+    <!--                app:iconPadding="0dp"-->
+    <!--                app:iconSize="@dimen/timer_icon_height"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintVertical_bias="0.227" />-->
 
-    </LinearLayout>
-</ScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="600dp"
+        android:layout_height="500dp"
+        android:elevation="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/img_home_wallpaper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnWebsite"
+        style="@style/CustomMaterialButton"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:text="Visit Our Website"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
@@ -44,11 +45,24 @@ import java.util.Objects;
 import it.sms1920.spqs.ufit.launcher.R;
 
 
+
 public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = StatsFragment.class.getCanonicalName();
     private static iStatsFragment.Presenter presenter;
+    private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
+
+    private LinearLayout cardWeight;
+    private LinearLayout cardFat;
+    private LinearLayout cardWater;
+    private LinearLayout cardMuscle;
+
+    private LinearLayout cardArm;
+    private LinearLayout cardChest;
+    private LinearLayout cardWaist;
+    private LinearLayout cardTight;
+    private LinearLayout cardCalve;
 
     //declaration of all the text view inside the 2 different tab content
     @SuppressLint("StaticFieldLeak")
@@ -147,6 +161,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         });
 
 
+
         imcHelp = view.findViewById(R.id.imcHelp);
 
         imcHelp.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +185,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         return view;
     }
+
+
 
 
     /**
@@ -251,8 +268,12 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         tvBMIStatus = view.findViewById(R.id.tvBMIStatus);
         tvFFMIStatus = view.findViewById(R.id.tvFFMIStatus);
 
-        //text view of weight show the dialog box
-        weight.setOnClickListener(new View.OnClickListener() {
+
+        weight = view.findViewById(R.id.weightInput);
+        weightDate = view.findViewById(R.id.weightDateInput);
+        cardWeight = view.findViewById(R.id.cardWeight);
+
+        cardWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -260,9 +281,11 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             }
         });
 
+
         fat = view.findViewById(R.id.fatInput);
         fatDate = view.findViewById(R.id.fatDateInput);
-        fat.setOnClickListener(new View.OnClickListener() {
+        cardFat = view.findViewById(R.id.cardFat);
+        cardFat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -272,7 +295,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         muscle = view.findViewById(R.id.musclesInput);
         muscleDate = view.findViewById(R.id.musclesDateInput);
-        muscle.setOnClickListener(new View.OnClickListener() {
+        cardMuscle = view.findViewById(R.id.cardMuscle);
+        cardMuscle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -282,7 +306,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         water = view.findViewById(R.id.waterInput);
         waterDate = view.findViewById(R.id.waterDateInput);
-        water.setOnClickListener(new View.OnClickListener() {
+        cardWater = view.findViewById(R.id.cardWater);
+        cardWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -299,10 +324,10 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         chest = view.findViewById(R.id.chestInput);
         chestDate = view.findViewById(R.id.chestDateInput);
-
+        cardChest = view.findViewById(R.id.cardChest);
 
         //text view of weight show the dialog box
-        chest.setOnClickListener(new View.OnClickListener() {
+        cardChest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -312,7 +337,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         arm = view.findViewById(R.id.bicepsInput);
         armDate = view.findViewById(R.id.bicepsDateInput);
-        arm.setOnClickListener(new View.OnClickListener() {
+        cardArm = view.findViewById(R.id.cardArm);
+        cardArm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -322,7 +348,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         waist = view.findViewById(R.id.waistInput);
         waistDate = view.findViewById(R.id.waistDateInput);
-        waist.setOnClickListener(new View.OnClickListener() {
+        cardWaist = view.findViewById(R.id.cardWaist);
+        cardWaist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -332,7 +359,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         tight = view.findViewById(R.id.tightInput);
         tightDate = view.findViewById(R.id.tightDateInput);
-        tight.setOnClickListener(new View.OnClickListener() {
+        cardTight = view.findViewById(R.id.cardTight);
+        cardTight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -343,7 +371,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         calve = view.findViewById(R.id.calveInput);
         calveDate = view.findViewById(R.id.calveDateInput);
-        calve.setOnClickListener(new View.OnClickListener() {
+        cardCalve = view.findViewById(R.id.cardCalve);
+        cardCalve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
@@ -513,6 +542,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
          * When the dialog is created the layout show 2 editText inside it. One of them use datePicker
          *
          * @param savedInstanceState istance of dialog
+
          * @return builder.create()
          */
         @NonNull
@@ -575,6 +605,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         }
     }
+
+
 
 
 }

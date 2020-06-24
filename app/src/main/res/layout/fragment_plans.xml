@@ -50,6 +50,7 @@
             android:id="@+id/rvWorkoutPlans"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:background="@color/lightGray" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
