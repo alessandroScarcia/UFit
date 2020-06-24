@@ -49,20 +49,8 @@ import it.sms1920.spqs.ufit.launcher.R;
 public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = StatsFragment.class.getCanonicalName();
     private static iStatsFragment.Presenter presenter;
-    private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
-
-    private LinearLayout cardWeight;
-    private LinearLayout cardFat;
-    private LinearLayout cardWater;
-    private LinearLayout cardMuscle;
-
-    private LinearLayout cardArm;
-    private LinearLayout cardChest;
-    private LinearLayout cardWaist;
-    private LinearLayout cardTight;
-    private LinearLayout cardCalve;
 
     //declaration of all the text view inside the 2 different tab content
     @SuppressLint("StaticFieldLeak")
@@ -271,7 +259,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         weight = view.findViewById(R.id.weightInput);
         weightDate = view.findViewById(R.id.weightDateInput);
-        cardWeight = view.findViewById(R.id.cardWeight);
+        LinearLayout cardWeight = view.findViewById(R.id.cardWeight);
 
         cardWeight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,7 +272,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         fat = view.findViewById(R.id.fatInput);
         fatDate = view.findViewById(R.id.fatDateInput);
-        cardFat = view.findViewById(R.id.cardFat);
+        LinearLayout cardFat = view.findViewById(R.id.cardFat);
         cardFat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -295,7 +283,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         muscle = view.findViewById(R.id.musclesInput);
         muscleDate = view.findViewById(R.id.musclesDateInput);
-        cardMuscle = view.findViewById(R.id.cardMuscle);
+        LinearLayout cardMuscle = view.findViewById(R.id.cardMuscle);
         cardMuscle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -306,7 +294,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         water = view.findViewById(R.id.waterInput);
         waterDate = view.findViewById(R.id.waterDateInput);
-        cardWater = view.findViewById(R.id.cardWater);
+        LinearLayout cardWater = view.findViewById(R.id.cardWater);
         cardWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -324,7 +312,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         chest = view.findViewById(R.id.chestInput);
         chestDate = view.findViewById(R.id.chestDateInput);
-        cardChest = view.findViewById(R.id.cardChest);
+        LinearLayout cardChest = view.findViewById(R.id.cardChest);
 
         //text view of weight show the dialog box
         cardChest.setOnClickListener(new View.OnClickListener() {
@@ -337,7 +325,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         arm = view.findViewById(R.id.bicepsInput);
         armDate = view.findViewById(R.id.bicepsDateInput);
-        cardArm = view.findViewById(R.id.cardArm);
+        LinearLayout cardArm = view.findViewById(R.id.cardArm);
         cardArm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -348,7 +336,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         waist = view.findViewById(R.id.waistInput);
         waistDate = view.findViewById(R.id.waistDateInput);
-        cardWaist = view.findViewById(R.id.cardWaist);
+        LinearLayout cardWaist = view.findViewById(R.id.cardWaist);
         cardWaist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -359,7 +347,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         tight = view.findViewById(R.id.tightInput);
         tightDate = view.findViewById(R.id.tightDateInput);
-        cardTight = view.findViewById(R.id.cardTight);
+        LinearLayout cardTight = view.findViewById(R.id.cardTight);
         cardTight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -371,7 +359,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         calve = view.findViewById(R.id.calveInput);
         calveDate = view.findViewById(R.id.calveDateInput);
-        cardCalve = view.findViewById(R.id.cardCalve);
+        LinearLayout cardCalve = view.findViewById(R.id.cardCalve);
         cardCalve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

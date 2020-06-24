@@ -152,7 +152,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
         setToolbarTitle("Statistiche");
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StrenghtTestFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
     }
 
     @Override
