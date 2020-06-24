@@ -64,8 +64,8 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         presenter = new WorkoutExercisesListPresenter(this, workoutPlanId);
     }
 
-    public void saveCurrentWorkoutPlan(String name){
-        presenter.onSaveCurrentWorkoutPlanRequested(name);
+    public void createNewWorkoutPlan(String name){
+        presenter.onSaveNewWorkoutPlanRequested(name);
     }
 
     @NonNull
@@ -82,16 +82,6 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
     @Override
     public int getItemCount() {
         return presenter.getExerciseCount();
-    }
-
-    @Override
-    public void callNotifyItemRemoved(int position) {
-        notifyItemRemoved(position);
-    }
-
-    @Override
-    public void callNotifyItemRangeChanged(int position, int range) {
-        notifyItemRangeChanged(position, range);
     }
 
     @Override
@@ -113,6 +103,7 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
     public ArrayList<String> getExercisesIdList() {
         return presenter.onExercisesIdRequested();
     }
+
 
     /*
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
@@ -180,8 +171,9 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
         }
 
-        public void setExerciseSetsAdapter(int position, List<ExerciseSetItem> exerciseSets){
-            adapter = new ExerciseSetListAdapter(editable, presenter.onSetsListRequested(position));
+        @Override
+        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference){
+            adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId, setsListReference);
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
         }

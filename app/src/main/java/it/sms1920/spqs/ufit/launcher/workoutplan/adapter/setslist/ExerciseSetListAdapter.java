@@ -1,5 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +28,8 @@ public class ExerciseSetListAdapter
     private ExerciseSetListContract.Presenter presenter;
     private boolean editable;
 
-    public ExerciseSetListAdapter(boolean editable, List<ExerciseSetItem> serie) {
-        presenter = new ExerciseSetListPresenter(this, serie);
+    public ExerciseSetListAdapter(boolean editable, String exerciseListId, String exerciseId, Object setsListReference) {
+        presenter = new ExerciseSetListPresenter(this, exerciseListId, exerciseId, setsListReference);
         this.editable = editable;
     }
 
@@ -120,6 +123,44 @@ public class ExerciseSetListAdapter
                         onItemRemoved(getAdapterPosition());
                     }
                 });
+
+                txtReps.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if (!Objects.requireNonNull(txtReps.getText()).toString().equals("")) {
+                            presenter.onUpdateRepsRequested(Integer.parseInt(Objects.requireNonNull(txtReps.getText()).toString()), getAdapterPosition());
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+                txtLoads.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if (!Objects.requireNonNull(txtLoads.getText()).toString().equals("")) {
+                            presenter.onUpdateLoadsRequested(Float.parseFloat(Objects.requireNonNull(txtLoads.getText()).toString()), getAdapterPosition());
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
             } else {
                 reps = itemView.findViewById(R.id.reps);
                 load = itemView.findViewById(R.id.loads);

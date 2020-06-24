@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist.WorkoutExercisesListAdapter;
 
@@ -25,6 +26,8 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     private ShowWorkoutPlanContract.Presenter presenter;
     private WorkoutExercisesListAdapter adapter;
     private String workoutPlanId;
+
+    LauncherActivity launcher;
 
     public ShowWorkoutPlanFragment() {
         // Required empty public constructor
@@ -48,13 +51,17 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        launcher = (LauncherActivity) getActivity();
+        if (launcher != null) {
+            launcher.showPlanClicked();
+        }
         if (getArguments() != null) {
             workoutPlanId = getArguments().getString(ARG_WORKOUT_PLAN_ID);
         }
 
-        presenter = new ShowWorkoutPlanPresenter(this);
+        presenter = new ShowWorkoutPlanPresenter(this, workoutPlanId);
         adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, getActivity(), workoutPlanId);
-        //adapter = new ExerciseSetsAdapter(workoutPlanId);
     }
 
     @Override
@@ -69,4 +76,36 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
 
         return view;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        launcher.showPlanClosed();
+    }
+
+    @Override
+    public void setToolbarTextEqualToName(String name) {
+        if (launcher != null) {
+            launcher.setToolbarTitle(name);
+        }
+    }
+
+    @Override
+    public void showToolbarNavigationButton() {
+        launcher.toggleToolbarNavigationButton(true);
+        launcher.setToolbarNavigationButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launcher.insertPlansFragment();
+            }
+        });
+    }
+
+    @Override
+    public void hideToolbarNavigationButton() {
+        launcher.toggleToolbarNavigationButton(false);
+    }
+
+
+
 }

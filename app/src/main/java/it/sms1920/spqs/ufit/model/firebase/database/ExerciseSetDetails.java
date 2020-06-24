@@ -31,6 +31,10 @@ public class ExerciseSetDetails {
         return exerciseSetItems;
     }
 
+    public void setExerciseSetItems(List<ExerciseSetItem> exerciseSetItems) {
+        this.exerciseSetItems = exerciseSetItems;
+    }
+
     @NonNull
     @Override
     public String toString() {

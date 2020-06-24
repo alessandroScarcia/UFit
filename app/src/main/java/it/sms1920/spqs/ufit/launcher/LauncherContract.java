@@ -22,7 +22,7 @@ public interface LauncherContract {
 
         void resetActivity();
 
-        enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE}
+        enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE, SHOW_PLAN }
     }
 
     interface Presenter {
@@ -38,9 +38,13 @@ public interface LauncherContract {
 
         void onSearchIconClicked();
 
+        void onShowPlanClicked();
+
         void onBackPressed();
 
         void onLogOutIconClicked();
+
+        void onShowPlanClosed();
     }
 
 }

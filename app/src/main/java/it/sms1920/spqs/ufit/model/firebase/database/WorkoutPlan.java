@@ -43,4 +43,8 @@ public class WorkoutPlan {
     public String getTrainerId() {
         return trainerId;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

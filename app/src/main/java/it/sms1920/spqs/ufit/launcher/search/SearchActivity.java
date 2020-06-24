@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.exercise.ExerciseActivity;
@@ -51,7 +52,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(v));
             }
         };
-        adapter = new SearchListAdapter(R.layout.item_exercise_vertical, itemClickListener);
+        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, itemClickListener);
 
         rvSearchResult = findViewById(R.id.rvSearchResult);
         TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
@@ -83,7 +84,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
 
         // Setting adapter to the recycler view for search result
         rvSearchResult.setAdapter(adapter);
-        rvSearchResult.setLayoutManager(new GridLayoutManager(this, 2));
+        rvSearchResult.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -106,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
     @Override
     public void showExercise(int position) {
         // Extract single view item from recycler view with used LayoutManager method "findViewByPosition"
-        GridLayoutManager layoutManager = (GridLayoutManager) rvSearchResult.getLayoutManager();
+        LinearLayoutManager layoutManager = (LinearLayoutManager) rvSearchResult.getLayoutManager();
 
         if (layoutManager != null) {
             View view = layoutManager.findViewByPosition(position);

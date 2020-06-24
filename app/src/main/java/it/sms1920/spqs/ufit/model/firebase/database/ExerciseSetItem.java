@@ -23,6 +23,14 @@ public class ExerciseSetItem {
         return load;
     }
 
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
+    public void setLoad(float load) {
+        this.load = load;
+    }
+
     @NonNull
     @Override
     public String toString() {

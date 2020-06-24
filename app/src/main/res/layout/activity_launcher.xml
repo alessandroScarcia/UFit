@@ -25,6 +25,7 @@
             android:id="@+id/logo"
             android:layout_width="60dp"
             android:layout_height="41dp"
+            android:visibility="gone"
             android:layout_marginStart="14dp"
             android:layout_marginTop="9dp"
             android:background="@drawable/ufit_logo_text"

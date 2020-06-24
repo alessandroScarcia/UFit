@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +24,10 @@ import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
 
-    LauncherPresenter presenter;
-    Menu menu;
-    Toolbar toolbar;
+    private LauncherContract.Presenter presenter;
+    private Menu menu;
+    private Toolbar toolbar;
+    private ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         // Setting toolbar
         toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+        logo = findViewById(R.id.logo);
 
         presenter = new LauncherPresenter(this);
 
@@ -68,6 +73,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 return true;
             }
         });
+
+        logo.setVisibility(View.VISIBLE);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
     }
@@ -105,8 +112,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetMenuIcons();
         resetToolbarIcons();
         toolbar.getMenu().findItem(R.id.search).setVisible(true);
-        menu.findItem(R.id.nav_home).setChecked(true);
-        menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_selected);
+        setMenuItemIcon(R.id.nav_home, R.drawable.ic_menu_home_selected);
+        logo.setVisibility(View.VISIBLE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
@@ -114,8 +123,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void insertPlansFragment() {
         resetMenuIcons();
         resetToolbarIcons();
-        menu.findItem(R.id.nav_plans).setChecked(true);
-        menu.findItem(R.id.nav_plans).setIcon(R.drawable.ic_menu_plans_selected);
+        setMenuItemIcon(R.id.nav_plans, R.drawable.ic_menu_plans_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("Workout Plans");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutPlansFragment()).commit();
 
     }
@@ -124,8 +135,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void insertTrainerFragment() {
         resetMenuIcons();
         resetToolbarIcons();
-        menu.findItem(R.id.nav_trainer).setChecked(true);
-        menu.findItem(R.id.nav_trainer).setIcon(R.drawable.ic_menu_trainer_selected);
+        setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("Personal Trainer");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
 
     }
@@ -134,8 +147,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void insertStatsFragment() {
         resetMenuIcons();
         resetToolbarIcons();
-        menu.findItem(R.id.nav_stats).setChecked(true);
-        menu.findItem(R.id.nav_stats).setIcon(R.drawable.ic_menu_stats_selected);
+        setMenuItemIcon(R.id.nav_stats, R.drawable.ic_menu_stats_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("Statistiche");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
     }
 
@@ -143,9 +158,11 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void insertProfileFragment() {
         resetMenuIcons();
         resetToolbarIcons();
+        setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
         toolbar.getMenu().findItem(R.id.logout).setVisible(true);
-        menu.findItem(R.id.nav_profile).setChecked(true);
-        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("Profile");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
     }
 
@@ -159,8 +176,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void insertChooseFragment() {
         resetMenuIcons();
         resetToolbarIcons();
-        menu.findItem(R.id.nav_profile).setChecked(true);
-        menu.findItem(R.id.nav_profile).setIcon(R.drawable.ic_menu_account_selected);
+        setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("Account");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChooseFragment()).commit();
     }
 
@@ -175,6 +194,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         finish();
     }
 
+    private void setMenuItemIcon(int item, int icon) {
+        menu.findItem(item).setChecked(true);
+        menu.findItem(item).setIcon(icon);
+    }
 
     private void resetMenuIcons() {
         menu.findItem(R.id.nav_home).setIcon(R.drawable.ic_menu_home_normal);
@@ -190,6 +213,27 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.add).setVisible(false);
     }
 
+    public void setToolbarTitle(String title) {
+        toolbar.setTitle(title);
+    }
 
+    public void toggleToolbarNavigationButton(boolean active) {
+        if (active) {
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        } else {
+            toolbar.setNavigationIcon(null);
+        }
+    }
+
+    public void setToolbarNavigationButtonClickListener(View.OnClickListener clickListener) {
+        toolbar.setNavigationOnClickListener(clickListener);
+    }
+
+    public void showPlanClicked() {
+        presenter.onShowPlanClicked();
+    }
+    public void showPlanClosed() {
+        presenter.onShowPlanClosed();
+    }
 
 }
