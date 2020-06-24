@@ -8,6 +8,7 @@ import android.content.Context;
 import java.util.List;
 import java.util.Random;
 
+import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.model.room.Stats;
 import it.sms1920.spqs.ufit.model.room.UserStats;
 
@@ -19,11 +20,11 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     private Stats statsModel;
     private final iStatsFragment.View view;
     public UserStats userStats;
+    private Context contextStats;
 
     public StatsPresenter(iStatsFragment.View view, Context context) {
         this.view = view;
-
-
+        contextStats = context;
         initializeDatabase(context);
 
         //this check is useful for the first insert
@@ -65,10 +66,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     @Override
     public float calculateBMI(float weight) {
         float BMI = 0;
-//        User user = new User();
-//
-//
-//        if (user.getHeight() != 0) {
+//        if (userStats.getHeight() != 0) {
 //            float heightM = (float) user.getHeight() / 10;
 //            BMI = weight / (heightM * heightM);
 //        }
@@ -152,7 +150,8 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             getUserStats.setDateWaistDetection(dateDetectionWaist);
             getUserStats.setDateTightDetection(dateDetectionTight);
             getUserStats.setDateCalveDetection(dateDetectionCalve);
-
+//            float height =  usrStats.getHeight();
+//            getUserStats.setHeight(height);
         }
 
         //copy the general object into the static object
@@ -312,6 +311,25 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         if (fatControlValue.matches("\\d+(?:\\.\\d+)?")) {
             float FFMIValue = calculateFFMI(userStats.getWeight(), fat);
             view.setFFMI(String.valueOf(FFMIValue));
+
+            String strFFMIStatus;
+            if(FFMIValue < 17){
+                strFFMIStatus = contextStats.getString(R.string.ffmi_below_average);
+            }else if(FFMIValue >= 18 && FFMIValue <= 19){
+                strFFMIStatus = contextStats.getString(R.string.ffmi_average);
+            }else if(FFMIValue >= 20 && FFMIValue <= 21){
+                strFFMIStatus = contextStats.getString(R.string.ffmi_above_average);
+            }else if(FFMIValue == 22 ){
+                strFFMIStatus = contextStats.getString(R.string.ffmi_excellent);
+            }else if (FFMIValue >= 23 && FFMIValue <= 25){
+                strFFMIStatus = contextStats.getString(R.string.ffmi_superior);
+            }else if (FFMIValue >= 26 && FFMIValue <= 27){
+                strFFMIStatus = contextStats.getString(R.string.ffmi_sospicius);
+            }else {
+                strFFMIStatus = contextStats.getString(R.string.ffmi_not_natural);
+            }
+            view.setFFMIStatus(strFFMIStatus);
+
         }
     }
 
@@ -328,16 +346,29 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     public void setBMITextView(float weight) {
         float BMIValue = calculateBMI(weight);
         view.setBMI(String.valueOf(BMIValue));
+        String strBMIStatus;
+
+       if(BMIValue < 16.5){
+           strBMIStatus = contextStats.getString(R.string.severe_low_weight);
+       }else if(BMIValue >= 16.5 && BMIValue <= 18.4){
+           strBMIStatus = contextStats.getString(R.string.low_weight);
+       }else if(BMIValue >= 18.5 && BMIValue <= 24.9){
+           strBMIStatus = contextStats.getString(R.string.normal);
+        }else if(BMIValue >= 25 && BMIValue <= 30){
+           strBMIStatus = contextStats.getString(R.string.overweight);
+        }else if (BMIValue >= 30.1 && BMIValue <= 34.9){
+           strBMIStatus = contextStats.getString(R.string.obesity_first_level);
+       }else if (BMIValue >= 35 && BMIValue <= 40){
+           strBMIStatus = contextStats.getString(R.string.obesity_second_level);
+       }else {
+           strBMIStatus = contextStats.getString(R.string.obesity_third_level);
+       }
+        view.setBMIStatus(strBMIStatus);
     }
-
-
 //    public void callRemoveRecordStats(int id) {
 //        deleteRecordStats(id);
 //    }
 
-    public UserStats getUserStats() {
-        return userStats;
-    }
 
 
 }

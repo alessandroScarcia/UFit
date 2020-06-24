@@ -58,6 +58,10 @@ public interface iStatsFragment {
         void setFFMI(String valueOf);
 
         void setBMI(String valueOf);
+
+        void setBMIStatus(String strBMIStatus);
+
+        void setFFMIStatus(String strFFMIStatus);
     }
 
 

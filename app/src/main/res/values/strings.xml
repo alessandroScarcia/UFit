@@ -124,5 +124,22 @@
     <!-- Image content descriptions -->
     <string name="imgExercise">Exercise image</string>
     <string name="choose_activity_text">Oh no! Looks like no account is logged in yet! ☹</string>
+    <string name="formulaBMI">Peso(kg) / (Altezza x Altezza(m))</string>
+    <string name="ffmiFormula">weight [kg] * (1 - (body fat [%]/ 100))</string>
+    <string name="btnConnectionTrainer">Connect with your trainer</string>
+    <string name="severe_low_weight">Severe underweight</string>
+    <string name="low_weight">Underweight</string>
+    <string name="normal">Normal</string>
+    <string name="overweight">Overweight</string>
+    <string name="obesity_first_level">Obesity First Level</string>
+    <string name="obesity_second_level">Obesity Second Level</string>
+    <string name="obesity_third_level">Obesity Third Level</string>
+    <string name="ffmi_below_average">Below Average</string>
+    <string name="ffmi_average">Average</string>
+    <string name="ffmi_above_average">Above Average</string>
+    <string name="ffmi_excellent">Excellent</string>
+    <string name="ffmi_superior">Superior</string>
+    <string name="ffmi_sospicius">Sospicius not natural</string>
+    <string name="ffmi_not_natural">Obteined with steroids</string>
 
 </resources>

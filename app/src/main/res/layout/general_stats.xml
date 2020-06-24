@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -417,13 +417,14 @@
                             tools:text="20" />
 
                         <TextView
-                            android:id="@+id/imcViewText"
+                            android:id="@+id/tvBMIStatus"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:ellipsize="start"
                             android:gravity="center"
                             android:textSize="20sp"
                             android:textStyle="italic"
+                            android:text="@string/normal"
                             tools:text="normal" />
 
                         <ImageButton
@@ -434,6 +435,7 @@
                             android:adjustViewBounds="false"
                             android:background="@color/colorWhite"
                             android:cropToPadding="false"
+                            android:onClick="popupBMIFormula"
                             app:srcCompat="@drawable/ic_baseline_help_outline_24px" />
                     </TableRow>
 
@@ -461,7 +463,7 @@
                             tools:text="20" />
 
                         <TextView
-                            android:id="@+id/ffmiViewText"
+                            android:id="@+id/tvFFMIStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -560,4 +562,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

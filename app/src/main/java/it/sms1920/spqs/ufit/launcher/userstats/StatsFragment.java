@@ -21,11 +21,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +45,7 @@ import it.sms1920.spqs.ufit.launcher.R;
 import static java.sql.Types.NULL;
 
 
-public class StatsFragment extends Fragment implements iStatsFragment.View{
+public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener{
     private static final String TAG = StatsFragment.class.getCanonicalName();
     private static iStatsFragment.Presenter presenter;
     private TabLayout tlStats;
@@ -68,9 +71,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
     private TextView tightDate;
     private static TextView calve;
     private TextView calveDate;
+
+    public ImageButton imcHelp;
+    public ImageButton ffmiHelp;
     
     private TextView BMI;
     private TextView FFMI;
+
+    private TextView tvBMIStatus;
+    private TextView tvFFMIStatus;
 
 
     @Override
@@ -127,8 +136,32 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         });
 
 
+
+        imcHelp = view.findViewById(R.id.imcHelp);
+
+        imcHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), v);
+                popup.getMenuInflater().inflate(R.menu.popup_imc, popup.getMenu());
+                popup.show();
+            }
+        });
+
+        ffmiHelp = view.findViewById(R.id.ffmiHelp);
+        ffmiHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), v);
+                popup.getMenuInflater().inflate(R.menu.popup_ffmi, popup.getMenu());
+                popup.show();
+            }
+        });
+
         return view;
     }
+
+
 
 
     /**
@@ -177,7 +210,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         textViewValue.setText(String.valueOf(value));
         textViewDate.setText(date);
 
-
         if (textViewValue == weight) {
 //            Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + value + " " + date, Toast.LENGTH_SHORT).show();
             presenter.updateWeight(value, date);
@@ -207,7 +239,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         BMI = view.findViewById(R.id.bmiValue);
         FFMI = view.findViewById(R.id.ffmiValue);
         weightDate = view.findViewById(R.id.weightDateInput);
-
+        tvBMIStatus =  view.findViewById(R.id.tvBMIStatus);
+        tvFFMIStatus = view.findViewById(R.id.tvFFMIStatus);
 
         //text view of weight show the dialog box
         weight.setOnClickListener(new View.OnClickListener() {
@@ -387,8 +420,22 @@ public class StatsFragment extends Fragment implements iStatsFragment.View{
         BMI.setText(BMIValue);
     }
 
+    public void setBMIStatus(String strBMIStatus) {
+        tvBMIStatus.setText(strBMIStatus);
+    }
+
+    @Override
+    public void setFFMIStatus(String strFFMIStatus) {
+        tvFFMIStatus.setText(strFFMIStatus);
+    }
+
     public void setFFMI(String FFMIValue) {
         FFMI.setText(FFMIValue);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
     }
 
     public static class StatsDialog extends AppCompatDialogFragment {
