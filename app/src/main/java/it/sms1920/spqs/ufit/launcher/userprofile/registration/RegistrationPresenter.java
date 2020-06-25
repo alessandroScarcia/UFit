@@ -63,6 +63,8 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
                             }
                         });
             }
+        } else {
+            view.setEnabledUI(true);
         }
     }
 

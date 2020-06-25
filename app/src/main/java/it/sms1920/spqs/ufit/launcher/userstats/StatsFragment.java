@@ -97,7 +97,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -108,6 +107,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         //setting content of frame layout
         containerLayout = view.findViewById(R.id.container_stats);
         getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
+
         context = getActivity();
         presenter = new StatsPresenter(this, context);
 
