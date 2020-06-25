@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.userstats.strenght_test;
+package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
-public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapter.StrenghtHolder> implements iStrenghtTest.View {
+public class MaxEvaluationAdapter extends RecyclerView.Adapter<MaxEvaluationAdapter.StrenghtHolder> implements iMaxEvaluation.View {
 
 
-    private iStrenghtTest.Presenter presenter;
+    private iMaxEvaluation.Presenter presenter;
 
-//    private StrenghtTestFragment parentFragment;
+//    private MaxEvaluationFragment parentFragment;
 
-    public StrenghtTestAdapter() {
-        presenter = new StrenghtTestList(this);
+    public MaxEvaluationAdapter() {
+        presenter = new MaxEvaluationList(this);
 //        this.parentFragment = parentFragment;
     }
 
@@ -60,7 +60,7 @@ public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapte
     }
 
 
-    public static class StrenghtHolder extends RecyclerView.ViewHolder implements iStrenghtTest.View.Item {
+    public static class StrenghtHolder extends RecyclerView.ViewHolder implements iMaxEvaluation.View.Item {
         private TextView tvReps;
         private TextView tvWeight;
 

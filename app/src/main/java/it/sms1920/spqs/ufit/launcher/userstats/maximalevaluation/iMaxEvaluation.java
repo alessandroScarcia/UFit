@@ -1,7 +1,7 @@
-package it.sms1920.spqs.ufit.launcher.userstats.strenght_test;
+package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
 
 
-public interface iStrenghtTest {
+public interface iMaxEvaluation {
     interface View {
 
         void callNotifyDataSetChanged();
@@ -23,7 +23,7 @@ public interface iStrenghtTest {
 
     interface Presenter {
 
-        void onBindWeightItemListViewAtPosition(iStrenghtTest.View.Item holder, int position);
+        void onBindWeightItemListViewAtPosition(iMaxEvaluation.View.Item holder, int position);
 
         int getWeightCount();
 

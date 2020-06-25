@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.userstats.strenght_test;
+package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -26,9 +26,9 @@ import java.util.Objects;
 import it.sms1920.spqs.ufit.launcher.R;
 
 
-public class StrenghtTestFragment extends Fragment{
+public class MaxEvaluationFragment extends Fragment{
 
-    private static StrenghtTestAdapter adapter;
+    private static MaxEvaluationAdapter adapter;
 
     @SuppressLint("StaticFieldLeak")
     private static EditText etInsertWeight;
@@ -42,7 +42,7 @@ public class StrenghtTestFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new StrenghtTestAdapter();
+        adapter = new MaxEvaluationAdapter();
     }
 
     @Nullable

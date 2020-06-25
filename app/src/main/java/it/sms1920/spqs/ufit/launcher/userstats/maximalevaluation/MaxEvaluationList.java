@@ -1,11 +1,11 @@
-package it.sms1920.spqs.ufit.launcher.userstats.strenght_test;
+package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
 
 
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StrenghtTestList implements iStrenghtTest.Presenter {
+public class MaxEvaluationList implements iMaxEvaluation.Presenter {
     //declaration of the different range
     private static final int RM_1 = 1;
     private static final int RANGE_2_3 = 2;
@@ -33,13 +33,13 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     private static final int PERCENT_45  = 45;
 
 
-    private static final String TAG = StrenghtTestList.class.getCanonicalName();
-    private final iStrenghtTest.View view;
+    private static final String TAG = MaxEvaluationList.class.getCanonicalName();
+    private final iMaxEvaluation.View view;
 
     private List<Set> setWeightList;
     private static int RM;
 
-    public StrenghtTestList(iStrenghtTest.View view) {
+    public MaxEvaluationList(iMaxEvaluation.View view) {
         this.view = view;
         setWeightList= new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
 
 
     @Override
-    public void onBindWeightItemListViewAtPosition(iStrenghtTest.View.Item holder, int position) {
+    public void onBindWeightItemListViewAtPosition(iMaxEvaluation.View.Item holder, int position) {
         Set itemData = setWeightList.get(position);
         holder.setPosition(position);
         holder.setReps(itemData.getReps());

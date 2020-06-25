@@ -15,12 +15,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
-import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.TrainerFragment;
-import it.sms1920.spqs.ufit.launcher.userstats.strenght_test.StrenghtTestFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {

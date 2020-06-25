@@ -16,7 +16,6 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     private final iStatsFragment.View view;
     public UserStats userStats;
 
-
     public StatsPresenter(iStatsFragment.View view, Context context) {
         this.view = view;
         initializeDatabase(context);
