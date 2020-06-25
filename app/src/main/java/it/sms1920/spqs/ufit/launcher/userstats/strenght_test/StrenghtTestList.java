@@ -5,11 +5,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class StrenghtTestList implements iStrenghtTest.Presenter {
+    //declaration of the different range
     private static final int RM_1 = 1;
     private static final int RANGE_2_3 = 2;
     private static final int RANGE_4_5 = 3;
@@ -22,6 +19,20 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     private static final int RANGE_18_19 = 10;
     private static final int RANGE_20 = 11;
 
+    private static final int PERCENT_100 = 100;
+
+    private static final int PERCENT_90 = 90;
+    private static final int PERCENT_85  = 85;
+    private static final int PERCENT_80  = 80;
+    private static final int PERCENT_75  = 75;
+    private static final int PERCENT_70  = 70;
+    private static final int PERCENT_65  = 65;
+    private static final int PERCENT_60  = 60;
+    private static final int PERCENT_55  = 55;
+    private static final int PERCENT_50  = 50;
+    private static final int PERCENT_45  = 45;
+
+
     private static final String TAG = StrenghtTestList.class.getCanonicalName();
     private final iStrenghtTest.View view;
 
@@ -30,9 +41,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
 
     public StrenghtTestList(iStrenghtTest.View view) {
         this.view = view;
-
         setWeightList= new ArrayList<>();
-
     }
 
 
@@ -51,7 +60,9 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     }
 
 
-
+    /**
+     * Function used to add the different set into the list
+     */
     @Override
     public void loadSetList() {
         Log.d(TAG, "loadAdvice");
@@ -72,7 +83,6 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
         setWeightList.add(weightPercent50());
         setWeightList.add(weightPercent45());
 
-
         view.callNotifyDataSetChanged();
     }
 
@@ -85,7 +95,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent90() {
         Set newSet = new Set();
         newSet.setReps("3-2");
-        newSet.setWeight(String.valueOf(RM * 90 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_90 /PERCENT_100));
         return newSet;
     }
 
@@ -93,7 +103,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent85() {
         Set newSet = new Set();
         newSet.setReps("5-4");
-        newSet.setWeight(String.valueOf(RM * 85 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_85 /PERCENT_100));
         return newSet;
     }
 
@@ -101,7 +111,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent80() {
         Set newSet = new Set();
         newSet.setReps("7-6");
-        newSet.setWeight(String.valueOf(RM * 80 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_80 /PERCENT_100));
         return newSet;
     }
 
@@ -109,7 +119,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent75() {
         Set newSet = new Set();
         newSet.setReps("9-8");
-        newSet.setWeight(String.valueOf(RM * 75 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_75 /PERCENT_100));
         return newSet;
     }
 
@@ -117,7 +127,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent70() {
         Set newSet = new Set();
         newSet.setReps("11-10");
-        newSet.setWeight(String.valueOf(RM * 70 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_70 / PERCENT_100));
         return newSet;
     }
 
@@ -125,7 +135,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent65() {
         Set newSet = new Set();
         newSet.setReps("13-12");
-        newSet.setWeight(String.valueOf(RM * 65 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_65 / PERCENT_100));
         return newSet;
     }
 
@@ -133,7 +143,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent60() {
         Set newSet = new Set();
         newSet.setReps("15-14");
-        newSet.setWeight(String.valueOf(RM * 60 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_60 /PERCENT_100));
         return newSet;
     }
 
@@ -141,7 +151,7 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent55() {
         Set newSet = new Set();
         newSet.setReps("17-16");
-        newSet.setWeight(String.valueOf(RM * 55 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_55 / PERCENT_100));
         return newSet;
     }
 
@@ -149,17 +159,22 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
     public Set weightPercent50() {
         Set newSet = new Set();
         newSet.setReps("19-18");
-        newSet.setWeight(String.valueOf(RM * 50 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_50 / PERCENT_100));
         return newSet;
     }
 
     public Set weightPercent45() {
         Set newSet = new Set();
         newSet.setReps("20");
-        newSet.setWeight(String.valueOf(RM * 45 /100));
+        newSet.setWeight(String.valueOf(RM * PERCENT_45 / PERCENT_100));
         return newSet;
     }
 
+    /**
+     * Function used to calculate the weight of 1 rep
+     * @param range range of reps
+     * @param weightValue weight value submitted
+     */
     @Override
     public void calculateRM(int range, int weightValue) {
         switch (range){
@@ -167,34 +182,34 @@ public class StrenghtTestList implements iStrenghtTest.Presenter {
                 setRM(weightValue);
                 break;
             case RANGE_2_3:
-                setRM(weightValue * 100 / 90);
+                setRM(weightValue * PERCENT_100 / PERCENT_90);
                 break;
             case RANGE_4_5:
-                setRM(weightValue * 100 / 85);
+                setRM(weightValue * PERCENT_100 / PERCENT_85);
                 break;
             case RANGE_6_7:
-                setRM(weightValue * 100 / 80);
+                setRM(weightValue * PERCENT_100 / PERCENT_80);
                 break;
             case RANGE_8_9:
-                setRM(weightValue * 100 / 75);
+                setRM(weightValue * PERCENT_100 / PERCENT_75);
                 break;
             case RANGE_10_11:
-                setRM(weightValue * 100 / 70);
+                setRM(weightValue * PERCENT_100 / PERCENT_70);
                 break;
             case RANGE_12_13:
-                setRM(weightValue * 100 / 65);
+                setRM(weightValue * PERCENT_100 / PERCENT_65);
                 break;
             case RANGE_14_15:
-                setRM(weightValue * 100 / 60);
+                setRM(weightValue * PERCENT_100 / PERCENT_60);
                 break;
             case RANGE_16_17:
-                setRM(weightValue * 100 / 55);
+                setRM(weightValue * PERCENT_100 / PERCENT_55);
                 break;
             case RANGE_18_19:
-                setRM(weightValue * 100 / 50);
+                setRM(weightValue * PERCENT_100 / PERCENT_50);
                 break;
             case RANGE_20:
-                setRM(weightValue * 100 / 45);
+                setRM(weightValue * PERCENT_100 / PERCENT_45);
                 break;
         }
 

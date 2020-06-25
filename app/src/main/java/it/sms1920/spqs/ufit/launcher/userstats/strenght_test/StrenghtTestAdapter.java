@@ -44,10 +44,16 @@ public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapte
     }
 
 
+    /**
+     * Function that communicate with the list to realize the different set and weight
+     * @param checkIdRadioButton the id from the checkbox selected in the dialog box
+     * @param weightString the weight inserted in the edit box
+     */
     @Override
     public void calculateWeight(int checkIdRadioButton, String weightString) {
-
+        //we check the validity of the input
         if (checkIdRadioButton != 0 && weightString.matches("\\d+(?:\\.\\d+)?")){
+            //we round the value submitted and send to the presenter
             int weightValue = (int) Float.parseFloat(weightString);
             presenter.calculateRM(checkIdRadioButton, weightValue);
         }
@@ -58,13 +64,10 @@ public class StrenghtTestAdapter extends RecyclerView.Adapter<StrenghtTestAdapte
         private TextView tvReps;
         private TextView tvWeight;
 
-
         public StrenghtHolder(@NonNull final View itemView) {
             super(itemView);
             tvReps = itemView.findViewById(R.id.tvReps);
             tvWeight = itemView.findViewById(R.id.tvWeight);
-
-
         }
 
         @Override

@@ -73,7 +73,7 @@ public class StrenghtTestFragment extends Fragment{
         // initialize view references
         RecyclerView rvAdvice = view.findViewById(R.id.rvWeight);
 
-        // setup recyclerview for advice list
+        // setup recyclerview for list of weight and reps
         rvAdvice.setAdapter(adapter);
         rvAdvice.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -92,20 +92,19 @@ public class StrenghtTestFragment extends Fragment{
 
 
     /**
-     * This subclass is a component of the fragment that allow to show a dialog box to insert the values
-     * of the advice
+     * This subclass is a component of the fragment that allow to show a dialog box to select the values
+     * of the reps done in a set
      */
     public static class RepsChoiceDialog extends AppCompatDialogFragment {
         private RadioGroup rgReps;
 
         /**
-         * Construct od the Advice Dialog
+         * Construct od the RepsChoiceDialog
          */
         public RepsChoiceDialog() {}
 
         /**
-         * When the dialog is created the layout show 2 editText inside it to insert the title and
-         * the description of the new advice
+         * When the dialog is created the layout show a list of checkbox with the reps done in a set
          * @param savedInstanceState istance of the dialog
          * @return builder.create()
          */
@@ -126,7 +125,7 @@ public class StrenghtTestFragment extends Fragment{
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            //on selected checkbox we assign an index
                             switch (rgReps.getCheckedRadioButtonId()){
                                 case R.id.RM:
                                     checkIdRadioButton = 1;
@@ -167,7 +166,6 @@ public class StrenghtTestFragment extends Fragment{
                     });
 
             rgReps = view.findViewById(R.id.rgRepsChoice);
-
 
             return builder.create();
 

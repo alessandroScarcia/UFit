@@ -35,7 +35,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
-            android:text="Your reps"
+            android:hint="@string/reps"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintStart_toStartOf="parent"
