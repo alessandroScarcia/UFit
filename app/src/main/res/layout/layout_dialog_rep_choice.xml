@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvChoiceReps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/selectReps"
+        android:layout_marginBottom="20dp"/>
+
+    <RadioGroup
+        android:id="@+id/rgRepsChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvChoiceReps">
+        
+        <RadioButton
+            android:id="@+id/RM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/RM" />
+        <RadioButton
+            android:id="@+id/reps3_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_3_2" />
+        <RadioButton
+            android:id="@+id/reps5_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_5_4" />
+        <RadioButton
+            android:id="@+id/reps7_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_7_6" />
+
+        <RadioButton
+            android:id="@+id/reps9_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_9_8" />
+        <RadioButton
+            android:id="@+id/reps11_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_11_10" />
+        <RadioButton
+            android:id="@+id/reps13_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_13_12" />
+        <RadioButton
+            android:id="@+id/reps15_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_15_14" />
+        <RadioButton
+            android:id="@+id/reps17_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_17_16" />
+
+        <RadioButton
+            android:id="@+id/reps18_19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_18_19" />
+        <RadioButton
+            android:id="@+id/reps20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reps_20" />
+    </RadioGroup>
+
+        
+</RelativeLayout>

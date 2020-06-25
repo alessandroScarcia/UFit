@@ -97,6 +97,20 @@
     <string name="tightMeasure">Tight Measure</string>
     <string name="calveMeasure">Calve Measure</string>
 
+    <string name="RM">1 RM</string>
+    <string name="reps_3_2">3/2 reps</string>
+    <string name="reps_5_4">5/4 reps</string>
+    <string name="reps_7_6">7/6 reps</string>
+    <string name="reps_9_8">9/8 reps</string>
+    <string name="reps_11_10">11/10 reps</string>
+    <string name="reps_13_12">13/12 reps</string>
+    <string name="reps_15_14">15/14 reps</string>
+    <string name="reps_17_16">17/16 reps</string>
+    <string name="reps_18_19">19/18 reps</string>
+    <string name="reps_20">20 reps</string>
+    <string name="selectReps">Select reps</string>
+    <string name="insertWeight">Insert the weight of the exercise</string>
+    <string name="calculate">Calculate</string>
 
     <!-- Login -->
     <string name="login">Login</string>
@@ -143,7 +157,7 @@
     <string name="imgExercise">Exercise image</string>
 
 
-<!--    content description-->
+    <!--    content description-->
     <string name="img" translatable="false">img</string>
 
 </resources>

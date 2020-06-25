@@ -86,6 +86,20 @@
     <string name="tightMeasure">Misura coscia</string>
     <string name="calveMeasure">Misura polpaccio</string>
 
+    <string name="RM">1 RM</string>
+    <string name="reps_3_2">3/2 rip</string>
+    <string name="reps_5_4">5/4 rip</string>
+    <string name="reps_7_6">7/6 rip</string>
+    <string name="reps_9_8">9/8 rip</string>
+    <string name="reps_11_10">11/10 rip</string>
+    <string name="reps_13_12">13/12 rip</string>
+    <string name="reps_15_14">15/14 rip</string>
+    <string name="reps_17_16">17/16 rip</string>
+    <string name="reps_18_19">19/18 rip</string>
+    <string name="reps_20">20 rip</string>
+    <string name="selectReps">Seleziona il range di ripetioni</string>
+    <string name="insertWeight">Inserisci il carico dell\'esercizio</string>
+    <string name="calculate">Calcola</string>
 
     <!-- Login -->
     <string name="login">Accedi</string>
