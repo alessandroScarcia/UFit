@@ -3,35 +3,17 @@ package it.sms1920.spqs.ufit.launcher.userprofile.show;
 public interface ProfileContract {
 
     interface View {
+        void showProfileImage(String urlImage);
 
-        void showImagePicture(String urlImage);
+        void showNameSurname(String name, String surname);
 
-        void showName(String name);
-
-        void showEmail(String email);
-
-        void showHeight(int height);
-
-        void showWeight(int weight);
-
-        void showSurname(String surname);
-
-        void showGender(String gender);
+        void showGender(Integer gender);
 
         void showBirthDate(String birthDate);
 
-        void startChangeProfileInfoFragment();
+        void hideNoInfoAvailable();
     }
 
     interface Presenter {
-
-        String TABLE_USER = "User";
-
-
-        void onShowProfileInfo();
-
-        void onClickChangeProfileInfo();
-
-
     }
 }

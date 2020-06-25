@@ -2,48 +2,37 @@ package it.sms1920.spqs.ufit.model.firebase.database;
 
 import androidx.annotation.NonNull;
 
+import it.sms1920.spqs.ufit.model.util.StringUtils;
+
 public class User {
 
-    public static String NAME_FIELD = "name";
-    public static String SURNAME_FIELD = "surname";
-    public static String GENDER_FIELD = "gender";
-    public static String IMG_URL_FIELD = "urlImage";
-    public static String BIRTH_DATE_FIELD = "birthDate";
-    public static String HEIGHT_FIELD = "height";
-    public static String WEIGHT_FIELD = "weight";
+    public static final String CHILD_NAME = "User";
+    public static final String FIELD_NAME = "name";
+    public static final String FIELD_SURNAME = "surname";
+    public static final String FIELD_GENDER = "gender";
+    public static final String FIELD_IMAGE_URL = "imageUrl";
+    public static final String FIELD_BIRTH_DATE = "birthDate";
+    public static final String FIELD_ROLE = "role";
 
-    public static String PATH_STORAGE_PIC = "PicsProfile/";
-    public static String JPG = ".jpg";
-
-
-    public enum Gender {
-
-        MALE, FEMALE, NOT_SPECIFIED;
-
-        @NonNull
-        @Override
-        public String toString() {
-            return super.toString().substring(0, 1).toUpperCase()
-                    + super.toString().substring(1).toLowerCase();
-        }
-    }
+    public static final String PATH_STORAGE_PIC = "PicsProfile/";
+    public static final String JPG = ".jpg";
 
     private String name;
     private String surname;
-    private Gender gender;
+    private Integer gender;
     private String birthDate;
-    private String urlImage;
-    private int weight;
-    private int height;
+    private String imageUrl;
+    private Boolean role;
 
-    public User(String name, String surname, Gender gender, String urlImageProfile, String birthDate, int weight, int height) {
+    public User() {
+    }
+
+    public User(String name, String surname, Integer gender, String urlImageProfile, String birthDate, int weight, int height) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
-        this.urlImage = urlImageProfile;
+        this.imageUrl = urlImageProfile;
         this.birthDate = birthDate;
-        this.weight = weight;
-        this.height = height;
     }
 
     public String getName() {
@@ -62,44 +51,28 @@ public class User {
         this.surname = surname;
     }
 
-    public Gender getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getBirthDate() {
         return birthDate;
     }
 
-    public void setDateBirth(String dateBirth) {
+    public void setDateBirth(String birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
 }

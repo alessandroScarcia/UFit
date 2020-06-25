@@ -1,7 +1,5 @@
 package it.sms1920.spqs.ufit.launcher.userprofile.show;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -12,14 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
-
-import static it.sms1920.spqs.ufit.model.firebase.database.User.BIRTH_DATE_FIELD;
-import static it.sms1920.spqs.ufit.model.firebase.database.User.GENDER_FIELD;
-import static it.sms1920.spqs.ufit.model.firebase.database.User.HEIGHT_FIELD;
-import static it.sms1920.spqs.ufit.model.firebase.database.User.IMG_URL_FIELD;
-import static it.sms1920.spqs.ufit.model.firebase.database.User.NAME_FIELD;
-import static it.sms1920.spqs.ufit.model.firebase.database.User.SURNAME_FIELD;
-import static it.sms1920.spqs.ufit.model.firebase.database.User.WEIGHT_FIELD;
+import it.sms1920.spqs.ufit.model.firebase.database.User;
 
 
 public class ProfilePresenter implements ProfileContract.Presenter {
@@ -30,45 +21,42 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     private ProfileContract.View view;
 
     public ProfilePresenter(ProfileContract.View view) {
-        this.database = FirebaseDbSingleton.getInstance().getReference(TABLE_USER);
+        this.database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
         this.firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
         this.view = view;
+
+        showProfileInfo();
     }
 
-
-    @Override
-    public void onShowProfileInfo() {
+    public void showProfileInfo() {
         database.keepSynced(true);
 
         database.child(firebaseUser.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
 
-                        if (dataSnapshot.hasChild(NAME_FIELD))
-                            view.showName(dataSnapshot.child(NAME_FIELD).getValue().toString());
+                        if (user != null) {
+                            if (user.getImageUrl() != null) {
+                                view.showProfileImage(user.getImageUrl());
+                            }
 
-                        if (dataSnapshot.hasChild(SURNAME_FIELD))
-                            view.showSurname(dataSnapshot.child(SURNAME_FIELD).getValue().toString());
+                            if (user.getName() != null && user.getSurname() != null) {
+                                view.showNameSurname(user.getName(), user.getSurname());
+                                view.hideNoInfoAvailable();
+                            }
 
-                        view.showEmail(firebaseUser.getEmail());
+                            if (user.getGender() != null) {
+                                view.showGender(user.getGender());
+                                view.hideNoInfoAvailable();
+                            }
 
-                        if (dataSnapshot.hasChild(HEIGHT_FIELD))
-                            view.showHeight(Integer.parseInt(dataSnapshot.child(HEIGHT_FIELD).getValue().toString()));
-
-                        if (dataSnapshot.hasChild(WEIGHT_FIELD))
-                            view.showWeight(Integer.parseInt(dataSnapshot.child(WEIGHT_FIELD).getValue().toString()));
-
-                        if (dataSnapshot.hasChild(IMG_URL_FIELD))
-                            view.showImagePicture(dataSnapshot.child(IMG_URL_FIELD).getValue().toString());
-
-                        if (dataSnapshot.hasChild(GENDER_FIELD)) {
-                            Log.i("pippo", "quaddd");
-                            view.showGender(dataSnapshot.child(GENDER_FIELD).getValue().toString());
+                            if (user.getBirthDate() != null) {
+                                view.showBirthDate(user.getBirthDate());
+                                view.hideNoInfoAvailable();
+                            }
                         }
-
-                        if (dataSnapshot.hasChild(BIRTH_DATE_FIELD))
-                            view.showBirthDate(dataSnapshot.child(BIRTH_DATE_FIELD).getValue().toString());
 
                     }
 
@@ -79,11 +67,4 @@ public class ProfilePresenter implements ProfileContract.Presenter {
                     }
                 });
     }
-
-    @Override
-    public void onClickChangeProfileInfo() {
-        view.startChangeProfileInfoFragment();
-    }
-
-
 }

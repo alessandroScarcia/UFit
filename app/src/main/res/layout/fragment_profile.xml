@@ -1,217 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
     android:focusable="true"
     android:focusableInTouchMode="false"
     android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvProfileImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="10dp"
+        android:padding="3dp"
+        android:visibility="visible"
+        app:cardCornerRadius="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameSurname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_profile_placeholder" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvNameSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/profile_name_surname_placeholder"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tvGender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvProfileImage" />
+
+    <TextView
+        android:id="@+id/tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/gender"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tvBirthDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameSurname" />
+
+    <TextView
+        android:id="@+id/tvBirthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/birth_date"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/big_standard_margin"
-            android:layout_marginEnd="@dimen/big_standard_margin"
-            android:orientation="vertical">
-
-            <!-- foto e nome -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:orientation="horizontal">
-
-                <!-- Profile image-->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/imgProfileContainer"
-                    android:layout_width="@dimen/profile_image_size"
-                    android:layout_height="@dimen/profile_image_size"
-                    android:layout_gravity="center_vertical|center|center_horizontal"
-                    app:cardCornerRadius="@dimen/profile_image_corner_radius"
-                    app:cardElevation="1dp">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_profile_photo"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.cardview.widget.CardView>
-
-                <!-- Name & Surname-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/standard_margin"
-                    android:orientation="vertical">
-
-                    <!-- Name -->
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/lblName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/name"/>
-
-                    <!-- Surname -->
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/lblSurname"
-                            style="@style/CustomMaterialEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/surname"/>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <!-- Separator -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/big_standard_margin"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/big_standard_margin"
-                android:layout_marginBottom="@dimen/standard_margin"
-                android:background="?android:attr/listDivider" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Data di nascita -->
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblBirthDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/date"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- middle Separator -->
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:hint="@string/gender"
-                    app:layout_constraintTop_toBottomOf="@+id/lblBirthDate" />
-
-                <!-- Gender -->
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- riga di Peso e altezza -->
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:orientation="horizontal">
-                <!-- Height -->
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblHeight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/height"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- Separator -->
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblWeight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/weight"
-                    app:layout_constraintTop_toBottomOf="@+id/lblHeight" />
-
-                <!-- Weight -->
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Separator -->
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/big_standard_margin"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/big_standard_margin"
-                android:layout_marginBottom="@dimen/standard_margin"
-                android:background="?android:attr/listDivider" />
-
-            <!-- Email -->
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/lblEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email" />
-
-            <!-- Password -->
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/lblPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:text="@string/password" />
-
-            <!-- Separator -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/big_standard_margin"
-                android:layout_marginTop="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/big_standard_margin"
-                android:layout_marginBottom="@dimen/standard_margin"
-                android:background="?android:attr/listDivider" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnChangeProfileInfo"
-                style="@style/CustomMaterialButton"
-                android:layout_width="match_parent"
-                android:text="Modifica Profilo">
-
-            </com.google.android.material.button.MaterialButton>
-
-
-        </LinearLayout>
-
-    </ScrollView>
+    <TextView
+        android:id="@+id/tvNoInfoAvailable"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_text_no_information"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvProfileImage"
+        app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

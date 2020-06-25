@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.launcher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
+import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
@@ -24,6 +26,7 @@ import it.sms1920.spqs.ufit.launcher.userstats.strenght_test.StrenghtTestFragmen
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
+    private static final String TAG = LauncherActivity.class.getCanonicalName();
 
     private LauncherContract.Presenter presenter;
     private Menu menu;
@@ -98,6 +101,9 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
             case R.id.logout:
                 presenter.onLogOutIconClicked();
                 return true;
+            case R.id.profile_settings:
+                presenter.onProfileSettingsClicked();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -106,6 +112,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     @Override
     public void onBackPressed() {
         presenter.onBackPressed();
+        Log.d(TAG, "onBackPressed");
     }
 
     @Override
@@ -161,10 +168,22 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
         toolbar.getMenu().findItem(R.id.logout).setVisible(true);
+        toolbar.getMenu().findItem(R.id.profile_settings).setVisible(true);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
         setToolbarTitle("Profile");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+    }
+
+    @Override
+    public void insertProfileSettingsFragment() {
+        resetMenuIcons();
+        resetToolbarIcons();
+        setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(true);
+        setToolbarTitle(getString(R.string.profile_settings));
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileSettingsFragment()).commit();
     }
 
     @Override
@@ -212,6 +231,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.logout).setVisible(false);
         toolbar.getMenu().findItem(R.id.search).setVisible(false);
         toolbar.getMenu().findItem(R.id.add).setVisible(false);
+        toolbar.getMenu().findItem(R.id.profile_settings).setVisible(false);
     }
 
     public void setToolbarTitle(String title) {

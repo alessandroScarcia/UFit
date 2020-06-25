@@ -33,12 +33,23 @@
 
     <string name="image">Image</string>
     <string name="gender">Genere</string>
-    <string name="date">Data di nascita</string>
+    <string name="birth_date">Data di nascita</string>
+
+    <string name="profile_text_no_information">Non ci sono informazioni disponibili. Aggiornale dalle impostazioni del profilo.</string>
+
     <string-array name="genders">
         <item>Maschio</item>
         <item>Femmina</item>
         <item>Non specificato</item>
     </string-array>
+
+    <!-- Profile settings -->
+    <string name="profile_settings_change_image">Cambia immagine del profilo</string>
+    <string name="profile_settings_edit_password">Cambia password</string>
+    <string name="profile_settings_edit_email">Cambia email</string>
+    <string name="profile_settings">Impostazioni profilo</string>
+    <string name="profile_settings_edit_role">Passa ad account Trainer</string>
+    <string name="profile_settings_delete_profile">Cancella il profilo</string>
 
 
     <!--    Trainer-->
@@ -100,6 +111,14 @@
     <string name="selectReps">Seleziona il range di ripetioni</string>
     <string name="insertWeight">Inserisci il carico dell\'esercizio</string>
     <string name="calculate">Calcola</string>
+    <string name="profile_settings_edit_personal_information">Cambia informazioni personali</string>
+    <string name="edit_email_caution_msg">Attenzione: l\'email che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
+    <string name="profile_settings_name_empty">Il nome non può essere vuoto</string>
+    <string name="profule_settings_surname_empty">Il cognome non può essere vuoto</string>
+    <string name="edit_password_caution_msg">Attenzione: la password che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
+    <string name="profile_settings_delete_profile_msg">Sei sicuro di voler cancellare il tuo profilo? Questa azione non piò essere annullata!</string>
+    <string name="delete">Cancella il profilo</string>
+    <string name="cancel">Annulla</string>
 
     <!-- Login -->
     <string name="login">Accedi</string>
