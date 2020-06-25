@@ -24,6 +24,10 @@ public interface LauncherContract {
 
         void resetActivity();
 
+        String getWorkoutId();
+
+        void startEditWorkoutActivity(String id);
+
         enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS}
     }
 
@@ -49,6 +53,8 @@ public interface LauncherContract {
         void onShowPlanClosed();
 
         void onProfileSettingsClicked();
+
+        void onEditIconClicked();
     }
 
 }

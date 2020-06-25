@@ -111,4 +111,10 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         view.insertProfileSettingsFragment();
         currentFragment = PROFILE_SETTINGS;
     }
+
+    @Override
+    public void onEditIconClicked() {
+        String id = view.getWorkoutId();
+        view.startEditWorkoutActivity(id);
+    }
 }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.TrainerFragment;
 import it.sms1920.spqs.ufit.launcher.userstats.strenght_test.StrenghtTestFragment;
+import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
@@ -97,16 +99,20 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         switch (item.getItemId()) {
             case R.id.search:
                 presenter.onSearchIconClicked();
-                return true;
+                break;
             case R.id.logout:
                 presenter.onLogOutIconClicked();
-                return true;
+                break;
             case R.id.profile_settings:
                 presenter.onProfileSettingsClicked();
-                return true;
+                break;
+            case R.id.edit:
+                presenter.onEditIconClicked();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     @Override
@@ -214,6 +220,20 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         finish();
     }
 
+    @Override
+    public String getWorkoutId() {
+        TextView id = findViewById(R.id.workoutId);
+        return id.getText().toString();
+    }
+
+    @Override
+    public void startEditWorkoutActivity(String id) {
+        Intent intent = new Intent(this, CreatingWorkoutActivity.class);
+        intent.putExtra("workoutId", id);
+        intent.putExtra("workoutName", toolbar.getTitle().toString());
+        startActivity(intent);
+    }
+
     private void setMenuItemIcon(int item, int icon) {
         menu.findItem(item).setChecked(true);
         menu.findItem(item).setIcon(icon);
@@ -257,4 +277,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         presenter.onShowPlanClosed();
     }
 
+    public void showToolbarEditIcon(boolean visible) {
+        toolbar.getMenu().findItem(R.id.edit).setVisible(visible);
+    }
 }

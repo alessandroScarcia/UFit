@@ -38,6 +38,7 @@ public interface WorkoutExercisesListContract {
         ArrayList<String> onExercisesIdRequested();
         List<ExerciseSetItem> onSetsListRequested(int position);
 
+        void onUpdateRequested();
     }
 
 }

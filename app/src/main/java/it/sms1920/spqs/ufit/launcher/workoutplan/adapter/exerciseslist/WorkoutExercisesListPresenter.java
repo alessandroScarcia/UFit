@@ -53,6 +53,11 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
 
         mDatabase = FirebaseDbSingleton.getInstance().getReference();
 
+        fetchWorkout(workoutId);
+
+    }
+
+    void fetchWorkout(String workoutId) {
         Query mExerciseListIdQuery = mDatabase
                 .child("WorkoutPlan")
                 .orderByKey()
@@ -77,7 +82,6 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
     }
 
 
@@ -95,7 +99,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     for (DataSnapshot item : child.getChildren()) {
                         myExercises.add(item.getValue(ExerciseSetDetails.class));
-                        if (myExercises.get(myExercises.size() - 1).getExerciseSetItems() == null){
+                        if (myExercises.get(myExercises.size() - 1).getExerciseSetItems() == null) {
                             myExercises.get(myExercises.size() - 1).setExerciseSetItems(new ArrayList<ExerciseSetItem>());
                         }
                     }
@@ -159,7 +163,9 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
 
     @Override
     public void onSaveWorkoutPlanChangesRequested(String name) {
-        workoutPlan.setName(name);
+        if (!name.isEmpty()) {
+            workoutPlan.setName(name);
+        }
         mDatabase.child("WorkoutPlan").child(workoutPlan.getWorkoutPlanId()).setValue(workoutPlan);
         mDatabase.child("WorkoutPlanExerciseSets").child(exerciseListId).setValue(myExercises);
     }
@@ -201,6 +207,14 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
     @Override
     public List<ExerciseSetItem> onSetsListRequested(int position) {
         return myExercises.get(position).getExerciseSetItems();
+    }
+
+    @Override
+    public void onUpdateRequested() {
+        if (workoutPlan != null){
+            fetchWorkout(workoutPlan.getWorkoutPlanId());
+        }
+        view.callNotifyDataSetChanged();
     }
 
 

@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.create;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
     private Toolbar toolbar;
     private TextInputEditText txtName;
     private RecyclerView rvExerciseList;
+    private boolean isAnEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +58,25 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         txtName = findViewById(R.id.txtWorkoutName);
 
 
-        // Setting recycler view adapter for not editable exercises
-        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
+        String workoutId = getIntent().getStringExtra("workoutId");
+        String workoutName = getIntent().getStringExtra("workoutName");
+
+        if (workoutId != null && !workoutId.isEmpty()) {
+            isAnEdit = true;
+            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, workoutId);
+            txtName.setText(workoutName);
+        } else {
+            // Setting recycler view adapter for not editable exercises
+            isAnEdit = false;
+            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
+        }
+
 
         // Setting recycler view
         rvExerciseList = findViewById(R.id.lstExercises);
         rvExerciseList.setAdapter(adapter);
         rvExerciseList.setLayoutManager(new LinearLayoutManager(this));
+
 
 
         // Button to confirm the workout creation
@@ -136,9 +150,24 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
     @Override
     public void saveData() {
-        adapter.createNewWorkoutPlan(Objects.requireNonNull(txtName.getText()).toString());
-        // TODO notify data set changed
+        String workoutName = "";
+
+        if (txtName.getText() != null) {
+            workoutName = txtName.getText().toString();
+
+            if (isAnEdit) {
+                adapter.saveChangesWorkoutPlan(workoutName);
+                Log.d(TAG, "saveData: is an edit");
+            } else {
+                adapter.createNewWorkoutPlan(workoutName);
+                Log.d(TAG, "saveData: is a new");
+            }
+        } else {
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
+
         Intent intent = new Intent();
+        intent.putExtra("newExerciseName", workoutName);
         setResult(0, intent);
         finish();
     }
