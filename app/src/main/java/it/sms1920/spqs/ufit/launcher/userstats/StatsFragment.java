@@ -30,16 +30,19 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
@@ -84,8 +87,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     private static TextView calve;
     private TextView calveDate;
 
-    public ImageButton imcHelp;
-    public ImageButton ffmiHelp;
+    public MaterialButton imcHelp;
+    public MaterialButton ffmiHelp;
 
     private TextView BMI;
     private TextView FFMI;
@@ -107,8 +110,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         //setting content of frame layout
         containerLayout = view.findViewById(R.id.container_stats);
-        View child = getLayoutInflater().inflate(R.layout.general_stats, null);
-        containerLayout.addView(child);
+        View child = getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
+        //containerLayout.addView(child);
         context = getActivity();
         presenter = new StatsPresenter(this, context);
 
@@ -168,6 +171,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             }
         });
 
+        Toast.makeText(context, "Click to insert values and calculate BMI and FFMI", Toast.LENGTH_LONG).show();
+
         return view;
     }
 
@@ -175,13 +180,14 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     /**
      * Function used to show the dialog box set by the the class of StatsDialog
      *
-     * @param textViewValue
-     * @param textViewDate
+     * @param textViewValue .
+     * @param textViewDate  .
      */
     public void openDialog(TextView textViewValue, TextView textViewDate) {
         StatsDialog dialogBox = new StatsDialog(textViewValue, textViewDate);
         dialogBox.setTargetFragment(this, 1);
-        dialogBox.show(getFragmentManager(), "example dialog");
+        if (getFragmentManager() != null)
+            dialogBox.show(getFragmentManager(), "example dialog");
     }
 
     /**
@@ -190,8 +196,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showGeneralStats() {
         containerLayout.removeAllViewsInLayout();
-        View child = getLayoutInflater().inflate(R.layout.general_stats, null);
-        containerLayout.addView(child);
+        View child = getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
+        //containerLayout.addView(child);
     }
 
     /**
@@ -200,18 +206,18 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showBodyStats() {
         containerLayout.removeAllViewsInLayout();
-        View child = getLayoutInflater().inflate(R.layout.muscle_measurment, null);
-        containerLayout.addView(child);
+        View child = getLayoutInflater().inflate(R.layout.muscle_measurment, containerLayout);
+        //containerLayout.addView(child);
     }
 
 
     /**
      * Function to update the data inserted in dialog box
      *
-     * @param value
-     * @param date
-     * @param textViewValue
-     * @param textViewDate
+     * @param value         .
+     * @param date          .
+     * @param textViewValue .
+     * @param textViewDate  .
      */
 
     public static void applyTexts(float value, String date, TextView textViewValue, TextView textViewDate) {
@@ -489,13 +495,14 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         /**
          * When the dialog is created the layout show 2 editText inside it. One of them use datePicker
          *
-         * @param savedInstanceState
+         * @param savedInstanceState .
          * @return builder.create()
          */
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = getActivity().getLayoutInflater();
+            LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
             View view = inflater.inflate(R.layout.layout_dialog, null);
 
             builder.setView(view)
@@ -533,15 +540,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                     year = calendar.get(Calendar.YEAR);
                     mounth = calendar.get(Calendar.MONTH);
                     dayOfMounth = calendar.get(Calendar.DAY_OF_MONTH);
-
-                    datePickerDialog = new DatePickerDialog(getTargetFragment().getContext(),
-                            new DatePickerDialog.OnDateSetListener() {
-                                @SuppressLint("SetTextI18n")
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                    statsDateEditText.setText(dayOfMonth + "/" + month + "/" + year);
-                                }
-                            }, year, mounth, dayOfMounth);
+                    if (getTargetFragment() != null && getTargetFragment().getContext() != null)
+                        datePickerDialog = new DatePickerDialog(getTargetFragment().getContext(),
+                                new DatePickerDialog.OnDateSetListener() {
+                                    @SuppressLint("SetTextI18n")
+                                    @Override
+                                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                        statsDateEditText.setText(dayOfMonth + "/" + month + "/" + year);
+                                    }
+                                }, year, mounth, dayOfMounth);
                     datePickerDialog.show();
                 }
             });

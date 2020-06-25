@@ -1,102 +1,110 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightGray"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp">
+        android:padding="@dimen/smaller_standard_margin"
+        android:background="@color/colorTransparent"
+        android:orientation="vertical">
 
+        <!--        Prima riga-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/smaller_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
             android:orientation="horizontal">
 
+            <!--            Peso-->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+
+
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
-                        android:text="@string/weightLabel"
-                        android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="@dimen/small_standard_margin">
 
-                    <TextView
-                        android:id="@+id/weightInput"
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/weight"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/stats_text_size_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/weightDetailsButton"
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:visibility="gone"
+                            app:icon="@drawable/ic_pencil_normal"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView7"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="70.5" />
+                        android:layout_marginVertical="@dimen/standard_margin">
+
+                        <TextView
+                            android:id="@+id/weightInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/empty"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/stats_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            android:text="@string/kg"
+                            android:textSize="@dimen/stats_text_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/weightInput"
+                            app:layout_constraintStart_toEndOf="@+id/weightInput" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
                         android:id="@+id/weightDateInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
+                        android:layout_marginBottom="@dimen/smaller_standard_margin"
+                        android:gravity="center"
                         android:maxLines="1"
-                        android:text=" - "
+                        android:text="@string/empty"
                         android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
+                        android:textSize="@dimen/stats_text_size_small" />
 
-
-                    <ImageButton
-                        android:id="@+id/weightDetailsButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
 
                 </LinearLayout>
 
@@ -106,180 +114,203 @@
                     android:layout_height="match_parent"
                     android:elevation="1dp"
                     android:orientation="horizontal" />
+
             </com.google.android.material.card.MaterialCardView>
 
+            <!--            Altezza-->
             <com.google.android.material.card.MaterialCardView
-
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
-                        android:text="@string/fatLabel"
-                        android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="@dimen/small_standard_margin">
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/height"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/stats_text_size_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/heightDetailsButton"
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:visibility="gone"
+                            app:icon="@drawable/ic_pencil_normal"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView8"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin">
+
+                        <TextView
+                            android:id="@+id/heightInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/empty"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/stats_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            android:text="@string/cm"
+                            android:textSize="@dimen/stats_text_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/heightInput"
+                            app:layout_constraintStart_toEndOf="@+id/heightInput" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
-                        android:id="@+id/fatInput"
+                        android:id="@+id/heightDateInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="@dimen/smaller_standard_margin"
                         android:gravity="center_vertical|center_horizontal"
                         android:lines="1"
                         android:maxWidth="100dp"
                         android:maxLines="1"
-                        android:text=" - "
+                        android:text="@string/empty"
                         android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="50.9" />
+                        android:textSize="@dimen/stats_text_size_small" />
 
-
-                    <TextView
-                        android:id="@+id/fatDateInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
-
-
-                    <ImageButton
-                        android:id="@+id/fatDetailsButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/cardFat"
+                    android:id="@+id/cardHeight"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:elevation="1dp"
                     android:orientation="horizontal" />
+
             </com.google.android.material.card.MaterialCardView>
+
 
         </LinearLayout>
 
+        <!--        Seconda riga-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/smaller_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
+            android:layout_marginBottom="@dimen/smaller_standard_margin"
             android:orientation="horizontal">
 
+            <!--            Muscoli-->
             <com.google.android.material.card.MaterialCardView
-
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
-                        android:text="@string/musclesLabel"
-                        android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="@dimen/small_standard_margin">
 
-                    <TextView
-                        android:id="@+id/musclesInput"
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/musclesLabel"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/stats_text_size_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/musclesDetailsButton"
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:visibility="gone"
+                            app:icon="@drawable/ic_pencil_normal"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView5"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="20.2" />
+                        android:layout_marginVertical="@dimen/standard_margin">
+
+                        <TextView
+                            android:id="@+id/musclesInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/empty"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/stats_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            android:text="@string/percent"
+                            android:textSize="@dimen/stats_text_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/musclesInput"
+                            app:layout_constraintStart_toEndOf="@+id/musclesInput" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
                         android:id="@+id/musclesDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
-
-                    <ImageButton
-                        android:id="@+id/musclesDetailsButton"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
+                        android:layout_marginBottom="@dimen/smaller_standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/stats_text_size_small" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -290,81 +321,179 @@
                     android:orientation="horizontal" />
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <!--            Grasso-->
 
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
-                        android:text="@string/waterLabel"
-                        android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="@dimen/small_standard_margin">
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:text="@string/fatLabel"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/stats_text_size_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/fatDetailsButton"
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:visibility="gone"
+                            app:icon="@drawable/ic_pencil_normal"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView9"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin">
+
+                        <TextView
+                            android:id="@+id/fatInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/empty"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/stats_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            android:text="@string/percent"
+                            android:textSize="@dimen/stats_text_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/fatInput"
+                            app:layout_constraintStart_toEndOf="@+id/fatInput" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
-                        android:id="@+id/waterInput"
+                        android:id="@+id/fatDateInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
+                        android:layout_marginBottom="@dimen/smaller_standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
                         android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="20.5" />
+                        android:textSize="@dimen/stats_text_size_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cardFat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--            Acqua-->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_standard_margin">
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/waterLabel"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/stats_text_size_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/waterDetailsButton"
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:visibility="gone"
+                            app:icon="@drawable/ic_pencil_normal"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView10"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin">
+
+                        <TextView
+                            android:id="@+id/waterInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/empty"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/stats_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            android:text="@string/percent"
+                            android:textSize="@dimen/stats_text_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/waterInput"
+                            app:layout_constraintStart_toEndOf="@+id/waterInput" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
                         android:id="@+id/waterDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
-
-                    <ImageButton
-                        android:id="@+id/waterDetailsButton"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        app:srcCompat="@drawable/ic_baseline_list_alt_24px" />
+                        android:layout_marginBottom="@dimen/smaller_standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/stats_text_size_small" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -378,91 +507,94 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="@dimen/small_standard_margin"
+            android:background="@color/colorSecondary"
+            android:orientation="horizontal" />
+
+        <!--        Terza riga-->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_margin="@dimen/smaller_standard_margin"
+            app:cardCornerRadius="5dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
-                android:layout_weight="50"
-                app:cardCornerRadius="5dp"
-                app:contentPadding="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-                <TableLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:shrinkColumns="3"
-                    android:stretchColumns="0,1,2">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/indexTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_span="4"
-                            android:gravity="center_horizontal"
-                            android:text="@string/indexLabel"
-                            android:textColor="@color/gray"
-                            android:textSize="24sp"
-                            android:textStyle="italic" />
-
-                    </TableRow>
-
-                    <TableRow
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/imcTitle"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/imcLabel"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:id="@+id/bmiValue"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical|center_horizontal"
-                            android:maxWidth="100dp"
-                            android:maxLines="1"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            tools:text="20" />
-
-                        <TextView
-                            android:id="@+id/tvBMIStatus"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:ellipsize="start"
+                            android:layout_marginTop="@dimen/small_standard_margin"
                             android:gravity="center"
-                            android:text="@string/normal"
-                            android:textSize="20sp"
-                            android:textStyle="italic"
-                            tools:text="normal" />
+                            android:text="@string/imcLabel"
+                            android:textSize="@dimen/stats_text_size_title"
+                            android:textColor="@color/gray"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/imcHelp"
-                            android:layout_width="match_parent"
-                            android:layout_height="25sp"
-                            android:layout_gravity="center"
-                            android:adjustViewBounds="false"
-                            android:background="@color/colorWhite"
-                            android:cropToPadding="false"
-                            android:onClick="popupBMIFormula"
-                            app:srcCompat="@drawable/ic_baseline_help_outline_24px" />
-                    </TableRow>
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            app:icon="@drawable/ic_baseline_help_outline_24px"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/imcTitle"
+                            app:layout_constraintStart_toEndOf="@+id/imcTitle"
+                            app:layout_constraintTop_toTopOf="@+id/imcTitle" />
 
-                    <TableRow
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <TextView
+                        android:id="@+id/bmiValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
+
+                    <TextView
+                        android:id="@+id/tvBMIStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/stats_text_size_small" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -470,119 +602,58 @@
                             android:id="@+id/ffmiTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/small_standard_margin"
+                            android:gravity="center"
                             android:text="@string/ffmiLabel"
-                            android:textSize="20sp" />
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/stats_text_size_title"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/ffmiValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:maxWidth="100dp"
-                            android:maxLines="1"
-                            android:text="-"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp"
-                            tools:text="20" />
-
-                        <TextView
-                            android:id="@+id/tvFFMIStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:textSize="20sp"
-                            android:textStyle="italic"
-                            tools:text="normal" />
-
-                        <ImageButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/ffmiHelp"
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
-                            android:layout_gravity="center"
-                            android:adjustViewBounds="false"
-                            android:background="@color/colorWhite"
-                            android:cropToPadding="false"
-                            app:srcCompat="@drawable/ic_baseline_help_outline_24px"
-                            tools:ignore="ContentDescription" />
+                            style="@style/CustomMaterialButtonIcon"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            android:layout_marginStart="@dimen/smaller_standard_margin"
+                            app:icon="@drawable/ic_baseline_help_outline_24px"
+                            app:iconSize="@dimen/icon_size_small"
+                            app:layout_constraintBottom_toBottomOf="@+id/ffmiTitle"
+                            app:layout_constraintStart_toEndOf="@+id/ffmiTitle"
+                            app:layout_constraintTop_toTopOf="@+id/ffmiTitle" />
 
-                    </TableRow>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TableRow
+
+                    <TextView
+                        android:id="@+id/ffmiValue"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone"
-                        tools:visibility="gone">
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
 
-                        <TextView
-                            android:id="@+id/imc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="@string/rfmLabel"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/rfmValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:maxWidth="100dp"
-                            android:maxLines="1"
-                            android:textColor="@android:color/black"
-                            android:textSize="18sp"
-                            tools:text="20" />
-
-                        <TextView
-                            android:id="@+id/rfmViewText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:textSize="18sp"
-                            android:textStyle="italic"
-                            tools:text="normal" />
-
-                        <ImageButton
-                            android:id="@+id/rfmHelp"
-                            android:layout_width="25sp"
-                            android:layout_height="25sp"
-                            android:layout_gravity="center"
-                            android:adjustViewBounds="false"
-                            android:background="@color/colorWhite"
-                            android:cropToPadding="false"
-                            app:srcCompat="@drawable/ic_baseline_help_outline_24px" />
-
-                    </TableRow>
-
-                </TableLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
-                android:layout_weight="50"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
-                android:visibility="gone"
-                app:cardCornerRadius="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvFFMIStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/small_standard_margin"
+                        android:gravity="center"
+                        android:textSize="@dimen/stats_text_size_small" />
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-        </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
     </LinearLayout>
+
+
 </ScrollView>

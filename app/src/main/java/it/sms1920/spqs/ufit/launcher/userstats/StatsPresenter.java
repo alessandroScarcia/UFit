@@ -49,7 +49,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     /**
      * Setting database inside the model
      *
-     * @param context
+     * @param context .
      */
     @Override
     public void setDatabase(Context context) {
@@ -60,8 +60,8 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     /**
      * Function to calculate the BMI
      *
-     * @param weight
-     * @return
+     * @param weight .
+     * @return .
      */
     @Override
     public float calculateBMI(float weight) {
@@ -75,14 +75,13 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
     /**
-     * @param weight
-     * @param bodyFat
-     * @return
+     * @param weight .
+     * @param bodyFat .
+     * @return .
      */
     @Override
     public float calculateFFMI(float weight, float bodyFat) {
-        float FFMI = weight * (1 - (bodyFat / 100));
-        return FFMI;
+        return weight * (1 - (bodyFat / 100));
     }
 
     /**
@@ -207,11 +206,10 @@ public class StatsPresenter implements iStatsFragment.Presenter {
 
     @Override
     public boolean checkExistUserStats() {
-        if (userStats.getWeight() == NULL_STATS && userStats.getFat() == NULL_STATS &&
-                userStats.getMuscle() == NULL_STATS && userStats.getWater() == NULL_STATS) {
-            return true;
-        }
-        return false;
+        return userStats.getWeight() == NULL_STATS &&
+                userStats.getFat() == NULL_STATS &&
+                userStats.getMuscle() == NULL_STATS &&
+                userStats.getWater() == NULL_STATS;
     }
 
     @Override
@@ -253,24 +251,32 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     @Override
     public void setGeneralStats() {
         if (userStats.getWeight() != NULL) {
-            view.setWeight(String.valueOf(userStats.getWeight()));
+            view.setWeight(userStats.getWeight() + "");
             view.setWeightDate(String.valueOf(userStats.getDateWeightDetection()));
             setBMITextView(userStats.getWeight());
         }
 
+//        TODO davidino
+//        if (userStats.getHeight() != NULL) {
+//            view.getHeight(userStats.getWeight() + "");
+//            view.getHeightDate(String.valueOf(userStats.getDateHeightDetection()));
+//            setBMITextView(userStats.getHeight());
+//        }
+
+
         if (userStats.getFat() != NULL) {
-            view.setFat(String.valueOf(userStats.getFat()));
+            view.setFat(userStats.getFat() + "");
             view.setFatDate(String.valueOf(userStats.getDateFatDetection()));
             setFFMITextView(userStats.getFat());
         }
 
         if (userStats.getWater() != NULL) {
-            view.setWater(String.valueOf(userStats.getWater()));
+            view.setWater(userStats.getWater() + "");
             view.setWaterDate(String.valueOf(userStats.getDateWaterDetection()));
         }
 
         if (userStats.getMuscle() != NULL) {
-            view.setMuscle(String.valueOf(userStats.getMuscle()));
+            view.setMuscle(userStats.getMuscle() + "");
             view.setMuscleDate(String.valueOf(userStats.getDateMuscleDetection()));
         }
     }

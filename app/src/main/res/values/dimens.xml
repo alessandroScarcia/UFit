@@ -24,6 +24,7 @@
     <dimen name="big_standard_margin">32dp</dimen>
 
     <dimen name="icon_size">28dp</dimen>
+    <dimen name="icon_size_small">22dp</dimen>
 
     <dimen name="bottombar_elevation">1dp</dimen>
 
@@ -87,5 +88,11 @@
 
     <dimen name="timer_icon_width">60dp</dimen>
     <dimen name="timer_icon_height">60dp</dimen>
+
+
+    <dimen name="stats_text_size">20sp</dimen>
+    <dimen name="stats_text_size_title">18sp</dimen>
+    <dimen name="stats_text_size_small">16sp</dimen>
+
 
 </resources>

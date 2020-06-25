@@ -1,141 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EEEEEE"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp">
-
+        android:background="@color/colorGray5"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:background="#EEEEEE"
+            android:layout_marginStart="@dimen/smaller_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/bicepsImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:contentDescription="@string/img"
+                    android:paddingVertical="@dimen/small_standard_margin"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_arm_measure" />
 
-                    <ImageButton
-                        android:id="@+id/bicepsImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/ic_arm_measure" />
-
-                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
+                        android:layout_marginTop="@dimen/small_standard_margin"
+                        android:gravity="center"
                         android:text="@string/armMeasure"
                         android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/stats_text_size_title" />
 
                     <TextView
                         android:id="@+id/bicepsInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
 
 
                     <TextView
                         android:id="@+id/bicepsDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size_small" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/cardArm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:elevation="1dp"/>
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
@@ -144,43 +96,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="#EEEEEE"
-            android:gravity="center"
+            android:layout_marginStart="@dimen/smaller_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
-                <LinearLayout
+
+                <ImageView
+                    android:id="@+id/chestImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/chestImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/ic_chest_measure" />
-
-
-                </LinearLayout>
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/img"
+                    android:paddingVertical="@dimen/small_standard_margin"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_chest_measure" />
 
 
             </androidx.cardview.widget.CardView>
@@ -188,76 +124,53 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
+                        android:layout_marginTop="@dimen/small_standard_margin"
+                        android:gravity="center"
                         android:text="@string/chestMeasure"
                         android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/stats_text_size_title" />
 
                     <TextView
                         android:id="@+id/chestInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
 
 
                     <TextView
                         android:id="@+id/chestDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size_small" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/cardChest"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:elevation="1dp"/>
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
 
@@ -267,120 +180,79 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="#EEEEEE"
-            android:gravity="center"
+            android:layout_marginStart="@dimen/smaller_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/waistImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/waistImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/ic_waist_measure" />
-
-
-                </LinearLayout>
-
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/img"
+                    android:paddingVertical="@dimen/small_standard_margin"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_waist_measure" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
+                        android:layout_marginTop="@dimen/small_standard_margin"
+                        android:gravity="center"
                         android:text="@string/waistMeasure"
                         android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/stats_text_size_title" />
 
                     <TextView
                         android:id="@+id/waistInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
 
 
                     <TextView
                         android:id="@+id/waistDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size_small" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/cardWaist"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:elevation="1dp"/>
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
 
@@ -390,43 +262,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="#EEEEEE"
-            android:gravity="center"
+            android:layout_marginStart="@dimen/smaller_standard_margin"
+            android:layout_marginTop="@dimen/smaller_standard_margin"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
-                <LinearLayout
+
+                <ImageButton
+                    android:id="@+id/tightImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/tightImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/ic_tight_measure" />
-
-
-                </LinearLayout>
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/img"
+                    android:paddingVertical="@dimen/small_standard_margin"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_tight_measure" />
 
 
             </androidx.cardview.widget.CardView>
@@ -434,76 +290,53 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
+                        android:layout_marginTop="@dimen/small_standard_margin"
+                        android:gravity="center"
                         android:text="@string/tightMeasure"
                         android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/stats_text_size_title" />
 
                     <TextView
                         android:id="@+id/tightInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
 
 
                     <TextView
                         android:id="@+id/tightDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size_small" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/cardTight"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:elevation="1dp"/>
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
@@ -512,43 +345,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="#EEEEEE"
-            android:gravity="center"
+            android:layout_marginVertical="@dimen/smaller_standard_margin"
+            android:layout_marginStart="@dimen/smaller_standard_margin"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
-                <LinearLayout
+
+                <ImageView
+                    android:id="@+id/calveImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/calveImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/colorWhite"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/ic_calve_measure" />
-
-
-                </LinearLayout>
+                    android:background="@color/colorWhite"
+                    android:contentDescription="@string/img"
+                    android:paddingVertical="@dimen/small_standard_margin"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_calve_measure" />
 
 
             </androidx.cardview.widget.CardView>
@@ -556,76 +373,53 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:minWidth="70dp"
-                android:minHeight="70dp"
                 app:cardCornerRadius="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:autoSizeMaxTextSize="18sp"
-                        android:autoSizeMinTextSize="14sp"
-                        android:autoSizeStepGranularity="1dp"
-                        android:gravity="center_horizontal"
-                        android:lines="1"
+                        android:layout_marginTop="@dimen/small_standard_margin"
+                        android:gravity="center"
                         android:text="@string/calveMeasure"
                         android:textColor="@color/gray"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/stats_text_size_title" />
 
                     <TextView
                         android:id="@+id/calveInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="30sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/standard_margin"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size" />
 
 
                     <TextView
                         android:id="@+id/calveDateInput"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center_horizontal|center|clip_vertical"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxWidth="100dp"
-                        android:maxLines="1"
-                        android:text=" - "
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        tools:text="70.5" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/stats_text_size_small" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/cardCalve"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:elevation="1dp"/>
+                    android:elevation="1dp"
+                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
 
@@ -633,5 +427,4 @@
 
 
     </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</ScrollView>
