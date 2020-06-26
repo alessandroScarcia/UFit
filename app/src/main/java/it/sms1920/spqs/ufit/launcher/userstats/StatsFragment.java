@@ -1,15 +1,3 @@
-
-//public class StatsFragment extends Fragment {
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        // Using the correct layout for this fragment
-//        return inflater.inflate(R.layout.muscle_stats, container, false);
-//    }
-//}
-
-
 package it.sms1920.spqs.ufit.launcher.userstats;
 
 import android.annotation.SuppressLint;
@@ -30,13 +18,15 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
-
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
@@ -44,24 +34,34 @@ import java.util.Objects;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
+import static java.sql.Types.NULL;
 
 
 public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = StatsFragment.class.getCanonicalName();
     private static iStatsFragment.Presenter presenter;
+    private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
+
+    private LinearLayout cardWeight;
+    private LinearLayout cardFat;
+    private LinearLayout cardWater;
+    private LinearLayout cardMuscle;
+
+    private LinearLayout cardArm;
+    private LinearLayout cardChest;
+    private LinearLayout cardWaist;
+    private LinearLayout cardTight;
+    private LinearLayout cardCalve;
 
     //declaration of all the text view inside the 2 different tab content
     @SuppressLint("StaticFieldLeak")
     private static TextView weight;
-
     @SuppressLint("StaticFieldLeak")
     private static TextView fat;
-
     @SuppressLint("StaticFieldLeak")
     private static TextView water;
-
     @SuppressLint("StaticFieldLeak")
     private static TextView muscle;
     private TextView weightDate;
@@ -84,8 +84,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     private static TextView calve;
     private TextView calveDate;
 
-    public ImageButton imcHelp;
-    public ImageButton ffmiHelp;
+    public MaterialButton imcHelp;
+    public MaterialButton ffmiHelp;
 
     private TextView BMI;
     private TextView FFMI;
@@ -97,7 +97,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -107,16 +106,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         //setting content of frame layout
         containerLayout = view.findViewById(R.id.container_stats);
-        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.general_stats, container);
+        getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
 
-        containerLayout.addView(child);
         context = getActivity();
         presenter = new StatsPresenter(this, context);
 
         setViewsDataGeneralStats(view);
 
         //set options of tab menu
-        TabLayout tlStats = view.findViewById(R.id.tlStats);
+        tlStats = view.findViewById(R.id.tlStats);
         tlStats.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
@@ -130,7 +128,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                 } else if (tab.getPosition() == 1) {
                     setViewsDataMuscleStats(view);
                 }
-
             }
 
             @Override
@@ -147,7 +144,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                 }
             }
         });
-
 
 
         imcHelp = view.findViewById(R.id.imcHelp);
@@ -171,23 +167,24 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             }
         });
 
+        Toast.makeText(context, "Click to insert values and calculate BMI and FFMI", Toast.LENGTH_LONG).show();
+
         return view;
     }
-
-
 
 
     /**
      * Function used to show the dialog box set by the the class of StatsDialog
      *
      * @param textViewValue textView that call the dialog and will receive the value
-     * @param textViewDate textView that call the dialog and will receive the date
+     * @param textViewDate  textView that call the dialog and will receive the date
      */
     public void openDialog(TextView textViewValue, TextView textViewDate) {
         StatsDialog dialogBox = new StatsDialog(textViewValue, textViewDate);
         dialogBox.setTargetFragment(this, 1);
-        assert getFragmentManager() != null;
-        dialogBox.show(getFragmentManager(), "example dialog");
+        if (getFragmentManager() != null) {
+            dialogBox.show(getFragmentManager(), "example dialog");
+        }
     }
 
     /**
@@ -196,8 +193,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showGeneralStats() {
         containerLayout.removeAllViewsInLayout();
-        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.general_stats, null);
-        containerLayout.addView(child);
+        getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
+
     }
 
     /**
@@ -206,16 +203,16 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showBodyStats() {
         containerLayout.removeAllViewsInLayout();
-        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.muscle_measurment, null);
-        containerLayout.addView(child);
+        getLayoutInflater().inflate(R.layout.muscle_measurment, containerLayout);
+
     }
 
 
     /**
      * Function to update the data inserted in dialog box
      *
-     * @param value value from dialog
-     * @param date  date from dialog
+     * @param value         value from dialog
+     * @param date          date from dialog
      * @param textViewValue textView to edit with the value
      * @param textViewDate  textView to edit with the date
      */
@@ -249,17 +246,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     public void setViewsDataGeneralStats(View view) {
 //      Toast.makeText(context, presenter.getUserStats().getIdUserStats() + " " + presenter.getUserStats().getWeight(), Toast.LENGTH_SHORT).show();
 
-        weight = view.findViewById(R.id.weightInput);
         BMI = view.findViewById(R.id.bmiValue);
         FFMI = view.findViewById(R.id.ffmiValue);
-        weightDate = view.findViewById(R.id.weightDateInput);
         tvBMIStatus = view.findViewById(R.id.tvBMIStatus);
         tvFFMIStatus = view.findViewById(R.id.tvFFMIStatus);
 
 
         weight = view.findViewById(R.id.weightInput);
         weightDate = view.findViewById(R.id.weightDateInput);
-        LinearLayout cardWeight = view.findViewById(R.id.cardWeight);
+        cardWeight = view.findViewById(R.id.cardWeight);
 
         cardWeight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,7 +267,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         fat = view.findViewById(R.id.fatInput);
         fatDate = view.findViewById(R.id.fatDateInput);
-        LinearLayout cardFat = view.findViewById(R.id.cardFat);
+        cardFat = view.findViewById(R.id.cardFat);
         cardFat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,7 +278,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         muscle = view.findViewById(R.id.musclesInput);
         muscleDate = view.findViewById(R.id.musclesDateInput);
-        LinearLayout cardMuscle = view.findViewById(R.id.cardMuscle);
+        cardMuscle = view.findViewById(R.id.cardMuscle);
         cardMuscle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,7 +289,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         water = view.findViewById(R.id.waterInput);
         waterDate = view.findViewById(R.id.waterDateInput);
-        LinearLayout cardWater = view.findViewById(R.id.cardWater);
+        cardWater = view.findViewById(R.id.cardWater);
         cardWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -312,7 +307,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         chest = view.findViewById(R.id.chestInput);
         chestDate = view.findViewById(R.id.chestDateInput);
-        LinearLayout cardChest = view.findViewById(R.id.cardChest);
+        cardChest = view.findViewById(R.id.cardChest);
 
         //text view of weight show the dialog box
         cardChest.setOnClickListener(new View.OnClickListener() {
@@ -325,7 +320,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         arm = view.findViewById(R.id.bicepsInput);
         armDate = view.findViewById(R.id.bicepsDateInput);
-        LinearLayout cardArm = view.findViewById(R.id.cardArm);
+        cardArm = view.findViewById(R.id.cardArm);
         cardArm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -336,7 +331,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         waist = view.findViewById(R.id.waistInput);
         waistDate = view.findViewById(R.id.waistDateInput);
-        LinearLayout cardWaist = view.findViewById(R.id.cardWaist);
+        cardWaist = view.findViewById(R.id.cardWaist);
         cardWaist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -347,7 +342,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         tight = view.findViewById(R.id.tightInput);
         tightDate = view.findViewById(R.id.tightDateInput);
-        LinearLayout cardTight = view.findViewById(R.id.cardTight);
+        cardTight = view.findViewById(R.id.cardTight);
         cardTight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -359,7 +354,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         calve = view.findViewById(R.id.calveInput);
         calveDate = view.findViewById(R.id.calveDateInput);
-        LinearLayout cardCalve = view.findViewById(R.id.cardCalve);
+        cardCalve = view.findViewById(R.id.cardCalve);
         cardCalve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -449,19 +444,19 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
     public void setBMIStatus(float BMIValue) {
         String strBMIStatus;
-        if(BMIValue < 16.5){
+        if (BMIValue < 16.5) {
             strBMIStatus = getString(R.string.severe_low_weight);
-        }else if(BMIValue >= 16.5 && BMIValue <= 18.4){
+        } else if (BMIValue >= 16.5 && BMIValue <= 18.4) {
             strBMIStatus = getString(R.string.low_weight);
-        }else if(BMIValue >= 18.5 && BMIValue <= 24.9){
+        } else if (BMIValue >= 18.5 && BMIValue <= 24.9) {
             strBMIStatus = getString(R.string.normal);
-        }else if(BMIValue >= 25 && BMIValue <= 30){
+        } else if (BMIValue >= 25 && BMIValue <= 30) {
             strBMIStatus = getString(R.string.overweight);
-        }else if (BMIValue >= 30.1 && BMIValue <= 34.9){
+        } else if (BMIValue >= 30.1 && BMIValue <= 34.9) {
             strBMIStatus = getString(R.string.obesity_first_level);
-        }else if (BMIValue >= 35 && BMIValue <= 40){
+        } else if (BMIValue >= 35 && BMIValue <= 40) {
             strBMIStatus = getString(R.string.obesity_second_level);
-        }else {
+        } else {
             strBMIStatus = getString(R.string.obesity_third_level);
         }
         tvBMIStatus.setText(strBMIStatus);
@@ -470,19 +465,19 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void setFFMIStatus(float FFMIValue) {
         String strFFMIStatus;
-        if(FFMIValue < 17){
+        if (FFMIValue < 17) {
             strFFMIStatus = getString(R.string.ffmi_below_average);
-        }else if(FFMIValue >= 18 && FFMIValue <= 19){
+        } else if (FFMIValue >= 18 && FFMIValue <= 19) {
             strFFMIStatus = getString(R.string.ffmi_average);
-        }else if(FFMIValue >= 20 && FFMIValue <= 21){
+        } else if (FFMIValue >= 20 && FFMIValue <= 21) {
             strFFMIStatus = getString(R.string.ffmi_above_average);
-        }else if(FFMIValue == 22 ){
+        } else if (FFMIValue == 22) {
             strFFMIStatus = getString(R.string.ffmi_excellent);
-        }else if (FFMIValue >= 23 && FFMIValue <= 25){
+        } else if (FFMIValue >= 23 && FFMIValue <= 25) {
             strFFMIStatus = getString(R.string.ffmi_superior);
-        }else if (FFMIValue >= 26 && FFMIValue <= 27){
+        } else if (FFMIValue >= 26 && FFMIValue <= 27) {
             strFFMIStatus = getString(R.string.ffmi_sospicius);
-        }else {
+        } else {
             strFFMIStatus = getString(R.string.ffmi_not_natural);
         }
         tvFFMIStatus.setText(strFFMIStatus);
@@ -530,7 +525,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
          * When the dialog is created the layout show 2 editText inside it. One of them use datePicker
          *
          * @param savedInstanceState istance of dialog
-
          * @return builder.create()
          */
         @NonNull
@@ -575,17 +569,18 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                     year = calendar.get(Calendar.YEAR);
                     mounth = calendar.get(Calendar.MONTH);
                     dayOfMounth = calendar.get(Calendar.DAY_OF_MONTH);
+                    if (getTargetFragment() != null && getTargetFragment().getContext() != null) {
+                        datePickerDialog = new DatePickerDialog(getTargetFragment().getContext(),
+                                new DatePickerDialog.OnDateSetListener() {
+                                    @SuppressLint("SetTextI18n")
+                                    @Override
+                                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                        statsDateEditText.setText(dayOfMonth + "/" + month + "/" + year);
+                                    }
+                                }, year, mounth, dayOfMounth);
+                        datePickerDialog.show();
+                    }
 
-                    datePickerDialog = new DatePickerDialog(Objects.requireNonNull
-                            (Objects.requireNonNull(getTargetFragment()).getContext()),
-                            new DatePickerDialog.OnDateSetListener() {
-                                @SuppressLint("SetTextI18n")
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                    statsDateEditText.setText(dayOfMonth + "/" + month + "/" + year);
-                                }
-                            }, year, mounth, dayOfMounth);
-                    datePickerDialog.show();
                 }
             });
 
@@ -593,8 +588,6 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         }
     }
-
-
 
 
 }

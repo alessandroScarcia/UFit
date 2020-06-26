@@ -14,6 +14,8 @@ public interface LauncherContract {
 
         void insertProfileFragment();
 
+        void insertProfileSettingsFragment();
+
         void startSearchActivity();
 
         void insertChooseFragment();
@@ -22,7 +24,11 @@ public interface LauncherContract {
 
         void resetActivity();
 
-        enum FragType {HOME, PLANS, TRAINER, STATS, PROFILE, SHOW_PLAN }
+        String getWorkoutId();
+
+        void startEditWorkoutActivity(String id);
+
+        enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS}
     }
 
     interface Presenter {
@@ -45,6 +51,10 @@ public interface LauncherContract {
         void onLogOutIconClicked();
 
         void onShowPlanClosed();
+
+        void onProfileSettingsClicked();
+
+        void onEditIconClicked();
     }
 
 }

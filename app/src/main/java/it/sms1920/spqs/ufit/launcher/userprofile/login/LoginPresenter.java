@@ -9,7 +9,10 @@ import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,38 +38,58 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View view;
     private FirebaseAuth firebaseAuth;
-    private String previousUserId = null;
+    private FirebaseUser user;
+    private String previousUserId;
+    private boolean isAnonymous;
 
     public LoginPresenter(LoginContract.View view) {
         this.view = view;
 
         this.firebaseAuth = FirebaseAuthSingleton.getFirebaseAuth();
 
-        FirebaseUser anonymousUser = firebaseAuth.getCurrentUser();
-        if (anonymousUser != null) {
-            previousUserId = anonymousUser.getUid();
-            Log.d(TAG, "prevoiousUid " + previousUserId);
+        user = firebaseAuth.getCurrentUser();
+
+        if (user != null && user.isAnonymous()) {
+            isAnonymous = user.isAnonymous();
+            previousUserId = user.getUid();
         }
     }
 
     @Override
     public void onLoginButtonClicked(String email, String password) {
         if (checkFields(email, password)) {
-            view.setEnabledUi(false);
+            if (isAnonymous) {
+                view.setEnabledUi(false);
 
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "signInWithEmailAndPasword:success");
-                                returnLoginResult(SUCCESS);
-                            } else {
-                                Log.w(TAG, "signInWithEmailAndPassword:failure", task.getException());
-                                returnLoginResult(FAILURE);
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "signInWithEmailAndPasword:success");
+                                    returnLoginResult(SUCCESS);
+                                } else {
+                                    Log.w(TAG, "signInWithEmailAndPassword:failure", task.getException());
+                                    returnLoginResult(FAILURE);
+                                }
                             }
-                        }
-                    });
+                        });
+            } else {
+                AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+                user.reauthenticate(credential)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "re-authenticate:success");
+                                    view.endActivity();
+                                } else {
+                                    Log.d(TAG, "re-authenticate:failure", task.getException());
+                                }
+                            }
+                        });
+            }
+
         }
     }
 
@@ -81,7 +104,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         if (TextUtils.isEmpty(emailField)) {
             view.setInputError(EMAIL_FIELD_EMPTY);
-        } else if (StringUtils.isEmail(emailField)) {
+        } else if (!StringUtils.isEmail(emailField)) {
             view.setInputError(EMAIL_FORMAT_NOT_VALID);
         } else {
             emailCheck = true;

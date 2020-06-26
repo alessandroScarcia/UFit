@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UFit</string>
+
+
+    <!--    SplashScreen-->
     <string name="splash_screen_team_name">by SPQS</string>
 
+
+    <!--    Launcher-->
     <string name="home">Home</string>
     <string name="plan">Schede</string>
     <string name="trainer">Trainer</string>
     <string name="stats">Statistiche</string>
     <string name="profile">Profilo</string>
-    <string name="image">Image</string>
 
+
+    <!--    WorkoutPlan-->
     <string name="myPlans">Le mie schede</string>
     <string name="trainerPlans">Schede del trainer</string>
 
-    <string name="addTo">Aggiungi a…</string>
+    <string name="serie">Serie</string>
+    <string name="reps">Ripetizioni</string>
+    <string name="loads">Carichi</string>
 
-    <string name="loading">Caricamento&#8230;</string>
+    <string name="new_workout_plan">Nuova scheda d\'allenamento</string>
+    <string name="workout_plan_name">Nome scheda d\'allenamento</string>
 
-    <!-- Profilo -->
+
+    <!-- Profile -->
     <string name="name">Nome</string>
     <string name="surname">Cognome</string>
-    <string name="height">Altezza</string>
-    <string name="weight">Peso</string>
-    <string name="workouts">Allenamenti</string>
 
-    <string name="email">E-Mail</string>
-    <string name="password">Password</string>
-    <string name="squat">Squat</string>
-    <string name="add_exercise_to_plan">Aggiungi a una scheda</string>
-
+    <string name="image">Image</string>
     <string name="gender">Genere</string>
-    <string name="date">Data di nascita</string>
+    <string name="birth_date">Data di nascita</string>
+
+    <string name="profile_text_no_information">Non ci sono informazioni disponibili. Aggiornale dalle impostazioni del profilo.</string>
 
     <string-array name="genders">
         <item>Maschio</item>
@@ -38,105 +43,60 @@
         <item>Non specificato</item>
     </string-array>
 
-
-    <!-- Login -->
-    <string name="login">Accedi</string>
-    <string name="forgot_password">Recupera password</string>
-    <string name="not_registered_yet">Non hai un account?</string>
-
-    <string name="email_empty">Inserisci un email</string>
-    <string name="password_empty">Inserisci una password</string>
-    <string name="email_not_valid">Non sembra una email questa</string>
-    <string name="password_not_valid">Deve essere di almeno 6 caratteri. Richieste maiuscole, minuscole, numeri e caratteri speciali.</string>
-    <string name="wrong_credentials">Email o password non corrette.</string>
-
-    <string name="register">Registrati</string>
-    <string name="signout">Esci</string>
-    <string name="passwords_not_equal">Le password non corrispondono</string>
-    <string name="email_already_exists">Email già in uso</string>
-    <string name="confirm_password">Conferma Password</string>
-    <string name="already_have_account">Già iscritto?</string>
-
-    <!--Reset Password-->
-    <string name="send_email">Invia</string>
-    <string name="new_workout_plan">Nuova scheda d\'allenamento</string>
-    <string name="search_here">Cerca qui</string>
-
-    <string name="workout_plan_name">Nome scheda d\'allenamento</string>
-
-    <!--Stats strings-->
-    <string name="edit_value" >Modifica Valore</string>
-    <string name="global_cancel" >Cancella</string>
-    <string name="add_label" >Aggiungi</string>
+    <!-- Profile settings -->
+    <string name="profile_settings_change_image">Cambia immagine del profilo</string>
+    <string name="profile_settings_edit_password">Cambia password</string>
+    <string name="profile_settings_edit_email">Cambia email</string>
+    <string name="profile_settings">Impostazioni profilo</string>
+    <string name="profile_settings_edit_role">Passa ad account Trainer</string>
+    <string name="profile_settings_delete_profile">Cancella il profilo</string>
 
 
-    <string name="weightLabel">Peso(kg)</string>
-    <string name="fatLabel" >Grasso(%)</string>
-    <string name="bonesLabel" >Ossa(%)</string>
-    <string name="waterLabel">Acqua(%)</string>
-    <string name="musclesLabel" >Muscoli(%)</string>
-
-    <string name="indexLabel">Indice</string>
-    <string name="imcLabel">BMI</string>
-    <string name="rfmLabel" >RFM</string>
-    <string name="ffmiLabel" >FFMI</string>
+    <!--    Trainer-->
+    <string name="btnConnectionTrainer">Collegati al tuo trainer</string>
 
 
-    <string name="DateLabel" >Data</string>
-    <string name="MeasureLabel">Carico(Kg)</string>
-    <string name="MesureHint">Inserisci carico qui</string>
-    <string name="measureLabel">Inserisci carico qui</string>
-    <string name="sizeTableLabel">Misurazioni acquisite</string>
-
-
+    <!-- Stats -->
     <string name="myGeneralStats">Stato generale</string>
     <string name="myBodyStats">Misurazioni corporee</string>
 
+    <string name="height">Altezza</string>
+    <string name="weight">Peso</string>
+    <string name="fatLabel">Grasso</string>
+    <string name="bonesLabel">Ossa</string>
+    <string name="waterLabel">Acqua</string>
+    <string name="musclesLabel">Muscoli</string>
+    <string name="dateLabel">Data</string>
 
-    <string name="armMeasure">Arm Measure</string>
-    <string name="chestMeasure">Chest Measure</string>
-    <string name="waistMeasure">Waist Measure</string>
-    <string name="tightMeasure">Tight Measure</string>
-    <string name="calveMeasure">Calve Measure</string>
+    <string name="measure">Misura</string>
+    <string name="mesureHint">Inserisci carico qui</string>
 
+    <string name="sizeTableLabel">Misurazioni acquisite</string>
 
-    <string name="error_value_message">Insert a valid value</string>
-    <string name="muscles_involved">Muscoli coinvolti</string>
-    <string name="description">Descrizione</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-    <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
+    <string name="formulaBMI">Peso[kg] / (Altezza[m])²</string>
+    <string name="ffmiFormula">weight [kg] * (1 - (body fat [%]/ 100)) / (height [m])²</string>
 
-    <string name="insertTitleAdvice">Insert a title for your advice</string>
-    <string name="insertDescriptionAdvice">Insert a description for your advice</string>
-
-    <string name="serie">Serie</string>
-    <string name="reps">Ripetizioni</string>
-    <string name="loads">Carichi</string>
-    <string name="imgExercise">Immagine esercizio</string>
-    <string name="x">x</string>
-    <string name="kg">kg</string>
-    <string name="choose_activity_text">Oh no! Non hai ancora effettuato l\'accesso con il tuo account! ☹</string>
-    <string name="password_reset_helper_text">Inserire l\'indirizzo di posta elettronica dell\'account per il quale si desidera reimpostare la password</string>
-    <string name="password_reset_email_sent">Ti abbiamo inviato una email per reimpostare la tua password.</string>
-
-
-    <string name="formulaBMI">Peso(kg) / (Altezza x Altezza(m))</string>
-    <string name="ffmiFormula">Peso [kg] * (1 - (massa grassa [%]/ 100)) </string>
-    <string name="btnConnectionTrainer">Connettiti con il tuo trainer</string>
-    <string name="severe_low_weight">Gravemente sottopeso</string>
+    <string name="severe_low_weight">Estremamente sottopeso</string>
     <string name="low_weight">Sottopeso</string>
-    <string name="normal">Normale</string>
+    <string name="normal">Nella media</string>
     <string name="overweight">Sovrappeso</string>
-    <string name="obesity_first_level">Obesità di primo grado</string>
-    <string name="obesity_second_level">Obesità di secondo grado</string>
-    <string name="obesity_third_level">Obesità di terzo grado</string>
+    <string name="obesity_first_level">Obesità di 1° livello</string>
+    <string name="obesity_second_level">Obesità di 2° livello</string>
+    <string name="obesity_third_level">Obesità di 3° livello</string>
     <string name="ffmi_below_average">Sotto la media</string>
-    <string name="ffmi_average">Nella media</string>
+    <string name="ffmi_average">Media</string>
     <string name="ffmi_above_average">Sopra la media</string>
     <string name="ffmi_excellent">Eccellente</string>
     <string name="ffmi_superior">Superiore</string>
-    <string name="ffmi_sospicius">Sospetto non natural</string>
-    <string name="ffmi_not_natural">Ottenibile con steroidi</string>
+    <string name="ffmi_sospicius">Sospetto non naturale</string>
+    <string name="ffmi_not_natural">Ottenuto con steroidi</string>
+
+    <string name="armMeasure">Misura braccio</string>
+    <string name="chestMeasure">Misura petto</string>
+    <string name="waistMeasure">Misura addome</string>
+    <string name="tightMeasure">Misura coscia</string>
+    <string name="calveMeasure">Misura polpaccio</string>
+
     <string name="RM">1 RM</string>
     <string name="reps_3_2">3/2 rip</string>
     <string name="reps_5_4">5/4 rip</string>
@@ -151,7 +111,59 @@
     <string name="selectReps">Seleziona il range di ripetioni</string>
     <string name="insertWeight">Inserisci il carico dell\'esercizio</string>
     <string name="calculate">Calcola</string>
+    <string name="profile_settings_edit_personal_information">Cambia informazioni personali</string>
+    <string name="edit_email_caution_msg">Attenzione: l\'email che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
+    <string name="profile_settings_name_empty">Il nome non può essere vuoto</string>
+    <string name="profule_settings_surname_empty">Il cognome non può essere vuoto</string>
+    <string name="edit_password_caution_msg">Attenzione: la password che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
+    <string name="profile_settings_delete_profile_msg">Sei sicuro di voler cancellare il tuo profilo? Questa azione non piò essere annullata!</string>
+    <string name="delete">Cancella il profilo</string>
+    <string name="cancel">Annulla</string>
 
+    <!-- Login -->
+    <string name="login">Accedi</string>
+    <string name="forgot_password">Recupera password</string>
+    <string name="not_registered_yet">Non hai un account?</string>
+
+    <string name="email_empty">Inserisci un email</string>
+    <string name="password_empty">Inserisci una password</string>
+    <string name="email_not_valid">Non sembra una email questa</string>
+
+    <string name="wrong_credentials">Email o password non corrette.</string>
+    <string name="choose_activity_text">Oh no! Non hai ancora effettuato l\'accesso con il tuo account! ☹</string>
+
+
+    <!-- Reg -->
+    <string name="confirm_password">Conferma Password</string>
+    <string name="register">Registrati</string>
+    <string name="already_have_account">Già iscritto?</string>
+    <string name="password_not_valid">Deve essere di almeno 6 caratteri. Richieste maiuscole, minuscole, numeri e caratteri speciali.</string>
+    <string name="passwords_not_equal">Le password non corrispondono</string>
+    <string name="email_already_exists">Email già in uso</string>
+
+
+    <!--Reset Password-->
+    <string name="send_email">Invia</string>
+
+    <string name="password_reset_helper_text">Inserire l\'indirizzo di posta elettronica dell\'account per il quale si desidera reimpostare la password</string>
+    <string name="password_reset_email_sent">Ti abbiamo inviato una email per reimpostare la tua password.</string>
+
+
+    <!--    Consigli-->
+    <string name="insertTitleAdvice">Inserisci un titolo al tuo consiglio</string>
+    <string name="insertDescriptionAdvice">Inserisci il tuo consiglio</string>
+
+
+    <!--    Cerca-->
+    <string name="search_here">Cerca qui</string>
+
+
+    <!--    Esercizi-->
+    <string name="muscles_involved">Muscoli coinvolti</string>
+    <string name="description">Descrizione</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
+    <string name="imgExercise">Immagine esercizio</string>
 
 </resources>
 

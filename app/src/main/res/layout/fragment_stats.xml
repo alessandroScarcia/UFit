@@ -36,7 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/plans_tab_items_height"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/colorGray5">
 
 
         </LinearLayout>

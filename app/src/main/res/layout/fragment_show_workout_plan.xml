@@ -5,9 +5,16 @@
     android:layout_height="match_parent"
     tools:context="it.sms1920.spqs.ufit.launcher.workoutplan.showsingle.ShowWorkoutPlanFragment">
 
+    <TextView
+        android:id="@+id/workoutId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvExerciseSetsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lightGray"/>
+        android:background="@color/colorGray5"/>
+
 </FrameLayout>

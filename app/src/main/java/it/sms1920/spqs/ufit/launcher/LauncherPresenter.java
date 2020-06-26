@@ -8,6 +8,7 @@ import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.HOME;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PLANS;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PROFILE;
+import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.PROFILE_SETTINGS;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.SHOW_PLAN;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.STATS;
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.TRAINER;
@@ -75,7 +76,7 @@ public class LauncherPresenter implements LauncherContract.Presenter {
 
     @Override
     public void onBackPressed() {
-        switch (currentFragment){
+        switch (currentFragment) {
             case HOME:
                 view.endActivity();
                 break;
@@ -83,9 +84,13 @@ public class LauncherPresenter implements LauncherContract.Presenter {
                 currentFragment = PLANS;
                 view.insertPlansFragment();
                 break;
+            case PROFILE_SETTINGS:
+                view.insertProfileFragment();
+                break;
             default:
                 currentFragment = HOME;
                 view.insertHomeFragment();
+                break;
         }
     }
 
@@ -99,5 +104,17 @@ public class LauncherPresenter implements LauncherContract.Presenter {
     @Override
     public void onShowPlanClosed() {
         currentFragment = PLANS;
+    }
+
+    @Override
+    public void onProfileSettingsClicked() {
+        view.insertProfileSettingsFragment();
+        currentFragment = PROFILE_SETTINGS;
+    }
+
+    @Override
+    public void onEditIconClicked() {
+        String id = view.getWorkoutId();
+        view.startEditWorkoutActivity(id);
     }
 }

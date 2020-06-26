@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.showsingle;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.R;
@@ -28,6 +31,8 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     private String workoutPlanId;
 
     LauncherActivity launcher;
+
+    private boolean ready = false;
 
     public ShowWorkoutPlanFragment() {
         // Required empty public constructor
@@ -70,6 +75,9 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         View view = inflater.inflate(R.layout.fragment_show_workout_plan, container, false);
 
         // initialize view references
+        TextView id = view.findViewById(R.id.workoutId);
+        id.setText(workoutPlanId);
+
         RecyclerView rvExerciseSetsList = view.findViewById(R.id.rvExerciseSetsList);
         rvExerciseSetsList.setAdapter(adapter);
         rvExerciseSetsList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -80,6 +88,8 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        adapter.saveCurrentData("");
+        launcher.showToolbarEditIcon(false);
         launcher.showPlanClosed();
     }
 
@@ -101,11 +111,22 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         });
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.update();
+    }
+
     @Override
     public void hideToolbarNavigationButton() {
         launcher.toggleToolbarNavigationButton(false);
     }
 
+    @Override
+    public void setToolBarMenuEditIcon() {
+        launcher.showToolbarEditIcon(true);
+    }
 
 
 }

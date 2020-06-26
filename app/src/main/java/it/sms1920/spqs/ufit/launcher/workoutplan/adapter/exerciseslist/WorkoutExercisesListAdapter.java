@@ -29,8 +29,7 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
     private AppCompatActivity activity;
     private WorkoutExercisesListContract.Presenter presenter;
-    boolean editable;
-
+    private boolean editable;
     /*
             Resource ID indicating layout to use in binding. Required at least something like below:
             Required: TextView with "txtExerciseName" as ID
@@ -64,8 +63,13 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         presenter = new WorkoutExercisesListPresenter(this, workoutPlanId);
     }
 
-    public void createNewWorkoutPlan(String name){
+
+    public void createNewWorkoutPlan(String name) {
         presenter.onSaveNewWorkoutPlanRequested(name);
+    }
+
+    public void saveChangesWorkoutPlan(String name) {
+        presenter.onSaveWorkoutPlanChangesRequested(name);
     }
 
     @NonNull
@@ -102,6 +106,14 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
     public ArrayList<String> getExercisesIdList() {
         return presenter.onExercisesIdRequested();
+    }
+
+    public void saveCurrentData(String name) {
+        presenter.onSaveWorkoutPlanChangesRequested(name);
+    }
+
+    public void update() {
+        presenter.onUpdateRequested();
     }
 
 
@@ -141,7 +153,6 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
 
             });
-
             btnRemove = itemView.findViewById(R.id.btnRemove);
             btnRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -150,9 +161,7 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
                 }
             });
 
-
             series = itemView.findViewById(R.id.rvSeries);
-
 
             btnAdd = itemView.findViewById(R.id.addSerie);
             btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -169,10 +178,11 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
             itemView.setOnClickListener(myClickListener);
 
+
         }
 
         @Override
-        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference){
+        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference) {
             adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId, setsListReference);
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
@@ -204,7 +214,6 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
             adapter.addSerieToList(reps, loads);
         }
     }
-
 
 
 }

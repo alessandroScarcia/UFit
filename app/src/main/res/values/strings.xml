@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">UFit</string>
+
+
+    <!--    SplashScreen-->
     <string name="splash_screen_team_name">by SPQS</string>
 
+
+    <!--    Launcher-->
     <string name="home">Home</string>
     <string name="plan">Plans</string>
     <string name="trainer">Trainer</string>
@@ -10,126 +15,68 @@
     <string name="profile">Profile</string>
 
 
-    <string name="signout">Sign Out</string>
-
+    <!--    WorkoutPlan-->
     <string name="myPlans">My workout plans</string>
     <string name="trainerPlans">Trainer\'s workout plans</string>
 
-    <string name="addTo">Add to…</string>
-
-    <string name="serie">Serie</string>
+    <string name="serie">Sets</string>
     <string name="reps">Reps</string>
     <string name="loads">Loads</string>
 
-    <string name="loading">Loading&#8230;</string>
-
-
     <string name="new_workout_plan">Create new Workout Plan</string>
     <string name="workout_plan_name">Workout plan name</string>
-    <string name="x">x</string>
-    <string name="kg">kg</string>
+
 
     <!-- Profile -->
     <string name="name">Name</string>
     <string name="surname">Surname</string>
-    <string name="height">Height</string>
-    <string name="weight">Weight</string>
-    <string name="workouts">Workouts</string>
+
+    <string name="email" translatable="false">E-Mail</string>
+    <string name="password" translatable="false">Password</string>
     <string name="image">Image</string>
-    <string name="email">E-Mail</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="squat">Squat</string>
-    <string name="add_exercise_to_plan">Add to your plan</string>
     <string name="gender">Gender</string>
-    <string name="date">Birthdate</string>
-    <!--Stats strings-->
-    <string name="edit_value">Modifica Valore</string>
-    <string name="global_cancel">Cancella</string>
-    <string name="add_label">Aggiungi</string>
-
-
-    <string name="weightLabel">Peso(kg)</string>
-    <string name="fatLabel">Grasso(%)</string>
-    <string name="bonesLabel">Ossa(%)</string>
-    <string name="waterLabel">Acqua(%)</string>
-    <string name="musclesLabel">Muscoli(%)</string>
-
-    <string name="indexLabel">Indice</string>
-    <string name="imcLabel">BMI</string>
-    <string name="rfmLabel">RFM</string>
-    <string name="ffmiLabel">FFMI</string>
-
-
-    <string name="DateLabel">Data</string>
-    <string name="MeasureLabel">Carico(Kg)</string>
-    <string name="MesureHint">Inserisci carico qui</string>
-    <string name="measureLabel">Inserisci carico qui</string>
-    <string name="sizeTableLabel">Misurazioni acquisite</string>
-
+    <string name="birth_date">Birthdate</string>
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>
         <item>Not specified</item>
     </string-array>
 
-    <!-- Login -->
-    <string name="login">Login</string>
-    <string name="forgot_password">Forgot password</string>
-    <string name="not_registered_yet">Not registered yet?</string>
+    <!-- Profile Settings -->
+    <string name="profile_text_no_information">No information available. Update them from profile settings.</string>
+    <string name="profile_settings_change_image">Change profile image</string>
+    <string name="profile_settings_edit_password">Edit password</string>
+    <string name="profile_settings_edit_email">Edit email</string>
+    <string name="profile_settings">Profile settings</string>
+    <string name="profile_name_surname_placeholder" translatable="false">%s %s</string>
 
-    <string name="email_empty">"Email can not be empty"</string>
-    <string name="password_empty">"Password can not be empty"</string>
-    <string name="email_not_valid">"This is not an email"</string>
-
-    <string name="wrong_credentials">"Email or password incorrect."</string>
-
-
-    <!-- Reg -->
-    <string name="register">Register</string>
-    <string name="already_have_account">Already have an account?</string>
-    <string name="password_not_valid">"Needs at least 6 characters. Required: uppercase, lowercase, numbers and special chars"</string>
-    <string name="passwords_not_equal">"Insert same password pls"</string>
-    <string name="email_already_exists">Email already exists</string>
-    <string name="send_email">Send</string>
-
-    <string name="password_reset_helper_text">Enter the email address of the account for which you want to reset your password</string>
-    <string name="password_reset_email_sent">We sent you an email to reset your password.</string>
-
-
-    <string name="myGeneralStats">Stato generale</string>
-    <string name="myBodyStats">Misurazioni corporee</string>
-
-
-    <string name="armMeasure">Arm Measure</string>
-    <string name="chestMeasure">Chest Measure</string>
-    <string name="waistMeasure">Waist Measure</string>
-    <string name="tightMeasure">Tight Measure</string>
-    <string name="calveMeasure">Calve Measure</string>
-
-
-    <string name="insertTitleAdvice">Insert a title for your advice</string>
-    <string name="insertDescriptionAdvice">Insert a description for your advice</string>
-
-
-    <string name="error_value_message">Insert a valid value</string>
-
-
-    <string name="search_here">Search here</string>
-    <string name="muscles_involved">Muscles Involved</string>
-    <string name="description">Description</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-    <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
-
-    <!-- Image content descriptions -->
-    <string name="imgExercise">Exercise image</string>
-    <string name="choose_activity_text">Oh no! Looks like no account is logged in yet! ☹</string>
-
-
-
-    <string name="formulaBMI">weight(kg) / (height x height(m))</string>
-    <string name="ffmiFormula">weight [kg] * (1 - (body fat [%]/ 100))</string>
+    <!--    Trainer-->
     <string name="btnConnectionTrainer">Connect with your trainer</string>
+
+
+    <!-- Stats -->
+    <string name="myGeneralStats">General</string>
+    <string name="myBodyStats">Measurement</string>
+
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="fatLabel">Fat</string>
+    <string name="bonesLabel">Bones</string>
+    <string name="waterLabel">Water</string>
+    <string name="musclesLabel">Muscles</string>
+    <string name="dateLabel">Date</string>
+
+    <string name="imcLabel" translatable="false">BMI</string>
+    <string name="ffmiLabel" translatable="false">FFMI</string>
+
+    <string name="measure">Measure</string>
+    <string name="mesureHint">Insert load here</string>
+
+    <string name="sizeTableLabel">Misurazioni acquisite</string>
+
+    <string name="formulaBMI">Weight[kg] / (Height[m] x Height[m])</string>
+    <string name="ffmiFormula">weight [kg] * (1 - (body fat [%]/ 100)) / (height [m])²</string>
+
     <string name="severe_low_weight">Severe underweight</string>
     <string name="low_weight">Underweight</string>
     <string name="normal">Normal</string>
@@ -144,6 +91,19 @@
     <string name="ffmi_superior">Superior</string>
     <string name="ffmi_sospicius">Sospicius not natural</string>
     <string name="ffmi_not_natural">Obteined with steroids</string>
+
+    <string name="empty" translatable="false"> - </string>
+    <string name="x" translatable="false">x</string>
+    <string name="kg" translatable="false">kg</string>
+    <string name="cm" translatable="false">cm</string>
+    <string name="percent" translatable="false">%</string>
+
+    <string name="armMeasure">Arm Measure</string>
+    <string name="chestMeasure">Chest Measure</string>
+    <string name="waistMeasure">Waist Measure</string>
+    <string name="tightMeasure">Tight Measure</string>
+    <string name="calveMeasure">Calve Measure</string>
+
     <string name="RM">1 RM</string>
     <string name="reps_3_2">3/2 reps</string>
     <string name="reps_5_4">5/4 reps</string>
@@ -158,5 +118,64 @@
     <string name="selectReps">Select reps</string>
     <string name="insertWeight">Insert the weight of the exercise</string>
     <string name="calculate">Calculate</string>
+    <string name="profile_settings_edit_role">Switch to Trainer account</string>
+    <string name="profile_settings_delete_profile">Delete profile</string>
+    <string name="profile_settings_edit_personal_information">Edit personal information</string>
+    <string name="edit_email_caution_msg">Caution: the email you enter will be your only way to access your account!</string>
+    <string name="date" translatable="false">%d/%d/%d</string>
+    <string name="profile_settings_name_empty">Name can\'t be empty</string>
+    <string name="profule_settings_surname_empty">Surname can\'t be empty</string>
+    <string name="edit_password_caution_msg">Caution: the password you enter will be the only way to access your account!</string>
+    <string name="profile_settings_delete_profile_msg">Are you sure you want to delete your profile? This action can\'t be reverted!</string>
+    <string name="delete">Delete profile</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="not_registered_yet">Not registered yet?</string>
+
+    <string name="email_empty">Email cannot be empty</string>
+    <string name="password_empty">Password cannot be empty</string>
+    <string name="email_not_valid">"This is not an email"</string>
+
+    <string name="wrong_credentials">"Email or password incorrect."</string>
+    <string name="choose_activity_text">Oh no! Looks like no account is logged in yet! ☹</string>
+
+
+    <!-- Reg -->
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="password_not_valid">"Needs at least 6 characters. Required: uppercase, lowercase, numbers and special chars"</string>
+    <string name="passwords_not_equal">"Insert the same password pls"</string>
+    <string name="email_already_exists">Email already exists</string>
+
+    <!--Reset Password-->
+    <string name="send_email">Send</string>
+
+    <string name="password_reset_helper_text">Enter the email address of the account for which you want to reset your password</string>
+    <string name="password_reset_email_sent">We sent you an email to reset your password.</string>
+
+
+    <!--    Consigli-->
+    <string name="insertTitleAdvice">Insert a title for your advice</string>
+    <string name="insertDescriptionAdvice">Insert a description for your advice</string>
+
+
+    <!--    Cerca-->
+    <string name="search_here">Search here</string>
+
+
+    <!--    Esercizi-->
+    <string name="muscles_involved">Muscles Involved</string>
+    <string name="description">Description</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
+    <string name="imgExercise">Exercise image</string>
+
+
+    <!--    content description-->
+    <string name="img" translatable="false">img</string>
 
 </resources>

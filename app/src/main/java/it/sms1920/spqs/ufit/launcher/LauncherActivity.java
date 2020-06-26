@@ -2,10 +2,12 @@ package it.sms1920.spqs.ufit.launcher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +17,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
+import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
+import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.TrainerFragment;
+import it.sms1920.spqs.ufit.launcher.userstats.strenght_test.StrenghtTestFragment;
+import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
+    private static final String TAG = LauncherActivity.class.getCanonicalName();
 
     private LauncherContract.Presenter presenter;
     private Menu menu;
@@ -92,18 +99,26 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         switch (item.getItemId()) {
             case R.id.search:
                 presenter.onSearchIconClicked();
-                return true;
+                break;
             case R.id.logout:
                 presenter.onLogOutIconClicked();
-                return true;
+                break;
+            case R.id.profile_settings:
+                presenter.onProfileSettingsClicked();
+                break;
+            case R.id.edit:
+                presenter.onEditIconClicked();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     @Override
     public void onBackPressed() {
         presenter.onBackPressed();
+        Log.d(TAG, "onBackPressed");
     }
 
     @Override
@@ -159,10 +174,22 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
         toolbar.getMenu().findItem(R.id.logout).setVisible(true);
+        toolbar.getMenu().findItem(R.id.profile_settings).setVisible(true);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
         setToolbarTitle("Profile");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+    }
+
+    @Override
+    public void insertProfileSettingsFragment() {
+        resetMenuIcons();
+        resetToolbarIcons();
+        setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(true);
+        setToolbarTitle(getString(R.string.profile_settings));
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileSettingsFragment()).commit();
     }
 
     @Override
@@ -193,6 +220,20 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         finish();
     }
 
+    @Override
+    public String getWorkoutId() {
+        TextView id = findViewById(R.id.workoutId);
+        return id.getText().toString();
+    }
+
+    @Override
+    public void startEditWorkoutActivity(String id) {
+        Intent intent = new Intent(this, CreatingWorkoutActivity.class);
+        intent.putExtra("workoutId", id);
+        intent.putExtra("workoutName", toolbar.getTitle().toString());
+        startActivity(intent);
+    }
+
     private void setMenuItemIcon(int item, int icon) {
         menu.findItem(item).setChecked(true);
         menu.findItem(item).setIcon(icon);
@@ -210,6 +251,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.logout).setVisible(false);
         toolbar.getMenu().findItem(R.id.search).setVisible(false);
         toolbar.getMenu().findItem(R.id.add).setVisible(false);
+        toolbar.getMenu().findItem(R.id.profile_settings).setVisible(false);
     }
 
     public void setToolbarTitle(String title) {
@@ -235,4 +277,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         presenter.onShowPlanClosed();
     }
 
+    public void showToolbarEditIcon(boolean visible) {
+        toolbar.getMenu().findItem(R.id.edit).setVisible(visible);
+    }
 }

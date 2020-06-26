@@ -5,6 +5,8 @@ public interface ShowWorkoutPlanContract {
         void setToolbarTextEqualToName(String name);
         void showToolbarNavigationButton();
         void hideToolbarNavigationButton();
+
+        void setToolBarMenuEditIcon();
     }
 
     interface Presenter {
