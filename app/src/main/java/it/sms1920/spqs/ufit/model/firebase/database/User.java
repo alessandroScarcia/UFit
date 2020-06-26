@@ -27,12 +27,13 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surname, Integer gender, String urlImageProfile, String birthDate, int weight, int height) {
+    public User(String name, String surname, Integer gender, String urlImageProfile, String birthDate, Boolean role) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
         this.imageUrl = urlImageProfile;
         this.birthDate = birthDate;
+        this.role = role;
     }
 
     public String getName() {
@@ -75,5 +76,8 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    public Boolean getRole() { return role; }
+
+    public void setRole(Boolean role) { this.role = role; }
 }
 
