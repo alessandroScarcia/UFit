@@ -36,7 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.card.MaterialCardView;
+
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
@@ -107,7 +107,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         //setting content of frame layout
         containerLayout = view.findViewById(R.id.container_stats);
-        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.general_stats, null);
+        @SuppressLint("InflateParams") View child = getLayoutInflater().inflate(R.layout.general_stats, container);
 
         containerLayout.addView(child);
         context = getActivity();
