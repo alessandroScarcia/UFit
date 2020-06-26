@@ -91,6 +91,7 @@
     <string name="ffmi_superior">Superior</string>
     <string name="ffmi_sospicius">Sospicius not natural</string>
     <string name="ffmi_not_natural">Obteined with steroids</string>
+    <string name="click_to_insert_values">"Click to insert values and calculate BMI and FFMI",</string>
 
     <string name="empty" translatable="false"> - </string>
     <string name="x" translatable="false">x</string>
@@ -124,11 +125,12 @@
     <string name="edit_email_caution_msg">Caution: the email you enter will be your only way to access your account!</string>
     <string name="date" translatable="false">%d/%d/%d</string>
     <string name="profile_settings_name_empty">Name can\'t be empty</string>
-    <string name="profule_settings_surname_empty">Surname can\'t be empty</string>
+    <string name="profile_settings_surname_empty">Surname can\'t be empty</string>
     <string name="edit_password_caution_msg">Caution: the password you enter will be the only way to access your account!</string>
     <string name="profile_settings_delete_profile_msg">Are you sure you want to delete your profile? This action can\'t be reverted!</string>
     <string name="delete">Delete profile</string>
     <string name="cancel">Cancel</string>
+    <string name="visit_our_site">"Visit Our Website"</string>
 
     <!-- Login -->
     <string name="login">Login</string>

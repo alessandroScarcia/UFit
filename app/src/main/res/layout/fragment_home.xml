@@ -104,10 +104,10 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnWebsite"
         style="@style/CustomMaterialButton"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="@dimen/standard_margin"
-        android:text="Visit Our Website"
+        android:text="@string/visit_our_site"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

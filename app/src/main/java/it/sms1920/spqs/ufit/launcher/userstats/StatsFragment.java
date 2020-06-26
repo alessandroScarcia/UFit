@@ -169,7 +169,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             }
         });
 
-        Toast.makeText(context, "Click to insert values and calculate BMI and FFMI", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.click_to_insert_values, Toast.LENGTH_LONG).show();
 
         return view;
     }
