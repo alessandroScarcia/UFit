@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
+package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -26,10 +26,10 @@ import java.util.Objects;
 import it.sms1920.spqs.ufit.launcher.R;
 
 
-public class MaxEvaluationFragment extends Fragment{
+public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTestFragment.View{
 
-    private static MaxEvaluationAdapter adapter;
-
+    private static MaxStrenghtTestAdapter adapter;
+    private iMaxStrenghtTestFragment.Presenter presenter;
     @SuppressLint("StaticFieldLeak")
     private static EditText etInsertWeight;
 
@@ -42,7 +42,8 @@ public class MaxEvaluationFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new MaxEvaluationAdapter();
+        adapter = new MaxStrenghtTestAdapter();
+        presenter = new MaxStrenghtTestPresenter(this);
     }
 
     @Nullable
@@ -55,7 +56,7 @@ public class MaxEvaluationFragment extends Fragment{
         btnSelectReps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialog();
+                presenter.onSelectRepsClicked();
             }
         });
 
@@ -64,7 +65,8 @@ public class MaxEvaluationFragment extends Fragment{
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.calculateWeight(checkIdRadioButton, etInsertWeight.getText().toString());
+                int weightResult = presenter.checkDataToAdapter(checkIdRadioButton, etInsertWeight.getText().toString());
+                adapter.calculateWeight(checkIdRadioButton, weightResult);
             }
         });
 
@@ -83,6 +85,7 @@ public class MaxEvaluationFragment extends Fragment{
     /**
      * Function that communicate with the subclass to show the content of the dialog box
      */
+    @Override
     public void openDialog() {
         RepsChoiceDialog dialogBox = new RepsChoiceDialog();
         dialogBox.setTargetFragment(this, 1);
@@ -112,7 +115,7 @@ public class MaxEvaluationFragment extends Fragment{
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
+            LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.layout_dialog_rep_choice, null);
 
             builder.setView(view)

@@ -53,16 +53,16 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     /**
      * Function to calculate the BMI
      *
-     * @param weight parameter to calculate the BMI
+     *
      * @return BMI
      */
     @Override
-    public float calculateBMI(float weight) {
+    public float calculateBMI() {
         float BMI = 0;
-//        if (userStats.getHeight() != 0) {
-//            float heightM = (float) user.getHeight() / 10;
-//            BMI = weight / (heightM * heightM);
-//        }
+        if (userStats.getHeight() != 0) {
+            float heightM = (float) userStats.getHeight() / 100;
+            BMI = userStats.getWeight() / (heightM * heightM);
+        }
 
         return BMI;
     }
@@ -74,7 +74,8 @@ public class StatsPresenter implements iStatsFragment.Presenter {
      */
     @Override
     public float calculateFFMI(float weight, float bodyFat) {
-        return weight * (1 - (bodyFat / 100));
+        float height = userStats.getHeight() / 100;
+        return (weight * (1 - (bodyFat) / 100 )) / (height * height);
     }
 
     /**
@@ -103,10 +104,12 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             float fat = usrStats.getFat();
             float muscle = usrStats.getMuscle();
             float water = usrStats.getWater();
+            float height = usrStats.getHeight();
             String dateDetectionWeight = usrStats.getDateWeightDetection();
             String dateDetectionFat = usrStats.getDateFatDetection();
             String dateDetectionMuscle = usrStats.getDateMuscleDetection();
             String dateDetectionWater = usrStats.getDateWaterDetection();
+            String dateDetectionHeight = usrStats.getDateHeight();
 
             //get the values of muscle stats
             float arm = usrStats.getArmMeasure();
@@ -126,10 +129,12 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             getUserStats.setFat(fat);
             getUserStats.setMuscle(muscle);
             getUserStats.setWater(water);
+            getUserStats.setHeight(height);
             getUserStats.setDateWeightDetection(dateDetectionWeight);
             getUserStats.setDateFatDetection(dateDetectionFat);
             getUserStats.setDateWaterDetection(dateDetectionWater);
             getUserStats.setDateMuscleDetection(dateDetectionMuscle);
+            getUserStats.setDateHeight(dateDetectionHeight);
 
             //assign the muscle stats in scope object
             getUserStats.setArmMeasure(arm);
@@ -142,8 +147,6 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             getUserStats.setDateWaistDetection(dateDetectionWaist);
             getUserStats.setDateTightDetection(dateDetectionTight);
             getUserStats.setDateCalveDetection(dateDetectionCalve);
-//            float height =  usrStats.getHeight();
-//            getUserStats.setHeight(height);
         }
 
         //copy the general object into the static object
@@ -164,7 +167,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         userStats.setDateWeightDetection(dateWeightDetection);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
         //with the weight is possible calculate the BMI
-        setBMITextView(weight);
+        setBMITextView();
     }
 
     @Override
@@ -173,7 +176,7 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         userStats.setDateFatDetection(dateFatDetection);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
         //with the percentage of fat we can calculate the FFMI
-        setFFMITextView(fat);
+        setFFMITextView();
     }
 
     @Override
@@ -212,7 +215,6 @@ public class StatsPresenter implements iStatsFragment.Presenter {
 
     @Override
     public void updateChest(float value, String date) {
-
         userStats.setChestMeasure(value);
         userStats.setDateChestDetection(date);
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
@@ -240,17 +242,26 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
     @Override
+    public void updateHeight(float value, String date) {
+        userStats.setHeight(value);
+        userStats.setDateHeight(date);
+        Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
+        setBMITextView();
+        setFFMITextView();
+    }
+
+    @Override
     public void setGeneralStats() {
         if (userStats.getWeight() != NULL) {
             view.setWeight(String.valueOf(userStats.getWeight()));
             view.setWeightDate(String.valueOf(userStats.getDateWeightDetection()));
-            setBMITextView(userStats.getWeight());
+            setBMITextView();
         }
 
         if (userStats.getFat() != NULL) {
             view.setFat(String.valueOf(userStats.getFat()));
             view.setFatDate(String.valueOf(userStats.getDateFatDetection()));
-            setFFMITextView(userStats.getFat());
+            setFFMITextView();
         }
 
         if (userStats.getWater() != NULL) {
@@ -262,6 +273,12 @@ public class StatsPresenter implements iStatsFragment.Presenter {
             view.setMuscle(String.valueOf(userStats.getMuscle()));
             view.setMuscleDate(String.valueOf(userStats.getDateMuscleDetection()));
         }
+
+        if (userStats.getHeight() != NULL) {
+            view.setHeight(String.valueOf(userStats.getHeight()));
+            view.setHeightDate(String.valueOf(userStats.getDateHeight()));
+        }
+
     }
 
     @Override
@@ -293,16 +310,15 @@ public class StatsPresenter implements iStatsFragment.Presenter {
         }
     }
 
-    public void setFFMITextView(float fat) {
-        String fatControlValue = String.valueOf(fat);
+    public void setFFMITextView() {
+        String fatControlValue = String.valueOf(userStats.getFat());
 
         //check if weight is a number to calculate the FFMI(if the text view contains a value)
         if (fatControlValue.matches("\\d+(?:\\.\\d+)?")) {
-            float FFMIValue = calculateFFMI(userStats.getWeight(), fat);
+            float FFMIValue = calculateFFMI(userStats.getWeight(), userStats.getFat());
             view.setFFMI(String.valueOf(FFMIValue));
 
             view.setFFMIStatus(FFMIValue);
-
         }
     }
 
@@ -316,8 +332,8 @@ public class StatsPresenter implements iStatsFragment.Presenter {
     }
 
 
-    public void setBMITextView(float weight) {
-        float BMIValue = calculateBMI(weight);
+    public void setBMITextView() {
+        float BMIValue = calculateBMI();
         view.setBMI(String.valueOf(BMIValue));
 
 
@@ -328,7 +344,5 @@ public class StatsPresenter implements iStatsFragment.Presenter {
 //    public void callRemoveRecordStats(int id) {
 //        deleteRecordStats(id);
 //    }
-
-
 
 }

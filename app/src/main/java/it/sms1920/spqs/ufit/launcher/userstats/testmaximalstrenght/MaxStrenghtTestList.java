@@ -1,11 +1,11 @@
-package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
+package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
 
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaxEvaluationList implements iMaxEvaluation.Presenter {
+public class MaxStrenghtTestList implements iMaxStrenghtTest.Presenter {
     //declaration of the different range
     private static final int RM_1 = 1;
     private static final int RANGE_2_3 = 2;
@@ -33,13 +33,13 @@ public class MaxEvaluationList implements iMaxEvaluation.Presenter {
     private static final int PERCENT_45  = 45;
 
 
-    private static final String TAG = MaxEvaluationList.class.getCanonicalName();
-    private final iMaxEvaluation.View view;
+    private static final String TAG = MaxStrenghtTestList.class.getCanonicalName();
+    private final iMaxStrenghtTest.View view;
 
     private List<Set> setWeightList;
     private static int RM;
 
-    public MaxEvaluationList(iMaxEvaluation.View view) {
+    public MaxStrenghtTestList(iMaxStrenghtTest.View view) {
         this.view = view;
         setWeightList= new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class MaxEvaluationList implements iMaxEvaluation.Presenter {
 
 
     @Override
-    public void onBindWeightItemListViewAtPosition(iMaxEvaluation.View.Item holder, int position) {
+    public void onBindWeightItemListViewAtPosition(iMaxStrenghtTest.View.Item holder, int position) {
         Set itemData = setWeightList.get(position);
         holder.setPosition(position);
         holder.setReps(itemData.getReps());
@@ -177,45 +177,47 @@ public class MaxEvaluationList implements iMaxEvaluation.Presenter {
      */
     @Override
     public void calculateRM(int range, int weightValue) {
-        switch (range){
-            case RM_1:
-                setRM(weightValue);
-                break;
-            case RANGE_2_3:
-                setRM(weightValue * PERCENT_100 / PERCENT_90);
-                break;
-            case RANGE_4_5:
-                setRM(weightValue * PERCENT_100 / PERCENT_85);
-                break;
-            case RANGE_6_7:
-                setRM(weightValue * PERCENT_100 / PERCENT_80);
-                break;
-            case RANGE_8_9:
-                setRM(weightValue * PERCENT_100 / PERCENT_75);
-                break;
-            case RANGE_10_11:
-                setRM(weightValue * PERCENT_100 / PERCENT_70);
-                break;
-            case RANGE_12_13:
-                setRM(weightValue * PERCENT_100 / PERCENT_65);
-                break;
-            case RANGE_14_15:
-                setRM(weightValue * PERCENT_100 / PERCENT_60);
-                break;
-            case RANGE_16_17:
-                setRM(weightValue * PERCENT_100 / PERCENT_55);
-                break;
-            case RANGE_18_19:
-                setRM(weightValue * PERCENT_100 / PERCENT_50);
-                break;
-            case RANGE_20:
-                setRM(weightValue * PERCENT_100 / PERCENT_45);
-                break;
+        if (weightValue != -1) {
+            switch (range) {
+                case RM_1:
+                    setRM(weightValue);
+                    break;
+                case RANGE_2_3:
+                    setRM(weightValue * PERCENT_100 / PERCENT_90);
+                    break;
+                case RANGE_4_5:
+                    setRM(weightValue * PERCENT_100 / PERCENT_85);
+                    break;
+                case RANGE_6_7:
+                    setRM(weightValue * PERCENT_100 / PERCENT_80);
+                    break;
+                case RANGE_8_9:
+                    setRM(weightValue * PERCENT_100 / PERCENT_75);
+                    break;
+                case RANGE_10_11:
+                    setRM(weightValue * PERCENT_100 / PERCENT_70);
+                    break;
+                case RANGE_12_13:
+                    setRM(weightValue * PERCENT_100 / PERCENT_65);
+                    break;
+                case RANGE_14_15:
+                    setRM(weightValue * PERCENT_100 / PERCENT_60);
+                    break;
+                case RANGE_16_17:
+                    setRM(weightValue * PERCENT_100 / PERCENT_55);
+                    break;
+                case RANGE_18_19:
+                    setRM(weightValue * PERCENT_100 / PERCENT_50);
+                    break;
+                case RANGE_20:
+                    setRM(weightValue * PERCENT_100 / PERCENT_45);
+                    break;
+            }
+
+            setWeightList.clear();
+
+            loadSetList();
         }
-
-        setWeightList.clear();
-
-        loadSetList();
     }
 
 }

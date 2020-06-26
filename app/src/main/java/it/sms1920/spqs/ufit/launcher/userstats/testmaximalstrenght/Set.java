@@ -1,4 +1,4 @@
-package it.sms1920.spqs.ufit.launcher.userstats.maximalevaluation;
+package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
 
 public class Set {

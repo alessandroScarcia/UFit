@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -26,15 +25,14 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
-import java.util.Objects;
+
 
 import it.sms1920.spqs.ufit.launcher.R;
 
-import static java.sql.Types.NULL;
+
 
 
 public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
@@ -48,6 +46,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     private LinearLayout cardFat;
     private LinearLayout cardWater;
     private LinearLayout cardMuscle;
+    private LinearLayout cardHeight;
 
     private LinearLayout cardArm;
     private LinearLayout cardChest;
@@ -83,6 +82,9 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @SuppressLint("StaticFieldLeak")
     private static TextView calve;
     private TextView calveDate;
+
+    private TextView heightDate;
+    private static TextView height;
 
     public MaterialButton imcHelp;
     public MaterialButton ffmiHelp;
@@ -240,6 +242,8 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             presenter.updateTight(value, date);
         } else if (textViewValue == calve) {
             presenter.updateCalve(value, date);
+        }else if (textViewValue == height) {
+            presenter.updateHeight(value, date);
         }
     }
 
@@ -295,6 +299,18 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             public void onClick(View view) {
                 //we pass to the dialog box the text view to update at the end of the insertion
                 openDialog(water, waterDate);
+            }
+        });
+
+
+        height = view.findViewById(R.id.heightInput);
+        heightDate = view.findViewById(R.id.heightDateInput);
+        cardHeight = view.findViewById(R.id.cardHeight);
+        cardHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we pass to the dialog box the text view to update at the end of the insertion
+                openDialog(height, heightDate);
             }
         });
 
@@ -364,6 +380,14 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         });
 
         presenter.setBodyStats();
+    }
+
+    public void setHeight(String heightValue){
+        height.setText(heightValue);
+    }
+
+    public void setHeightDate(String heightDateValue){
+        heightDate.setText(heightDateValue);
     }
 
     public void setWeight(String weightValue) {
@@ -467,15 +491,15 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         String strFFMIStatus;
         if (FFMIValue < 17) {
             strFFMIStatus = getString(R.string.ffmi_below_average);
-        } else if (FFMIValue >= 18 && FFMIValue <= 19) {
+        } else if (FFMIValue >= 17 && FFMIValue <= 19) {
             strFFMIStatus = getString(R.string.ffmi_average);
-        } else if (FFMIValue >= 20 && FFMIValue <= 21) {
+        } else if (FFMIValue >= 19 && FFMIValue < 22) {
             strFFMIStatus = getString(R.string.ffmi_above_average);
         } else if (FFMIValue == 22) {
             strFFMIStatus = getString(R.string.ffmi_excellent);
-        } else if (FFMIValue >= 23 && FFMIValue <= 25) {
+        } else if (FFMIValue > 22 && FFMIValue <= 25) {
             strFFMIStatus = getString(R.string.ffmi_superior);
-        } else if (FFMIValue >= 26 && FFMIValue <= 27) {
+        } else if (FFMIValue >= 25 && FFMIValue <= 27) {
             strFFMIStatus = getString(R.string.ffmi_sospicius);
         } else {
             strFFMIStatus = getString(R.string.ffmi_not_natural);
@@ -531,7 +555,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
+            LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.layout_dialog, null);
 
             builder.setView(view)
@@ -575,6 +599,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
                                     @SuppressLint("SetTextI18n")
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                        month++;
                                         statsDateEditText.setText(dayOfMonth + "/" + month + "/" + year);
                                     }
                                 }, year, mounth, dayOfMounth);
