@@ -179,7 +179,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements EditP
                 etlEditName.setError(getString(R.string.profile_settings_name_empty));
                 break;
             case SURNAME_EMPTY:
-                etlEditSurname.setError(getString(R.string.profule_settings_surname_empty));
+                etlEditSurname.setError(getString(R.string.profile_settings_surname_empty));
                 break;
             default:
                 break;

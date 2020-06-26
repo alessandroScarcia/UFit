@@ -167,7 +167,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
             }
         });
 
-        Toast.makeText(context, "Click to insert values and calculate BMI and FFMI", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.click_to_insert_values, Toast.LENGTH_LONG).show();
 
         return view;
     }
@@ -531,7 +531,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
+            LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.layout_dialog, null);
 
             builder.setView(view)

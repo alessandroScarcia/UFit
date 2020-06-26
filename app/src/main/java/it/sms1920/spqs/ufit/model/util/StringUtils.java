@@ -20,7 +20,7 @@ public class StringUtils {
 
     public static boolean isEmail(String email) {
         if (TextUtils.isEmpty(email)) {
-            return false;
+            return true;
         }
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
