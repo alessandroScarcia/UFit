@@ -51,9 +51,9 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_bluetooth_linking, container, false);
-        presenter = new BluetoothLinkingPresenter(this, new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1));
         status = view.findViewById(R.id.txtStatus);
         btnConnect = view.findViewById(R.id.btnConnetti);
+        presenter = new BluetoothLinkingPresenter(this, new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1));
 
 
         //show bluetooth devices dialog when click connect button

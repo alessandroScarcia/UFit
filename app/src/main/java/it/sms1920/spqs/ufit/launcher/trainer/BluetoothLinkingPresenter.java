@@ -122,9 +122,10 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
     @Override
     public void onStart() {
-
-        if (bluetoothAdapter.isEnabled()) {
-            chatController = new BluetoothHelper(handler);
+        if (bluetoothAdapter != null) {
+            if (bluetoothAdapter.isEnabled()) {
+                chatController = new BluetoothHelper(handler);
+            }
         }
     }
 

@@ -8,7 +8,7 @@ public interface LauncherContract {
 
         void insertPlansFragment();
 
-        void insertTrainerFragment(boolean isAnonymous, boolean isTrainer, boolean isLinked);
+        void insertTrainerFragment(boolean isAnonymous);
 
         void insertStatsFragment();
 
@@ -33,9 +33,6 @@ public interface LauncherContract {
 
     interface Presenter {
 
-        void updateStatus();
-
-        enum UserLinkingState {USER_NO_LINKED, USER_LINKED, TRAINER_NO_LINKED, TRAINER_LINKED}
 
         void onHomeIconClicked();
 
@@ -61,7 +58,6 @@ public interface LauncherContract {
 
         void onEditIconClicked();
 
-        //UserLinkingState onCheckUserLinkingRequested();
     }
 
 }

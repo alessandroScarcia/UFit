@@ -145,7 +145,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
     @Override
-    public void insertTrainerFragment(boolean isAnonymous, boolean isTrainer, boolean isLinked) {
+    public void insertTrainerFragment(boolean isAnonymous) {
         if (isAnonymous) {
             insertChooseFragment();
         } else {
@@ -254,11 +254,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.setTitle(title);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.updateStatus();
-    }
+
 
     public void toggleToolbarNavigationButton(boolean active) {
         if (active) {
