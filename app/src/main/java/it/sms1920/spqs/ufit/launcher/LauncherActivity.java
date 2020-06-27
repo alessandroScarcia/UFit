@@ -16,14 +16,12 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
+import it.sms1920.spqs.ufit.launcher.trainer.BluetoothLinkingFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
-import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
 import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
-import it.sms1920.spqs.ufit.launcher.trainer.TrainerFragment;
-import it.sms1920.spqs.ufit.launcher.userstats.strenght_test.StrenghtTestFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
@@ -146,14 +144,24 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
     @Override
-    public void insertTrainerFragment() {
-        resetMenuIcons();
-        resetToolbarIcons();
-        setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
-        logo.setVisibility(View.GONE);
-        toggleToolbarNavigationButton(false);
-        setToolbarTitle("Personal Trainer");
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TrainerFragment()).commit();
+    public void insertTrainerFragment(boolean isAnonymous, boolean isTrainer, boolean isLinked) {
+        if (isAnonymous) {
+            insertChooseFragment();
+        } else {
+            insertBluetoothLinkingFragment();/*
+            resetMenuIcons();
+            resetToolbarIcons();
+            setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
+            logo.setVisibility(View.GONE);
+            toggleToolbarNavigationButton(false);
+            setToolbarTitle("Personal Trainer");
+
+
+            TrainerFragment fragment = TrainerFragment.newInstance(isAnonymous, isTrainer, isLinked);
+
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        */}
 
     }
 
@@ -258,6 +266,12 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.setTitle(title);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.updateStatus();
+    }
+
     public void toggleToolbarNavigationButton(boolean active) {
         if (active) {
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -273,11 +287,22 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void showPlanClicked() {
         presenter.onShowPlanClicked();
     }
+
     public void showPlanClosed() {
         presenter.onShowPlanClosed();
     }
 
     public void showToolbarEditIcon(boolean visible) {
         toolbar.getMenu().findItem(R.id.edit).setVisible(visible);
+    }
+
+    public void insertBluetoothLinkingFragment() {
+        resetMenuIcons();
+        resetToolbarIcons();
+        setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
+        logo.setVisibility(View.GONE);
+        toggleToolbarNavigationButton(false);
+        setToolbarTitle("Trainer Linking");
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BluetoothLinkingFragment()).commit();
     }
 }

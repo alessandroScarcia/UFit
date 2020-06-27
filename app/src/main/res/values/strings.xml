@@ -53,6 +53,22 @@
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Connect with your trainer</string>
 
+<!--    Bluetooth-->
+    <string name="noPaired">No devices paired</string>
+    <string name="noFound">No devices found, be sure to active bluetooth visibility</string>
+    <string name="sameRole">You can only connect accounts with different role</string>
+    <string name="dispositiviBT">Bluetooth devices</string>
+    <string name="senzaBluetooth">Bluetooth not avaiable in this device</string>
+    <string name="bluetoothDisabled">Bluetooth not enabled</string>
+    <string name="disconnection">Disconnecting…</string>
+    <string name="lostConnection">Connection lost</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connetti">Connect</string>
+    <string name="connessoCon">Connected with: </string>
+    <string name="connecting">Status: Connecting…</string>
+    <string name="notConnected">Status: Not connected</string>
+    <string name="associati">Paired devices</string>
+    <string name="trovati">Discovered devices</string>
 
     <!-- Stats -->
     <string name="myGeneralStats">General</string>

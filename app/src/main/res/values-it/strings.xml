@@ -55,6 +55,22 @@
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Collegati al tuo trainer</string>
 
+    <!--    Bluetooth-->
+    <string name="noPaired">Non ci sono dispositivi associati</string>
+    <string name="noFound">Non ho trovato dispositivi, assicurati abbiano la visilità bluetooth attiva</string>
+    <string name="sameRole">Puoi collegare solamente account con ruoli diversi</string>
+    <string name="dispositiviBT">Dispositivi Bluetooth</string>
+    <string name="senzaBluetooth">Bluetooth non disponibile</string>
+    <string name="connetti">Connetti</string>
+    <string name="bluetoothDisabled">Bluetooth non attivo</string>
+    <string name="disconnection">Disconnessione…</string>
+    <string name="lostConnection">Connessione persa</string>
+    <string name="connessoCon">Connesso a: </string>
+    <string name="disconnect">Disconnetti</string>
+    <string name="connecting">Stato: Connessione…</string>
+    <string name="notConnected">Stato: Non connesso</string>
+    <string name="associati">Dispositivi associati</string>
+    <string name="trovati">Dispositivi trovati</string>
 
     <!-- Stats -->
     <string name="myGeneralStats">Stato generale</string>

@@ -2,8 +2,6 @@ package it.sms1920.spqs.ufit.model.firebase.database;
 
 import androidx.annotation.NonNull;
 
-import it.sms1920.spqs.ufit.model.util.StringUtils;
-
 public class User {
 
     public static final String CHILD_NAME = "User";
@@ -22,7 +20,8 @@ public class User {
     private Integer gender;
     private String birthDate;
     private String imageUrl;
-    private Boolean role;
+    private Boolean role = false;
+    private String linkedUserId = "";
 
     public User() {
     }
@@ -75,5 +74,27 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    public Boolean getRole() {
+        return role;
+    }
+
+    public String getLinkedUserId() {
+        return linkedUserId;
+    }
+
+    public void setRole(Boolean role) {
+        this.role = role;
+    }
+
+    public void setLinkedUserId(String linkedUserId) {
+        this.linkedUserId = linkedUserId;
+    }
+
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Name: "+ getName() + "\nSurname: " + getSurname() + "\nTrainer: " + getRole() + "\nLinkedWith: " + getLinkedUserId();
+    }
 }
 
