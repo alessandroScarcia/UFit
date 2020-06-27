@@ -42,13 +42,13 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
 
         userInfoRef = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME).child(user.getUid());
 
-        fetchProfileImage();
+        fetchProfileInfo();
     }
 
     /**
      * Extract User's Profile Image from Firebase Realtime Database and asks view to visualize it.
      */
-    private void fetchProfileImage() {
+    private void fetchProfileInfo() {
         userInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,6 +58,7 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
 
                 if (userInfo != null) {
                     view.setProfileImage(userInfo.getImageUrl());
+                    view.updateRole(userInfo.getRole());
                 }
             }
 
@@ -96,6 +97,8 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
     @Override
     public void onEditRoleCheckedChanged(boolean isChecked) {
         userInfoRef.child(User.FIELD_ROLE).setValue(isChecked);
+
+        view.updateRole(isChecked);
     }
 
     @Override

@@ -22,6 +22,7 @@ import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragmen
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
+import it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght.MaxStrenghtTestFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
@@ -148,21 +149,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         if (isAnonymous) {
             insertChooseFragment();
         } else {
-            insertBluetoothLinkingFragment();/*
-            resetMenuIcons();
-            resetToolbarIcons();
-            setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
-            logo.setVisibility(View.GONE);
-            toggleToolbarNavigationButton(false);
-            setToolbarTitle("Personal Trainer");
-
-
-            TrainerFragment fragment = TrainerFragment.newInstance(isAnonymous, isTrainer, isLinked);
-
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-        */}
-
+            insertBluetoothLinkingFragment();
+        }
     }
 
     @Override
@@ -287,7 +275,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void showPlanClicked() {
         presenter.onShowPlanClicked();
     }
-
     public void showPlanClosed() {
         presenter.onShowPlanClosed();
     }

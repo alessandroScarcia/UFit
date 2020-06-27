@@ -106,6 +106,7 @@
     <string name="ffmi_superior">Superiore</string>
     <string name="ffmi_sospicius">Sospetto non naturale</string>
     <string name="ffmi_not_natural">Ottenuto con steroidi</string>
+    <string name="click_to_insert_values">"Clicca per inserire i valori e calcolare BMI e FFMI"</string>
 
     <string name="armMeasure">Misura braccio</string>
     <string name="chestMeasure">Misura petto</string>
@@ -130,11 +131,13 @@
     <string name="profile_settings_edit_personal_information">Cambia informazioni personali</string>
     <string name="edit_email_caution_msg">Attenzione: l\'email che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
     <string name="profile_settings_name_empty">Il nome non può essere vuoto</string>
-    <string name="profule_settings_surname_empty">Il cognome non può essere vuoto</string>
+    <string name="profile_settings_surname_empty">Il cognome non può essere vuoto</string>
     <string name="edit_password_caution_msg">Attenzione: la password che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
     <string name="profile_settings_delete_profile_msg">Sei sicuro di voler cancellare il tuo profilo? Questa azione non piò essere annullata!</string>
     <string name="delete">Cancella il profilo</string>
     <string name="cancel">Annulla</string>
+
+    <string name="visit_our_site">"Visita il nostro sito"</string>
 
     <!-- Login -->
     <string name="login">Accedi</string>
@@ -180,6 +183,29 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur. Duis aute irure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
     <string name="imgExercise">Immagine esercizio</string>
+
+    <!-- Assemblies Report -->
+    <string name="assemblies_report_search_reports">Ricerca segnalazioni</string>
+    <string name="assemblies_report_create_report">Crea segnalazione</string>
+    <string name="assemblies_report_gym_address">Indirizzo della palestra</string>
+    <string name="assemblies_report_desc">Inserisci l\'indirizzo della tua palestra e ricercheremo assembramenti segnalati recentemente da altri utenti.</string>
+    <string name="assemblies_report_assembly_perception">Percezione dell\'assembramento</string>
+    <string name="assemblies_report_send_report">Invia segnalazione</string>
+    <string name="assemblies_report_create_report_msg">Grazie per aver inviato la tua segnalazione!</string>
+    <string name="assemblies_report">Segnalazione assembramenti</string>
+    <string name="assemblies_report_address_empty">L\'indirizzo della palestra non può essere vuoto</string>
+    <string name="assemblies_report_address_not_valid">L\'indirizzo della palestra inserito non è valido</string>
+    <string name="assemblies_report_perception_empty">La percezione dell\'assembramento non può essere vuota</string>
+    <string name="assemblies_report_connection_error">Nessuna connessione disponibile. Prova più tardi.</string>
+    <string name="assemblies_report_no_result">Nessuna segnalazione trovata per la posizione inserita.</string>
+    <string name="assemblies_report_search_result">Gli utenti hanno segnalato che la posizione inserita è: %s</string>
+    <string name="assemblies_report_gps_access_reasons">Ogni segnalazone generata dagli utenti necessità la posizione a cui fa riferimento. Queste informazioni sono private e mai visibili ad altri utenti. Se desideri generare una segnalazione di assembramento, è necessario il tuo consenso per accedere alle informazini sulla tua posizione.</string>
+    <string name="dialog_positive_button">Accetto</string>
+    <string name="dialog_negative_button">No grazie</string>
+    <string name="assembly_perception_not_crowded">Non affollato</string>
+    <string name="assembly_perception_slightly_crowded">Poco affollato</string>
+    <string name="assembly_perception_crowded">Affollato</string>
+    <string name="assembly_perception_really_crowded">Molto affollato</string>
 
 </resources>
 

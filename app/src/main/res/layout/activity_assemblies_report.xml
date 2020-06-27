@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".assembliesreport.AssembliesReportActivity">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/partial_tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tlAssembliesReport"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/plans_tab_items_height"
+        android:elevation="@dimen/toolbar_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar"
+        app:tabBackground="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorSecondary"
+        app:tabTextColor="@color/colorWhite">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_search_reports" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_create_report" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/llSearchReports"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/tlAssembliesReport">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etlGymAddress"
+            style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGymAddress"
+                style="@style/CustomMaterialEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/assemblies_report_gym_address"
+                android:inputType="textPostalAddress"
+                app:boxStrokeColor="@color/colorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSearchReports"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_search_reports" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorSecondary" />
+
+        <TextView
+            android:id="@+id/tvAssembliesReportDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_desc"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCreateReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tlAssembliesReport">
+
+
+        <TextView
+            android:id="@+id/tvAssemblyPerceptionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_assembly_perception"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+        <RadioGroup
+            android:id="@+id/rgAssemblyPerception"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_button_1">
+
+            <RadioButton
+                android:id="@+id/rbNotCrowded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/assembly_perception_not_crowded" />
+
+            <RadioButton
+                android:id="@+id/rbSlightlyCrowded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/assembly_perception_slightly_crowded" />
+
+            <RadioButton
+                android:id="@+id/rbCrowded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/assembly_perception_crowded" />
+
+            <RadioButton
+                android:id="@+id/rbReallyCrowded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/assembly_perception_really_crowded" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSendReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_send_report" />
+
+        <TextView
+            android:id="@+id/tvAssemblyReportCreateMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/assemblies_report_create_report_msg"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

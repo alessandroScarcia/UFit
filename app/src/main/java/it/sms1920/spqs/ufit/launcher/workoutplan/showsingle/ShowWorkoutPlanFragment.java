@@ -86,14 +86,6 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        adapter.saveCurrentData("");
-        launcher.showToolbarEditIcon(false);
-        launcher.showPlanClosed();
-    }
-
-    @Override
     public void setToolbarTextEqualToName(String name) {
         if (launcher != null) {
             launcher.setToolbarTitle(name);
@@ -116,6 +108,14 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     public void onResume() {
         super.onResume();
         adapter.update();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        adapter.saveCurrentData("");
+        launcher.showToolbarEditIcon(false);
+        launcher.showPlanClosed();
     }
 
     @Override

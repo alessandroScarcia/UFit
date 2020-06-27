@@ -22,6 +22,8 @@ public interface ProfileSettingsContract {
         void reauthenticate();
 
         void insertChooseFragment();
+
+        void updateRole(boolean isChecked);
     }
 
     interface Presenter {

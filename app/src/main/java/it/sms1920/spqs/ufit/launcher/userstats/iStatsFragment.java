@@ -59,6 +59,10 @@ public interface iStatsFragment {
         void setBMIStatus(float strBMIStatus);
 
         void setFFMIStatus(float strFFMIStatus);
+
+        void setHeight(String valueOf);
+
+        void setHeightDate(String valueOf);
     }
 
 
@@ -70,7 +74,7 @@ public interface iStatsFragment {
 
         void setDatabase(Context context);
 
-        float calculateBMI(float parseFloat);
+        float calculateBMI();
 
         float calculateFFMI(float weight, float bodyFat);
 
@@ -108,6 +112,6 @@ public interface iStatsFragment {
 
         void initializeDatabase(Context context);
 
-
+        void updateHeight(float value, String date);
     }
 }

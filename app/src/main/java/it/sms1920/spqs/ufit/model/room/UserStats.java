@@ -69,6 +69,28 @@ public class UserStats {
     @ColumnInfo(name = "dateCalveDetection")
     private String dateCalveDetection;
 
+    @ColumnInfo(name = "height")
+    private float height;
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public String getDateHeight() {
+        return dateHeight;
+    }
+
+    public void setDateHeight(String dateHeight) {
+        this.dateHeight = dateHeight;
+    }
+
+    @ColumnInfo(name = "dateHeight")
+    private String dateHeight;
+
     public float getArmMeasure() {
         return armMeasure;
     }

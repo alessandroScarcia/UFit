@@ -48,6 +48,8 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
 
     private ImageView imgProfile;
 
+    private Switch swEditRole;
+
     public ProfileSettingsFragment() {
     }
 
@@ -84,7 +86,7 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
         Button btnEditPassword = view.findViewById(R.id.btnEditPassword);
         Button btnDeleteProfile = view.findViewById(R.id.btnDeleteProfile);
 
-        Switch swEditRole = view.findViewById(R.id.swEditRole);
+        swEditRole = view.findViewById(R.id.swEditRole);
 
         btnEditProfileImage.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -166,7 +168,7 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
     public void showConfirmDeleteProfileDialog() {
         DeleteProfileDialog deleteProfileDialog = new DeleteProfileDialog();
         deleteProfileDialog.setTargetFragment(this, RC_DELETE_PROFILE);
-        deleteProfileDialog.show(getFragmentManager(), null);
+        deleteProfileDialog.show(getParentFragmentManager(), null);
     }
 
     @Override
@@ -201,6 +203,11 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
         } else {
             launcher.insertChooseFragment();
         }
+    }
+
+    @Override
+    public void updateRole(boolean isChecked) {
+        swEditRole.setChecked(isChecked);
     }
 
     public void onDialogPositiveClick() {
