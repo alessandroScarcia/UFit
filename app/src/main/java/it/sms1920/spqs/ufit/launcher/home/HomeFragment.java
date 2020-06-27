@@ -1,7 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.home;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,36 +15,41 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import it.sms1920.spqs.ufit.launcher.assembliesreport.AssembliesReportActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
 import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceList;
 import it.sms1920.spqs.ufit.launcher.traineradvice.iAdvice;
 
+public class HomeFragment extends Fragment implements HomeContract.View, iAdvice.View {
+    private static final String TAG = HomeFragment.class.getCanonicalName();
 
-public class HomeFragment extends Fragment implements iAdvice.View {
+    private HomeContract.Presenter presenter;
+
     private Intent webViewIntent;
     private TextView tvTitleAdvice;
     private TextView tvDescriptionAdvice;
     private final String URL_WEBSITE = "http://www.quatematico.com/Ufit";
 
+    private FloatingActionButton fabAssembliesReport;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        presenter = new HomePresenter(this);
     }
-
-
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_home, container, false);
-        iAdvice.Presenter presenter = new AdviceList(this);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        iAdvice.Presenter advicePresenter = new AdviceList(this);
         tvTitleAdvice = view.findViewById(R.id.tvTitleRandomAdvice);
         tvDescriptionAdvice = view.findViewById(R.id.tvDescriptionRandomAdvice);
-        presenter.getRandomAdvice();
+        advicePresenter.getRandomAdvice();
 
 
 //   TODO     Button btnTimer = view.findViewById(R.id.btnTimerDialog);
@@ -68,6 +72,14 @@ public class HomeFragment extends Fragment implements iAdvice.View {
             }
         });
 
+        fabAssembliesReport = view.findViewById(R.id.fabAssembliesReport);
+        fabAssembliesReport.setOnClickListener(new FloatingActionButton.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onAssembliesReportClicked();
+            }
+        });
+
         // Using the correct layout for this fragment
         return view;
     }
@@ -81,7 +93,7 @@ public class HomeFragment extends Fragment implements iAdvice.View {
 
     }
 
-    public void setRandomAdvice(String title, String description){
+    public void setRandomAdvice(String title, String description) {
         tvTitleAdvice.setText(title);
         tvDescriptionAdvice.setText(description);
     }
@@ -89,8 +101,12 @@ public class HomeFragment extends Fragment implements iAdvice.View {
     public void openDialog() {
         HomeFragment.TimerDialog dialogBox = new HomeFragment.TimerDialog();
         dialogBox.setTargetFragment(this, 1);
-        assert getFragmentManager() != null;
-        dialogBox.show(getFragmentManager(), "example dialog");
+        dialogBox.show(getParentFragmentManager(), "example dialog");
+    }
+
+    @Override
+    public void startAssembliesReportActivity() {
+        startActivity(new Intent(getContext(), AssembliesReportActivity.class));
     }
 
     public static class TimerDialog extends DialogFragment {

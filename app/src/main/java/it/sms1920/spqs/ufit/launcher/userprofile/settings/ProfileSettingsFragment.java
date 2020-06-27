@@ -166,7 +166,7 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
     public void showConfirmDeleteProfileDialog() {
         DeleteProfileDialog deleteProfileDialog = new DeleteProfileDialog();
         deleteProfileDialog.setTargetFragment(this, RC_DELETE_PROFILE);
-        deleteProfileDialog.show(getFragmentManager(), null);
+        deleteProfileDialog.show(getParentFragmentManager(), null);
     }
 
     @Override

@@ -165,6 +165,29 @@
     <string name="placeholder_item_list"> ● item1\n ● item2\n ● item3\n ● item4</string>
     <string name="imgExercise">Immagine esercizio</string>
 
+    <!-- Assemblies Report -->
+    <string name="assemblies_report_search_reports">Ricerca segnalazioni</string>
+    <string name="assemblies_report_create_report">Crea segnalazione</string>
+    <string name="assemblies_report_gym_address">Indirizzo della palestra</string>
+    <string name="assemblies_report_desc">Inserisci l\'indirizzo della tua palestra e ricercheremo assembramenti segnalati recentemente da altri utenti.</string>
+    <string name="assemblies_report_assembly_perception">Percezione dell\'assembramento</string>
+    <string name="assemblies_report_send_report">Invia segnalazione</string>
+    <string name="assemblies_report_create_report_msg">Grazie per aver inviato la tua segnalazione!</string>
+    <string name="assemblies_report">Segnalazione assembramenti</string>
+    <string name="assemblies_report_address_empty">L\'indirizzo della palestra non può essere vuoto</string>
+    <string name="assemblies_report_address_not_valid">L\'indirizzo della palestra inserito non è valido</string>
+    <string name="assemblies_report_perception_empty">La percezione dell\'assembramento non può essere vuota</string>
+    <string name="assemblies_report_connection_error">Nessuna connessione disponibile. Prova più tardi.</string>
+    <string name="assemblies_report_no_result">Nessuna segnalazione trovata per la posizione inserita.</string>
+    <string name="assemblies_report_search_result">Gli utenti hanno segnalato che la posizione inserita è: %s</string>
+    <string name="assemblies_report_gps_access_reasons">Ogni segnalazone generata dagli utenti necessità la posizione a cui fa riferimento. Queste informazioni sono private e mai visibili ad altri utenti. Se desideri generare una segnalazione di assembramento, è necessario il tuo consenso per accedere alle informazini sulla tua posizione.</string>
+    <string name="dialog_positive_button">Accetto</string>
+    <string name="dialog_negative_button">No grazie</string>
+    <string name="assembly_perception_not_crowded">Non affollato</string>
+    <string name="assembly_perception_slightly_crowded">Poco affollato</string>
+    <string name="assembly_perception_crowded">Affollato</string>
+    <string name="assembly_perception_really_crowded">Molto affollato</string>
+
 </resources>
 
 
