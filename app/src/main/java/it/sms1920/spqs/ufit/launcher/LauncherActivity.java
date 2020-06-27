@@ -23,7 +23,7 @@ import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.TrainerFragment;
-import it.sms1920.spqs.ufit.launcher.userstats.strenght_test.StrenghtTestFragment;
+import it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght.MaxStrenghtTestFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 

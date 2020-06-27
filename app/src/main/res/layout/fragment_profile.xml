@@ -17,7 +17,7 @@
         android:elevation="10dp"
         android:padding="3dp"
         android:visibility="visible"
-        app:cardCornerRadius="200dp"
+        app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toTopOf="@+id/tvNameSurname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

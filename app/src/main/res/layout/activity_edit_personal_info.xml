@@ -28,7 +28,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditName"
-                style="@style/CustomMaterialEditText"
+                style="@style/CustomMaterialEditTextOnWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
@@ -44,7 +44,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditSurname"
-                style="@style/CustomMaterialEditText"
+                style="@style/CustomMaterialEditTextOnWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/surname"
@@ -81,13 +81,13 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditBirthDate"
-                style="@style/CustomMaterialEditText"
+                style="@style/CustomMaterialEditTextOnWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="@string/birth_date"
                 android:inputType="textEmailAddress"
-                app:boxStrokeColor="@color/colorPrimary" />
+                app:boxStrokeColor="@color/colorPrimary"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
