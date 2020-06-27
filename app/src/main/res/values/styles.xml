@@ -59,6 +59,8 @@
         <item name="android:textColorLink">@color/colorSecondary</item>
     </style>
 
+    <style name="CustomMaterialEditTextOnWhite"> <item name="android:textCursorDrawable">@drawable/ufit_cursor_profile_settings</item> </style>
+
     <style name="CustomMaterialButtonIcon" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <item name="android:colorPressedHighlight">@color/colorTransparent</item>
         <item name="android:colorLongPressedHighlight">@color/colorTransparent</item>
