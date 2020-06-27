@@ -21,6 +21,7 @@
         <activity android:name=".userprofile.settings.edit.password.EditPasswordActivity" />
         <activity android:name=".userprofile.settings.edit.personalinfo.EditPersonalInfoActivity" />
         <activity android:name=".workoutplan.create.SelectExercisesActivity" />
+        <activity android:name=".assembliesreport.AssembliesReportActivity" />
         <activity android:name=".workoutplan.create.CreatingWorkoutActivity" />
         <activity
             android:name=".splashscreen.SplashScreenActivity"
