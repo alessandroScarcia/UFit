@@ -2,6 +2,8 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
@@ -53,6 +55,20 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
     }
 
     @Override
+    public void removeItemAt(int position) {
+
+        removeWorkout(personalWorkoutPlans.get(position).getWorkoutPlanId(), personalWorkoutPlans.get(position).getExerciseListId());
+        personalWorkoutPlans.remove(position);
+        view.callNotifyDataSetChanged();
+    }
+
+    private void removeWorkout(String id, String exerciseListId) {
+        FirebaseDbSingleton.getInstance().getReference().child("WorkoutPlan").child(id).setValue(null);
+        FirebaseDbSingleton.getInstance().getReference().child("WorkoutPlanExerciseSets").child(exerciseListId).setValue(null);
+
+    }
+
+    @Override
     public void onPersonalWorkoutPlansRequired() {
         workoutPlans = personalWorkoutPlans;
         view.callNotifyDataSetChanged();
@@ -65,7 +81,6 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
     }
 
     private void loadWorkoutPlans() {
-
         Query mPersonalWorkoutPlansQuery = FirebaseDbSingleton.getInstance().getReference()
                 .child("WorkoutPlan")
                 .orderByChild("userOwnerId")

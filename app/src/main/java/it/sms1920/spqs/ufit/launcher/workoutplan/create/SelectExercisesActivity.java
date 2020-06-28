@@ -32,7 +32,8 @@ public class SelectExercisesActivity
     private SelectExercisesContract.Presenter presenter;
     private SearchListAdapter adapter;
     private FloatingActionButton btnDone;
-
+    private RecyclerView rvSearchResult;
+    private TextView tvNoFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,8 @@ public class SelectExercisesActivity
         });
 
 
-        RecyclerView rvSearchResult = findViewById(R.id.rvSearchResult);
+        rvSearchResult = findViewById(R.id.rvSearchResult);
+        tvNoFound = findViewById(R.id.tvNoFound);
 
         adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, true, this);
         adapter.setMyClickListener(new View.OnClickListener() {
@@ -149,6 +151,17 @@ public class SelectExercisesActivity
             btnDone.show();
         } else {
             btnDone.hide();
+        }
+    }
+
+    @Override
+    public void notifyNoItemFound(boolean isEmpty) {
+        if (isEmpty) {
+            rvSearchResult.setVisibility(View.GONE);
+            tvNoFound.setVisibility(View.VISIBLE);
+        } else {
+            rvSearchResult.setVisibility(View.VISIBLE);
+            tvNoFound.setVisibility(View.GONE);
         }
     }
 }

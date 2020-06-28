@@ -227,4 +227,8 @@
 
 
 
+    <string name="noItemFound">No results</string>
+    <string name="noWorkoutFound">You have no workout plans</string>
+
+
 </resources>

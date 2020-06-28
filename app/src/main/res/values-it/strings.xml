@@ -211,6 +211,9 @@
     <string name="assembly_perception_crowded">Affollato</string>
     <string name="assembly_perception_really_crowded">Molto affollato</string>
 
+
+    <string name="noItemFound">Nessun risultato</string>
+    <string name="noWorkoutFound">Non hai schede d\'allenamento</string>
 </resources>
 
 

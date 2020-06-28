@@ -1,7 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.trainer;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -203,7 +202,7 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     @Override
     public void showBluetoothDialog(BluetoothAdapter bluetoothAdapter, ArrayAdapter<String> discoveredDevicesAdapter, BroadcastReceiver discoveryFinishReceiver) {
         dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.layout_bluetooth);
+        dialog.setContentView(R.layout.fragment_bluetooth_dialog);
         dialog.setTitle(getString(R.string.dispositiviBT));
 
         if (!bluetoothAdapter.isEnabled()) {

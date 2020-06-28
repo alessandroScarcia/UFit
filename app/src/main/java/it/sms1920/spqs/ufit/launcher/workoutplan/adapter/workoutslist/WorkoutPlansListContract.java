@@ -3,6 +3,7 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 public interface WorkoutPlansListContract {
     interface View {
 
+        void onItemRemoved(int position);
         void callNotifyDataSetChanged();
 
         void showWorkoutPlanDetail(String workoutPlanId);
@@ -21,6 +22,7 @@ public interface WorkoutPlansListContract {
 
         int getWorkoutPlansCount();
 
+        void removeItemAt(int position);
         void onPersonalWorkoutPlansRequired();
 
         void onTrainerWorkoutPlansRequired();

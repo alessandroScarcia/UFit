@@ -20,12 +20,13 @@ import it.sms1920.spqs.ufit.launcher.exercise.ExerciseActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 
 
-public class SearchActivity extends AppCompatActivity implements SearchContract.View {
+public class SearchActivity extends AppCompatActivity implements SearchContract.View, SearchListAdapter.Manager {
     private static final String TAG = SearchActivity.class.getCanonicalName();
 
     private SearchPresenter presenter;
     private SearchListAdapter adapter;
     private RecyclerView rvSearchResult;
+    private TextView tvNoFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,9 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
                 presenter.onItemClicked(rvSearchResult.getChildLayoutPosition(v));
             }
         };
-        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, itemClickListener);
+        adapter = new SearchListAdapter(R.layout.item_exercise_horizontal, itemClickListener, this);
+
+        tvNoFound = findViewById(R.id.tvNoFound);
 
         rvSearchResult = findViewById(R.id.rvSearchResult);
         TextInputEditText txtSearchField = findViewById(R.id.txtSearchField);
@@ -129,4 +132,19 @@ public class SearchActivity extends AppCompatActivity implements SearchContract.
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.idle);
     }
 
+    @Override
+    public void notifySelectionMode(boolean activated) {
+
+    }
+
+    @Override
+    public void notifyNoItemFound(boolean isEmpty) {
+        if (isEmpty) {
+            rvSearchResult.setVisibility(View.GONE);
+            tvNoFound.setVisibility(View.VISIBLE);
+        } else {
+            rvSearchResult.setVisibility(View.VISIBLE);
+            tvNoFound.setVisibility(View.GONE);
+        }
+    }
 }
