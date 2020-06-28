@@ -48,19 +48,20 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         this.myClickListener = myClickListener;
     }
 
-    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity) {
+    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, boolean isForAthlete) {
         this.layoutItemID = layoutItemID;
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
-        presenter = new WorkoutExercisesListPresenter(this);
+        presenter = new WorkoutExercisesListPresenter(this, isForAthlete);
+
 
     }
 
-    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, String workoutPlanId) {
+    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, String workoutPlanId, boolean isForAthlete) {
         this.layoutItemID = layoutItemID;
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
-        presenter = new WorkoutExercisesListPresenter(this, workoutPlanId);
+        presenter = new WorkoutExercisesListPresenter(this, workoutPlanId, isForAthlete);
     }
 
 

@@ -66,7 +66,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         }
 
         presenter = new ShowWorkoutPlanPresenter(this, workoutPlanId);
-        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, getActivity(), workoutPlanId);
+        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, getActivity(), workoutPlanId, false);
     }
 
     @Override

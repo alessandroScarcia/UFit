@@ -61,7 +61,7 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
         tvNoFound = view.findViewById(R.id.tvNoFound);
 
         // initialize view references
-        TabLayout tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
+        tlWorkoutPlans = view.findViewById(R.id.tlWorkoutPlans);
         rvWorkoutPlans = view.findViewById(R.id.rvWorkoutPlans);
 
         // add listener to change workout plans list visualized
@@ -90,16 +90,12 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
         return view;
     }
 
-    @Override
-    public void showTrainerWorkoutPlans() {
-        adapter.showTrainerWorkoutPlans();
-
-        fabAdd.hide();
-    }
 
     @Override
     public void addNewPlan() {
-        startActivityForResult(new Intent(getContext(), CreatingWorkoutActivity.class), 0);
+        Intent intent = new Intent(getContext(), CreatingWorkoutActivity.class);
+        intent.putExtra("tabPosition", tlWorkoutPlans.getSelectedTabPosition());
+        startActivityForResult(intent, 0);
     }
 
     @Override
@@ -121,10 +117,20 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
                 .commit();
     }
 
+
     @Override
     public void showPersonalWorkoutPlans() {
         adapter.showPersonalWorkoutPlans();
         fabAdd.show();
+    }
+
+    @Override
+    public void showTrainerWorkoutPlans(boolean role) {
+        adapter.showTrainerWorkoutPlans();
+
+        if (!role) {
+            fabAdd.hide();
+        }
     }
 
     public void noItemFound(boolean isEmpty) {

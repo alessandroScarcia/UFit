@@ -30,7 +30,8 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
     private List<WorkoutPlan> personalWorkoutPlans = new ArrayList<>();
     private List<WorkoutPlan> trainerWorkoutPlans = new ArrayList<>();
 
-    User me;
+    private boolean requiredTrainerTab = false;
+    private User me;
 
     public WorkoutPlansListPresenter(WorkoutPlansListContract.View view) {
         this.view = view;
@@ -59,11 +60,14 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
 
     @Override
     public void onBindWorkoutPlanItemListViewAtPosition(WorkoutPlansListContract.View.Item holder, int position) {
-        // TODO add data creation or data last workout execution bind
         WorkoutPlan itemData = workoutPlans.get(position);
-        Log.d(TAG, itemData.getName());
         holder.setPosition(position);
         holder.setName(itemData.getName());
+    }
+
+    @Override
+    public boolean isTrainer() {
+        return me.getRole();
     }
 
     @Override
@@ -72,10 +76,20 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
     }
 
     @Override
-    public void removeItemAt(int position) {
+    public boolean isTrainerTabRequested() {
+        return requiredTrainerTab;
+    }
 
-        removeWorkout(personalWorkoutPlans.get(position).getWorkoutPlanId(), personalWorkoutPlans.get(position).getExerciseListId());
-        personalWorkoutPlans.remove(position);
+    @Override
+    public void removeItemAt(int position) {
+        if (requiredTrainerTab) {
+            removeWorkout(trainerWorkoutPlans.get(position).getWorkoutPlanId(), trainerWorkoutPlans.get(position).getExerciseListId());
+            trainerWorkoutPlans.remove(position);
+        } else {
+            removeWorkout(personalWorkoutPlans.get(position).getWorkoutPlanId(), personalWorkoutPlans.get(position).getExerciseListId());
+            personalWorkoutPlans.remove(position);
+        }
+
         view.callNotifyDataSetChanged();
     }
 
@@ -87,12 +101,14 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
     @Override
     public void onPersonalWorkoutPlansRequired() {
         workoutPlans = personalWorkoutPlans;
+        requiredTrainerTab = false;
         view.callNotifyDataSetChanged();
     }
 
     @Override
     public void onTrainerWorkoutPlansRequired() {
         workoutPlans = trainerWorkoutPlans;
+        requiredTrainerTab = true;
         view.callNotifyDataSetChanged();
     }
 
@@ -174,7 +190,6 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
 
                 }
             });
-
 
 
         }

@@ -110,10 +110,10 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
 
             linkedUserRef.keepSynced(false);
         }
-
+        firstStart = false;
         userInfoRef.child(User.FIELD_ROLE).setValue(isChecked);
         view.updateRole(isChecked);
-        firstStart = false;
+
     }
 
     @Override

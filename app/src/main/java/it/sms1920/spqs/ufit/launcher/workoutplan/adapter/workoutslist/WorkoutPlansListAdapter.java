@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,9 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
                     onItemRemoved(getAdapterPosition());
                 }
             });
+//            if (presenter.isTrainerTabRequested() && !presenter.isTrainer()) {
+//                btnRemove.setVisibility(View.GONE);
+//            }
 
             tvName = itemView.findViewById(R.id.tvWorkoutPlanName);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +102,8 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
         public void setPosition(int position) {
             this.position = position;
         }
+
+
     }
 
 

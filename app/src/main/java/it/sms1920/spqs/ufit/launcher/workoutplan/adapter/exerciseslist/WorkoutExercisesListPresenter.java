@@ -25,34 +25,40 @@ import it.sms1920.spqs.ufit.model.search.iSearchClient;
 public class WorkoutExercisesListPresenter implements WorkoutExercisesListContract.Presenter, iSearchClient {
     private static final String TAG = WorkoutExercisesListPresenter.class.getCanonicalName();
 
-    WorkoutExercisesListContract.View view;
+    private WorkoutExercisesListContract.View view;
 
-    List<ExerciseSetDetails> myExercises_copy;
-    List<ExerciseSetDetails> myExercises;
-    SearchExercise mSearch;
+    private List<ExerciseSetDetails> myExercises_copy;
+    private List<ExerciseSetDetails> myExercises;
+    private SearchExercise mSearch;
 
     private DatabaseReference mDatabase;
     private String exerciseListId = null;
     private WorkoutPlan workoutPlan = null;
 
-    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view) {
+
+    private boolean isForAthlete;
+
+    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, boolean isForAthlete) {
         this.view = view;
 
         myExercises = new ArrayList<>();
         mSearch = new SearchExercise(this);
 
         mDatabase = FirebaseDbSingleton.getInstance().getReference();
+
+        this.isForAthlete = isForAthlete;
         view.callNotifyDataSetChanged();
+
     }
 
-    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, String workoutId) {
+    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, String workoutId, boolean isForAthlete) {
         this.view = view;
 
         myExercises = new ArrayList<>();
         mSearch = new SearchExercise(this);
 
         mDatabase = FirebaseDbSingleton.getInstance().getReference();
-
+        this.isForAthlete = isForAthlete;
         fetchWorkout(workoutId);
 
     }
@@ -156,10 +162,12 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
                 FirebaseAuthSingleton.getFirebaseAuth().getUid(),
                 workoutSetsKey,
                 null,
-                false);
+                isForAthlete);
 
-        mDatabase.child("WorkoutPlan").child(Objects.requireNonNull(workoutKey)).setValue(workoutPlan);
-        mDatabase.child("WorkoutPlanExerciseSets").child(Objects.requireNonNull(workoutSetsKey)).setValue(myExercises);
+        if (workoutKey != null && workoutSetsKey != null) {
+            mDatabase.child("WorkoutPlan").child(workoutKey).setValue(workoutPlan);
+            mDatabase.child("WorkoutPlanExerciseSets").child(workoutSetsKey).setValue(myExercises);
+        }
     }
 
     @Override
