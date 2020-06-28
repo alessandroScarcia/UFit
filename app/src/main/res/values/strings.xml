@@ -49,6 +49,7 @@
     <string name="profile_settings_edit_email">Edit email</string>
     <string name="profile_settings">Profile settings</string>
     <string name="profile_name_surname_placeholder" translatable="false">%s %s</string>
+    <string name="atleta">Athlete</string>
 
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Connect with your trainer</string>
@@ -223,6 +224,7 @@
     <string name="assembly_perception_slightly_crowded">Slightly crowded</string>
     <string name="assembly_perception_crowded">Crowded</string>
     <string name="assembly_perception_really_crowded">Really crowded</string>
+
 
 
 </resources>

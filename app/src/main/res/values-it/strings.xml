@@ -50,7 +50,7 @@
     <string name="profile_settings">Impostazioni profilo</string>
     <string name="profile_settings_edit_role">Passa ad account Trainer</string>
     <string name="profile_settings_delete_profile">Cancella il profilo</string>
-
+    <string name="atleta">Atleta</string>
 
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Collegati al tuo trainer</string>

@@ -16,11 +16,11 @@
         android:paddingBottom="16dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
             android:elevation="8dp"
-            app:cardCornerRadius="200dp">
+            app:cardCornerRadius="90dp">
 
             <ImageView
                 android:id="@+id/imgProfile"
@@ -42,10 +42,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorSecondary" />
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/standard_margin"
+            android:background="@color/colorOnSurface" />
 
 
         <Button
@@ -56,10 +55,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorSecondary" />
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/standard_margin"
+            android:background="@color/colorOnSurface" />
 
         <Button
             android:id="@+id/btnEditEmail"
@@ -75,34 +73,56 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorSecondary" />
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/standard_margin"
+            android:background="@color/colorOnSurface" />
 
-        <Switch
-            android:id="@+id/swEditRole"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/profile_settings_edit_role"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/atleta"
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/swEditRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/small_standard_margin"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trainer"
+
+                android:textAllCaps="true"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/colorSecondary" />
+            android:layout_height="1dp"
+            android:layout_margin="@dimen/standard_margin"
+            android:background="@color/colorOnSurface" />
 
         <Button
             android:id="@+id/btnDeleteProfile"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/profile_settings_delete_profile" />
+            android:text="@string/profile_settings_delete_profile"
+            android:textColor="@color/colorRed" />
 
 
     </LinearLayout>
