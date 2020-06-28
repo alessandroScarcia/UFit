@@ -31,6 +31,8 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
 
     private FirebaseUser user;
     private DatabaseReference userInfoRef;
+    private User userInfo;
+    private boolean firstStart = true;
 
     public ProfileSettingsPresenter(ProfileSettingsContract.View view) {
         this.view = view;
@@ -41,7 +43,7 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
         }
 
         userInfoRef = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME).child(user.getUid());
-
+        userInfoRef.keepSynced(true);
         fetchProfileInfo();
     }
 
@@ -54,7 +56,7 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.d(TAG, "userInfo:onDataChange");
 
-                User userInfo = dataSnapshot.getValue(User.class);
+                userInfo = dataSnapshot.getValue(User.class);
 
                 if (userInfo != null) {
                     view.setProfileImage(userInfo.getImageUrl());
@@ -96,9 +98,22 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
 
     @Override
     public void onEditRoleCheckedChanged(boolean isChecked) {
-        userInfoRef.child(User.FIELD_ROLE).setValue(isChecked);
 
+        if (!firstStart) {
+            String linkedUserId = userInfo.getLinkedUserId();
+
+            DatabaseReference linkedUserRef = FirebaseDbSingleton.getInstance().getReference().child("User").child(linkedUserId);
+            linkedUserRef.keepSynced(true);
+
+            linkedUserRef.child("linkedUserId").setValue("");
+            userInfoRef.child("linkedUserId").setValue("");
+
+            linkedUserRef.keepSynced(false);
+        }
+
+        userInfoRef.child(User.FIELD_ROLE).setValue(isChecked);
         view.updateRole(isChecked);
+        firstStart = false;
     }
 
     @Override
