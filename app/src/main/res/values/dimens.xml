@@ -22,6 +22,7 @@
     <dimen name="standard_margin">16dp</dimen>
     <dimen name="medium_standard_margin">24dp</dimen>
     <dimen name="big_standard_margin">32dp</dimen>
+    <dimen name="insane_standard_margin">70dp</dimen>
 
     <dimen name="icon_size">28dp</dimen>
     <dimen name="icon_size_small">22dp</dimen>

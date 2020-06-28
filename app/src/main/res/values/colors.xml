@@ -17,6 +17,7 @@
     <color name="colorGray50">#80000000</color>
     <color name="colorOnSurface">#1F000000</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorRed">#CBFF0000</color>
 
     <color name="separator">?android:attr/listDivider</color>
 

@@ -54,7 +54,11 @@
 
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Collegati al tuo trainer</string>
-
+    <string name="userLinked">Sei il personal trainer di un utente.</string>
+    <string name="trainerLinked">Hai collegato un personal trainer.</string>
+    <string name="connectionHintForTrainer">Connetti un utente aiutandolo a creare schede adatte a lui.</string>
+    <string name="connectionHintForUser">Connetti un trainer per avere schede di allenamento adatte a te.</string>
+    <string name="linkedUserInfo">Profilo collegato:</string>
     <!--    Bluetooth-->
     <string name="noPaired">Non ci sono dispositivi associati</string>
     <string name="noFound">Non ho trovato dispositivi, assicurati abbiano la visilità bluetooth attiva</string>

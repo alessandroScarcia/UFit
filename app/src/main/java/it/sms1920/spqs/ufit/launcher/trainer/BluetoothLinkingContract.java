@@ -1,7 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.trainer;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.widget.ArrayAdapter;
 
@@ -24,7 +23,7 @@ public interface BluetoothLinkingContract {
 
         String getLostConnectionString();
 
-        void notifyConnectionEstablished();
+        void notifyConnectionStateChanged();
 
         void closeDialog();
 
@@ -34,9 +33,13 @@ public interface BluetoothLinkingContract {
 
         String getSameRoleString();
 
-        void alreadyConnected();
+        void alreadyConnected(boolean isTrainer);
 
         String getDisconnectionString();
+
+        String getConnectHint(Boolean role);
+
+        void showLinkedUserInfo(String name, String surname, Integer gender, String imageUrl, String birthDate);
     }
 
     interface Presenter {
@@ -52,5 +55,7 @@ public interface BluetoothLinkingContract {
         void onDestroy();
 
         void onStart();
+
+        void onDisconnectButtonClicked();
     }
 }

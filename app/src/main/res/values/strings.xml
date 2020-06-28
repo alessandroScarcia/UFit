@@ -52,13 +52,17 @@
 
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Connect with your trainer</string>
-
+    <string name="userLinked">"Currently linked to a user. In workout section, you can create for him custom workout plans."</string>
+    <string name="trainerLinked">"Currently linked to a Trainer. If your trainer creates workout for you, you'll find it in workout section."</string>
+    <string name="connectionHintForTrainer">Connect to a user to help him in workout, suppling help in workoutplan creation.</string>
+    <string name="connectionHintForUser">Connect to a trainer to get helped in better workoutplan creation, most suitable for you.</string>
+    <string name="linkedUserInfo">Linked user info:</string>
 <!--    Bluetooth-->
     <string name="noPaired">No devices paired</string>
     <string name="noFound">No devices found, be sure to active bluetooth visibility</string>
     <string name="sameRole">You can only connect accounts with different role</string>
     <string name="dispositiviBT">Bluetooth devices</string>
-    <string name="senzaBluetooth">Bluetooth not avaiable in this device</string>
+    <string name="senzaBluetooth">Bluetooth not available in this device</string>
     <string name="bluetoothDisabled">Bluetooth not enabled</string>
     <string name="disconnection">Disconnecting…</string>
     <string name="lostConnection">Connection lost</string>
@@ -69,6 +73,7 @@
     <string name="notConnected">Status: Not connected</string>
     <string name="associati">Paired devices</string>
     <string name="trovati">Discovered devices</string>
+
 
     <!-- Stats -->
     <string name="myGeneralStats">General</string>
@@ -218,5 +223,6 @@
     <string name="assembly_perception_slightly_crowded">Slightly crowded</string>
     <string name="assembly_perception_crowded">Crowded</string>
     <string name="assembly_perception_really_crowded">Really crowded</string>
+
 
 </resources>

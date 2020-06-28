@@ -1,6 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.trainer;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -14,20 +15,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import it.sms1920.spqs.ufit.launcher.LauncherActivity;
 import it.sms1920.spqs.ufit.launcher.R;
+
+import static android.view.View.GONE;
 
 public class BluetoothLinkingFragment extends Fragment implements BluetoothLinkingContract.View {
 
@@ -35,7 +42,7 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
 
     private TextView status;
     private MaterialButton btnConnect;
-
+    private MaterialButton btnDisconnect;
     private Dialog dialog;
 
     private BluetoothLinkingContract.Presenter presenter;
@@ -53,16 +60,24 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
         View view = inflater.inflate(R.layout.fragment_bluetooth_linking, container, false);
         status = view.findViewById(R.id.txtStatus);
         btnConnect = view.findViewById(R.id.btnConnetti);
+        btnDisconnect = view.findViewById(R.id.btnDisconnetti);
         presenter = new BluetoothLinkingPresenter(this, new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1));
 
 
-        //show bluetooth devices dialog when click connect button
         btnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.onConnectButtonClicked();
             }
         });
+
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onDisconnectButtonClicked();
+            }
+        });
+
 
         launcher = (LauncherActivity) getActivity();
         return view;
@@ -99,7 +114,7 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     }
 
     @Override
-    public void notifyConnectionEstablished() {
+    public void notifyConnectionStateChanged() {
         launcher.insertBluetoothLinkingFragment();
     }
 
@@ -126,15 +141,63 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     }
 
     @Override
-    public void alreadyConnected() {
+    public void alreadyConnected(boolean isTrainer) {
 
-        btnConnect.setText(R.string.disconnect);
+        btnConnect.setVisibility(GONE);
+        btnDisconnect.setVisibility(View.VISIBLE);
+
+        if (isTrainer) setStatus(getString(R.string.userLinked));
+        else setStatus(getString(R.string.trainerLinked));
 
     }
 
     @Override
     public String getDisconnectionString() {
         return getString(R.string.disconnection);
+    }
+
+    @Override
+    public String getConnectHint(Boolean role) {
+        String string;
+        if (role) {
+            string = getString(R.string.connectionHintForTrainer);
+        } else {
+            string = getString(R.string.connectionHintForUser);
+        }
+        return string;
+    }
+
+    @Override
+    public void showLinkedUserInfo(String name, String surname, Integer gender, String imageUrl, String birthDate) {
+        View view = getView();
+
+        AppCompatImageView img = view.findViewById(R.id.imageTrainer);
+        img.setVisibility(GONE);
+
+        ConstraintLayout lyt = view.findViewById(R.id.lytLinkedInfo);
+        lyt.setVisibility(View.VISIBLE);
+
+        TextView tvNameSurname = view.findViewById(R.id.tvNameSurname);
+        TextView tvGender = view.findViewById(R.id.tvGender);
+        TextView tvBirthDate = view.findViewById(R.id.tvBirthDate);
+
+        String nameSurnameText = getString(R.string.name) + ": " + name + " " + surname;
+        tvNameSurname.setText(nameSurnameText);
+
+        String genderText = getText(R.string.gender) + ": " + getResources().getStringArray(R.array.genders)[gender];
+        tvGender.setText(genderText);
+
+        String birthDateText = getString(R.string.birth_date) + ": " + birthDate;
+        tvBirthDate.setText(birthDateText);
+
+
+        ImageView imgProfile = view.findViewById(R.id.imgProfile);
+
+        Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.img_profile_placeholder)
+                .into(imgProfile);
+
     }
 
     @Override

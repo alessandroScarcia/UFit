@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.model.bluetooth.BluetoothHelper;
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
@@ -57,10 +59,46 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot item : snapshot.getChildren()) {
                             me = item.getValue(User.class);
-                            view.setStatus(me.toString());
-                            if (!me.getLinkedUserId().isEmpty()) {
-                                view.alreadyConnected();
-                                connected = true;
+                            if (me != null) {
+                                if (!me.getLinkedUserId().isEmpty()) {
+                                    view.alreadyConnected(me.getRole());
+                                    connected = true;
+                                    fetchLinkedUser();
+
+                                } else {
+
+                                    view.setStatus(view.getConnectHint(me.getRole()));
+
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+    }
+
+    private void fetchLinkedUser() {
+        FirebaseDbSingleton.getInstance().getReference().child("User").child(me.getLinkedUserId()).keepSynced(true);
+
+        FirebaseDbSingleton.getInstance().getReference()
+                .child("User")
+                .orderByKey()
+                .equalTo(me.getLinkedUserId())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            him = item.getValue(User.class);
+
+                            if (him != null) {
+                                view.showLinkedUserInfo(him.getName(), him.getSurname(), him.getGender(), him.getImageUrl(), him.getBirthDate());
+                                view.showToast(him.toString());
                             }
                         }
                     }
@@ -76,17 +114,7 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
     @Override
     public void onConnectButtonClicked() {
-        if (me.getLinkedUserId().isEmpty()) {
-            view.showBluetoothDialog(bluetoothAdapter, discoveredDevicesAdapter, discoveryFinishReceiver);
-        } else {
-            view.showToast(view.getDisconnectionString());
-
-            FirebaseDbSingleton.getInstance().getReference().child("User").child(me.getLinkedUserId()).child("linkedUserId").setValue("");
-
-            me.setLinkedUserId("");
-            FirebaseDbSingleton.getInstance().getReference().child("User").child(FirebaseAuthSingleton.getFirebaseAuth().getUid()).setValue(me);
-            view.notifyConnectionEstablished();
-        }
+        view.showBluetoothDialog(bluetoothAdapter, discoveredDevicesAdapter, discoveryFinishReceiver);
     }
 
     @Override
@@ -127,6 +155,20 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
                 chatController = new BluetoothHelper(handler);
             }
         }
+    }
+
+    @Override
+    public void onDisconnectButtonClicked() {
+        view.showToast(view.getDisconnectionString());
+
+        FirebaseDbSingleton.getInstance().getReference().child("User").child(me.getLinkedUserId()).child("linkedUserId").setValue("");
+
+        me.setLinkedUserId("");
+        FirebaseDbSingleton.getInstance().getReference()
+                .child("User")
+                .child(Objects.requireNonNull(FirebaseAuthSingleton.getFirebaseAuth().getUid()))
+                .setValue(me);
+        view.notifyConnectionStateChanged();
     }
 
 
@@ -183,13 +225,10 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
                     String readMessage = new String(readBuf, 0, msg.arg1);
 
                     if (readMessage.isEmpty()) {
-                        view.notifyConnectionEstablished();
+                        view.notifyConnectionStateChanged();
                     } else {
-                        view.showToast("Invio del ID: " + FirebaseAuthSingleton.getFirebaseAuth().getUid());
-                        view.setStatus(view.getConnectedWithString() + " " + readMessage);
-
+                        view.showToast("Ricevuto ID: " + readMessage);
                         tryConnectWith(readMessage);
-
                     }
 
                     break;
@@ -219,10 +258,12 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot user : snapshot.getChildren()) {
                     him = user.getValue(User.class);
-                    if (him.getRole() == me.getRole()) {
-                        view.setStatus(view.getSameRoleString());
-                    } else {
-                        connectUser(readMessage);
+                    if (him != null) {
+                        if (him.getRole() == me.getRole()) {
+                            view.setStatus(view.getSameRoleString());
+                        } else {
+                            connectUser(readMessage);
+                        }
                     }
                 }
             }
@@ -247,7 +288,7 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
         sendMessage("");
 
-        view.notifyConnectionEstablished();
+        view.notifyConnectionStateChanged();
 
     }
 
