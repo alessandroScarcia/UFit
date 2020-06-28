@@ -51,11 +51,16 @@ public class EditPasswordPresenter implements EditPasswordContract.Presenter {
                             } else {
                                 Log.w(TAG, "updatePassword:failure", task.getException());
                                 if (task.getException() instanceof FirebaseAuthRecentLoginRequiredException) {
-                                    view.reauthenticate();
+                                    view.showAskReauthenticateDialog();
                                 }
                             }
                         }
                     });
         }
+    }
+
+    @Override
+    public void onReautenticate() {
+        view.reauthenticate();
     }
 }

@@ -138,6 +138,7 @@
     <string name="profile_settings_surname_empty">Il cognome non può essere vuoto</string>
     <string name="edit_password_caution_msg">Attenzione: la password che inserirai sarà il tuo unico modo per accedere al tuo account!</string>
     <string name="profile_settings_delete_profile_msg">Sei sicuro di voler cancellare il tuo profilo? Questa azione non piò essere annullata!</string>
+    <string name="profile_setting_change_credentials">Questa operazione richiede l\'accesso</string>
     <string name="delete">Cancella il profilo</string>
     <string name="cancel">Annulla</string>
 

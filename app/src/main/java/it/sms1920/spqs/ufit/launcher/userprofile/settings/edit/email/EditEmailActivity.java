@@ -1,11 +1,16 @@
 package it.sms1920.spqs.ufit.launcher.userprofile.settings.edit.email;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.userprofile.login.LoginActivity;
+import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 
 public class EditEmailActivity extends AppCompatActivity implements EditEmailContract.View {
     private static final String TAG = EditEmailActivity.class.getCanonicalName();
@@ -100,4 +106,47 @@ public class EditEmailActivity extends AppCompatActivity implements EditEmailCon
     public void showEmail(String email) {
         etEmail.setText(email);
     }
+
+    @Override
+    public void showAskReauthenticateDialog() {
+        EditEmailActivity.ChangeEmailDialog changeCredentialsDialog = new EditEmailActivity.ChangeEmailDialog();
+        changeCredentialsDialog.show(getSupportFragmentManager(), null);
+    }
+
+    private void onDialogPositiveClick() {
+        presenter.onReautenticate();
+    }
+
+    public static class ChangeEmailDialog extends DialogFragment {
+        private final String TAG = EditEmailActivity.ChangeEmailDialog.class.getCanonicalName();
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.profile_setting_change_credentials)
+                    .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Log.d(TAG, "positiveButtonClick");
+                            EditEmailActivity editEmailActivity = (EditEmailActivity) getActivity();
+                            if (editEmailActivity != null) {
+                                editEmailActivity.onDialogPositiveClick();
+                            }
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Log.d(TAG, "negativeButtonClick");
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+
+
+
 }
+
+

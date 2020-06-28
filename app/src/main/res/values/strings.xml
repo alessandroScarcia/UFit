@@ -51,6 +51,8 @@
     <string name="profile_name_surname_placeholder" translatable="false">%s %s</string>
     <string name="atleta">Athlete</string>
 
+
+
     <!--    Trainer-->
     <string name="btnConnectionTrainer">Connect with your trainer</string>
     <string name="userLinked">"Currently linked to a user. In workout section, you can create for him custom workout plans."</string>
@@ -150,6 +152,7 @@
     <string name="profile_settings_surname_empty">Surname can\'t be empty</string>
     <string name="edit_password_caution_msg">Caution: the password you enter will be the only way to access your account!</string>
     <string name="profile_settings_delete_profile_msg">Are you sure you want to delete your profile? This action can\'t be reverted!</string>
+    <string name="profile_setting_change_credentials">This operation requires sign in</string>
     <string name="delete">Delete profile</string>
     <string name="cancel">Cancel</string>
     <string name="visit_our_site">"Visit Our Website"</string>

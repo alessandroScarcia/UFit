@@ -7,12 +7,16 @@ public interface EditPasswordContract {
         void setError(Presenter.PasswordError error);
 
         void reauthenticate();
+
+        void showAskReauthenticateDialog();
     }
 
     interface Presenter {
         void onBackPressed();
 
         void confirmEdit(String password, String confirmPassword);
+
+        void onReautenticate();
 
         enum PasswordError {
             PASSWORD_EMPTY,

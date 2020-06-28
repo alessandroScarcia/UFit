@@ -10,6 +10,8 @@ public interface EditEmailContract {
         void reauthenticate();
 
         void showEmail(String email);
+
+        void showAskReauthenticateDialog();
     }
 
     interface Presenter {
@@ -17,6 +19,8 @@ public interface EditEmailContract {
         void onBackPressed();
 
         void confirmEdit(String email);
+
+        void onReautenticate();
 
         enum EmailError {
             EMAIL_EMPTY,

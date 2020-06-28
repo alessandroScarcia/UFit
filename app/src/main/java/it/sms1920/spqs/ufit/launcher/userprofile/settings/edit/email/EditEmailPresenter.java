@@ -48,15 +48,21 @@ public class EditEmailPresenter implements EditEmailContract.Presenter {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "updateEmail:success");
+
                                 view.endActivity();
                             } else {
                                 Log.w(TAG, "updateEmail:failure", task.getException());
                                 if (task.getException() instanceof FirebaseAuthRecentLoginRequiredException) {
-                                    view.reauthenticate();
+                                    view.showAskReauthenticateDialog();
                                 }
                             }
                         }
                     });
         }
+    }
+
+    @Override
+    public void onReautenticate() {
+        view.reauthenticate();
     }
 }
