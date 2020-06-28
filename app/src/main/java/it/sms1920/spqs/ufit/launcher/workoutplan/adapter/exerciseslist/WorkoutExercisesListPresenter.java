@@ -139,13 +139,13 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
 
             for (int i = 0; i < myExercises_copy.size(); i++) {
                 if (exercise.getExerciseId().equals(myExercises_copy.get(i).getExerciseId())) {
-                    myExercises.add(new ExerciseSetDetails(exercise.getExerciseId(), exercise.getName(), myExercises_copy.get(i).getExerciseSetItems()));
+                    myExercises.add(new ExerciseSetDetails(exercise.getExerciseId(), exercise.getName(), myExercises_copy.get(i).getExerciseSetItems(), exercise.getImageUrl()));
                     exists = true;
                     i = myExercises_copy.size(); // Stopping iteration
                 }
             }
             if (!exists) {
-                myExercises.add(new ExerciseSetDetails(exercise.getExerciseId(), exercise.getName(), new ArrayList<ExerciseSetItem>()));
+                myExercises.add(new ExerciseSetDetails(exercise.getExerciseId(), exercise.getName(), new ArrayList<ExerciseSetItem>(), exercise.getImageUrl()));
             }
         }
         view.callNotifyDataSetChanged();
@@ -183,6 +183,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
     public void onBindExerciseItemViewAtPosition(WorkoutExercisesListContract.View.Item holder, int position) {
         ExerciseSetDetails exercise = myExercises.get(position);
         holder.setName(exercise.getExerciseName());
+        holder.setImage(exercise.getImageUrl());
         holder.setId(exercise.getExerciseId());
         holder.setExerciseSetsAdapter(position, exerciseListId, myExercises.get(position).getExerciseId(), myExercises.get(position).getExerciseSetItems());
     }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,9 +196,8 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         }
 
         @Override
-        public void setImage(Image image) {
-            //TODO image fetch
-            this.image.setImageResource(R.drawable.img_exercise);
+        public void setImage(String imageURL) {
+            Picasso.get().load(imageURL).into(image);
         }
 
         @Override

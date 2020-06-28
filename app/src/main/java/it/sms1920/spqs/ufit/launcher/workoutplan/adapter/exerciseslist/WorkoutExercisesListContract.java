@@ -17,7 +17,7 @@ public interface WorkoutExercisesListContract {
 
         interface Item {
             void setName(String name);
-            void setImage(Image image);
+            void setImage(String imageURL);
             void setId(String id);
             void setExerciseSets(List<ExerciseSetItem> exerciseSets);
 
