@@ -155,7 +155,8 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
                 name,
                 FirebaseAuthSingleton.getFirebaseAuth().getUid(),
                 workoutSetsKey,
-                null);
+                null,
+                false);
 
         mDatabase.child("WorkoutPlan").child(Objects.requireNonNull(workoutKey)).setValue(workoutPlan);
         mDatabase.child("WorkoutPlanExerciseSets").child(Objects.requireNonNull(workoutSetsKey)).setValue(myExercises);
@@ -211,7 +212,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
 
     @Override
     public void onUpdateRequested() {
-        if (workoutPlan != null){
+        if (workoutPlan != null) {
             fetchWorkout(workoutPlan.getWorkoutPlanId());
         }
         view.callNotifyDataSetChanged();

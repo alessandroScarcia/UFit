@@ -9,6 +9,7 @@ public class WorkoutPlan {
         this.userOwnerId = userOwnerId;
     }
 
+    private Boolean forMyAthlete = false;
     private String userOwnerId;
     private String exerciseListId;
     private String trainerId;
@@ -16,12 +17,13 @@ public class WorkoutPlan {
     public WorkoutPlan() {
     }
 
-    public WorkoutPlan(String workoutPlanId, String name, String userOwnerId, String exerciseListId, String trainerId) {
+    public WorkoutPlan(String workoutPlanId, String name, String userOwnerId, String exerciseListId, String trainerId, Boolean forMyAthlete) {
         this.workoutPlanId = workoutPlanId;
         this.name = name;
         this.userOwnerId = userOwnerId;
         this.exerciseListId = exerciseListId;
         this.trainerId = trainerId;
+        this.forMyAthlete = forMyAthlete;
     }
 
     public String getWorkoutPlanId() {
@@ -46,5 +48,9 @@ public class WorkoutPlan {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getForMyAthlete() {
+        return forMyAthlete;
     }
 }
