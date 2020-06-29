@@ -16,7 +16,10 @@ public class WorkoutPlansPresenter implements WorkoutPlansContract.Presenter {
     public WorkoutPlansPresenter(final WorkoutPlansContract.View view) {
         this.view = view;
 
-        FirebaseDbSingleton.getInstance().getReference().child("User").orderByKey().equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDbSingleton.getInstance().getReference().child("User")
+                .orderByKey()
+                .equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot item : snapshot.getChildren()) {

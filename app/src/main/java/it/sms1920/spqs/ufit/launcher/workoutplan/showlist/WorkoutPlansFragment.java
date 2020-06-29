@@ -139,7 +139,6 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
             tvNoFound.setVisibility(View.VISIBLE);
         } else {
             rvWorkoutPlans.setVisibility(View.VISIBLE);
-
             tvNoFound.setVisibility(View.GONE);
         }
     }
