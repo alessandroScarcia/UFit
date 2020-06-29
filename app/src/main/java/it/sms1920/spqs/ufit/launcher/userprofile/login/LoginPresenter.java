@@ -40,7 +40,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private String previousUserId;
-    private boolean isAnonymous;
+    private boolean isAnonymous = false;
 
     public LoginPresenter(LoginContract.View view) {
         this.view = view;

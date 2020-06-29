@@ -38,6 +38,10 @@ public interface AssembliesReportContract {
         double getCurrentLongitude();
 
         void showSendReportMsg();
+
+        void showSearchReports();
+
+        void showCreateReport();
     }
 
     interface Presenter {
@@ -54,6 +58,8 @@ public interface AssembliesReportContract {
         void onLocationReady();
 
         void gpsPermissionsDenied();
+
+        void onTabSelected(int position);
 
         enum AddressError {
             ADDRESS_EMPTY,

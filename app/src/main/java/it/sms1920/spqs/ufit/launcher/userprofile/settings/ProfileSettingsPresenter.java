@@ -161,7 +161,9 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "deleteProfile:success");
+                    FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
                     view.insertChooseFragment();
+
                 } else {
                     Log.w(TAG, "deleteProfile:failure", task.getException());
                     if (task.getException() instanceof FirebaseAuthRecentLoginRequiredException) {
@@ -170,5 +172,7 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
                 }
             }
         });
+
+
     }
 }

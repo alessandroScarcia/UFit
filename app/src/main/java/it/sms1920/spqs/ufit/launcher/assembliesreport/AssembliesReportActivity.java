@@ -1,12 +1,5 @@
 package it.sms1920.spqs.ufit.launcher.assembliesreport;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,18 +8,21 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -105,22 +101,7 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
         tlAssembliesReport.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-                    case 0:
-                        if (llSearchReports.getVisibility() != View.VISIBLE) {
-                            llSearchReports.setVisibility(View.VISIBLE);
-                            llCreateReport.setVisibility(View.GONE);
-                        }
-                        break;
-                    case 1:
-                        if (llCreateReport.getVisibility() != View.VISIBLE) {
-                            llCreateReport.setVisibility(View.VISIBLE);
-                            llSearchReports.setVisibility(View.GONE);
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                presenter.onTabSelected(tab.getPosition());
             }
 
             @Override
@@ -339,6 +320,22 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
     @Override
     public void showSendReportMsg() {
         tvAssemblyReportCreateMsg.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showSearchReports() {
+        if (llSearchReports.getVisibility() != View.VISIBLE) {
+            llSearchReports.setVisibility(View.VISIBLE);
+            llCreateReport.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showCreateReport() {
+        if (llCreateReport.getVisibility() != View.VISIBLE) {
+            llCreateReport.setVisibility(View.VISIBLE);
+            llSearchReports.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -185,4 +185,18 @@ public class AssembliesReportPresenter implements AssembliesReportContract.Prese
     public void gpsPermissionsDenied() {
         view.showGpsNotGrantedMsg();
     }
+
+    @Override
+    public void onTabSelected(int position) {
+        switch (position) {
+            case 0:
+                view.showSearchReports();
+                break;
+            case 1:
+                view.showCreateReport();
+                break;
+            default:
+                break;
+        }
+    }
 }

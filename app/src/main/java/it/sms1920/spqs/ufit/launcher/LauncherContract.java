@@ -28,7 +28,7 @@ public interface LauncherContract {
 
         void startEditWorkoutActivity(String id);
 
-        enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS}
+        enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS, CHOOSE}
     }
 
     interface Presenter {

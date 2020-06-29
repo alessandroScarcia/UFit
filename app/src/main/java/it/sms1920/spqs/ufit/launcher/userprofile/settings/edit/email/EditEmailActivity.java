@@ -92,6 +92,9 @@ public class EditEmailActivity extends AppCompatActivity implements EditEmailCon
             case EMAIL_NOT_VALID:
                 etlEmail.setError(getString(R.string.email_not_valid));
                 break;
+            case ALREADY_USED:
+                etlEmail.setError(getString(R.string.email_already_exists));
+                break;
             default:
                 break;
         }

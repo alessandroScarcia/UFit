@@ -12,7 +12,7 @@ import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 
 public class SplashScreenPresenter implements SplashScreenContract.Presenter {
-
+    private static final String TAG = SplashScreenPresenter.class.getCanonicalName();
     private SplashScreenContract.View view;
 
     public SplashScreenPresenter(SplashScreenContract.View view, Context context) {
@@ -25,7 +25,11 @@ public class SplashScreenPresenter implements SplashScreenContract.Presenter {
         instance.setIndicatorsEnabled(false);
         instance.setLoggingEnabled(true);
 
-        Picasso.setSingletonInstance(instance);
+        try {
+            Picasso.setSingletonInstance(instance);
+        } catch (IllegalStateException e) {
+            Log.w(TAG, "Singleton instance already exists.", e);
+        }
     }
 
     @Override

@@ -24,7 +24,8 @@ public interface EditEmailContract {
 
         enum EmailError {
             EMAIL_EMPTY,
-            EMAIL_NOT_VALID
+            EMAIL_NOT_VALID,
+            ALREADY_USED
         }
     }
 }

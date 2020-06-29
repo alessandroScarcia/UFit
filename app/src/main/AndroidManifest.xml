@@ -17,14 +17,27 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".userprofile.settings.edit.email.EditEmailActivity" />
-        <activity android:name=".userprofile.settings.edit.password.EditPasswordActivity" />
-        <activity android:name=".userprofile.settings.edit.personalinfo.EditPersonalInfoActivity" />
-        <activity android:name=".workoutplan.create.SelectExercisesActivity" />
-        <activity android:name=".assembliesreport.AssembliesReportActivity" />
-        <activity android:name=".workoutplan.create.CreatingWorkoutActivity" />
+        <activity
+            android:name=".userprofile.settings.edit.email.EditEmailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".userprofile.settings.edit.password.EditPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".userprofile.settings.edit.personalinfo.EditPersonalInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".workoutplan.create.SelectExercisesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".assembliesreport.AssembliesReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".workoutplan.create.CreatingWorkoutActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".splashscreen.SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,13 +45,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".userprofile.resetpassword.ResetPasswordActivity" />
-        <activity android:name=".userprofile.login.LoginActivity" />
-        <activity android:name=".userprofile.registration.RegistrationActivity" />
-        <activity android:name=".search.SearchActivity" />
-        <activity android:name=".exercise.ExerciseActivity" />
+        <activity
+            android:name=".userprofile.resetpassword.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".userprofile.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".userprofile.registration.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".exercise.ExerciseActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LauncherActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
     </application>
 

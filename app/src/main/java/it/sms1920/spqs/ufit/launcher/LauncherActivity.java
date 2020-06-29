@@ -60,18 +60,23 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 switch (menuItem.getItemId()) {
                     // Home
                     case R.id.nav_home:
+                        Log.d(TAG, "nav_home");
                         presenter.onHomeIconClicked();
                         break;
                     case R.id.nav_plans:
+                        Log.d(TAG, "nav_plans");
                         presenter.onPlansIconClicked();
                         break;
                     case R.id.nav_trainer:
+                        Log.d(TAG, "nav_trainer");
                         presenter.onTrainerIconClicked();
                         break;
                     case R.id.nav_stats:
+                        Log.d(TAG, "nav_stats");
                         presenter.onStatsIconClicked();
                         break;
                     case R.id.nav_profile:
+                        Log.d(TAG, "nav_profile");
                         presenter.onProfileIconClicked();
                         break;
                 }
@@ -255,7 +260,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
 
-
     public void toggleToolbarNavigationButton(boolean active) {
         if (active) {
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -271,6 +275,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void showPlanClicked() {
         presenter.onShowPlanClicked();
     }
+
     public void showPlanClosed() {
         presenter.onShowPlanClosed();
     }

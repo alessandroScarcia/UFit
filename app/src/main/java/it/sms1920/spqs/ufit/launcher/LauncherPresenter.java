@@ -14,6 +14,7 @@ import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.STATS
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType.TRAINER;
 
 public class LauncherPresenter implements LauncherContract.Presenter {
+    private static final String TAG = LauncherPresenter.class.getCanonicalName();
 
     private LauncherContract.View view;
     private FragType currentFragment = HOME;
@@ -63,7 +64,12 @@ public class LauncherPresenter implements LauncherContract.Presenter {
     public void onProfileIconClicked() {
         FirebaseUser firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
-        if (firebaseUser == null || firebaseUser.isAnonymous()) {
+        if (firebaseUser == null) {
+            throw new IllegalStateException(TAG + " user should be logged anonymously at least.");
+        }
+
+        if (firebaseUser.isAnonymous()) {
+            currentFragment = FragType.CHOOSE;
             view.insertChooseFragment();
         } else {
             if (currentFragment != PROFILE) {
