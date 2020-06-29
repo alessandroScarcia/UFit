@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.BluetoothLinkingFragment;
+import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;

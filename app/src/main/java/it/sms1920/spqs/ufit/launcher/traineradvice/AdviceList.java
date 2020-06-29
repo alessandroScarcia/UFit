@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,9 +14,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
+import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.Advice;
+import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
+import it.sms1920.spqs.ufit.model.firebase.database.User;
 
 
 public class AdviceList implements iAdvice.Presenter {
@@ -27,6 +32,10 @@ public class AdviceList implements iAdvice.Presenter {
     private List<Advice> adviceList;
     private Random RANDOM = new Random();
 
+
+    private FirebaseUser firebaseUser;
+    private DatabaseReference database;
+    private String userLinkId;
 
 
     public String randomId(int len) {
@@ -40,6 +49,34 @@ public class AdviceList implements iAdvice.Presenter {
     }
 
 
+    public void getUserLinkTrainer(){
+        database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
+        firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
+
+        database.keepSynced(true);
+
+        database.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        if (user != null) {
+                            if (user.getLinkedUserId() != null) {
+                                userLinkId = user.getLinkedUserId()+"";
+                                Log.d(TAG, "Id trainer" + user.getLinkedUserId());
+                                getSingleAdvice();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+
     public AdviceList(iAdvice.View view) {
         this.view = view;
         adviceList= new ArrayList<>();
@@ -48,29 +85,49 @@ public class AdviceList implements iAdvice.Presenter {
 
     @Override
     public void getRandomAdvice(){
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Advice");
+        getUserLinkTrainer();
+    }
 
-//        Query mRandomAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo("-1").startAt(1).endAt(4);
-        Query zone1Ref = mDatabase.orderByChild("author").equalTo("-1");
-        Log.d(TAG, String.valueOf(adviceList.size()));
-        zone1Ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+    public void getSingleAdvice(){
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Advice");
+        final String language = Locale.getDefault().getISO3Language();
+        Query mRandomAdviceQuery;
+
+        Log.d(TAG, "Avvio di getSingleAdvice "+ userLinkId );
+
+        if(userLinkId != null){
+            mRandomAdviceQuery = mDatabase.orderByChild("author").equalTo(userLinkId);
+        }else{
+            mRandomAdviceQuery = mDatabase.orderByChild("author").equalTo("-1");
+        }
+
+        mRandomAdviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                Advice adviceR = dataSnapshot.getValue(Advice.class);
-//                Log.d(TAG, adviceR.getTitle());
-//                saveRandomAdvice(adviceR);
                 adviceList.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Log.d(TAG, "loadPersonalTrainerAdvice->onDataChange:" + child.getKey());
 
                     Advice temp = child.getValue(Advice.class);
-                    if (temp != null) {
+                    if (temp != null && temp.getCodLanguage().equals(language)) {
                         Log.d(TAG, temp.getTitle());
                         adviceList.add(temp);
                     }
                 }
+                Log.d(TAG, String.valueOf(adviceList.size()));
                 Random random =  new Random();
-                saveRandomAdvice(adviceList.get(random.nextInt(adviceList.size())));
+                if(adviceList.size() != 0) {
+                    saveRandomAdvice(adviceList.get(random.nextInt(adviceList.size())));
+                    Log.d(TAG, "Consigli del sistema");
+                }else{
+                    Log.d(TAG, "il trainer non ha pubblicato nessun consiglio");
+                    userLinkId = null;
+                    getSingleAdvice();
+                }
+                if(adviceList.size() != 0 && userLinkId != null) {
+                    Log.d(TAG, "il Trainer ha pubblicato consigli");
+                }
             }
 
             @Override
@@ -119,8 +176,15 @@ public class AdviceList implements iAdvice.Presenter {
         Advice advice = new Advice();
         advice.setTitle(title);
         advice.setDescription(description);
-        advice.setAuthor(author);
+        database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
+        firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
+
+        assert firebaseUser != null;
+        advice.setAuthor(firebaseUser.getUid());
         advice.setAdviceId(randomId(ID_LENGHT));
+
+        String language = Locale.getDefault().getISO3Language();
+        advice.setCodLanguage(language);
 
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -134,9 +198,13 @@ public class AdviceList implements iAdvice.Presenter {
     private void loadAdviceList() {
         Log.d(TAG, "loadAdvice");
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
+        firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
+
+        assert firebaseUser != null;
 
         // TODO add reference to local user
-        Query mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo("-1");
+        Query mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo(firebaseUser.getUid());
 
         mPersonalTrainerAdviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

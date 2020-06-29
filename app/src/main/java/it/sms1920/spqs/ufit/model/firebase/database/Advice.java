@@ -6,12 +6,21 @@ public class Advice {
     public static String DESCRIPTION_FIELD = "description";
     public static String AUTHOR_FIELD = "author";
     public static String ID_FIELD = "adviceId";
+    public static String COD_LANGUAGE = "codLanguage";
 
     private String title;
     private String description;
     private String author;
     private String adviceId;
+    private String codLanguage;
 
+    public String getCodLanguage() {
+        return codLanguage;
+    }
+
+    public void setCodLanguage(String codLanguage) {
+        this.codLanguage = codLanguage;
+    }
 
     public Advice() {
 
