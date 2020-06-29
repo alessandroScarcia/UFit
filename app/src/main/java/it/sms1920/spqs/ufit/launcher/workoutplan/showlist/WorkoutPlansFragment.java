@@ -41,7 +41,6 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new WorkoutPlansPresenter(this);
-        adapter = new WorkoutPlansListAdapter(this);
         launcher = (LauncherActivity) getActivity();
     }
 
@@ -83,6 +82,7 @@ public class WorkoutPlansFragment extends Fragment implements WorkoutPlansContra
             }
         });
 
+        adapter = new WorkoutPlansListAdapter(this);
         // setup recyclerview for workout plans list
         rvWorkoutPlans.setAdapter(adapter);
         rvWorkoutPlans.setLayoutManager(new LinearLayoutManager(getContext()));
