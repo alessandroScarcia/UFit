@@ -22,8 +22,8 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
     private WorkoutPlansFragment parentFragment;
 
     public WorkoutPlansListAdapter(WorkoutPlansFragment parentFragment) {
-        presenter = new WorkoutPlansListPresenter(this);
         this.parentFragment = parentFragment;
+        presenter = new WorkoutPlansListPresenter(this);
     }
 
     @NonNull
@@ -56,8 +56,8 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
     }
 
     @Override
-    public void callNotifyDataSetChanged() {
-        parentFragment.noItemFound(presenter.getWorkoutPlansCount() == 0);
+    public void callNotifyDataSetChanged(boolean isEmpty) {
+        parentFragment.noItemFound(isEmpty);
         notifyDataSetChanged();
     }
 

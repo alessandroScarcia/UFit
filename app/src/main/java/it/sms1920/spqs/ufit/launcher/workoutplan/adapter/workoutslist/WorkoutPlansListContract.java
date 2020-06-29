@@ -4,7 +4,7 @@ public interface WorkoutPlansListContract {
     interface View {
 
         void onItemRemoved(int position);
-        void callNotifyDataSetChanged();
+        void callNotifyDataSetChanged(boolean isEmpty);
 
         void showWorkoutPlanDetail(String workoutPlanId);
 

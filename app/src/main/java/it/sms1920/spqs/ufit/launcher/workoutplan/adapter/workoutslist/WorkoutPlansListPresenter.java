@@ -50,7 +50,7 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
 
             }
         });
-
+        view.callNotifyDataSetChanged(workoutPlans.isEmpty());
     }
 
     @Override
@@ -90,7 +90,7 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
             personalWorkoutPlans.remove(position);
         }
 
-        view.callNotifyDataSetChanged();
+        view.callNotifyDataSetChanged(workoutPlans.isEmpty());
     }
 
     private void removeWorkout(String id, String exerciseListId) {
@@ -102,14 +102,14 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
     public void onPersonalWorkoutPlansRequired() {
         workoutPlans = personalWorkoutPlans;
         requiredTrainerTab = false;
-        view.callNotifyDataSetChanged();
+        view.callNotifyDataSetChanged(workoutPlans.isEmpty());
     }
 
     @Override
     public void onTrainerWorkoutPlansRequired() {
         workoutPlans = trainerWorkoutPlans;
         requiredTrainerTab = true;
-        view.callNotifyDataSetChanged();
+        view.callNotifyDataSetChanged(workoutPlans.isEmpty());
     }
 
     private void loadWorkoutPlans() {
@@ -142,7 +142,7 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
                     }
 
                     workoutPlans = personalWorkoutPlans;
-                    view.callNotifyDataSetChanged();
+                    view.callNotifyDataSetChanged(workoutPlans.isEmpty());
                 }
 
                 @Override
@@ -182,7 +182,7 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
                         }
                     }
                     workoutPlans = personalWorkoutPlans;
-                    view.callNotifyDataSetChanged();
+                    view.callNotifyDataSetChanged(workoutPlans.isEmpty());
                 }
 
                 @Override

@@ -15,11 +15,13 @@ public class WorkoutPlansPresenter implements WorkoutPlansContract.Presenter {
 
     public WorkoutPlansPresenter(final WorkoutPlansContract.View view) {
         this.view = view;
+
         FirebaseDbSingleton.getInstance().getReference().child("User").orderByKey().equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot item : snapshot.getChildren()){
+                for (DataSnapshot item : snapshot.getChildren()) {
                     me = item.getValue(User.class);
+                    onTabSelectedAtPosition(0);
                 }
             }
 
@@ -35,7 +37,11 @@ public class WorkoutPlansPresenter implements WorkoutPlansContract.Presenter {
         if (position == 0) {
             view.showPersonalWorkoutPlans();
         } else if (position == 1) {
-            view.showTrainerWorkoutPlans(me.getRole());
+            if (me != null) {
+                view.showTrainerWorkoutPlans(me.getRole());
+            } else {
+                view.showTrainerWorkoutPlans(false);
+            }
         } else {
             throw new IllegalArgumentException("Invalid value for argument position.");
         }

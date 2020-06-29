@@ -46,7 +46,6 @@ public class SplashScreenPresenter implements SplashScreenContract.Presenter {
         }
 
         DatabaseReference workoutPlanRef = FirebaseDbSingleton.getInstance().getReference("WorkoutPlan");
-        Log.d("TAG", "startSession: " + workoutPlanRef);
         workoutPlanRef.keepSynced(true);
 
         DatabaseReference exerciseSetsRef = FirebaseDbSingleton.getInstance().getReference("WorkoutPlanExerciseSets");
