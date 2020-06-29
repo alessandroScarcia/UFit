@@ -37,7 +37,19 @@ public class AdviceList implements iAdvice.Presenter {
     private DatabaseReference database;
     private String userLinkId;
 
+    public AdviceList(iAdvice.View view) {
+        this.view = view;
+        adviceList= new ArrayList<>();
+        loadAdviceList();
+    }
 
+
+    /**
+     * Function used to generate a random id. This function is useful for the new advice added in the
+     * list showed in the view
+     * @param len lenght of the id
+     * @return sb.toString()
+     */
     public String randomId(int len) {
         StringBuilder sb = new StringBuilder(len);
         String DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -49,7 +61,10 @@ public class AdviceList implements iAdvice.Presenter {
     }
 
 
-    public void getUserLinkTrainer(){
+    /**
+     * This function provide to find the userLinkId and call the function to get a single advice
+     */
+    public void getRandomAdvice(){
         database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
@@ -77,18 +92,9 @@ public class AdviceList implements iAdvice.Presenter {
     }
 
 
-    public AdviceList(iAdvice.View view) {
-        this.view = view;
-        adviceList= new ArrayList<>();
-        loadAdviceList();
-    }
-
-    @Override
-    public void getRandomAdvice(){
-        getUserLinkTrainer();
-    }
-
-
+    /**
+     * Function used to get a random advice from the database
+     */
     public void getSingleAdvice(){
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Advice");
         final String language = Locale.getDefault().getISO3Language();
@@ -97,8 +103,10 @@ public class AdviceList implements iAdvice.Presenter {
         Log.d(TAG, "Avvio di getSingleAdvice "+ userLinkId );
 
         if(userLinkId != null){
+            //query if the athlete is connected to a trainer
             mRandomAdviceQuery = mDatabase.orderByChild("author").equalTo(userLinkId);
         }else{
+            //query used to retrive the advice of the system
             mRandomAdviceQuery = mDatabase.orderByChild("author").equalTo("-1");
         }
 
@@ -110,6 +118,8 @@ public class AdviceList implements iAdvice.Presenter {
                     Log.d(TAG, "loadPersonalTrainerAdvice->onDataChange:" + child.getKey());
 
                     Advice temp = child.getValue(Advice.class);
+
+                    //we check the advice taked from the database and check the language
                     if (temp != null && temp.getCodLanguage().equals(language)) {
                         Log.d(TAG, temp.getTitle());
                         adviceList.add(temp);
@@ -117,6 +127,8 @@ public class AdviceList implements iAdvice.Presenter {
                 }
                 Log.d(TAG, String.valueOf(adviceList.size()));
                 Random random =  new Random();
+
+
                 if(adviceList.size() != 0) {
                     saveRandomAdvice(adviceList.get(random.nextInt(adviceList.size())));
                     Log.d(TAG, "Consigli del sistema");
@@ -128,6 +140,7 @@ public class AdviceList implements iAdvice.Presenter {
                 if(adviceList.size() != 0 && userLinkId != null) {
                     Log.d(TAG, "il Trainer ha pubblicato consigli");
                 }
+
             }
 
             @Override
@@ -137,6 +150,10 @@ public class AdviceList implements iAdvice.Presenter {
         });
     }
 
+    /**
+     * Function that communicate with the view
+     * @param advice advice that we want to show
+     */
     public void saveRandomAdvice(Advice advice){
         view.setRandomAdvice(advice.getTitle(),advice.getDescription());
     }
@@ -171,6 +188,13 @@ public class AdviceList implements iAdvice.Presenter {
     public void onPersonalAdviceRequired() {
     }
 
+    /**
+     * Function used to add a new advice into the databse with the information passed and the language
+     * of the system
+     * @param title  of the advice
+     * @param description of the advice
+     * @param author of the advice
+     */
     @Override
     public void addNewAdviceItem(String title, String description, String author){
         Advice advice = new Advice();
@@ -195,6 +219,10 @@ public class AdviceList implements iAdvice.Presenter {
     }
 
 
+    /**
+     * Function used in the section of trainer advice that show all the advice created from a specific
+     * trainer
+     */
     private void loadAdviceList() {
         Log.d(TAG, "loadAdvice");
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
