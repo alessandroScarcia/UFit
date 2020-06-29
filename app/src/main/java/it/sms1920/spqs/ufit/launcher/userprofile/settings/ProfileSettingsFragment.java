@@ -43,12 +43,15 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
 
     private static final int RC_CHOOSE_IMAGE = 1567;
     private static final int RC_DELETE_PROFILE = 666;
+    private static final int RC_EDIT_ROLE = 1789;
 
     private ProfileSettingsContract.Presenter presenter;
 
     private ImageView imgProfile;
 
     private Switch swEditRole;
+
+    public static boolean checkRole = false; //atleta
 
     public ProfileSettingsFragment() {
     }
@@ -123,12 +126,15 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
             }
         });
 
-        swEditRole.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+
+        swEditRole.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                presenter.onEditRoleCheckedChanged(isChecked);
+            public void onClick(View v) {
+                checkRole = swEditRole.isChecked();
+                presenter.onShowConfirmEditRoleDialog();
             }
         });
+
 
         return view;
     }
@@ -172,6 +178,13 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
     }
 
     @Override
+    public void showConfirmEditRoleDialog() {
+        EditRoleDialog editRoleDialog = new EditRoleDialog();
+        editRoleDialog.setTargetFragment(this, RC_EDIT_ROLE);
+        editRoleDialog.show(getParentFragmentManager(), null);
+    }
+
+    @Override
     public void setProfileImage(String imageUrl) {
         Picasso.get()
                 .load(imageUrl)
@@ -210,7 +223,7 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
         swEditRole.setChecked(isChecked);
     }
 
-    public void onDialogPositiveClick() {
+    public void onDeleteProfileDialogPositiveClick() {
         presenter.deleteProfile();
     }
 
@@ -228,13 +241,63 @@ public class ProfileSettingsFragment extends Fragment implements ProfileSettings
                             Log.d(TAG, "positiveButtonClick");
                             ProfileSettingsFragment profileSettingsFragment = (ProfileSettingsFragment) getTargetFragment();
                             if (profileSettingsFragment != null) {
-                                profileSettingsFragment.onDialogPositiveClick();
+                                profileSettingsFragment.onDeleteProfileDialogPositiveClick();
                             }
                         }
                     })
                     .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Log.d(TAG, "negativeButtonClick");
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+
+    private void onEditRoleDialogPositiveClick() {
+        presenter.onEditRoleCheckedChanged(checkRole);
+    }
+
+    public static class EditRoleDialog extends DialogFragment {
+        private final String TAG = ProfileSettingsFragment.EditRoleDialog.class.getCanonicalName();
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            String message;
+
+            final ProfileSettingsFragment profileSettingsFragment = (ProfileSettingsFragment) getTargetFragment();
+
+            if( checkRole == true ) //atleta
+                message = getResources().getString(R.string.edit_role_in_trainer);
+            else
+                message = getResources().getString(R.string.edit_role_in_athlete);
+
+            builder.setMessage(message)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+
+
+                        public void onClick(DialogInterface dialog, int id) {
+                            Log.d(TAG, "positiveButtonClick");
+
+                            if (profileSettingsFragment != null) {
+                                profileSettingsFragment.onEditRoleDialogPositiveClick();
+                            }
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Log.d(TAG, "negativeButtonClick");
+
+
+                            if( checkRole == true)
+                                profileSettingsFragment.updateRole(false);
+                            else
+                                profileSettingsFragment.updateRole(true);
                         }
                     });
             // Create the AlertDialog object and return it

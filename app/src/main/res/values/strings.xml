@@ -152,7 +152,7 @@
     <string name="profile_settings_surname_empty">Surname can\'t be empty</string>
     <string name="edit_password_caution_msg">Caution: the password you enter will be the only way to access your account!</string>
     <string name="profile_settings_delete_profile_msg">Are you sure you want to delete your profile? This action can\'t be reverted!</string>
-    <string name="profile_setting_change_credentials">This operation requires sign in</string>
+    <string name="profile_setting_change_credentials">This operation requires Login</string>
     <string name="delete">Delete profile</string>
     <string name="cancel">Cancel</string>
     <string name="visit_our_site">"Visit Our Website"</string>
@@ -233,6 +233,9 @@
     <string name="noItemFound">No results</string>
     <string name="noWorkoutFound">No workout plans</string>
     <string name="notSavable">Add at least 1 exercise and give a name to workout plan</string>
+    <string name="login_request">Login Request</string>
+    <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione"</string>
+    <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione"</string>
 
 
 </resources>

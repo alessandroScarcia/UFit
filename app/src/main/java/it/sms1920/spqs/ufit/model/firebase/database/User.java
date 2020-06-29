@@ -13,6 +13,7 @@ public class User {
     public static final String FIELD_IMAGE_URL = "imageUrl";
     public static final String FIELD_BIRTH_DATE = "birthDate";
     public static final String FIELD_ROLE = "role";
+    public static final String FIELD_LINKED_USER_ID = "linkedUserId";
 
     public static final String PATH_STORAGE_PIC = "PicsProfile/";
     public static final String JPG = ".jpg";

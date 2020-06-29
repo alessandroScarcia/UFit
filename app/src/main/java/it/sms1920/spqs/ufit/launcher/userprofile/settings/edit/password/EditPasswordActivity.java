@@ -123,7 +123,8 @@ public class EditPasswordActivity extends AppCompatActivity implements EditPassw
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(R.string.profile_setting_change_credentials)
+            builder.setTitle(R.string.login_request)
+                    .setMessage(R.string.profile_setting_change_credentials)
                     .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Log.d(TAG, "positiveButtonClick");
@@ -133,7 +134,7 @@ public class EditPasswordActivity extends AppCompatActivity implements EditPassw
                             }
                         }
                     })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Log.d(TAG, "negativeButtonClick");
                         }

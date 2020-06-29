@@ -1,11 +1,16 @@
 package it.sms1920.spqs.ufit.launcher.userprofile.settings.edit.personalinfo;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import it.sms1920.spqs.ufit.launcher.R;
+import it.sms1920.spqs.ufit.launcher.userprofile.settings.edit.email.EditEmailActivity;
+import it.sms1920.spqs.ufit.launcher.userprofile.settings.edit.password.EditPasswordActivity;
 
 public class EditPersonalInfoActivity extends AppCompatActivity implements EditPersonalInfoContract.View {
     private static final String TAG = EditPersonalInfoActivity.class.getCanonicalName();
@@ -185,4 +192,6 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements EditP
                 break;
         }
     }
+
+
 }

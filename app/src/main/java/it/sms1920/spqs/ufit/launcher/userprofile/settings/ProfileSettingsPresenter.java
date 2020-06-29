@@ -102,11 +102,11 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
         if (!firstStart) {
             String linkedUserId = userInfo.getLinkedUserId();
 
-            DatabaseReference linkedUserRef = FirebaseDbSingleton.getInstance().getReference().child("User").child(linkedUserId);
+            DatabaseReference linkedUserRef = FirebaseDbSingleton.getInstance().getReference().child(User.CHILD_NAME).child(linkedUserId);
             linkedUserRef.keepSynced(true);
 
-            linkedUserRef.child("linkedUserId").setValue("");
-            userInfoRef.child("linkedUserId").setValue("");
+            linkedUserRef.child(User.FIELD_LINKED_USER_ID).setValue("");
+            userInfoRef.child(User.FIELD_LINKED_USER_ID).setValue("");
 
             linkedUserRef.keepSynced(false);
         }
@@ -174,5 +174,10 @@ public class ProfileSettingsPresenter implements ProfileSettingsContract.Present
         });
 
 
+    }
+
+    @Override
+    public void onShowConfirmEditRoleDialog() {
+        view.showConfirmEditRoleDialog();
     }
 }

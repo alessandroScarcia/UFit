@@ -17,6 +17,8 @@ public interface ProfileSettingsContract {
 
         void showConfirmDeleteProfileDialog();
 
+        void showConfirmEditRoleDialog();
+
         void setProfileImage(String imageUrl);
 
         void reauthenticate();
@@ -42,5 +44,7 @@ public interface ProfileSettingsContract {
         void onResultImageUri(Uri imageUri);
 
         void deleteProfile();
+
+        void onShowConfirmEditRoleDialog();
     }
 }
