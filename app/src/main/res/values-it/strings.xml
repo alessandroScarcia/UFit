@@ -214,6 +214,7 @@
 
     <string name="noItemFound">Nessun risultato</string>
     <string name="noWorkoutFound">Non ci sono schede d\'allenamento</string>
+    <string name="notSavable">Dai un nome alla scheda e aggiungi almeno un esercizio</string>
 </resources>
 
 

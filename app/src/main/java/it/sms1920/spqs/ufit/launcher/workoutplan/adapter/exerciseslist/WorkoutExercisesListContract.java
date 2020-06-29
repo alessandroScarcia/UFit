@@ -1,11 +1,9 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist;
 
-import android.media.Image;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import it.sms1920.spqs.ufit.model.firebase.database.Exercise;
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist.ExerciseSetListAdapter;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
 
 public interface WorkoutExercisesListContract {
@@ -21,7 +19,7 @@ public interface WorkoutExercisesListContract {
             void setId(String id);
             void setExerciseSets(List<ExerciseSetItem> exerciseSets);
 
-            void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference);
+            ExerciseSetListAdapter setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, List<ExerciseSetItem> /*Object*/ setsListReference);
 
             void addExerciseSet(int reps, float loads);
         }
@@ -37,6 +35,7 @@ public interface WorkoutExercisesListContract {
         void onNewExercisesAdded(ArrayList<String> exerciseId);
         ArrayList<String> onExercisesIdRequested();
         List<ExerciseSetItem> onSetsListRequested(int position);
+
 
         void onUpdateRequested();
     }

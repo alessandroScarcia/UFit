@@ -15,6 +15,7 @@ public interface ExerciseSetListContract {
         interface Item {
             void setReps(String reps);
             void setLoad(String load);
+            void setSets(String sets);
         }
     }
 
@@ -28,5 +29,8 @@ public interface ExerciseSetListContract {
         void onUpdateLoadsRequested(float newLoad, int position);
         ArrayList<Integer> getReps();
         ArrayList<Float> getLoads();
+
+
+        void onSaveRequested(String exerciseListId, int pos);
     }
 }

@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist;
 
 import android.app.Activity;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,7 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
     @Override
     public void callNotifyDataSetChanged() {
+
         notifyDataSetChanged();
     }
 
@@ -172,7 +174,10 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
                     addExerciseSet(0, 0);
                 }
             });
-
+            if (!editable) {
+                btnAdd.setVisibility(GONE);
+                btnRemove.setVisibility(GONE);
+            }
 
             name = itemView.findViewById(R.id.txtExerciseName);
             image = itemView.findViewById(R.id.imgExercise);
@@ -184,14 +189,17 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         }
 
         @Override
-        public void setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, Object setsListReference) {
+        public ExerciseSetListAdapter setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, List<ExerciseSetItem> /*Object*/ setsListReference) {
+            Log.d("TAG", "UFFAsetExerciseSetsAdapter:1 " + setsListReference);
             adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId, setsListReference);
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
+            return adapter;
         }
 
         @Override
         public void setName(String name) {
+            if (name == null) name = "";
             this.name.setText(StringUtils.capitalize(name));
         }
 

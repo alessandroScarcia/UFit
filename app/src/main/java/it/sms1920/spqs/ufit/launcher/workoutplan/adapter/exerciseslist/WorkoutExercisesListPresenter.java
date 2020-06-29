@@ -10,9 +10,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist.ExerciseSetListAdapter;
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetDetails;
 import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
@@ -23,18 +23,16 @@ import it.sms1920.spqs.ufit.model.search.SearchExercise;
 import it.sms1920.spqs.ufit.model.search.iSearchClient;
 
 public class WorkoutExercisesListPresenter implements WorkoutExercisesListContract.Presenter, iSearchClient {
-    private static final String TAG = WorkoutExercisesListPresenter.class.getCanonicalName();
 
     private WorkoutExercisesListContract.View view;
 
-    private List<ExerciseSetDetails> myExercises_copy;
     private List<ExerciseSetDetails> myExercises;
     private SearchExercise mSearch;
 
     private DatabaseReference mDatabase;
     private String exerciseListId = null;
     private WorkoutPlan workoutPlan = null;
-
+    private ArrayList<ExerciseSetListAdapter> adapters = new ArrayList<>();
 
     private boolean isForAthlete;
 
@@ -130,7 +128,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
     @Override
     public void notifyResultListReady() {
 
-        myExercises_copy = new ArrayList<>(myExercises);
+        List<ExerciseSetDetails> myExercises_copy = new ArrayList<>(myExercises);
         myExercises.clear();
 
 
@@ -148,6 +146,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
                 myExercises.add(new ExerciseSetDetails(exercise.getExerciseId(), exercise.getName(), new ArrayList<ExerciseSetItem>(), exercise.getImageUrl()));
             }
         }
+        adapters.clear();
         view.callNotifyDataSetChanged();
     }
 
@@ -164,9 +163,16 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
                 null,
                 isForAthlete);
 
+
         if (workoutKey != null && workoutSetsKey != null) {
             mDatabase.child("WorkoutPlan").child(workoutKey).setValue(workoutPlan);
-            mDatabase.child("WorkoutPlanExerciseSets").child(workoutSetsKey).setValue(myExercises);
+            for (int i = 0; i < myExercises.size(); i++) {
+                mDatabase.child("WorkoutPlanExerciseSets").child(workoutSetsKey).child(String.valueOf(i)).child("exerciseId").setValue(myExercises.get(i).getExerciseId());
+                adapters.get(i).onSaveRequested(workoutSetsKey, i);
+            }
+
+
+            //mDatabase.child("WorkoutPlanExerciseSets").child(workoutSetsKey).setValue(myExercises);
         }
     }
 
@@ -175,8 +181,13 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         if (!name.isEmpty()) {
             workoutPlan.setName(name);
         }
+        for (int i = 0; i < myExercises.size(); i++) {
+            mDatabase.child("WorkoutPlanExerciseSets").child(exerciseListId).child(i + "").child("exerciseId").setValue(myExercises.get(i).getExerciseId());
+
+            adapters.get(i).onSaveRequested(exerciseListId, i);
+        }
         mDatabase.child("WorkoutPlan").child(workoutPlan.getWorkoutPlanId()).setValue(workoutPlan);
-        mDatabase.child("WorkoutPlanExerciseSets").child(exerciseListId).setValue(myExercises);
+
     }
 
     @Override
@@ -185,8 +196,14 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         holder.setName(exercise.getExerciseName());
         holder.setImage(exercise.getImageUrl());
         holder.setId(exercise.getExerciseId());
-        holder.setExerciseSetsAdapter(position, exerciseListId, myExercises.get(position).getExerciseId(), myExercises.get(position).getExerciseSetItems());
+
+        ExerciseSetListAdapter adapter = holder.setExerciseSetsAdapter(position, exerciseListId, myExercises.get(position).getExerciseId(), myExercises.get(position).getExerciseSetItems());
+
+        adapters.add(adapter);
+
+
     }
+
 
     @Override
     public int getExerciseCount() {
@@ -196,6 +213,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
     @Override
     public void removeItemAt(int position) {
         myExercises.remove(position);
+        adapters.clear();
         view.callNotifyDataSetChanged();
     }
 
@@ -219,11 +237,13 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         return myExercises.get(position).getExerciseSetItems();
     }
 
+
     @Override
     public void onUpdateRequested() {
         if (workoutPlan != null) {
             fetchWorkout(workoutPlan.getWorkoutPlanId());
         }
+        adapters.clear();
         view.callNotifyDataSetChanged();
     }
 

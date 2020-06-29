@@ -150,7 +150,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
     @Override
     public void showError() {
-        Toast.makeText(this, "Dai un nome alla scheda e aggiungi almeno un esercizio", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.notSavable), Toast.LENGTH_SHORT).show();
     }
 
     @Override
