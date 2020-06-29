@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
@@ -54,6 +55,8 @@ public class EditEmailPresenter implements EditEmailContract.Presenter {
                                 Log.w(TAG, "updateEmail:failure", task.getException());
                                 if (task.getException() instanceof FirebaseAuthRecentLoginRequiredException) {
                                     view.showAskReauthenticateDialog();
+                                } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                    view.setError(EmailError.ALREADY_USED);
                                 }
                             }
                         }
