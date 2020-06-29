@@ -35,21 +35,26 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
 
     public WorkoutPlansListPresenter(WorkoutPlansListContract.View view) {
         this.view = view;
-        FirebaseDbSingleton.getInstance().getReference().child("User").orderByKey().equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot item : snapshot.getChildren()) {
-                    me = item.getValue(User.class);
 
-                    loadWorkoutPlans();
+        if (FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser().isAnonymous()) {
+            loadWorkoutPlans(true);
+        } else {
+            FirebaseDbSingleton.getInstance().getReference().child("User").orderByKey().equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        me = item.getValue(User.class);
+
+                        loadWorkoutPlans(false);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
         view.callNotifyDataSetChanged(workoutPlans.isEmpty());
     }
 
@@ -112,20 +117,44 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
         view.callNotifyDataSetChanged(workoutPlans.isEmpty());
     }
 
-    private void loadWorkoutPlans() {
-        FirebaseDbSingleton.getInstance().getReference()
-                .child("WorkoutPlan").keepSynced(true);
-        Query mPersonalWorkoutPlansQuery = FirebaseDbSingleton.getInstance().getReference()
+    private void loadWorkoutPlans(boolean isAnonymous) {
+        FirebaseDbSingleton.getInstance().getReference().child("WorkoutPlan").keepSynced(true);
+        Query mPersonalWorkoutPlansQuery = null;
+        Query mTrainerWorkoutPlansQuery = null;
+
+        mPersonalWorkoutPlansQuery = FirebaseDbSingleton.getInstance().getReference()
                 .child("WorkoutPlan")
                 .orderByChild("userOwnerId")
                 .equalTo(FirebaseAuthSingleton.getFirebaseAuth().getUid());
+        if (!isAnonymous) {
+            mTrainerWorkoutPlansQuery = FirebaseDbSingleton.getInstance().getReference()
+                    .child("WorkoutPlan")
+                    .orderByChild("userOwnerId")
+                    .equalTo(me.getLinkedUserId());
+        }
 
-        Query mTrainerWorkoutPlansQuery = FirebaseDbSingleton.getInstance().getReference()
-                .child("WorkoutPlan")
-                .orderByChild("userOwnerId")
-                .equalTo(me.getLinkedUserId());
 
-        if (me.getRole()) {
+        if (isAnonymous) {
+            // Loading my workouts
+            mPersonalWorkoutPlansQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        WorkoutPlan temp = child.getValue(WorkoutPlan.class);
+                        if (temp != null) {
+                            personalWorkoutPlans.add(temp);
+                            Log.d(TAG, "onDataChange: " + temp);
+                        }
+                    }
+                    workoutPlans = personalWorkoutPlans;
+                    view.callNotifyDataSetChanged(personalWorkoutPlans.isEmpty());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+        } else if (me.getRole()) {
             mPersonalWorkoutPlansQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -160,7 +189,7 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
                         if (temp != null) {
 
                             personalWorkoutPlans.add(temp);
-
+                            Log.d(TAG, "onDataChange: " + temp);
                         }
                     }
                 }
@@ -169,6 +198,7 @@ public class WorkoutPlansListPresenter implements WorkoutPlansListContract.Prese
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
+
 
             // Loading trainer's workout
             mTrainerWorkoutPlansQuery.addListenerForSingleValueEvent(new ValueEventListener() {

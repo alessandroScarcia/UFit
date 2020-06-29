@@ -34,8 +34,6 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
 
     LauncherActivity launcher;
 
-    private boolean ready = false;
-
     public ShowWorkoutPlanFragment() {
         // Required empty public constructor
     }
