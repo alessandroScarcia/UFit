@@ -2,6 +2,7 @@ package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.setslist;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class ExerciseSetListAdapter
     private ExerciseSetListContract.Presenter presenter;
     private boolean editable;
 
-    public ExerciseSetListAdapter(boolean editable, String exerciseListId, String exerciseId, Object setsListReference) {
+    public ExerciseSetListAdapter(boolean editable, String exerciseListId, String exerciseId, List<ExerciseSetItem>/* Object*/ setsListReference) {
         presenter = new ExerciseSetListPresenter(this, exerciseListId, exerciseId, setsListReference);
         this.editable = editable;
     }
@@ -92,6 +93,11 @@ public class ExerciseSetListAdapter
         presenter.setSeriesList(list);
     }
 
+    public void onSaveRequested(String exerciseListId, int pos) {
+        presenter.onSaveRequested(exerciseListId, pos);
+    }
+
+
     /**
      * Inner class, used to extend RecyclerView's ViewHolder for correct item binding
      */
@@ -113,17 +119,17 @@ public class ExerciseSetListAdapter
         public RowHolder(@NonNull View itemView) {
             super(itemView);
             serie = itemView.findViewById(R.id.series);
-            if (editable) {
-                txtReps = itemView.findViewById(R.id.txtReps);
-                txtLoads = itemView.findViewById(R.id.txtLoads);
-                btnRemove = itemView.findViewById(R.id.btnRemove);
-                btnRemove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        onItemRemoved(getAdapterPosition());
-                    }
-                });
 
+            txtReps = itemView.findViewById(R.id.txtReps);
+            txtLoads = itemView.findViewById(R.id.txtLoads);
+            btnRemove = itemView.findViewById(R.id.btnRemove);
+            btnRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemRemoved(getAdapterPosition());
+                }
+            });
+            if (editable) {
                 txtReps.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -132,8 +138,9 @@ public class ExerciseSetListAdapter
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        if (!Objects.requireNonNull(txtReps.getText()).toString().equals("")) {
-                            presenter.onUpdateRepsRequested(Integer.parseInt(Objects.requireNonNull(txtReps.getText()).toString()), getAdapterPosition());
+                        if (!txtReps.getText().toString().equals("")) {
+                            presenter.onUpdateRepsRequested(Integer.parseInt(txtReps.getText().toString()), getAdapterPosition());
+                            Log.d("TAG", "onTextChanged: " + txtReps.getText().toString());
                         }
                     }
 
@@ -161,29 +168,25 @@ public class ExerciseSetListAdapter
                     }
                 });
 
-            } else {
-                reps = itemView.findViewById(R.id.reps);
-                load = itemView.findViewById(R.id.loads);
             }
-            serie.setText(String.valueOf(getItemCount()));
+
         }
 
         @Override
         public void setReps(String reps) {
-            if (editable) {
-                this.txtReps.setText(reps);
-            } else {
-                this.reps.setText(reps);
-            }
+            this.txtReps.setText(reps);
         }
 
         @Override
         public void setLoad(String load) {
-            if (editable) {
-                this.txtLoads.setText(load);
-            } else {
-                this.load.setText(load);
-            }
+            this.txtLoads.setText(load);
         }
+
+        @Override
+        public void setSets(String sets) {
+            serie.setText(sets);
+        }
+
+
     }
 }

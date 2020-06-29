@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +68,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         }
 
         presenter = new ShowWorkoutPlanPresenter(this, workoutPlanId);
-        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, getActivity(), workoutPlanId);
+        adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, false, getActivity(), workoutPlanId, false);
     }
 
     @Override
@@ -77,6 +79,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         // initialize view references
         TextView id = view.findViewById(R.id.workoutId);
         id.setText(workoutPlanId);
+
 
         RecyclerView rvExerciseSetsList = view.findViewById(R.id.rvExerciseSetsList);
         rvExerciseSetsList.setAdapter(adapter);
@@ -107,6 +110,10 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     @Override
     public void onResume() {
         super.onResume();
+        launcher.toggleToolbarNavigationButton(true);
+
+        launcher.showToolbarEditIcon(true);
+        Log.d(TAG, "onResume: ");
         adapter.update();
     }
 

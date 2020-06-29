@@ -34,6 +34,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
     private TextInputEditText txtName;
     private RecyclerView rvExerciseList;
     private boolean isAnEdit = false;
+    private boolean isForAthlete = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
         setContentView(R.layout.activity_creating_workout);
 
         presenter = new CreatingWorkoutPresenter(this);
+
+        if ( getIntent().getIntExtra("tabPosition", 0) == 1){
+            isForAthlete = true;
+        }
 
         // setting toolbar
         toolbar = findViewById(R.id.tool_bar);
@@ -63,12 +68,12 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
         if (workoutId != null && !workoutId.isEmpty()) {
             isAnEdit = true;
-            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, workoutId);
+            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, workoutId, isForAthlete);
             txtName.setText(workoutName);
         } else {
             // Setting recycler view adapter for not editable exercises
             isAnEdit = false;
-            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this);
+            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, isForAthlete);
         }
 
 
@@ -145,7 +150,7 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
     @Override
     public void showError() {
-        Toast.makeText(this, "Dai un nome alla scheda e aggiungi almeno un esercizio", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.notSavable), Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -1,41 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CustomMaterialComponent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRemove"
+        style="@style/CustomMaterialButtonIcon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_marginEnd="@dimen/standard_margin"
+        app:icon="@drawable/ic_cross_rounded_black"
+        app:iconTint="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/series"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/standard_margin"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:layout_marginStart="32dp"
         android:textSize="@dimen/exercise_detail_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/reps"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reps"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtRepsLayout"
+        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="@dimen/exercise_detail_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/loads"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:inputType="none"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/series"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtReps"
+            style="@style/CustomMaterialEditText"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/loads"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text="@string/x"
         android:textSize="@dimen/exercise_detail_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/reps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtLoadsLayout"
+        app:layout_constraintStart_toEndOf="@+id/txtRepsLayout"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtLoadsLayout"
+        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:inputType="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtRepsLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLoads"
+            style="@style/CustomMaterialEditText"
+            android:layout_width="match_parent"
+            android:focusable="false"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:maxLength="4" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/smaller_standard_margin"
+        android:text="@string/kg"
+        android:textSize="@dimen/exercise_detail_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtLoadsLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

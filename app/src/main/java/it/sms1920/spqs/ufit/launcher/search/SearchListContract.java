@@ -19,7 +19,6 @@ public interface SearchListContract {
 
             void markSelected();
 
-
         }
     }
 

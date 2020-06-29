@@ -4,11 +4,12 @@ public interface WorkoutPlansContract {
     interface View {
         void showPersonalWorkoutPlans();
 
-        void showTrainerWorkoutPlans();
+        void showTrainerWorkoutPlans(boolean role);
 
         void addNewPlan();
 
         void insertShowWorkoutPlanFragment(String workoutPlanId);
+
     }
 
     interface Presenter {

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -19,6 +20,8 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
 
     private ExerciseSetListContract.View view;
     private List<ExerciseSetItem> list;
+    private String exerciseListId;
+    private String exerciseId;
 
     /**
      * Associated presenter to ExerciseSetListAdapter.
@@ -28,12 +31,15 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
      * @param exerciseId        exercise id
      * @param setsListReference a reference to the sets list stored in WorkoutExerciseListPresenter in ExerciseSetDetails.exerciseSetItems ( myExercises.get(int).getExerciseSetItems variable ). Needs a cast to
      */
-    public ExerciseSetListPresenter(final ExerciseSetListContract.View view, String exerciseListId, final String exerciseId, Object setsListReference) {
+    public ExerciseSetListPresenter(final ExerciseSetListContract.View view, String exerciseListId, final String exerciseId, List<ExerciseSetItem> /*Object*/ setsListReference) {
         this.view = view;
-        this.list = (List<ExerciseSetItem>) setsListReference;
+        // this.list = /*(List<ExerciseSetItem>)*/ setsListReference;
+        this.exerciseListId = exerciseListId;
+        this.exerciseId = exerciseId;
 
-
+        Log.d("TAG", "UFFAExerciseSetListPresenter:2 " + list);
         if (exerciseListId != null && exerciseId != null) {
+            FirebaseDbSingleton.getInstance().getReference("WorkoutPlanExerciseSets").child(exerciseListId).keepSynced(true);
             Query mExerciseSetListQuery = FirebaseDbSingleton.getInstance().getReference()
                     .child("WorkoutPlanExerciseSets")
                     .orderByKey()
@@ -46,13 +52,16 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         for (DataSnapshot item : child.getChildren()) {
                             myChild = item.getValue(ExerciseSetDetails.class);
-                            if (myChild != null && myChild.getExerciseId().equals(exerciseId)) {
-                                list = myChild.getExerciseSetItems();
+                            if (myChild != null) {
+                                if (myChild.getExerciseId().equals(exerciseId)) {
+                                    list = myChild.getExerciseSetItems();
+                                }
                             }
                         }
                     }
                     view.callNotifyDatasetChanged();
                 }
+
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -61,6 +70,7 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
             });
 
         }
+
     }
 
     /**
@@ -73,6 +83,7 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
     public void onBindItemViewAtPosition(ExerciseSetListContract.View.Item holder, int position) {
         holder.setReps(String.valueOf(list.get(position).getReps()));
         holder.setLoad(String.valueOf(list.get(position).getLoad()));
+        holder.setSets(String.valueOf(position + 1));
     }
 
     @Override
@@ -123,8 +134,8 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
     @Override
     public ArrayList<Integer> getReps() {
         ArrayList<Integer> reps = new ArrayList<>();
-        for (ExerciseSetItem serie : list) {
-            reps.add(serie.getReps());
+        for (ExerciseSetItem exerciseSetItem : list) {
+            reps.add(exerciseSetItem.getReps());
         }
         return reps;
     }
@@ -137,4 +148,10 @@ public class ExerciseSetListPresenter implements ExerciseSetListContract.Present
         }
         return loads;
     }
+
+    @Override
+    public void onSaveRequested(String exerciseListId, int pos) {
+        FirebaseDbSingleton.getInstance().getReference("WorkoutPlanExerciseSets").child(exerciseListId).child(pos + "").child("exerciseSetItems").setValue(list);
+    }
+
 }

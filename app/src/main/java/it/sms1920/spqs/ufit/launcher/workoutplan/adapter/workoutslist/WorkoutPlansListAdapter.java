@@ -1,9 +1,12 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.workoutslist;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.material.button.MaterialButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +38,11 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
     }
 
     @Override
+    public void onItemRemoved(int position) {
+        presenter.removeItemAt(position);
+    }
+
+    @Override
     public int getItemCount() {
         return presenter.getWorkoutPlansCount();
     }
@@ -49,6 +57,7 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
 
     @Override
     public void callNotifyDataSetChanged() {
+        parentFragment.noItemFound(presenter.getWorkoutPlansCount() == 0);
         notifyDataSetChanged();
     }
 
@@ -60,9 +69,21 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
     public class WorkoutPlanHolder extends RecyclerView.ViewHolder implements WorkoutPlansListContract.View.Item {
         private TextView tvName;
         private int position;
+        MaterialButton btnRemove;
 
         public WorkoutPlanHolder(@NonNull View itemView) {
             super(itemView);
+            btnRemove = itemView.findViewById(R.id.btnRemove);
+            btnRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemRemoved(getAdapterPosition());
+                }
+            });
+//            if (presenter.isTrainerTabRequested() && !presenter.isTrainer()) {
+//                btnRemove.setVisibility(View.GONE);
+//            }
+
             tvName = itemView.findViewById(R.id.tvWorkoutPlanName);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,5 +102,9 @@ public class WorkoutPlansListAdapter extends RecyclerView.Adapter<WorkoutPlansLi
         public void setPosition(int position) {
             this.position = position;
         }
+
+
     }
+
+
 }

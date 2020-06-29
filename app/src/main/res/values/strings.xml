@@ -230,4 +230,9 @@
 
 
 
+    <string name="noItemFound">No results</string>
+    <string name="noWorkoutFound">No workout plans</string>
+    <string name="notSavable">Add at least 1 exercise and give a name to workout plan</string>
+
+
 </resources>
