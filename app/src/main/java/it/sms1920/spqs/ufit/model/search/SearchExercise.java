@@ -39,6 +39,8 @@ public class SearchExercise {
     public SearchExercise(iSearchClient client) {
         this.client = client;
         this.rootReference = FirebaseDbSingleton.getInstance().getReference();
+        rootReference.child(ExerciseTranslation.CHILD_NAME).keepSynced(true);
+        rootReference.child(Exercise.CHILD_NAME).keepSynced(true);
     }
 
     /**
