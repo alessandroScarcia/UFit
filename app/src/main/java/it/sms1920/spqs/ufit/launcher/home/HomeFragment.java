@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment implements HomeContract.View, AdviceL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         presenter = new HomePresenter(this);
     }
 
@@ -42,10 +41,11 @@ public class HomeFragment extends Fragment implements HomeContract.View, AdviceL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        AdviceListContract.Presenter advicePresenter = new AdviceList(this);
+
         tvTitleAdvice = view.findViewById(R.id.tvTitleRandomAdvice);
         tvDescriptionAdvice = view.findViewById(R.id.tvDescriptionRandomAdvice);
-        advicePresenter.getRandomAdvice();
+
+        presenter.callGetRandomAdvice(this);
 
         Button btnWebsite = view.findViewById(R.id.btnWebsite);
 
