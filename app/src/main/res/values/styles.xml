@@ -1,4 +1,5 @@
 <resources>
+
     <style name="CustomMaterialOutlinedEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/colorSecondary</item>
         <item name="hintTextColor">@color/colorSecondary</item>
@@ -7,7 +8,6 @@
         <item name="colorControlActivated">@color/colorSecondary</item>
         <item name="colorControlNormal">@color/colorSecondary</item>
     </style>
-
 
 
     <style name="CustomMaterialOutlinedEditTextDenseLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -59,7 +59,9 @@
         <item name="android:textColorLink">@color/colorSecondary</item>
     </style>
 
-    <style name="CustomMaterialEditTextOnWhite"> <item name="android:textCursorDrawable">@drawable/ufit_cursor_profile_settings</item> </style>
+    <style name="CustomMaterialEditTextOnWhite">
+        <item name="android:textCursorDrawable">@drawable/ufit_cursor_profile_settings</item>
+    </style>
 
     <style name="CustomMaterialButtonIcon" parent="@style/Widget.MaterialComponents.Button.TextButton">
         <item name="android:colorPressedHighlight">@color/colorTransparent</item>
@@ -84,7 +86,7 @@
     <style name="CustomMaterialToolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
 
     </style>
-    
+
     <style name="CustomMaterialTextSearchBar" parent="CustomMaterialEditTextLayout">
         <item name="hintTextColor">@color/colorTransparent</item>
     </style>

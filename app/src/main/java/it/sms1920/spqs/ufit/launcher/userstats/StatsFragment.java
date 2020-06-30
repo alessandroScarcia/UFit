@@ -35,9 +35,9 @@ import it.sms1920.spqs.ufit.launcher.R;
 
 
 
-public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
+public class StatsFragment extends Fragment implements StatsContract.View, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = StatsFragment.class.getCanonicalName();
-    private static iStatsFragment.Presenter presenter;
+    private static StatsContract.Presenter presenter;
     private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
@@ -108,7 +108,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
 
         //setting content of frame layout
         containerLayout = view.findViewById(R.id.container_stats);
-        getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
+        getLayoutInflater().inflate(R.layout.fragment_stats_general, containerLayout);
 
         context = getActivity();
         presenter = new StatsPresenter(this, context);
@@ -195,7 +195,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showGeneralStats() {
         containerLayout.removeAllViewsInLayout();
-        getLayoutInflater().inflate(R.layout.general_stats, containerLayout);
+        getLayoutInflater().inflate(R.layout.fragment_stats_general, containerLayout);
 
     }
 
@@ -205,7 +205,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
     @Override
     public void showBodyStats() {
         containerLayout.removeAllViewsInLayout();
-        getLayoutInflater().inflate(R.layout.muscle_measurment, containerLayout);
+        getLayoutInflater().inflate(R.layout.fragment_stats_muscles, containerLayout);
 
     }
 
@@ -556,7 +556,7 @@ public class StatsFragment extends Fragment implements iStatsFragment.View, Popu
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = requireActivity().getLayoutInflater();
-            View view = inflater.inflate(R.layout.layout_dialog, null);
+            View view = inflater.inflate(R.layout.fragment_insert_stats_value_dialog, null);
 
             builder.setView(view)
                     .setTitle("Inserisci Dati")

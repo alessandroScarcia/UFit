@@ -1,8 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.toolworkout;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.progressindicator.ProgressIndicator;
 
@@ -24,10 +22,10 @@ import it.sms1920.spqs.ufit.launcher.R;
 
 
 
-public class TimerFragment extends Fragment implements iTimer.View{
+public class TimerFragment extends DialogFragment implements TimerContract.View{
     
     private static final String TAG = TimerFragment.class.getCanonicalName();
-    private iTimer.Presenter presenter;
+    private TimerContract.Presenter presenter;
     private MediaPlayer countDownPlayer;
     private CountDownTimer countDownTimer;
     private TextView textViewCountDown;
@@ -51,7 +49,7 @@ public class TimerFragment extends Fragment implements iTimer.View{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_timer, container, false);
+        view = inflater.inflate(R.layout.fragment_timer_dialog, container, false);
 
         presenter = new TimerPresenter(this);
         countDownPlayer = MediaPlayer.create(view.getContext(), R.raw.countdown_sound);

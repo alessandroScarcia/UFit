@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/title"
+        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/insertTitleAdvice">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTitleAdvice"
+            style="@style/CustomMaterialEditTextOnWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description"
+        style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_height="match_parent"
+        android:hint="@string/insertDescriptionAdvice">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDescriptionAdvice"
+            style="@style/CustomMaterialEditTextOnWhite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</RelativeLayout>

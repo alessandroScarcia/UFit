@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/exercise_thumbnail_height"
                 android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/img_exercise" />
+                app:srcCompat="@drawable/img_exercise_placeholder" />
 
             <View
                 android:layout_width="match_parent"

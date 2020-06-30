@@ -156,6 +156,7 @@
     <string name="delete">Delete profile</string>
     <string name="cancel">Cancel</string>
     <string name="visit_our_site">"Visit Our Website"</string>
+    <string name="insertValue">Insert value</string>
 
     <!-- Login -->
     <string name="login">Login</string>
@@ -236,6 +237,7 @@
     <string name="login_request">Login Request</string>
     <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione"</string>
     <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione"</string>
+
 
 
 </resources>

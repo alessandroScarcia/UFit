@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * Contract used to set the content inside the fragment of the Stats
  */
-public interface iStatsFragment {
+public interface StatsContract {
 
     /**
      * Interface used to show the different content of the view (in base of the tab selected)

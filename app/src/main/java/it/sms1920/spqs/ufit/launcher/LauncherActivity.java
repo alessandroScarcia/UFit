@@ -309,22 +309,8 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
 
     @Override
     public void startTimer() {
-        TimerDialog dialogBox = new TimerDialog();
+        TimerFragment dialogBox = new TimerFragment();
         dialogBox.show(getSupportFragmentManager(), "example dialog");
     }
 
-    public static class TimerDialog extends DialogFragment {
-
-        public TimerDialog() {
-
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.layout_dialog_timer, container, false);
-            getChildFragmentManager().beginTransaction().add(R.id.frame_container_timer, new TimerFragment()).commit();
-            return v;
-        }
-
-    }
 }

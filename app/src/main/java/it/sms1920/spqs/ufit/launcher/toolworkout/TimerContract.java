@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.progressindicator.ProgressIndicator;
 
-public interface iTimer {
+public interface TimerContract {
 
     interface View{
         void setMaxProgressBar(int max);

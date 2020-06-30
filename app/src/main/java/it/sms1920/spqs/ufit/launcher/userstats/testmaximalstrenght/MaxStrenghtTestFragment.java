@@ -1,9 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,8 +18,6 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.Objects;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
@@ -109,7 +105,7 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = requireActivity().getLayoutInflater();
-            View view = inflater.inflate(R.layout.layout_dialog_rep_choice, null);
+            View view = inflater.inflate(R.layout.fragment_choose_reps_dialog, null);
 
             builder.setView(view)
                     .setTitle("Inserisci Dati")

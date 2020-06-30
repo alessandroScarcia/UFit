@@ -25,7 +25,7 @@
                 android:layout_height="@dimen/item_workout_creation_exercise_card_image_height"
                 android:contentDescription="@string/imgExercise"
                 android:scaleType="fitCenter"
-                android:src="@drawable/a"
+                android:src="@drawable/img_exercise_placeholder"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

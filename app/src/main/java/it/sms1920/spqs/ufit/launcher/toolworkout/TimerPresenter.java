@@ -5,9 +5,9 @@ import android.content.SharedPreferences;
 
 import java.util.Locale;
 
-public class TimerPresenter implements iTimer.Presenter {
+public class TimerPresenter implements TimerContract.Presenter {
     private long initialTime;
-    private final iTimer.View view;
+    private final TimerContract.View view;
     public int progressionProgressBar = 0;
     private long timeLeftInMillis;
 
@@ -17,15 +17,15 @@ public class TimerPresenter implements iTimer.Presenter {
     private int seconds;
 
     private boolean soundActive = true;
-    public TimerPresenter(iTimer.View view) {
+    public TimerPresenter(TimerContract.View view) {
         this.view = view;
     }
 
 
     /**
      * Function used to calculate the milliseconds from minutes and seconds
-     * @param minutes
-     * @param seconds
+     * @param minutes .
+     * @param seconds .
      */
     public void setTime(int minutes, int seconds){
         timeLeftInMillis = (minutes * 1000) * 60 + seconds * 1000;
@@ -35,7 +35,7 @@ public class TimerPresenter implements iTimer.Presenter {
 
     /**
      * Calculate minutes and seconds from milliseconds
-     * @param initialTimeMillis
+     * @param initialTimeMillis .
      */
     public void setTimeFromMillis(long initialTimeMillis){
         minutes = (int) (initialTimeMillis / 1000) / 60;
@@ -49,7 +49,7 @@ public class TimerPresenter implements iTimer.Presenter {
 
     /**
      * Function that manage the start and pause event
-     * @param running
+     * @param running .
      */
     public void startPause(boolean running) {
         timerRunning = running;

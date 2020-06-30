@@ -94,14 +94,15 @@ public class AdviceFragment extends Fragment implements AdviceContract.View {
         /**
          * When the dialog is created the layout show 2 editText inside it to insert the title and
          * the description of the new advice
-         * @param savedInstanceState
+         * @param savedInstanceState .
          * @return builder.create()
          */
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = getActivity().getLayoutInflater();
-            View view = inflater.inflate(R.layout.layout_dialog_advice, null);
+            View view = inflater.inflate(R.layout.fragment_new_advice_dialog, null);
 
             builder.setView(view)
                     .setTitle("Inserisci Dati")

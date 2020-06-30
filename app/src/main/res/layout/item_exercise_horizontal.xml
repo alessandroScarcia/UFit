@@ -20,7 +20,7 @@
             android:layout_width="@dimen/item_workout_creation_exercise_card_image_width"
             android:layout_height="@dimen/item_workout_creation_exercise_card_image_height"
             android:scaleType="fitCenter"
-            android:src="@drawable/a" />
+            android:src="@drawable/img_exercise_placeholder" />
 
         <ImageView
             android:contentDescription="@string/img"

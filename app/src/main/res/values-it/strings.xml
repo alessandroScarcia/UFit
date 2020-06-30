@@ -141,8 +141,10 @@
     <string name="profile_setting_change_credentials">Questa operazione richiede l\'accesso</string>
     <string name="delete">Cancella il profilo</string>
     <string name="cancel">Annulla</string>
+    <string name="insertValue">Inserisci valore</string>
 
     <string name="visit_our_site">"Visita il nostro sito"</string>
+
 
     <!-- Login -->
     <string name="login">Accedi</string>
