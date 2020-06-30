@@ -10,7 +10,7 @@
         android:background="@color/colorGray5"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -20,32 +20,24 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+                android:id="@+id/cardArm"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/smaller_standard_margin"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
+                app:cardCornerRadius="@dimen/corner_radius_card_measure">
 
                 <ImageView
                     android:id="@+id/bicepsImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/stats_measure_width"
+                    android:layout_height="@dimen/stats_image_measure_height"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_arm_measure" />
 
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/stats_measure_width"
+                    android:layout_width="@dimen/stats_measure_width"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
@@ -81,19 +73,12 @@
 
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/cardArm"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="1dp"
-                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/smaller_standard_margin"
@@ -101,17 +86,17 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+                android:id="@+id/cardChest"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/smaller_standard_margin"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
+                app:cardCornerRadius="@dimen/corner_radius_card_measure">
 
 
                 <ImageView
                     android:id="@+id/chestImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/stats_measure_width"
+                    android:layout_height="@dimen/stats_image_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
@@ -119,16 +104,9 @@
                     app:srcCompat="@drawable/ic_chest_measure" />
 
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/stats_measure_width"
+                    android:layout_width="@dimen/stats_measure_width"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
@@ -165,16 +143,10 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/cardChest"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="1dp"
-                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <LinearLayout
@@ -185,32 +157,26 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardWaist"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                app:cardCornerRadius="5dp">
+                app:cardCornerRadius="@dimen/corner_radius_card_measure">
 
                 <ImageView
                     android:id="@+id/waistImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/stats_measure_width"
+                    android:layout_height="@dimen/stats_image_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_waist_measure" />
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/stats_measure_width"
+                    android:layout_width="@dimen/stats_measure_width"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
@@ -247,12 +213,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/cardWaist"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="1dp"
-                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
 
@@ -267,17 +227,18 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardTight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                app:cardCornerRadius="5dp">
+                app:cardCornerRadius="@dimen/corner_radius_card_measure">
 
 
                 <ImageButton
                     android:id="@+id/tightImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/stats_measure_width"
+                    android:layout_height="@dimen/stats_image_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
@@ -285,16 +246,9 @@
                     app:srcCompat="@drawable/ic_tight_measure" />
 
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/stats_measure_width"
+                    android:layout_width="@dimen/stats_measure_width"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
@@ -331,12 +285,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/cardTight"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="1dp"
-                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
@@ -350,17 +298,18 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardCalve"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/smaller_standard_margin"
                 android:layout_weight="1"
-                app:cardCornerRadius="5dp">
+                app:cardCornerRadius="@dimen/corner_radius_card_measure">
 
 
                 <ImageView
                     android:id="@+id/calveImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/stats_measure_width"
+                    android:layout_height="@dimen/stats_image_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
@@ -368,16 +317,9 @@
                     app:srcCompat="@drawable/ic_calve_measure" />
 
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:cardCornerRadius="5dp">
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/stats_measure_width"
+                    android:layout_width="@dimen/stats_measure_width"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
@@ -414,12 +356,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/cardCalve"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="1dp"
-                    android:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
 

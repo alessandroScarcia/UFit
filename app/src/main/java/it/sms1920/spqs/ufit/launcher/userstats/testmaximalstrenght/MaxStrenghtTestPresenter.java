@@ -1,10 +1,10 @@
 package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
-public class MaxStrenghtTestPresenter implements MaxStrenghtTestContact.Presenter {
+public class MaxStrenghtTestPresenter implements MaxStrenghtTestContract.Presenter {
 
-    private MaxStrenghtTestContact.View view;
+    private MaxStrenghtTestContract.View view;
 
-    public MaxStrenghtTestPresenter(MaxStrenghtTestContact.View view) {
+    public MaxStrenghtTestPresenter(MaxStrenghtTestContract.View view) {
         this.view = view;
     }
 

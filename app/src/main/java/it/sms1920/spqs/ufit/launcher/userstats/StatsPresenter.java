@@ -3,8 +3,10 @@
 package it.sms1920.spqs.ufit.launcher.userstats;
 
 import android.content.Context;
+
 import java.util.List;
 import java.util.Random;
+
 import it.sms1920.spqs.ufit.model.room.Stats;
 import it.sms1920.spqs.ufit.model.room.UserStats;
 
@@ -53,29 +55,23 @@ public class StatsPresenter implements StatsContract.Presenter {
     /**
      * Function to calculate the BMI
      *
-     *
      * @return BMI
      */
     @Override
     public float calculateBMI() {
-        float BMI = 0;
-        if (userStats.getHeight() != 0) {
-            float heightM = (float) userStats.getHeight() / 100;
-            BMI = userStats.getWeight() / (heightM * heightM);
-        }
-
-        return BMI;
+        float heightM = (float) userStats.getHeight() / 100;
+        return userStats.getWeight() / (heightM * heightM);
     }
 
     /**
-     * @param weight weight of the user
+     * @param weight  weight of the user
      * @param bodyFat fat of the user
      * @return FFMI
      */
     @Override
     public float calculateFFMI(float weight, float bodyFat) {
         float height = userStats.getHeight() / 100;
-        return (weight * (1 - (bodyFat) / 100 )) / (height * height);
+        return (weight * (1 - (bodyFat) / 100)) / (height * height);
     }
 
     /**
@@ -168,6 +164,7 @@ public class StatsPresenter implements StatsContract.Presenter {
         Stats.localDatabase.userStatsDAO().updateUserStats(userStats);
         //with the weight is possible calculate the BMI
         setBMITextView();
+        setFFMITextView();
     }
 
     @Override
@@ -256,6 +253,7 @@ public class StatsPresenter implements StatsContract.Presenter {
             view.setWeight(String.valueOf(userStats.getWeight()));
             view.setWeightDate(String.valueOf(userStats.getDateWeightDetection()));
             setBMITextView();
+
         }
 
         if (userStats.getFat() != NULL) {
@@ -314,7 +312,8 @@ public class StatsPresenter implements StatsContract.Presenter {
         String fatControlValue = String.valueOf(userStats.getFat());
 
         //check if weight is a number to calculate the FFMI(if the text view contains a value)
-        if (fatControlValue.matches("\\d+(?:\\.\\d+)?")) {
+        if (fatControlValue.matches("\\d+(?:\\.\\d+)?") && userStats.getFat() != 0
+                && userStats.getWeight() != 0 && userStats.getHeight() != 0) {
             float FFMIValue = calculateFFMI(userStats.getWeight(), userStats.getFat());
             view.setFFMI(String.valueOf(FFMIValue));
 
@@ -333,11 +332,11 @@ public class StatsPresenter implements StatsContract.Presenter {
 
 
     public void setBMITextView() {
-        float BMIValue = calculateBMI();
-        view.setBMI(String.valueOf(BMIValue));
-
-
-        view.setBMIStatus(BMIValue);
+        if (userStats.getHeight() != 0 && userStats.getWeight() != 0) {
+            float BMIValue = calculateBMI();
+            view.setBMI(String.valueOf(BMIValue));
+            view.setBMIStatus(BMIValue);
+        }
     }
 
 

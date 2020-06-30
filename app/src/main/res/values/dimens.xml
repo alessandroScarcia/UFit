@@ -94,6 +94,9 @@
     <dimen name="stats_text_size">20sp</dimen>
     <dimen name="stats_text_size_title">18sp</dimen>
     <dimen name="stats_text_size_small">16sp</dimen>
+    <dimen name="stats_measure_width">200dp</dimen>
+    <dimen name="stats_image_measure_height">120</dimen>
+    <dimen name="corner_radius_card_measure">5dp</dimen>
 
 
 </resources>
