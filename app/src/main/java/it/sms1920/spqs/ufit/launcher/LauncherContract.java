@@ -8,7 +8,7 @@ public interface LauncherContract {
 
         void insertPlansFragment();
 
-        void insertTrainerFragment(boolean isAnonymous);
+        void insertTrainerFragment();
 
         void insertStatsFragment();
 
@@ -29,6 +29,12 @@ public interface LauncherContract {
         void startEditWorkoutActivity(String id);
 
         void startTimer();
+
+        void setToolbarTitle(String text);
+
+        void insertBluetoothLinkingFragment();
+
+        String getLoginRequiredString();
 
         enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS, CHOOSE}
     }

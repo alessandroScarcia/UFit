@@ -223,6 +223,8 @@
     <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione con il tuo Atleta"</string>
 
     <string name="maxReps">rip massime</string>
+    <string name="workoutplan">Schede d\'allenamento</string>
+    <string name="login_required">Profilo necessario</string>
 
 </resources>
 

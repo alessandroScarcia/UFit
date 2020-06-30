@@ -25,7 +25,7 @@
 
     <string name="new_workout_plan">Create new Workout Plan</string>
     <string name="workout_plan_name">Workout plan name</string>
-
+    <string name="workoutplan">Workout Plans</string>
 
     <!-- Profile -->
     <string name="name">Name</string>
@@ -238,7 +238,7 @@
     <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione"</string>
     <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione"</string>
     <string name="maxReps">max reps</string>
-
+    <string name="login_required">Account required</string>
 
 
 </resources>

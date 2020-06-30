@@ -2,38 +2,29 @@ package it.sms1920.spqs.ufit.launcher;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.fragment.app.DialogFragment;
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
+import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.BluetoothLinkingFragment;
-
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
-import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
-
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
-    private static final String TAG = LauncherActivity.class.getCanonicalName();
-
     private LauncherContract.Presenter presenter;
     private Menu menu;
     private Toolbar toolbar;
@@ -65,23 +56,18 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 switch (menuItem.getItemId()) {
                     // Home
                     case R.id.nav_home:
-                        Log.d(TAG, "nav_home");
                         presenter.onHomeIconClicked();
                         break;
                     case R.id.nav_plans:
-                        Log.d(TAG, "nav_plans");
                         presenter.onPlansIconClicked();
                         break;
                     case R.id.nav_trainer:
-                        Log.d(TAG, "nav_trainer");
                         presenter.onTrainerIconClicked();
                         break;
                     case R.id.nav_stats:
-                        Log.d(TAG, "nav_stats");
                         presenter.onStatsIconClicked();
                         break;
                     case R.id.nav_profile:
-                        Log.d(TAG, "nav_profile");
                         presenter.onProfileIconClicked();
                         break;
                 }
@@ -130,7 +116,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     @Override
     public void onBackPressed() {
         presenter.onBackPressed();
-        Log.d(TAG, "onBackPressed");
     }
 
     @Override
@@ -152,18 +137,14 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         setMenuItemIcon(R.id.nav_plans, R.drawable.ic_menu_plans_selected);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
-        setToolbarTitle("Workout Plans");
+        setToolbarTitle(getString(R.string.workoutplan));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new WorkoutPlansFragment()).commit();
 
     }
 
     @Override
-    public void insertTrainerFragment(boolean isAnonymous) {
-        if (isAnonymous) {
+    public void insertTrainerFragment() {
             insertChooseFragment();
-        } else {
-            insertBluetoothLinkingFragment();
-        }
     }
 
     @Override
@@ -173,7 +154,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         setMenuItemIcon(R.id.nav_stats, R.drawable.ic_menu_stats_selected);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
-        setToolbarTitle("Statistiche");
+        setToolbarTitle(getString(R.string.stats));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StatsFragment()).commit();
     }
 
@@ -186,7 +167,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.profile_settings).setVisible(true);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
-        setToolbarTitle("Profile");
+        setToolbarTitle(getString(R.string.profile));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
     }
 
@@ -214,7 +195,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         setMenuItemIcon(R.id.nav_profile, R.drawable.ic_menu_account_selected);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
-        setToolbarTitle("Account");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ChooseFragment()).commit();
     }
 
@@ -303,8 +283,13 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
-        setToolbarTitle("Trainer Linking");
+        setToolbarTitle(getString(R.string.trainer));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BluetoothLinkingFragment()).commit();
+    }
+
+    @Override
+    public String getLoginRequiredString() {
+        return getString(R.string.login_required);
     }
 
     @Override
