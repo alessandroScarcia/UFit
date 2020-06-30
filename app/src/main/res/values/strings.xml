@@ -123,11 +123,11 @@
     <string name="cm" translatable="false">cm</string>
     <string name="percent" translatable="false">%</string>
 
-    <string name="armMeasure">Arm Measure</string>
-    <string name="chestMeasure">Chest Measure</string>
-    <string name="waistMeasure">Waist Measure</string>
-    <string name="tightMeasure">Tight Measure</string>
-    <string name="calveMeasure">Calve Measure</string>
+    <string name="armMeasure">Arm</string>
+    <string name="chestMeasure">Chest</string>
+    <string name="waistMeasure">Waist</string>
+    <string name="tightMeasure">Tight</string>
+    <string name="calveMeasure">Calve</string>
 
     <string name="RM">1 RM</string>
     <string name="reps_3_2">3/2 reps</string>
