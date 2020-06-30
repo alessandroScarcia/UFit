@@ -77,8 +77,8 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements EditP
         etEditBirthDate = findViewById(R.id.etEditBirthDate);
 
         // TODO change item layouts
-        genderAdapter = ArrayAdapter.createFromResource(this, R.array.genders, android.R.layout.simple_spinner_item);
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderAdapter = ArrayAdapter.createFromResource(this, R.array.genders, R.layout.item_gender_spinner);
+        genderAdapter.setDropDownViewResource(R.layout.item_gender_spinner);
         tvEditGender.setAdapter(genderAdapter);
 
         etEditBirthDate.setOnClickListener(new View.OnClickListener() {
