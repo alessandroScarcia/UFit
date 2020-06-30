@@ -1,7 +1,11 @@
 package it.sms1920.spqs.ufit.launcher;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
+import androidx.annotation.NonNull;
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 
 import static it.sms1920.spqs.ufit.launcher.LauncherContract.View.FragType;
@@ -117,9 +121,15 @@ public class LauncherPresenter implements LauncherContract.Presenter {
 
     @Override
     public void onLogOutIconClicked() {
+        view.lockView();
         FirebaseAuthSingleton.getFirebaseAuth().signOut();
-        FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
-        view.resetActivity();
+        FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                view.resetActivity();
+            }
+        });
     }
 
 
