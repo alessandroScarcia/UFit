@@ -35,7 +35,7 @@ public class AdviceList implements iAdvice.Presenter {
 
     private FirebaseUser firebaseUser;
     private DatabaseReference database;
-    private String userLinkId;
+    private String userLinkId = null;
 
     public AdviceList(iAdvice.View view) {
         this.view = view;
@@ -68,6 +68,8 @@ public class AdviceList implements iAdvice.Presenter {
         database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
+        Log.d(TAG, "loggato" + firebaseUser.getUid());
+
         database.keepSynced(true);
 
         database.child(firebaseUser.getUid())
@@ -79,9 +81,9 @@ public class AdviceList implements iAdvice.Presenter {
                             if (user.getLinkedUserId() != null) {
                                 userLinkId = user.getLinkedUserId()+"";
                                 Log.d(TAG, "Id trainer" + user.getLinkedUserId());
-                                getSingleAdvice();
                             }
                         }
+                        getSingleAdvice();
                     }
 
                     @Override
