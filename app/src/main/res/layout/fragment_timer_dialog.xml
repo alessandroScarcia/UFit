@@ -11,6 +11,7 @@
         android:gravity="center">
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCountDownSound"
+        android:visibility="gone"
         style="?attr/borderlessButtonStyle"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
