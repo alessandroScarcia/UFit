@@ -22,6 +22,8 @@ public interface WorkoutExercisesListContract {
             ExerciseSetListAdapter setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, List<ExerciseSetItem> /*Object*/ setsListReference);
 
             void addExerciseSet(int reps, float loads);
+
+            void setNoItemView();
         }
     }
 

@@ -241,6 +241,7 @@
     <string name="login_required">Account required</string>
     <string name="active_bluetooth">Active Bluetooth</string>
     <string name="waitingtrainer">Waiting for a trainer connecting…</string>
+    <string name="no_sets">No sets added</string>
 
 
 </resources>

@@ -68,12 +68,12 @@ public class CreatingWorkoutActivity extends AppCompatActivity implements Creati
 
         if (workoutId != null && !workoutId.isEmpty()) {
             isAnEdit = true;
-            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, workoutId, isForAthlete);
+            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, workoutId, isForAthlete, true);
             txtName.setText(workoutName);
         } else {
             // Setting recycler view adapter for not editable exercises
             isAnEdit = false;
-            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, isForAthlete);
+            adapter = new WorkoutExercisesListAdapter(R.layout.item_exercise_horizontal_detailed, true, this, isForAthlete, true);
         }
 
 

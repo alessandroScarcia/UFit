@@ -228,6 +228,8 @@
 
     <string name="active_bluetooth">Attiva Bluetooth</string>
     <string name="waitingtrainer">In attesa che un trainer si connetta.</string>
+    <string name="no_sets">Serie non aggiunte</string>
+
 </resources>
 
 

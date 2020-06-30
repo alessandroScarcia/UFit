@@ -33,8 +33,9 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
     private ArrayList<ExerciseSetListAdapter> adapters = new ArrayList<>();
 
     private boolean isForAthlete;
+    private boolean isCreation;
 
-    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, boolean isForAthlete) {
+    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, boolean isForAthlete, boolean isCreation) {
         this.view = view;
 
         myExercises = new ArrayList<>();
@@ -43,11 +44,12 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         mDatabase = FirebaseDbSingleton.getInstance().getReference();
 
         this.isForAthlete = isForAthlete;
+        this.isCreation = isCreation;
         view.callNotifyDataSetChanged();
 
     }
 
-    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, String workoutId, boolean isForAthlete) {
+    public WorkoutExercisesListPresenter(WorkoutExercisesListContract.View view, String workoutId, boolean isForAthlete, boolean isCreation) {
         this.view = view;
 
         myExercises = new ArrayList<>();
@@ -55,6 +57,7 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
 
         mDatabase = FirebaseDbSingleton.getInstance().getReference();
         this.isForAthlete = isForAthlete;
+        this.isCreation = isCreation;
         fetchWorkout(workoutId);
 
     }
@@ -194,6 +197,10 @@ public class WorkoutExercisesListPresenter implements WorkoutExercisesListContra
         holder.setName(exercise.getExerciseName());
         holder.setImage(exercise.getImageUrl());
         holder.setId(exercise.getExerciseId());
+
+        if (myExercises.get(position).getExerciseSetItems().size() == 0 && !isCreation){
+            holder.setNoItemView();
+        }
 
         ExerciseSetListAdapter adapter = holder.setExerciseSetsAdapter(position, exerciseListId, myExercises.get(position).getExerciseId(), myExercises.get(position).getExerciseSetItems());
 

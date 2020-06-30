@@ -50,20 +50,20 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         this.myClickListener = myClickListener;
     }
 
-    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, boolean isForAthlete) {
+    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, boolean isForAthlete, boolean isCreation) {
         this.layoutItemID = layoutItemID;
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
-        presenter = new WorkoutExercisesListPresenter(this, isForAthlete);
+        presenter = new WorkoutExercisesListPresenter(this, isForAthlete, isCreation);
 
 
     }
 
-    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, String workoutPlanId, boolean isForAthlete) {
+    public WorkoutExercisesListAdapter(int layoutItemID, boolean editable, Activity activity, String workoutPlanId, boolean isForAthlete, boolean isCreation) {
         this.layoutItemID = layoutItemID;
         this.activity = (AppCompatActivity) activity;
         this.editable = editable;
-        presenter = new WorkoutExercisesListPresenter(this, workoutPlanId, isForAthlete);
+        presenter = new WorkoutExercisesListPresenter(this, workoutPlanId, isForAthlete, isCreation);
     }
 
 
@@ -112,9 +112,6 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         return presenter.onExercisesIdRequested();
     }
 
-    public void saveCurrentData(String name) {
-        presenter.onSaveWorkoutPlanChangesRequested(name);
-    }
 
     public void update() {
         presenter.onUpdateRequested();
@@ -134,10 +131,21 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         MaterialButton btnAdd;
         MaterialButton btnToggleExpansion;
 
+        TextView sets;
+        TextView reps;
+        TextView load;
+        TextView noItem;
+
         ExerciseSetListAdapter adapter;
 
         public ExerciseHolder(@NonNull final View itemView) {
             super(itemView);
+
+            sets = itemView.findViewById(R.id.tvSerie);
+            reps = itemView.findViewById(R.id.tvReps);
+            load = itemView.findViewById(R.id.tvLoads);
+            noItem = itemView.findViewById(R.id.tvNoFound);
+
 
             btnToggleExpansion = itemView.findViewById(R.id.btnToggleExpand);
             btnToggleExpansion.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +198,6 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
 
         @Override
         public ExerciseSetListAdapter setExerciseSetsAdapter(int position, String workoutPlanId, String exerciseId, List<ExerciseSetItem> /*Object*/ setsListReference) {
-            Log.d("TAG", "UFFAsetExerciseSetsAdapter:1 " + setsListReference);
             adapter = new ExerciseSetListAdapter(editable, workoutPlanId, exerciseId, setsListReference);
             series.setAdapter(adapter);
             series.setLayoutManager(new LinearLayoutManager(activity));
@@ -221,6 +228,14 @@ public class WorkoutExercisesListAdapter extends RecyclerView.Adapter<WorkoutExe
         @Override
         public void addExerciseSet(int reps, float loads) {
             adapter.addSerieToList(reps, loads);
+        }
+
+        @Override
+        public void setNoItemView() {
+            sets.setVisibility(GONE);
+            reps.setVisibility(GONE);
+            load.setVisibility(GONE);
+            noItem.setVisibility(View.VISIBLE);
         }
     }
 
