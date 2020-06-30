@@ -23,7 +23,7 @@ public class User {
     private Integer gender;
     private String birthDate;
     private String imageUrl;
-    private Boolean role = false;
+    private Boolean role = Boolean.FALSE;
     private String linkedUserId = "";
 
     public User() {

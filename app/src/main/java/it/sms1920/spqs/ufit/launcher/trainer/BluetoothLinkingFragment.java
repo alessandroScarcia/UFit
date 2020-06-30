@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,6 +159,7 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     @Override
     public String getConnectHint(Boolean role) {
         String string;
+
         if (role) {
             string = getString(R.string.connectionHintForTrainer);
         } else {
