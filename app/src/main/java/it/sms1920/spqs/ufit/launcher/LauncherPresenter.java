@@ -121,10 +121,6 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         view.resetActivity();
     }
 
-    @Override
-    public void onShowPlanClosed() {
-        currentFragment = PLANS;
-    }
 
     @Override
     public void onProfileSettingsClicked() {
