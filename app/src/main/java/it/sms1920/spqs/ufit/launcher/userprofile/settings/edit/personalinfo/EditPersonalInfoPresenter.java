@@ -85,14 +85,25 @@ public class EditPersonalInfoPresenter implements EditPersonalInfoContract.Prese
 
     @Override
     public void confirmEdit(String name, String surname, Integer gender, String birthDate) {
-        if (check(name, surname)) {
-            userInfoRef.child(User.FIELD_NAME).setValue(name);
-            userInfoRef.child(User.FIELD_SURNAME).setValue(surname);
-            userInfoRef.child(User.FIELD_GENDER).setValue(gender);
-            userInfoRef.child(User.FIELD_BIRTH_DATE).setValue(birthDate);
 
-            view.endActivity();
+        if (!name.isEmpty()) {
+            userInfoRef.child(User.FIELD_NAME).setValue(name);
         }
+
+        if (!surname.isEmpty()) {
+            userInfoRef.child(User.FIELD_SURNAME).setValue(surname);
+        }
+
+        if (gender != -1) {
+            userInfoRef.child(User.FIELD_GENDER).setValue(gender);
+        }
+
+        if (!birthDate.isEmpty()) {
+            userInfoRef.child(User.FIELD_BIRTH_DATE).setValue(birthDate);
+        }
+
+        view.endActivity();
+
     }
 
     private boolean check(String name, String surname) {

@@ -22,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import it.sms1920.spqs.ufit.launcher.R;
 
 
-public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTestFragment.View{
+public class MaxStrenghtTestFragment extends Fragment implements MaxStrenghtTestContact.View{
 
     private static MaxStrenghtTestAdapter adapter;
-    private iMaxStrenghtTestFragment.Presenter presenter;
+    private MaxStrenghtTestContact.Presenter presenter;
     private EditText etInsertWeight;
 
     private static int checkIdRadioButton = 0;

@@ -149,6 +149,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements EditP
     @Override
     public void showGender(Integer gender) {
         this.gender = gender;
+
         if (gender < 0 || gender > getResources().getStringArray(R.array.genders).length) {
             throw new IllegalArgumentException(TAG + " Invalid value for argument gender.");
         }

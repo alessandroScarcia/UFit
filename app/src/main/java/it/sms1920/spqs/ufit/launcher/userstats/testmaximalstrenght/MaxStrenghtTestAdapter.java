@@ -4,23 +4,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
-public class MaxStrenghtTestAdapter extends RecyclerView.Adapter<MaxStrenghtTestAdapter.StrenghtHolder> implements iMaxStrenghtTest.View {
+public class MaxStrenghtTestAdapter extends RecyclerView.Adapter<MaxStrenghtTestAdapter.StrenghtHolder> implements MaxStrenghtTestListContract.View {
 
 
-    private iMaxStrenghtTest.Presenter presenter;
+    private MaxStrenghtTestListContract.Presenter presenter;
 
-//    private MaxStrenghtTestFragment parentFragment;
 
     public MaxStrenghtTestAdapter() {
         presenter = new MaxStrenghtTestList(this);
-//        this.parentFragment = parentFragment;
     }
 
     @NonNull
@@ -58,7 +55,7 @@ public class MaxStrenghtTestAdapter extends RecyclerView.Adapter<MaxStrenghtTest
 
 
 
-    public static class StrenghtHolder extends RecyclerView.ViewHolder implements iMaxStrenghtTest.View.Item {
+    public static class StrenghtHolder extends RecyclerView.ViewHolder implements MaxStrenghtTestListContract.View.Item {
         private TextView tvReps;
         private TextView tvWeight;
 

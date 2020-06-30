@@ -111,9 +111,9 @@ public class LauncherPresenter implements LauncherContract.Presenter {
 
     @Override
     public void onLogOutIconClicked() {
-        view.resetActivity();
         FirebaseAuthSingleton.getFirebaseAuth().signOut();
         FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
+        view.resetActivity();
     }
 
     @Override

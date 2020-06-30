@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+
 import it.sms1920.spqs.ufit.model.bluetooth.BluetoothHelper;
 import it.sms1920.spqs.ufit.model.firebase.auth.FirebaseAuthSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
@@ -47,16 +49,20 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
             view.disableButton();
         }
 
-        FirebaseDbSingleton.getInstance().getReference().child("User").child(FirebaseAuthSingleton.getFirebaseAuth().getUid()).keepSynced(true);
+        FirebaseDbSingleton.getInstance().getReference().child(User.CHILD_NAME).child(FirebaseAuthSingleton.getFirebaseAuth().getUid()).keepSynced(true);
 
         final String myUid = FirebaseAuthSingleton.getFirebaseAuth().getUid();
         FirebaseDbSingleton.getInstance().getReference()
-                .child("User")
+                .child(User.CHILD_NAME)
                 .orderByKey()
                 .equalTo(myUid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        view.setStatus(view.getConnectHint(false));
+
                         for (DataSnapshot item : snapshot.getChildren()) {
                             me = item.getValue(User.class);
                             if (me != null) {
@@ -66,9 +72,7 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
                                     fetchLinkedUser();
 
                                 } else {
-
                                     view.setStatus(view.getConnectHint(me.getRole()));
-
                                 }
                             }
                         }
@@ -84,10 +88,10 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
     }
 
     private void fetchLinkedUser() {
-        FirebaseDbSingleton.getInstance().getReference().child("User").child(me.getLinkedUserId()).keepSynced(true);
+        FirebaseDbSingleton.getInstance().getReference().child(User.CHILD_NAME).child(me.getLinkedUserId()).keepSynced(true);
 
         FirebaseDbSingleton.getInstance().getReference()
-                .child("User")
+                .child(User.CHILD_NAME)
                 .orderByKey()
                 .equalTo(me.getLinkedUserId())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -161,11 +165,11 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
     public void onDisconnectButtonClicked() {
         view.showToast(view.getDisconnectionString());
 
-        FirebaseDbSingleton.getInstance().getReference().child("User").child(me.getLinkedUserId()).child("linkedUserId").setValue("");
+        FirebaseDbSingleton.getInstance().getReference().child(User.CHILD_NAME).child(me.getLinkedUserId()).child(User.FIELD_LINKED_USER_ID).setValue("");
 
         me.setLinkedUserId("");
         FirebaseDbSingleton.getInstance().getReference()
-                .child("User")
+                .child(User.CHILD_NAME)
                 .child(Objects.requireNonNull(FirebaseAuthSingleton.getFirebaseAuth().getUid()))
                 .setValue(me);
         view.notifyConnectionStateChanged();
@@ -246,10 +250,10 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
     private void tryConnectWith(final String readMessage) {
 
-        FirebaseDbSingleton.getInstance().getReference().child("User").child(readMessage).keepSynced(true);
+        FirebaseDbSingleton.getInstance().getReference().child(User.CHILD_NAME).child(readMessage).keepSynced(true);
 
         Query query = FirebaseDbSingleton.getInstance().getReference()
-                .child("User")
+                .child(User.CHILD_NAME)
                 .orderByKey()
                 .equalTo(readMessage);
 
