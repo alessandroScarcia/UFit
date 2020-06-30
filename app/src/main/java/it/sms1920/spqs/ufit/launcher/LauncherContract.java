@@ -36,6 +36,8 @@ public interface LauncherContract {
 
         String getLoginRequiredString();
 
+        void lockView();
+
         enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS, CHOOSE}
     }
 
