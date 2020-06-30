@@ -109,19 +109,15 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     public void onResume() {
         super.onResume();
         launcher.toggleToolbarNavigationButton(true);
-
         launcher.showToolbarEditIcon(true);
-        Log.d(TAG, "onResume: ");
         adapter.update();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        adapter.saveCurrentData("");
         launcher.showToolbarEditIcon(false);
         launcher.showToolbarTimerIcon(false);
-        launcher.showPlanClosed();
     }
 
     @Override

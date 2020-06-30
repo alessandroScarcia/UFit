@@ -30,9 +30,6 @@ public class HomeFragment extends Fragment implements HomeContract.View, AdviceL
     private Intent webViewIntent;
     private TextView tvTitleAdvice;
     private TextView tvDescriptionAdvice;
-    private final String URL_WEBSITE = "http://www.quatematico.com/Ufit";
-
-    private FloatingActionButton fabAssembliesReport;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,16 +46,6 @@ public class HomeFragment extends Fragment implements HomeContract.View, AdviceL
         tvTitleAdvice = view.findViewById(R.id.tvTitleRandomAdvice);
         tvDescriptionAdvice = view.findViewById(R.id.tvDescriptionRandomAdvice);
         advicePresenter.getRandomAdvice();
-
-
-//   TODO     Button btnTimer = view.findViewById(R.id.btnTimerDialog);
-//        btnTimer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                openDialog();
-//            }
-//        });
 
         Button btnWebsite = view.findViewById(R.id.btnWebsite);
 
@@ -103,8 +90,5 @@ public class HomeFragment extends Fragment implements HomeContract.View, AdviceL
     public void startAssembliesReportActivity() {
         startActivity(new Intent(getContext(), AssembliesReportActivity.class));
     }
-
-
-
 
 }

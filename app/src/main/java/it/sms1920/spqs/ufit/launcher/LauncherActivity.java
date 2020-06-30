@@ -265,10 +265,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         presenter.onShowPlanClicked();
     }
 
-    public void showPlanClosed() {
-        presenter.onShowPlanClosed();
-    }
-
     public void showToolbarEditIcon(boolean visible) {
         toolbar.getMenu().findItem(R.id.edit).setVisible(visible);
     }

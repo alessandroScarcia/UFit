@@ -60,8 +60,6 @@ public interface LauncherContract {
 
         void onLogOutIconClicked();
 
-        void onShowPlanClosed();
-
         void onProfileSettingsClicked();
 
         void onEditIconClicked();
