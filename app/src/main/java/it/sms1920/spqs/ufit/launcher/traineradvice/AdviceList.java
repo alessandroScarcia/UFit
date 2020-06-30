@@ -23,11 +23,11 @@ import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.User;
 
 
-public class AdviceList implements iAdvice.Presenter {
+public class AdviceList implements AdviceListContract.Presenter {
 
     private static final String TAG = AdviceList.class.getCanonicalName();
     private static final int ID_LENGHT = 8;
-    private final iAdvice.View view;
+    private final AdviceListContract.View view;
 
     private List<Advice> adviceList;
     private Random RANDOM = new Random();
@@ -37,7 +37,7 @@ public class AdviceList implements iAdvice.Presenter {
     private DatabaseReference database;
     private String userLinkId = null;
 
-    public AdviceList(iAdvice.View view) {
+    public AdviceList(AdviceListContract.View view) {
         this.view = view;
         adviceList= new ArrayList<>();
         loadAdviceList();
@@ -172,7 +172,7 @@ public class AdviceList implements iAdvice.Presenter {
     }
 
     @Override
-    public void onBindAdviceItemListViewAtPosition(iAdvice.View.Item holder, int position) {
+    public void onBindAdviceItemListViewAtPosition(AdviceListContract.View.Item holder, int position) {
         Advice itemData = adviceList.get(position);
         Log.d(TAG, itemData.getTitle());
         holder.setPosition(position);

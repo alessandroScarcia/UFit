@@ -1,6 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.traineradvice;
 
-public interface iAdviceFragment {
+public interface AdviceContract {
     interface View {
 
 //        void addNewAdvice(String titleAdvice, String descriptionAdvice);

@@ -1,9 +1,9 @@
 package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
-import android.annotation.SuppressLint;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Objects;
 
 import it.sms1920.spqs.ufit.launcher.R;
 
@@ -30,12 +29,10 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
 
     private static MaxStrenghtTestAdapter adapter;
     private iMaxStrenghtTestFragment.Presenter presenter;
-    @SuppressLint("StaticFieldLeak")
-    private static EditText etInsertWeight;
+
+    private EditText etInsertWeight;
 
 
-    @SuppressLint("StaticFieldLeak")
-    public static Context context;
 
     private static int checkIdRadioButton = 0;
 
@@ -50,7 +47,7 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
-        context = view.getContext();
+
         Button btnSelectReps = view.findViewById(R.id.btnRepsDialog);
 
         btnSelectReps.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +86,7 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
     public void openDialog() {
         RepsChoiceDialog dialogBox = new RepsChoiceDialog();
         dialogBox.setTargetFragment(this, 1);
-        assert getFragmentManager() != null;
-        dialogBox.show(getFragmentManager(), "example dialog");
+        dialogBox.show(getParentFragmentManager(), "example dialog");
     }
 
 
