@@ -112,11 +112,11 @@
     <string name="ffmi_not_natural">Ottenuto con steroidi</string>
     <string name="click_to_insert_values">"Clicca per inserire i valori e calcolare BMI e FFMI"</string>
 
-    <string name="armMeasure">Misura braccio</string>
-    <string name="chestMeasure">Misura petto</string>
-    <string name="waistMeasure">Misura addome</string>
-    <string name="tightMeasure">Misura coscia</string>
-    <string name="calveMeasure">Misura polpaccio</string>
+    <string name="armMeasure">Braccia</string>
+    <string name="chestMeasure">Petto</string>
+    <string name="waistMeasure">Addome</string>
+    <string name="tightMeasure">Coscia</string>
+    <string name="calveMeasure">Polpaccio</string>
 
     <string name="RM">1 RM</string>
     <string name="reps_3_2">3/2 rip</string>
