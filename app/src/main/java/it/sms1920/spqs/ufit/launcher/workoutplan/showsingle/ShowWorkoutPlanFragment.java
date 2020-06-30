@@ -120,6 +120,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
         super.onPause();
         adapter.saveCurrentData("");
         launcher.showToolbarEditIcon(false);
+        launcher.showToolbarTimerIcon(false);
         launcher.showPlanClosed();
     }
 
@@ -131,6 +132,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     @Override
     public void setToolBarMenuEditIcon() {
         launcher.showToolbarEditIcon(true);
+        launcher.showToolbarTimerIcon(true);
     }
 
 

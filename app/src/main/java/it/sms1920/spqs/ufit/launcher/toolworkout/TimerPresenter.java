@@ -206,11 +206,7 @@ public class TimerPresenter implements iTimer.Presenter {
 
     @Override
     public void controllerSound() {
-        if(soundActive){
-            soundActive = false;
-        }else{
-            soundActive = true;
-        }
+        soundActive = !soundActive;
 
         view.changeIconSoundSetting(soundActive);
     }

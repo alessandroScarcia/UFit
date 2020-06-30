@@ -52,15 +52,6 @@ public class HomeFragment extends Fragment implements HomeContract.View, iAdvice
         advicePresenter.getRandomAdvice();
 
 
-//   TODO     Button btnTimer = view.findViewById(R.id.btnTimerDialog);
-//        btnTimer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                openDialog();
-//            }
-//        });
-
         Button btnWebsite = view.findViewById(R.id.btnWebsite);
 
         webViewIntent = new Intent(Intent.ACTION_VIEW);
@@ -98,30 +89,12 @@ public class HomeFragment extends Fragment implements HomeContract.View, iAdvice
         tvDescriptionAdvice.setText(description);
     }
 
-    public void openDialog() {
-        HomeFragment.TimerDialog dialogBox = new HomeFragment.TimerDialog();
-        dialogBox.setTargetFragment(this, 1);
-        dialogBox.show(getParentFragmentManager(), "example dialog");
-    }
-
     @Override
     public void startAssembliesReportActivity() {
         startActivity(new Intent(getContext(), AssembliesReportActivity.class));
     }
 
-    public static class TimerDialog extends DialogFragment {
-        public TimerDialog() {
 
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.layout_dialog_timer, container, false);
-            getChildFragmentManager().beginTransaction().add(R.id.frame_container_timer, new TimerFragment()).commit();
-            return v;
-        }
-
-    }
 
 
 }

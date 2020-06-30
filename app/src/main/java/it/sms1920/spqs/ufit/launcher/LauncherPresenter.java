@@ -133,4 +133,9 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         view.startEditWorkoutActivity(id);
     }
 
+    @Override
+    public void onTimerIconClicked() {
+        view.startTimer();
+    }
+
 }
