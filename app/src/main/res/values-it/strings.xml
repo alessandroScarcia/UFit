@@ -219,8 +219,8 @@
     <string name="noWorkoutFound">Non ci sono schede d\'allenamento</string>
     <string name="notSavable">Dai un nome alla scheda e aggiungi almeno un esercizio</string>
     <string name="login_request">Richiesta Login</string>
-    <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione con il tuo Trainer"</string>
-    <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione con il tuo Atleta"</string>
+    <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione"</string>
+    <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione"</string>
 
     <string name="maxReps">rip massime</string>
     <string name="workoutplan">Schede d\'allenamento</string>

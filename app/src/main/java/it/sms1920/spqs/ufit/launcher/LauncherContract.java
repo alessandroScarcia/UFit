@@ -43,7 +43,6 @@ public interface LauncherContract {
 
     interface Presenter {
 
-
         void onHomeIconClicked();
 
         void onPlansIconClicked();

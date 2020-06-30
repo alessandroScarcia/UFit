@@ -1,6 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
-public interface MaxStrenghtTestContact {
+public interface MaxStrenghtTestContract {
 
     interface View {
 

@@ -22,9 +22,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
@@ -48,11 +50,11 @@ public class StatsFragment extends Fragment implements StatsContract.View, Popup
     private LinearLayout cardMuscle;
     private LinearLayout cardHeight;
 
-    private LinearLayout cardArm;
-    private LinearLayout cardChest;
-    private LinearLayout cardWaist;
-    private LinearLayout cardTight;
-    private LinearLayout cardCalve;
+    private CardView cardArm;
+    private CardView cardChest;
+    private CardView cardWaist;
+    private CardView cardTight;
+    private CardView cardCalve;
 
     //declaration of all the text view inside the 2 different tab content
     @SuppressLint("StaticFieldLeak")
@@ -613,6 +615,5 @@ public class StatsFragment extends Fragment implements StatsContract.View, Popup
 
         }
     }
-
 
 }
