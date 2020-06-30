@@ -76,6 +76,7 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         if (firebaseUser.isAnonymous()) {
             currentFragment = FragType.CHOOSE;
             view.insertChooseFragment();
+            view.setToolbarTitle(view.getLoginRequiredString());
         } else {
             if (currentFragment != PROFILE) {
                 view.insertProfileFragment();
