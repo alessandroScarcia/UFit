@@ -616,5 +616,4 @@ public class StatsFragment extends Fragment implements StatsContract.View, Popup
         }
     }
 
-
 }

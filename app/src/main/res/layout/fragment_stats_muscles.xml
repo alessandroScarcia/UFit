@@ -29,7 +29,7 @@
                 <ImageView
                     android:id="@+id/bicepsImage"
                     android:layout_width="@dimen/stats_measure_width"
-                    android:layout_height="@dimen/stats_image_measure_height"
+                    android:layout_height="@dimen/stats_measure_height"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
                     android:scaleType="fitCenter"
@@ -96,7 +96,7 @@
                 <ImageView
                     android:id="@+id/chestImage"
                     android:layout_width="@dimen/stats_measure_width"
-                    android:layout_height="@dimen/stats_image_measure_height"
+                    android:layout_height="@dimen/stats_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
@@ -167,7 +167,7 @@
                 <ImageView
                     android:id="@+id/waistImage"
                     android:layout_width="@dimen/stats_measure_width"
-                    android:layout_height="@dimen/stats_image_measure_height"
+                    android:layout_height="@dimen/stats_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
@@ -238,7 +238,7 @@
                 <ImageButton
                     android:id="@+id/tightImage"
                     android:layout_width="@dimen/stats_measure_width"
-                    android:layout_height="@dimen/stats_image_measure_height"
+                    android:layout_height="@dimen/stats_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
@@ -309,7 +309,7 @@
                 <ImageView
                     android:id="@+id/calveImage"
                     android:layout_width="@dimen/stats_measure_width"
-                    android:layout_height="@dimen/stats_image_measure_height"
+                    android:layout_height="@dimen/stats_measure_height"
                     android:background="@color/colorWhite"
                     android:contentDescription="@string/img"
                     android:paddingVertical="@dimen/small_standard_margin"
