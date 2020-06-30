@@ -1,7 +1,5 @@
 package it.sms1920.spqs.ufit.launcher.workoutplan.adapter.exerciseslist;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,9 +18,9 @@ import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.WorkoutPlan;
 import it.sms1920.spqs.ufit.model.search.ExerciseDetailed;
 import it.sms1920.spqs.ufit.model.search.SearchExercise;
-import it.sms1920.spqs.ufit.model.search.iSearchClient;
+import it.sms1920.spqs.ufit.model.search.SearchClient;
 
-public class WorkoutExercisesListPresenter implements WorkoutExercisesListContract.Presenter, iSearchClient {
+public class WorkoutExercisesListPresenter implements WorkoutExercisesListContract.Presenter, SearchClient {
 
     private WorkoutExercisesListContract.View view;
 

@@ -29,14 +29,14 @@ import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 public class SearchExercise {
     private static final String TAG = SearchExercise.class.getCanonicalName();
 
-    private iSearchClient client;
+    private SearchClient client;
 
     private DatabaseReference rootReference;
 
     private Map<String, Exercise> exerciseMap = new TreeMap<>();
     private List<ExerciseTranslation> exerciseTranslationList = new ArrayList<>();
 
-    public SearchExercise(iSearchClient client) {
+    public SearchExercise(SearchClient client) {
         this.client = client;
         this.rootReference = FirebaseDbSingleton.getInstance().getReference();
         rootReference.child(ExerciseTranslation.CHILD_NAME).keepSynced(true);

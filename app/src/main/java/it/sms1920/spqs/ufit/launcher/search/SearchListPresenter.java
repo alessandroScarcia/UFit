@@ -1,19 +1,17 @@
 package it.sms1920.spqs.ufit.launcher.search;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import it.sms1920.spqs.ufit.model.search.ExerciseDetailed;
 import it.sms1920.spqs.ufit.model.search.SearchExercise;
-import it.sms1920.spqs.ufit.model.search.iSearchClient;
+import it.sms1920.spqs.ufit.model.search.SearchClient;
 
 /**
  * Presenter for SearchListAdapter View.
  * Implements iSearchClient to communicate with Model SearchExercise.
  */
-public class SearchListPresenter implements SearchListContract.Presenter, iSearchClient {
+public class SearchListPresenter implements SearchListContract.Presenter, SearchClient {
 
     private SearchListContract.View view;
 
