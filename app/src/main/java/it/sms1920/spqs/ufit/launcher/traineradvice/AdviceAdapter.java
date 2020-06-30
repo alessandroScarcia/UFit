@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.sms1920.spqs.ufit.launcher.R;
-public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHolder> implements iAdvice.View {
+public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHolder> implements AdviceListContract.View {
 
-    private iAdvice.Presenter presenter;
+    private AdviceListContract.Presenter presenter;
 
     private AdviceFragment parentFragment;
 
@@ -53,7 +53,7 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHold
 
     }
 
-    public class AdviceHolder extends RecyclerView.ViewHolder implements iAdvice.View.Item {
+    public class AdviceHolder extends RecyclerView.ViewHolder implements AdviceListContract.View.Item {
         private TextView tvTitle;
         private TextView tvDescription;
         private Button btnDeleteAdvice;

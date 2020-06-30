@@ -21,10 +21,9 @@ import it.sms1920.spqs.ufit.launcher.assembliesreport.AssembliesReportActivity;
 import it.sms1920.spqs.ufit.launcher.R;
 import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
 import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceList;
-import it.sms1920.spqs.ufit.launcher.traineradvice.iAdvice;
+import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceListContract;
 
-public class HomeFragment extends Fragment implements HomeContract.View, iAdvice.View {
-    private static final String TAG = HomeFragment.class.getCanonicalName();
+public class HomeFragment extends Fragment implements HomeContract.View, AdviceListContract.View {
 
     private HomeContract.Presenter presenter;
 
@@ -46,7 +45,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, iAdvice
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        iAdvice.Presenter advicePresenter = new AdviceList(this);
+        AdviceListContract.Presenter advicePresenter = new AdviceList(this);
         tvTitleAdvice = view.findViewById(R.id.tvTitleRandomAdvice);
         tvDescriptionAdvice = view.findViewById(R.id.tvDescriptionRandomAdvice);
         advicePresenter.getRandomAdvice();
@@ -64,6 +63,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, iAdvice
         Button btnWebsite = view.findViewById(R.id.btnWebsite);
 
         webViewIntent = new Intent(Intent.ACTION_VIEW);
+        String URL_WEBSITE = "http://www.quatematico.com/Ufit";
         webViewIntent.setData(Uri.parse(URL_WEBSITE));
         btnWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, iAdvice
             }
         });
 
-        fabAssembliesReport = view.findViewById(R.id.fabAssembliesReport);
+        FloatingActionButton fabAssembliesReport = view.findViewById(R.id.fabAssembliesReport);
         fabAssembliesReport.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,30 +98,13 @@ public class HomeFragment extends Fragment implements HomeContract.View, iAdvice
         tvDescriptionAdvice.setText(description);
     }
 
-    public void openDialog() {
-        HomeFragment.TimerDialog dialogBox = new HomeFragment.TimerDialog();
-        dialogBox.setTargetFragment(this, 1);
-        dialogBox.show(getParentFragmentManager(), "example dialog");
-    }
 
     @Override
     public void startAssembliesReportActivity() {
         startActivity(new Intent(getContext(), AssembliesReportActivity.class));
     }
 
-    public static class TimerDialog extends DialogFragment {
-        public TimerDialog() {
 
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.layout_dialog_timer, container, false);
-            getChildFragmentManager().beginTransaction().add(R.id.frame_container_timer, new TimerFragment()).commit();
-            return v;
-        }
-
-    }
 
 
 }

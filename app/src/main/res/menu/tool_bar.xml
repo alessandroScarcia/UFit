@@ -32,9 +32,17 @@
         android:visible="false"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/timer"
+        android:icon="@drawable/ic_timer_white"
+        android:title=""
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/edit"
         android:icon="@drawable/ic_pencil_pressed_white"
         android:title=""
         android:visible="false"
         app:showAsAction="ifRoom" />
+
+
 </menu>

@@ -24,8 +24,8 @@ import it.sms1920.spqs.ufit.launcher.R;
 
 
 
-public class AdviceFragment extends Fragment implements iAdviceFragment.View {
-    private iAdviceFragment.Presenter presenter;
+public class AdviceFragment extends Fragment implements AdviceContract.View {
+    private AdviceContract.Presenter presenter;
 
     private static AdviceAdapter adapter;
 
