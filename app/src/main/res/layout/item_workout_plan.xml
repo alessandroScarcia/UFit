@@ -28,12 +28,16 @@
         <!-- Title, secondary and supporting text -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvWorkoutPlanName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/big_standard_margin"
             android:layout_marginStart="32dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginEnd="@dimen/small_standard_margin"
             android:textAppearance="?attr/textAppearanceHeadline6"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRemove"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

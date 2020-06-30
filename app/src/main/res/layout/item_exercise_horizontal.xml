@@ -32,7 +32,8 @@
         <!-- Title, secondary and supporting text -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtExerciseName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/big_standard_margin"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:ellipsize="end"
