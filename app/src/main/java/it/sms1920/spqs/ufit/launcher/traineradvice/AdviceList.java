@@ -31,7 +31,7 @@ public class AdviceList implements iAdvice.Presenter {
 
     private List<Advice> adviceList;
     private Random RANDOM = new Random();
-
+    private boolean userLogged =  false;
 
     private FirebaseUser firebaseUser;
     private DatabaseReference database;
@@ -68,29 +68,31 @@ public class AdviceList implements iAdvice.Presenter {
         database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
-        Log.d(TAG, "loggato" + firebaseUser.getUid());
-
         database.keepSynced(true);
-
-        database.child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        if (user != null) {
-                            if (user.getLinkedUserId() != null) {
-                                userLinkId = user.getLinkedUserId()+"";
-                                Log.d(TAG, "Id trainer" + user.getLinkedUserId());
+        if(firebaseUser != null) {
+            database.child(firebaseUser.getUid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            User user = dataSnapshot.getValue(User.class);
+                            if (user != null) {
+                                if (user.getLinkedUserId() != null) {
+                                    userLinkId = user.getLinkedUserId() + "";
+                                    Log.d(TAG, "Id trainer" + user.getLinkedUserId());
+                                }
+                                userLogged = true;
                             }
+                            getSingleAdvice();
                         }
-                        getSingleAdvice();
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+        }else{
+            getSingleAdvice();
+        }
     }
 
 
@@ -232,9 +234,14 @@ public class AdviceList implements iAdvice.Presenter {
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
         assert firebaseUser != null;
+        Query mPersonalTrainerAdviceQuery;
+        String language = Locale.getDefault().getISO3Language();
 
-        // TODO add reference to local user
-        Query mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo(firebaseUser.getUid());
+        mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("codLanguage").equalTo(language);
+
+        if(userLogged) {
+            mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo(firebaseUser.getUid());
+        }
 
         mPersonalTrainerAdviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
