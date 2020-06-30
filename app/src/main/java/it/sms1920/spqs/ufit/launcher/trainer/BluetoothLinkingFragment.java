@@ -149,13 +149,13 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
 
     @Override
     public void alreadyConnected(boolean isTrainer) {
+        if (getContext() != null) {
+            btnConnect.setVisibility(GONE);
+            btnDisconnect.setVisibility(View.VISIBLE);
 
-        btnConnect.setVisibility(GONE);
-        btnDisconnect.setVisibility(View.VISIBLE);
-
-        if (isTrainer) setStatus(getString(R.string.userLinked));
-        else setStatus(getString(R.string.trainerLinked));
-
+            if (isTrainer) setStatus(getString(R.string.userLinked));
+            else setStatus(getString(R.string.trainerLinked));
+        }
     }
 
     @Override
@@ -165,47 +165,51 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
 
     @Override
     public String getConnectHint(Boolean role) {
-        String string;
+        String string = "";
 
         if (role) {
             string = getString(R.string.connectionHintForTrainer);
         } else {
-            string = getString(R.string.connectionHintForUser);
+            if (getContext() != null) {
+                string = getString(R.string.connectionHintForUser);
+            }
         }
         return string;
     }
 
     @Override
     public void showLinkedUserInfo(String name, String surname, Integer gender, String imageUrl, String birthDate) {
+
         View view = getView();
+        if (view != null) {
 
-        AppCompatImageView img = view.findViewById(R.id.imageTrainer);
-        img.setVisibility(GONE);
+            AppCompatImageView img = view.findViewById(R.id.imageTrainer);
+            img.setVisibility(GONE);
 
-        ConstraintLayout lyt = view.findViewById(R.id.lytLinkedInfo);
-        lyt.setVisibility(View.VISIBLE);
+            ConstraintLayout lyt = view.findViewById(R.id.lytLinkedInfo);
+            lyt.setVisibility(View.VISIBLE);
 
-        TextView tvNameSurname = view.findViewById(R.id.tvNameSurname);
-        TextView tvGender = view.findViewById(R.id.tvGender);
-        TextView tvBirthDate = view.findViewById(R.id.tvBirthDate);
+            TextView tvNameSurname = view.findViewById(R.id.tvNameSurname);
+            TextView tvGender = view.findViewById(R.id.tvGender);
+            TextView tvBirthDate = view.findViewById(R.id.tvBirthDate);
 
-        String nameSurnameText = getString(R.string.name) + ": " + name + " " + surname;
-        tvNameSurname.setText(nameSurnameText);
+            String nameSurnameText = getString(R.string.name) + ": " + name + " " + surname;
+            tvNameSurname.setText(nameSurnameText);
 
-        String genderText = getText(R.string.gender) + ": " + getResources().getStringArray(R.array.genders)[gender];
-        tvGender.setText(genderText);
+            String genderText = getText(R.string.gender) + ": " + getResources().getStringArray(R.array.genders)[gender];
+            tvGender.setText(genderText);
 
-        String birthDateText = getString(R.string.birth_date) + ": " + birthDate;
-        tvBirthDate.setText(birthDateText);
+            String birthDateText = getString(R.string.birth_date) + ": " + birthDate;
+            tvBirthDate.setText(birthDateText);
 
 
-        ImageView imgProfile = view.findViewById(R.id.imgProfile);
+            ImageView imgProfile = view.findViewById(R.id.imgProfile);
 
-        Picasso.get()
-                .load(imageUrl)
-                .placeholder(R.drawable.img_profile_placeholder)
-                .into(imgProfile);
-
+            Picasso.get()
+                    .load(imageUrl)
+                    .placeholder(R.drawable.img_profile_placeholder)
+                    .into(imgProfile);
+        }
     }
 
     @Override

@@ -103,7 +103,6 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
                             if (him != null) {
                                 view.showLinkedUserInfo(him.getName(), him.getSurname(), him.getGender(), him.getImageUrl(), him.getBirthDate());
-                                view.showToast(him.toString());
                             }
                         }
                     }
