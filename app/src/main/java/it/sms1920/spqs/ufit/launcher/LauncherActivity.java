@@ -28,6 +28,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     private LauncherContract.Presenter presenter;
     private Menu menu;
     private Toolbar toolbar;
+    private BottomNavigationView bottombar;
     private ImageView logo;
 
     @Override
@@ -45,10 +46,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
 
 
         // Setting bottom bar
-        final BottomNavigationView bottomNav = findViewById(R.id.bottom_bar);
-        menu = bottomNav.getMenu();
+        bottombar = findViewById(R.id.bottom_bar);
+        menu = bottombar.getMenu();
 
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottombar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -74,7 +75,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 return true;
             }
         });
-
         logo.setVisibility(View.VISIBLE);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
@@ -144,7 +144,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
 
     @Override
     public void insertTrainerFragment() {
-            insertChooseFragment();
+        insertChooseFragment();
     }
 
     @Override
@@ -286,6 +286,19 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     @Override
     public String getLoginRequiredString() {
         return getString(R.string.login_required);
+    }
+
+
+    @Override
+    public void lockView() {
+        toolbar.getMenu().findItem(R.id.logout).setEnabled(false);
+        toolbar.getMenu().findItem(R.id.profile_settings).setEnabled(false);
+
+        bottombar.getMenu().findItem(R.id.nav_home).setEnabled(false);
+        bottombar.getMenu().findItem(R.id.nav_plans).setEnabled(false);
+        bottombar.getMenu().findItem(R.id.nav_trainer).setEnabled(false);
+        bottombar.getMenu().findItem(R.id.nav_stats).setEnabled(false);
+        bottombar.getMenu().findItem(R.id.nav_profile).setEnabled(false);
     }
 
     @Override
