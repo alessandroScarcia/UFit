@@ -288,6 +288,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         return getString(R.string.login_required);
     }
 
+
     @Override
     public void lockView() {
         toolbar.getMenu().findItem(R.id.logout).setEnabled(false);
