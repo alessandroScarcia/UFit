@@ -14,19 +14,30 @@
         android:layout_height="wrap_content">
 
         <!-- Title, secondary and supporting text -->
+
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvWeight"
-            android:layout_width="300dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:textAppearance="?attr/textAppearanceBody2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvReps"
-            />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="62dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="232dp"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/kg"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvReps"
@@ -35,14 +46,24 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
-            android:hint="@string/reps"
+            android:hint="0"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
 
-
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvRepsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/maxReps"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -219,6 +219,9 @@
     <string name="login_request">Richiesta Login</string>
     <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione con il tuo Trainer"</string>
     <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione con il tuo Atleta"</string>
+
+    <string name="maxReps">rip massime</string>
+
 </resources>
 
 

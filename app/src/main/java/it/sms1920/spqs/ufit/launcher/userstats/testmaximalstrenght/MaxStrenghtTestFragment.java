@@ -1,9 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,15 +19,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Objects;
-
 import it.sms1920.spqs.ufit.launcher.R;
 
 
-public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTestFragment.View{
+public class MaxStrenghtTestFragment extends Fragment implements MaxStrenghtTestContact.View{
 
     private static MaxStrenghtTestAdapter adapter;
-    private iMaxStrenghtTestFragment.Presenter presenter;
+    private MaxStrenghtTestContact.Presenter presenter;
     private EditText etInsertWeight;
 
     private static int checkIdRadioButton = 0;

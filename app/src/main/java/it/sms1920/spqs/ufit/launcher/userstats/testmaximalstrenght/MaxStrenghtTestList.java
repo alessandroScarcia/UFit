@@ -5,7 +5,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaxStrenghtTestList implements iMaxStrenghtTest.Presenter {
+import it.sms1920.spqs.ufit.model.firebase.database.ExerciseSetItem;
+
+public class MaxStrenghtTestList implements MaxStrenghtTestListContract.Presenter {
     //declaration of the different range
     private static final int RM_1 = 1;
     private static final int RANGE_2_3 = 2;
@@ -34,12 +36,12 @@ public class MaxStrenghtTestList implements iMaxStrenghtTest.Presenter {
 
 
     private static final String TAG = MaxStrenghtTestList.class.getCanonicalName();
-    private final iMaxStrenghtTest.View view;
+    private final MaxStrenghtTestListContract.View view;
 
-    private List<Set> setWeightList;
+    private List<ExerciseSetItem> setWeightList;
     private static int RM;
 
-    public MaxStrenghtTestList(iMaxStrenghtTest.View view) {
+    public MaxStrenghtTestList(MaxStrenghtTestListContract.View view) {
         this.view = view;
         setWeightList= new ArrayList<>();
     }
@@ -47,11 +49,11 @@ public class MaxStrenghtTestList implements iMaxStrenghtTest.Presenter {
 
 
     @Override
-    public void onBindWeightItemListViewAtPosition(iMaxStrenghtTest.View.Item holder, int position) {
-        Set itemData = setWeightList.get(position);
+    public void onBindWeightItemListViewAtPosition(MaxStrenghtTestListContract.View.Item holder, int position) {
+        ExerciseSetItem itemData = setWeightList.get(position);
         holder.setPosition(position);
-        holder.setReps(itemData.getReps());
-        holder.setWeight(itemData.getWeight());
+        holder.setReps(String.valueOf(itemData.getReps()));
+        holder.setWeight(String.valueOf(itemData.getLoad()));
     }
 
     @Override
@@ -67,9 +69,9 @@ public class MaxStrenghtTestList implements iMaxStrenghtTest.Presenter {
     public void loadSetList() {
         Log.d(TAG, "loadAdvice");
 
-        Set rmSet = new Set();
-        rmSet.setReps("1");
-        rmSet.setWeight(String.valueOf(RM));
+        ExerciseSetItem rmSet = new ExerciseSetItem();
+        rmSet.setReps(1);
+        rmSet.setLoad(RM);
 
         setWeightList.add(rmSet);
         setWeightList.add(weightPercent90());
@@ -92,81 +94,81 @@ public class MaxStrenghtTestList implements iMaxStrenghtTest.Presenter {
     }
 
 
-    public Set weightPercent90() {
-        Set newSet = new Set();
-        newSet.setReps("3-2");
-        newSet.setWeight(String.valueOf(RM * PERCENT_90 /PERCENT_100));
+    public ExerciseSetItem weightPercent90() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(3);
+        newSet.setLoad((float) RM * PERCENT_90 /PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent85() {
-        Set newSet = new Set();
-        newSet.setReps("5-4");
-        newSet.setWeight(String.valueOf(RM * PERCENT_85 /PERCENT_100));
+    public ExerciseSetItem weightPercent85() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(5);
+        newSet.setLoad((float) RM * PERCENT_85 /PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent80() {
-        Set newSet = new Set();
-        newSet.setReps("7-6");
-        newSet.setWeight(String.valueOf(RM * PERCENT_80 /PERCENT_100));
+    public ExerciseSetItem weightPercent80() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(7);
+        newSet.setLoad((float) RM * PERCENT_80 /PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent75() {
-        Set newSet = new Set();
-        newSet.setReps("9-8");
-        newSet.setWeight(String.valueOf(RM * PERCENT_75 /PERCENT_100));
+    public ExerciseSetItem weightPercent75() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(9);
+        newSet.setLoad((float) RM * PERCENT_75 /PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent70() {
-        Set newSet = new Set();
-        newSet.setReps("11-10");
-        newSet.setWeight(String.valueOf(RM * PERCENT_70 / PERCENT_100));
+    public ExerciseSetItem weightPercent70() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(11);
+        newSet.setLoad((float) RM * PERCENT_70 / PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent65() {
-        Set newSet = new Set();
-        newSet.setReps("13-12");
-        newSet.setWeight(String.valueOf(RM * PERCENT_65 / PERCENT_100));
+    public ExerciseSetItem weightPercent65() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(13);
+        newSet.setLoad((float)RM * PERCENT_65 / PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent60() {
-        Set newSet = new Set();
-        newSet.setReps("15-14");
-        newSet.setWeight(String.valueOf(RM * PERCENT_60 /PERCENT_100));
+    public ExerciseSetItem weightPercent60() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(15);
+        newSet.setLoad((float) RM * PERCENT_60 /PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent55() {
-        Set newSet = new Set();
-        newSet.setReps("17-16");
-        newSet.setWeight(String.valueOf(RM * PERCENT_55 / PERCENT_100));
+    public ExerciseSetItem weightPercent55() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(17);
+        newSet.setLoad((float) RM * PERCENT_55 / PERCENT_100);
         return newSet;
     }
 
 
-    public Set weightPercent50() {
-        Set newSet = new Set();
-        newSet.setReps("19-18");
-        newSet.setWeight(String.valueOf(RM * PERCENT_50 / PERCENT_100));
+    public ExerciseSetItem weightPercent50() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(19);
+        newSet.setLoad((float) RM * PERCENT_50 / PERCENT_100);
         return newSet;
     }
 
-    public Set weightPercent45() {
-        Set newSet = new Set();
-        newSet.setReps("20");
-        newSet.setWeight(String.valueOf(RM * PERCENT_45 / PERCENT_100));
+    public ExerciseSetItem weightPercent45() {
+        ExerciseSetItem newSet = new ExerciseSetItem();
+        newSet.setReps(20);
+        newSet.setLoad((float) RM * PERCENT_45 / PERCENT_100);
         return newSet;
     }
 
