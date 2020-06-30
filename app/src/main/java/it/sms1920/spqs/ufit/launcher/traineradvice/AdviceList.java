@@ -23,21 +23,21 @@ import it.sms1920.spqs.ufit.model.firebase.database.FirebaseDbSingleton;
 import it.sms1920.spqs.ufit.model.firebase.database.User;
 
 
-public class AdviceList implements iAdvice.Presenter {
+public class AdviceList implements AdviceListContract.Presenter {
 
     private static final String TAG = AdviceList.class.getCanonicalName();
     private static final int ID_LENGHT = 8;
-    private final iAdvice.View view;
+    private final AdviceListContract.View view;
 
     private List<Advice> adviceList;
     private Random RANDOM = new Random();
-
+    private boolean userLogged =  false;
 
     private FirebaseUser firebaseUser;
     private DatabaseReference database;
-    private String userLinkId;
+    private String userLinkId = null;
 
-    public AdviceList(iAdvice.View view) {
+    public AdviceList(AdviceListContract.View view) {
         this.view = view;
         adviceList= new ArrayList<>();
         loadAdviceList();
@@ -69,26 +69,30 @@ public class AdviceList implements iAdvice.Presenter {
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
         database.keepSynced(true);
-
-        database.child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        if (user != null) {
-                            if (user.getLinkedUserId() != null) {
-                                userLinkId = user.getLinkedUserId()+"";
-                                Log.d(TAG, "Id trainer" + user.getLinkedUserId());
-                                getSingleAdvice();
+        if(firebaseUser != null) {
+            database.child(firebaseUser.getUid())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            User user = dataSnapshot.getValue(User.class);
+                            if (user != null) {
+                                if (user.getLinkedUserId() != null) {
+                                    userLinkId = user.getLinkedUserId() + "";
+                                    Log.d(TAG, "Id trainer" + user.getLinkedUserId());
+                                }
+                                userLogged = true;
                             }
+                            getSingleAdvice();
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+        }else{
+            getSingleAdvice();
+        }
     }
 
 
@@ -168,7 +172,7 @@ public class AdviceList implements iAdvice.Presenter {
     }
 
     @Override
-    public void onBindAdviceItemListViewAtPosition(iAdvice.View.Item holder, int position) {
+    public void onBindAdviceItemListViewAtPosition(AdviceListContract.View.Item holder, int position) {
         Advice itemData = adviceList.get(position);
         Log.d(TAG, itemData.getTitle());
         holder.setPosition(position);
@@ -230,9 +234,14 @@ public class AdviceList implements iAdvice.Presenter {
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
         assert firebaseUser != null;
+        Query mPersonalTrainerAdviceQuery;
+        String language = Locale.getDefault().getISO3Language();
 
-        // TODO add reference to local user
-        Query mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo(firebaseUser.getUid());
+        mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("codLanguage").equalTo(language);
+
+        if(userLogged) {
+            mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo(firebaseUser.getUid());
+        }
 
         mPersonalTrainerAdviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

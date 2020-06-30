@@ -1,9 +1,7 @@
 package it.sms1920.spqs.ufit.launcher.traineradvice;
 
 
-import it.sms1920.spqs.ufit.model.firebase.database.Advice;
-
-public interface iAdvice {
+public interface AdviceListContract {
     interface View {
 
         void callNotifyDataSetChanged();
@@ -28,7 +26,7 @@ public interface iAdvice {
     interface Presenter {
         void onDeleteClicked(int position, String adviceId);
 
-        void onBindAdviceItemListViewAtPosition(iAdvice.View.Item holder, int position);
+        void onBindAdviceItemListViewAtPosition(AdviceListContract.View.Item holder, int position);
 
         int getAdviceCount();
 

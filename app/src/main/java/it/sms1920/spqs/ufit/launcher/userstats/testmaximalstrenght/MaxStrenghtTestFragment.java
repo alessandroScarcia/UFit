@@ -30,12 +30,7 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
 
     private static MaxStrenghtTestAdapter adapter;
     private iMaxStrenghtTestFragment.Presenter presenter;
-    @SuppressLint("StaticFieldLeak")
-    private static EditText etInsertWeight;
-
-
-    @SuppressLint("StaticFieldLeak")
-    public static Context context;
+    private EditText etInsertWeight;
 
     private static int checkIdRadioButton = 0;
 
@@ -50,7 +45,6 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weight, container, false);
-        context = view.getContext();
         Button btnSelectReps = view.findViewById(R.id.btnRepsDialog);
 
         btnSelectReps.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +83,7 @@ public class MaxStrenghtTestFragment extends Fragment implements iMaxStrenghtTes
     public void openDialog() {
         RepsChoiceDialog dialogBox = new RepsChoiceDialog();
         dialogBox.setTargetFragment(this, 1);
-        assert getFragmentManager() != null;
-        dialogBox.show(getFragmentManager(), "example dialog");
+        dialogBox.show(getParentFragmentManager(), "example dialog");
     }
 
 
