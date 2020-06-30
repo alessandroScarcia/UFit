@@ -226,6 +226,8 @@
     <string name="workoutplan">Schede d\'allenamento</string>
     <string name="login_required">Profilo necessario</string>
 
+    <string name="active_bluetooth">Attiva Bluetooth</string>
+    <string name="waitingtrainer">In attesa che un trainer si connetta.</string>
 </resources>
 
 

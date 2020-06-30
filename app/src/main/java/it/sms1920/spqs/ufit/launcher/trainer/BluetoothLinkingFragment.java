@@ -38,6 +38,8 @@ import static android.view.View.GONE;
 
 public class BluetoothLinkingFragment extends Fragment implements BluetoothLinkingContract.View {
 
+    private static final int VISIBILITY_REQUEST = 0;
+    private static final int ACTIVATE_BLUETOOTH = 1;
     LauncherActivity launcher;
 
     private TextView status;
@@ -131,6 +133,11 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     }
 
     @Override
+    public void setButtonText(String text) {
+        btnConnect.setText(text);
+    }
+
+    @Override
     public String getConnectingString() {
         return getString(R.string.connecting);
     }
@@ -202,6 +209,24 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     }
 
     @Override
+    public void activeVisibility(BluetoothAdapter bluetoothAdapter) {
+        Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 30);
+        startActivityForResult(intent, VISIBILITY_REQUEST);
+    }
+
+    @Override
+    public String getButtonText(Boolean isTrainer) {
+        String text;
+        if (isTrainer) {
+            text = getString(R.string.connetti);
+        } else {
+            text = getString(R.string.active_bluetooth);
+        }
+        return text;
+    }
+
+    @Override
     public void showBluetoothDialog(BluetoothAdapter bluetoothAdapter, ArrayAdapter<String> discoveredDevicesAdapter, BroadcastReceiver discoveryFinishReceiver) {
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.fragment_bluetooth_dialog);
@@ -209,7 +234,7 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
 
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, 1);
+            startActivityForResult(enableBtIntent, ACTIVATE_BLUETOOTH);
         } else {
 
             continueShowingBluetoothDialog(bluetoothAdapter, discoveredDevicesAdapter, discoveryFinishReceiver);
@@ -304,11 +329,24 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            presenter.setChatController();
-            presenter.onConnectButtonClicked();
-        } else {
-            Toast.makeText(launcher, getString(R.string.bluetoothDisabled), Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case ACTIVATE_BLUETOOTH:
+                if (resultCode == Activity.RESULT_OK) {
+                    presenter.setChatController();
+                    presenter.onConnectButtonClicked();
+                } else {
+                    Toast.makeText(launcher, getString(R.string.bluetoothDisabled), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case VISIBILITY_REQUEST:
+                if (resultCode == 30) {
+                    Toast.makeText(launcher, getString(R.string.waitingtrainer), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(launcher, getString(R.string.bluetoothDisabled), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
         }
 
     }

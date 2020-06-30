@@ -29,6 +29,8 @@ public interface BluetoothLinkingContract {
 
         void setStatus(String text);
 
+        void setButtonText(String text);
+
         String getConnectingString();
 
         String getSameRoleString();
@@ -40,6 +42,10 @@ public interface BluetoothLinkingContract {
         String getConnectHint(Boolean role);
 
         void showLinkedUserInfo(String name, String surname, Integer gender, String imageUrl, String birthDate);
+
+        void activeVisibility(BluetoothAdapter bluetoothAdapter);
+
+        String getButtonText(Boolean isTrainer);
     }
 
     interface Presenter {

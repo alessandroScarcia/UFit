@@ -73,6 +73,7 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
                                 } else {
                                     view.setStatus(view.getConnectHint(me.getRole()));
+                                    view.setButtonText(view.getButtonText(me.getRole()));
                                 }
                             }
                         }
@@ -118,7 +119,11 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
 
     @Override
     public void onConnectButtonClicked() {
-        view.showBluetoothDialog(bluetoothAdapter, discoveredDevicesAdapter, discoveryFinishReceiver);
+        if (me.getRole()) {
+            view.showBluetoothDialog(bluetoothAdapter, discoveredDevicesAdapter, discoveryFinishReceiver);
+        } else {
+            view.activeVisibility(bluetoothAdapter);
+        }
     }
 
     @Override

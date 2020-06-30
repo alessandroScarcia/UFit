@@ -239,6 +239,8 @@
     <string name="edit_role_in_athlete">"By changing your role in Athlete you will lose your current association"</string>
     <string name="maxReps">max reps</string>
     <string name="login_required">Account required</string>
+    <string name="active_bluetooth">Active Bluetooth</string>
+    <string name="waitingtrainer">Waiting for a trainer connecting…</string>
 
 
 </resources>
