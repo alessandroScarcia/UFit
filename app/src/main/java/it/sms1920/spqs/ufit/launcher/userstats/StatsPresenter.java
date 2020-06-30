@@ -11,12 +11,12 @@ import it.sms1920.spqs.ufit.model.room.UserStats;
 import static java.sql.Types.NULL;
 
 
-public class StatsPresenter implements iStatsFragment.Presenter {
+public class StatsPresenter implements StatsContract.Presenter {
     private static final float NULL_STATS = 0;
-    private final iStatsFragment.View view;
+    private final StatsContract.View view;
     public UserStats userStats;
 
-    public StatsPresenter(iStatsFragment.View view, Context context) {
+    public StatsPresenter(StatsContract.View view, Context context) {
         this.view = view;
         initializeDatabase(context);
 

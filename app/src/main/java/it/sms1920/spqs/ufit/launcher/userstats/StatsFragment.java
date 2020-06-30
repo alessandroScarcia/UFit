@@ -35,9 +35,9 @@ import it.sms1920.spqs.ufit.launcher.R;
 
 
 
-public class StatsFragment extends Fragment implements iStatsFragment.View, PopupMenu.OnMenuItemClickListener {
+public class StatsFragment extends Fragment implements StatsContract.View, PopupMenu.OnMenuItemClickListener {
     private static final String TAG = StatsFragment.class.getCanonicalName();
-    private static iStatsFragment.Presenter presenter;
+    private static StatsContract.Presenter presenter;
     private TabLayout tlStats;
     LinearLayout containerLayout;
     Context context;
