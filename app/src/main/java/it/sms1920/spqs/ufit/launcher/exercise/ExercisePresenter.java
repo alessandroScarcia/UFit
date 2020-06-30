@@ -6,11 +6,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.sms1920.spqs.ufit.model.search.iSearchClient;
+import it.sms1920.spqs.ufit.model.search.SearchClient;
 import it.sms1920.spqs.ufit.model.search.ExerciseDetailed;
 import it.sms1920.spqs.ufit.model.search.SearchExercise;
 
-public class ExercisePresenter implements ExerciseContract.Presenter, iSearchClient {
+public class ExercisePresenter implements ExerciseContract.Presenter, SearchClient {
     private static final String TAG = ExercisePresenter.class.getCanonicalName();
     private ExerciseContract.View view;
 
