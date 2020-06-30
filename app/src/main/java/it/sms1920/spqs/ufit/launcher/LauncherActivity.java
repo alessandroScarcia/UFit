@@ -3,9 +3,11 @@ package it.sms1920.spqs.ufit.launcher;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +17,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.fragment.app.DialogFragment;
 import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
+import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.BluetoothLinkingFragment;
 
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
@@ -113,6 +117,9 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 break;
             case R.id.edit:
                 presenter.onEditIconClicked();
+                break;
+            case R.id.timer:
+                presenter.onTimerIconClicked();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -236,6 +243,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         startActivity(intent);
     }
 
+
     private void setMenuItemIcon(int item, int icon) {
         menu.findItem(item).setChecked(true);
         menu.findItem(item).setIcon(icon);
@@ -285,6 +293,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.edit).setVisible(visible);
     }
 
+    public void showToolbarTimerIcon(boolean visible) {
+        toolbar.getMenu().findItem(R.id.timer).setVisible(visible);
+    }
+
     public void insertBluetoothLinkingFragment() {
         resetMenuIcons();
         resetToolbarIcons();
@@ -293,5 +305,26 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toggleToolbarNavigationButton(false);
         setToolbarTitle("Trainer Linking");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new BluetoothLinkingFragment()).commit();
+    }
+
+    @Override
+    public void startTimer() {
+        TimerDialog dialogBox = new TimerDialog();
+        dialogBox.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    public static class TimerDialog extends DialogFragment {
+
+        public TimerDialog() {
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View v = inflater.inflate(R.layout.layout_dialog_timer, container, false);
+            getChildFragmentManager().beginTransaction().add(R.id.frame_container_timer, new TimerFragment()).commit();
+            return v;
+        }
+
     }
 }

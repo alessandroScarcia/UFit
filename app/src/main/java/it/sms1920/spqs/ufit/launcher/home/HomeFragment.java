@@ -25,12 +25,14 @@ import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceListContract;
 
 public class HomeFragment extends Fragment implements HomeContract.View, AdviceListContract.View {
 
-
     private HomeContract.Presenter presenter;
 
     private Intent webViewIntent;
     private TextView tvTitleAdvice;
     private TextView tvDescriptionAdvice;
+    private final String URL_WEBSITE = "http://www.quatematico.com/Ufit";
+
+    private FloatingActionButton fabAssembliesReport;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,25 +99,12 @@ public class HomeFragment extends Fragment implements HomeContract.View, AdviceL
     }
 
 
-
     @Override
     public void startAssembliesReportActivity() {
         startActivity(new Intent(getContext(), AssembliesReportActivity.class));
     }
 
-    public static class TimerDialog extends DialogFragment {
-        public TimerDialog() {
 
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.layout_dialog_timer, container, false);
-            getChildFragmentManager().beginTransaction().add(R.id.frame_container_timer, new TimerFragment()).commit();
-            return v;
-        }
-
-    }
 
 
 }

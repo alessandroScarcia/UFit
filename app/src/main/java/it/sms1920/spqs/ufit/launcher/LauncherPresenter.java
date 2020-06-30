@@ -111,9 +111,9 @@ public class LauncherPresenter implements LauncherContract.Presenter {
 
     @Override
     public void onLogOutIconClicked() {
-        view.resetActivity();
         FirebaseAuthSingleton.getFirebaseAuth().signOut();
         FirebaseAuthSingleton.getFirebaseAuth().signInAnonymously();
+        view.resetActivity();
     }
 
     @Override
@@ -131,6 +131,11 @@ public class LauncherPresenter implements LauncherContract.Presenter {
     public void onEditIconClicked() {
         String id = view.getWorkoutId();
         view.startEditWorkoutActivity(id);
+    }
+
+    @Override
+    public void onTimerIconClicked() {
+        view.startTimer();
     }
 
 }
