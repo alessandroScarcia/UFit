@@ -235,8 +235,8 @@
     <string name="noWorkoutFound">No workout plans</string>
     <string name="notSavable">Add at least 1 exercise and give a name to workout plan</string>
     <string name="login_request">Login Request</string>
-    <string name="edit_role_in_trainer">"Cambiando il tuo ruolo in Trainer perderai la tua attuale associazione"</string>
-    <string name="edit_role_in_athlete">"Cambiando il tuo ruolo in Atleta perderai la tua attuale associazione"</string>
+    <string name="edit_role_in_trainer">"By changing your role in Trainer you will lose your current association"</string>
+    <string name="edit_role_in_athlete">"By changing your role in Athlete you will lose your current association"</string>
     <string name="maxReps">max reps</string>
     <string name="login_required">Account required</string>
 
