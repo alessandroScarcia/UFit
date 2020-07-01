@@ -98,6 +98,8 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
         tvAssembliesReportDesc = findViewById(R.id.tvAssembliesReportDesc);
         tvAssemblyReportCreateMsg = findViewById(R.id.tvAssemblyReportCreateMsg);
 
+        presenter = new AssembliesReportPresenter(this);
+
         tlAssembliesReport.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -117,6 +119,7 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
             @Override
             public void onClick(View v) {
                 if (etGymAddress.getText() != null) {
+
                     presenter.onSearchReportClicked(etGymAddress.getText().toString());
                 }
             }
@@ -125,14 +128,15 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
         btnSendReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onSendReportClicked();
+
+
             }
         });
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        presenter = new AssembliesReportPresenter(this);
+
     }
 
     @Override

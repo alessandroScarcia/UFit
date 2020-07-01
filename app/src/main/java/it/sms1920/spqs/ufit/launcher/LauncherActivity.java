@@ -22,8 +22,10 @@ import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
 import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
+import it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght.MaxStrenghtTestFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
+import it.sms1920.spqs.ufit.model.firebase.database.WorkoutPlan;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
     private LauncherContract.Presenter presenter;
@@ -107,6 +109,9 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 break;
             case R.id.timer:
                 presenter.onTimerIconClicked();
+                break;
+            case R.id.maximalTest:
+                presenter.onMaxStrenghtTestIconClicked();
                 break;
             case R.id.adviceTrainer:
                 presenter.onAdviceTrainerIconClicked();
@@ -317,9 +322,14 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
     @Override
+    public void startMaxStrenghtTest() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MaxStrenghtTestFragment()).commit();
+    }
+
+    @Override
     public void startTimer() {
         TimerFragment dialogBox = new TimerFragment();
-        dialogBox.show(getSupportFragmentManager(), "example dialog");
+        dialogBox.show(getSupportFragmentManager(), "timer dialog");
     }
 
     public void showToolbarMaximalTestIcon(boolean visible) {
