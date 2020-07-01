@@ -17,6 +17,7 @@ import it.sms1920.spqs.ufit.launcher.home.HomeFragment;
 import it.sms1920.spqs.ufit.launcher.search.SearchActivity;
 import it.sms1920.spqs.ufit.launcher.toolworkout.TimerFragment;
 import it.sms1920.spqs.ufit.launcher.trainer.BluetoothLinkingFragment;
+import it.sms1920.spqs.ufit.launcher.traineradvice.AdviceActivity;
 import it.sms1920.spqs.ufit.launcher.userprofile.choose.ChooseFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.settings.ProfileSettingsFragment;
 import it.sms1920.spqs.ufit.launcher.userprofile.show.ProfileFragment;
@@ -106,6 +107,9 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 break;
             case R.id.timer:
                 presenter.onTimerIconClicked();
+                break;
+            case R.id.adviceTrainer:
+                presenter.onAdviceTrainerIconClicked();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -238,10 +242,15 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
     private void resetToolbarIcons() {
-        toolbar.getMenu().findItem(R.id.logout).setVisible(false);
         toolbar.getMenu().findItem(R.id.search).setVisible(false);
-        toolbar.getMenu().findItem(R.id.add).setVisible(false);
         toolbar.getMenu().findItem(R.id.profile_settings).setVisible(false);
+        toolbar.getMenu().findItem(R.id.logout).setVisible(false);
+        toolbar.getMenu().findItem(R.id.add).setVisible(false);
+        toolbar.getMenu().findItem(R.id.confirm).setVisible(false);
+        toolbar.getMenu().findItem(R.id.timer).setVisible(false);
+        toolbar.getMenu().findItem(R.id.edit).setVisible(false);
+        toolbar.getMenu().findItem(R.id.adviceTrainer).setVisible(false);
+        toolbar.getMenu().findItem(R.id.maximalTest).setVisible(false);
     }
 
     public void setToolbarTitle(String title) {
@@ -277,6 +286,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         resetMenuIcons();
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
+        toolbar.getMenu().findItem(R.id.adviceTrainer).setVisible(true);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
         setToolbarTitle(getString(R.string.trainer));
@@ -302,9 +312,17 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
     @Override
+    public void startAdviceTrainerActivity() {
+        startActivity(new Intent(this, AdviceActivity.class));
+    }
+
+    @Override
     public void startTimer() {
         TimerFragment dialogBox = new TimerFragment();
         dialogBox.show(getSupportFragmentManager(), "example dialog");
     }
 
+    public void showToolbarMaximalTestIcon(boolean visible) {
+        toolbar.getMenu().findItem(R.id.maximalTest).setVisible(visible);
+    }
 }

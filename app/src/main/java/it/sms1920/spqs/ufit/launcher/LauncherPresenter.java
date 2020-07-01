@@ -150,4 +150,9 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         view.startTimer();
     }
 
+    @Override
+    public void onAdviceTrainerIconClicked() {
+        view.startAdviceTrainerActivity();
+    }
+
 }

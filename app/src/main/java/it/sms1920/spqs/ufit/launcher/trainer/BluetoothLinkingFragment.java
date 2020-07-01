@@ -196,7 +196,8 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
             String nameSurnameText = getString(R.string.name) + ": " + name + " " + surname;
             tvNameSurname.setText(nameSurnameText);
 
-            String genderText = getText(R.string.gender) + ": " + getResources().getStringArray(R.array.genders)[gender];
+            String g = (gender == null) ? "" : getResources().getStringArray(R.array.genders)[gender];
+            String genderText = getText(R.string.gender) + ": " + g;
             tvGender.setText(genderText);
 
             String birthDateText = getString(R.string.birth_date) + ": " + birthDate;

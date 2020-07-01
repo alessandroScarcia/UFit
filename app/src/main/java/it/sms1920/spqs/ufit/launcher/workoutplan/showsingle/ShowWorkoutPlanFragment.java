@@ -129,6 +129,7 @@ public class ShowWorkoutPlanFragment extends Fragment implements ShowWorkoutPlan
     public void setToolBarMenuEditIcon() {
         launcher.showToolbarEditIcon(true);
         launcher.showToolbarTimerIcon(true);
+        launcher.showToolbarMaximalTestIcon(true);
     }
 
 
