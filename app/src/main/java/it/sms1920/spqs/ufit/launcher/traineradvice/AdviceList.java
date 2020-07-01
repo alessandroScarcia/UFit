@@ -36,6 +36,7 @@ public class AdviceList implements AdviceListContract.Presenter {
     private FirebaseUser firebaseUser;
     private DatabaseReference database;
     private String userLinkId = null;
+    private boolean isUserTrainer = false;
 
     public AdviceList(AdviceListContract.View view) {
         this.view = view;
@@ -81,6 +82,7 @@ public class AdviceList implements AdviceListContract.Presenter {
                                     Log.d(TAG, "Id trainer" + user.getLinkedUserId());
                                 }
                                 userLogged = true;
+                                isUserTrainer = user.getRole();
                             }
                             getSingleAdvice();
                         }
@@ -229,23 +231,21 @@ public class AdviceList implements AdviceListContract.Presenter {
      */
     private void loadAdviceList() {
         Log.d(TAG, "loadAdvice");
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Advice");
         database = FirebaseDbSingleton.getInstance().getReference(User.CHILD_NAME);
         firebaseUser = FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser();
 
         assert firebaseUser != null;
         Query mPersonalTrainerAdviceQuery;
-        String language = Locale.getDefault().getISO3Language();
 
-        mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("codLanguage").equalTo(language);
 
-        if(userLogged) {
-            mPersonalTrainerAdviceQuery = mDatabase.child("Advice").orderByChild("author").equalTo(firebaseUser.getUid());
-        }
+        mPersonalTrainerAdviceQuery = mDatabase.orderByChild("author").equalTo(firebaseUser.getUid());
+        Log.d(TAG, firebaseUser.getUid());
 
         mPersonalTrainerAdviceQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                adviceList.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Log.d(TAG, "loadPersonalTrainerAdvice->onDataChange:" + child.getKey());
 

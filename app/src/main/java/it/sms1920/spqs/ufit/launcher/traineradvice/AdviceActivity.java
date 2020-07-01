@@ -34,6 +34,9 @@ public class AdviceActivity extends AppCompatActivity implements AdviceContract.
         setContentView(R.layout.advice_activity);
 
         toolbar = findViewById(R.id.tool_bar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setTitle(getString(R.string.new_trainer_advice));
+        toolbar.setTitleTextColor(getColor(R.color.colorWhite));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

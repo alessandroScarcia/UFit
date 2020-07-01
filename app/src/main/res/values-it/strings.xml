@@ -230,6 +230,8 @@
     <string name="waitingtrainer">In attesa che un trainer si connetta.</string>
     <string name="no_sets">Serie non aggiunte</string>
 
+    <string name="new_trainer_advice">Consigli</string>
+
 </resources>
 
 
