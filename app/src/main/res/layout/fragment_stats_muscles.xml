@@ -36,9 +36,9 @@
                     app:srcCompat="@drawable/ic_arm_measure" />
 
                 <LinearLayout
-                    android:layout_marginStart="@dimen/stats_measure_width"
                     android:layout_width="@dimen/stats_measure_width"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/stats_measure_width"
                     android:layout_marginBottom="@dimen/smaller_standard_margin"
                     android:orientation="vertical">
 

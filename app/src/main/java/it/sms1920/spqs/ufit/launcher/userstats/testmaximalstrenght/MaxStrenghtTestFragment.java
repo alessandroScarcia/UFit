@@ -108,8 +108,8 @@ public class MaxStrenghtTestFragment extends Fragment implements MaxStrenghtTest
             View view = inflater.inflate(R.layout.fragment_choose_reps_dialog, null);
 
             builder.setView(view)
-                    .setTitle("Inserisci Dati")
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.insertValue)
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                         }
