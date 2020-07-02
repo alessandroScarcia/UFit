@@ -244,6 +244,7 @@
     <string name="no_sets">No sets added</string>
     <string name="new_trainer_advice">Trainer Advice</string>
     <string name="maximalStrengthTest">Maximal strength test</string>
+    <string name="advice_deleted">"Advice successfully deleted"</string>
 
 
 </resources>

@@ -25,7 +25,6 @@ import it.sms1920.spqs.ufit.launcher.userstats.StatsFragment;
 import it.sms1920.spqs.ufit.launcher.userstats.testmaximalstrenght.MaxStrenghtTestFragment;
 import it.sms1920.spqs.ufit.launcher.workoutplan.create.CreatingWorkoutActivity;
 import it.sms1920.spqs.ufit.launcher.workoutplan.showlist.WorkoutPlansFragment;
-import it.sms1920.spqs.ufit.model.firebase.database.WorkoutPlan;
 
 public class LauncherActivity extends AppCompatActivity implements LauncherContract.View {
     private LauncherContract.Presenter presenter;

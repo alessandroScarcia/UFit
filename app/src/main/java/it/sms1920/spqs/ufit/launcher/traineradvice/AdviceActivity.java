@@ -126,8 +126,8 @@ public class AdviceActivity extends AppCompatActivity implements AdviceContract.
             View view = inflater.inflate(R.layout.fragment_new_advice_dialog, null);
 
             builder.setView(view)
-                    .setTitle("Inserisci Dati")
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.insertValue)
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                         }

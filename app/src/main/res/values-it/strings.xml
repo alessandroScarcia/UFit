@@ -232,6 +232,7 @@
 
     <string name="new_trainer_advice">Consigli</string>
     <string name="maximalStrengthTest">Test massimale</string>
+    <string name="advice_deleted">"Consiglio eliminato con successo"</string>
 
 </resources>
 

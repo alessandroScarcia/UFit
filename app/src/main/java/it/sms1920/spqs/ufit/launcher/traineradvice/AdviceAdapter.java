@@ -70,7 +70,7 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHold
                 @Override
                 public void onClick(View v) {
                     presenter.onDeleteClicked(position, adviceId);
-                    Toast.makeText(itemView.getContext(),"Consiglio eliminato con successo", Toast.LENGTH_LONG);
+                    Toast.makeText(itemView.getContext(),R.string.advice_deleted, Toast.LENGTH_LONG);
                 }
             });
         }
