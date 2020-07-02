@@ -28,6 +28,8 @@ public interface LauncherContract {
 
         void startEditWorkoutActivity(String id);
 
+        void startMaxStrengthTest();
+
         void startTimer();
 
         void setToolbarTitle(String text);
@@ -39,8 +41,6 @@ public interface LauncherContract {
         void lockView();
 
         void startAdviceTrainerActivity();
-
-        void startMaxStrenghtTest();
 
         enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS, CHOOSE}
     }
@@ -71,7 +71,7 @@ public interface LauncherContract {
 
         void onTimerIconClicked();
 
-        void onMaxStrenghtTestIconClicked();
+        void onMaxStrengthTestIconClicked();
 
         void onAdviceTrainerIconClicked();
     }

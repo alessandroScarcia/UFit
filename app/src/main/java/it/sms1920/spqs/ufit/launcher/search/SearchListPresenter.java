@@ -35,12 +35,16 @@ public class SearchListPresenter implements SearchListContract.Presenter, Search
     public void onBindSelectableExerciseItemViewAtPosition(SearchListContract.View.Item holder, int position) {
 
         ExerciseDetailed exercise = exerciseDetailedList.get(position);
+
+
         if (view.getSelectedItems().contains(exercise.getExerciseId())) {
             holder.markSelected();
         }
         holder.setName(exercise.getName());
         holder.setImage(exercise.getImageUrl());
         holder.setId(exercise.getExerciseId());
+
+
     }
 
     @Override

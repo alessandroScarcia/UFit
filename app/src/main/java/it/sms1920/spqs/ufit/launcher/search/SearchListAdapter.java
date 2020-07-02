@@ -72,6 +72,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseHolder holder, int position) {
+
         if (selectable) {
             presenter.onBindSelectableExerciseItemViewAtPosition(holder, position);
         } else {

@@ -243,6 +243,7 @@
     <string name="waitingtrainer">Waiting for a trainer connecting…</string>
     <string name="no_sets">No sets added</string>
     <string name="new_trainer_advice">Trainer Advice</string>
+    <string name="maximalStrengthTest">Maximal strength test</string>
 
 
 </resources>

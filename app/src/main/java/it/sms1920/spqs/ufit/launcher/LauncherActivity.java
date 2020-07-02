@@ -111,7 +111,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
                 presenter.onTimerIconClicked();
                 break;
             case R.id.maximalTest:
-                presenter.onMaxStrenghtTestIconClicked();
+                presenter.onMaxStrengthTestIconClicked();
                 break;
             case R.id.adviceTrainer:
                 presenter.onAdviceTrainerIconClicked();
@@ -322,8 +322,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     }
 
     @Override
-    public void startMaxStrenghtTest() {
+    public void startMaxStrengthTest() {
+        toolbar.setTitle(R.string.maximalStrengthTest);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MaxStrenghtTestFragment()).commit();
+        resetToolbarIcons();
     }
 
     @Override

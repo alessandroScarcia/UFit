@@ -151,8 +151,8 @@ public class LauncherPresenter implements LauncherContract.Presenter {
     }
 
     @Override
-    public void onMaxStrenghtTestIconClicked() {
-        view.startMaxStrenghtTest();
+    public void onMaxStrengthTestIconClicked() {
+        view.startMaxStrengthTest();
     }
 
     @Override
