@@ -8,8 +8,6 @@ public interface LauncherContract {
 
         void insertPlansFragment();
 
-        void insertTrainerFragment();
-
         void insertStatsFragment();
 
         void insertProfileFragment();
@@ -41,6 +39,7 @@ public interface LauncherContract {
         void lockView();
 
         void startAdviceTrainerActivity();
+
 
         enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS, CHOOSE}
     }

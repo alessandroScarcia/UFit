@@ -46,6 +46,8 @@ public interface BluetoothLinkingContract {
         void activeVisibility(BluetoothAdapter bluetoothAdapter);
 
         String getButtonText(Boolean isTrainer);
+
+        void setAdviceIcon(boolean visible);
     }
 
     interface Presenter {

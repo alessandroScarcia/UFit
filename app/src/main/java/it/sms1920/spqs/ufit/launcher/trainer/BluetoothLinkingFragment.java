@@ -232,6 +232,11 @@ public class BluetoothLinkingFragment extends Fragment implements BluetoothLinki
     }
 
     @Override
+    public void setAdviceIcon(boolean visible) {
+        launcher.showToolbarAdviceTrainerIcon(visible);
+    }
+
+    @Override
     public void showBluetoothDialog(BluetoothAdapter bluetoothAdapter, ArrayAdapter<String> discoveredDevicesAdapter, BroadcastReceiver discoveryFinishReceiver) {
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.fragment_bluetooth_dialog);
