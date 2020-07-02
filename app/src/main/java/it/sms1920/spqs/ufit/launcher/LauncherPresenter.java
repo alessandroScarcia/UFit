@@ -47,7 +47,7 @@ public class LauncherPresenter implements LauncherContract.Presenter {
     public void onTrainerIconClicked() {
         if (currentFragment != TRAINER) {
             if (FirebaseAuthSingleton.getFirebaseAuth().getCurrentUser().isAnonymous()){
-                view.insertTrainerFragment();
+                view.insertChooseFragment();
                 view.setToolbarTitle(view.getLoginRequiredString());
             } else {
                 view.insertBluetoothLinkingFragment();

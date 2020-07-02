@@ -151,10 +151,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
 
     }
 
-    @Override
-    public void insertTrainerFragment() {
-        insertChooseFragment();
-    }
 
     @Override
     public void insertStatsFragment() {
@@ -287,11 +283,12 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.timer).setVisible(visible);
     }
 
+
+
     public void insertBluetoothLinkingFragment() {
         resetMenuIcons();
         resetToolbarIcons();
         setMenuItemIcon(R.id.nav_trainer, R.drawable.ic_menu_trainer_selected);
-        toolbar.getMenu().findItem(R.id.adviceTrainer).setVisible(true);
         logo.setVisibility(View.GONE);
         toggleToolbarNavigationButton(false);
         setToolbarTitle(getString(R.string.trainer));
@@ -323,7 +320,7 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
 
     @Override
     public void startMaxStrengthTest() {
-        toolbar.setTitle(R.string.maximalStrengthTest);
+        toolbar.setTitle(getString(R.string.maximalStrengthTest));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MaxStrenghtTestFragment()).commit();
         resetToolbarIcons();
     }
@@ -332,6 +329,10 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void startTimer() {
         TimerFragment dialogBox = new TimerFragment();
         dialogBox.show(getSupportFragmentManager(), "timer dialog");
+    }
+
+    public void showToolbarAdviceTrainerIcon(boolean visible){
+        toolbar.getMenu().findItem(R.id.adviceTrainer).setVisible(visible);
     }
 
     public void showToolbarMaximalTestIcon(boolean visible) {

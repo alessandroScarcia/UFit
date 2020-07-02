@@ -1,5 +1,6 @@
 package it.sms1920.spqs.ufit.launcher.trainer;
 
+import android.app.LauncherActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -66,6 +67,13 @@ class BluetoothLinkingPresenter implements BluetoothLinkingContract.Presenter {
                         for (DataSnapshot item : snapshot.getChildren()) {
                             me = item.getValue(User.class);
                             if (me != null) {
+
+                                if(me.getRole() == Boolean.TRUE){
+                                    view.setAdviceIcon(true);
+                                }else{
+                                    view.setAdviceIcon(false);
+                                }
+
                                 if (!me.getLinkedUserId().isEmpty()) {
                                     view.alreadyConnected(me.getRole());
                                     connected = true;
