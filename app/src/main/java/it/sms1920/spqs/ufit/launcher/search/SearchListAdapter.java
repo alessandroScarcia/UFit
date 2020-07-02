@@ -191,9 +191,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Ex
         }
 
         @Override
-        public void markSelected() {
-            lyt.setVisibility(View.VISIBLE);
-            selectionMode = true;
+        public void markSelection(boolean select) {
+            if (select) {
+                lyt.setVisibility(View.VISIBLE);
+            } else {
+                lyt.setVisibility(View.GONE);
+            }
+
+            selectionMode = !selectedItems.isEmpty();
         }
 
 

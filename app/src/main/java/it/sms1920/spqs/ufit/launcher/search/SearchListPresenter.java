@@ -36,9 +36,9 @@ public class SearchListPresenter implements SearchListContract.Presenter, Search
 
         ExerciseDetailed exercise = exerciseDetailedList.get(position);
 
-
+        holder.markSelection(false);
         if (view.getSelectedItems().contains(exercise.getExerciseId())) {
-            holder.markSelected();
+            holder.markSelection(true);
         }
         holder.setName(exercise.getName());
         holder.setImage(exercise.getImageUrl());

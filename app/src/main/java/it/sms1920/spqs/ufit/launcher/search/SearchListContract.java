@@ -17,7 +17,7 @@ public interface SearchListContract {
 
             void setId(String id);
 
-            void markSelected();
+            void markSelection(boolean select);
 
         }
     }
