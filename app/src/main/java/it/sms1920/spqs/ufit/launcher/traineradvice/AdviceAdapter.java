@@ -14,9 +14,9 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHold
 
     private AdviceListContract.Presenter presenter;
 
-    private AdviceFragment parentFragment;
+    private AdviceActivity parentFragment;
 
-    public AdviceAdapter(AdviceFragment parentFragment) {
+    public AdviceAdapter(AdviceActivity parentFragment) {
         presenter = new AdviceList(this);
         this.parentFragment = parentFragment;
     }

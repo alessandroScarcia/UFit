@@ -38,8 +38,21 @@
         android:visible="false"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/maximalTest"
+        android:icon="@drawable/ic_calc_white"
+        android:title=""
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/edit"
         android:icon="@drawable/ic_pencil_pressed_white"
+        android:title=""
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/adviceTrainer"
+        android:icon="@drawable/ic_bulb_white"
         android:title=""
         android:visible="false"
         app:showAsAction="ifRoom" />

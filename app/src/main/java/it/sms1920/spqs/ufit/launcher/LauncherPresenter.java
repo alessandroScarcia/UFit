@@ -150,4 +150,14 @@ public class LauncherPresenter implements LauncherContract.Presenter {
         view.startTimer();
     }
 
+    @Override
+    public void onMaxStrenghtTestIconClicked() {
+        view.startMaxStrenghtTest();
+    }
+
+    @Override
+    public void onAdviceTrainerIconClicked() {
+        view.startAdviceTrainerActivity();
+    }
+
 }

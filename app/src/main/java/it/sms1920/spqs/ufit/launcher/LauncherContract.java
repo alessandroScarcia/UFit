@@ -38,6 +38,10 @@ public interface LauncherContract {
 
         void lockView();
 
+        void startAdviceTrainerActivity();
+
+        void startMaxStrenghtTest();
+
         enum FragType {HOME, PLANS, SHOW_PLAN, TRAINER, STATS, PROFILE, PROFILE_SETTINGS, CHOOSE}
     }
 
@@ -66,6 +70,10 @@ public interface LauncherContract {
         void onEditIconClicked();
 
         void onTimerIconClicked();
+
+        void onMaxStrenghtTestIconClicked();
+
+        void onAdviceTrainerIconClicked();
     }
 
 }

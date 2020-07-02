@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,7 +65,7 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
     private Button btnSendReport;
 
     private TextView tvAssembliesReportDesc;
-    private TextView tvAssemblyReportCreateMsg;
+    private TextView tvGpsNotGrantedMsg;
 
     private ArrayAdapter<CharSequence> assemblyPerceptionAdapter;
 
@@ -96,7 +97,9 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
         btnSearchReports = findViewById(R.id.btnSearchReports);
         btnSendReport = findViewById(R.id.btnSendReport);
         tvAssembliesReportDesc = findViewById(R.id.tvAssembliesReportDesc);
-        tvAssemblyReportCreateMsg = findViewById(R.id.tvAssemblyReportCreateMsg);
+        tvGpsNotGrantedMsg = findViewById(R.id.tvAssemblyReportCreateMsg);
+
+        presenter = new AssembliesReportPresenter(this);
 
         tlAssembliesReport.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -129,10 +132,7 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
             }
         });
 
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        presenter = new AssembliesReportPresenter(this);
     }
 
     @Override
@@ -249,11 +249,13 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
     @Override
     public boolean checkGpsPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            tvGpsNotGrantedMsg.setVisibility(View.INVISIBLE);
             fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     if (task.isSuccessful() && task.getResult() != null) {
                         Location location = task.getResult();
+                        Log.d(TAG, location.toString());
                         currentLatitude = location.getLatitude();
                         currentLongitude = location.getLongitude();
                         presenter.onLocationReady();
@@ -285,8 +287,7 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
 
     @Override
     public void showGpsNotGrantedMsg() {
-        tvAssemblyReportCreateMsg.setText(getString(R.string.assemblies_report_gps_access_reasons));
-        tvAssemblyReportCreateMsg.setVisibility(View.VISIBLE);
+        tvGpsNotGrantedMsg.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -319,7 +320,7 @@ public class AssembliesReportActivity extends AppCompatActivity implements Assem
 
     @Override
     public void showSendReportMsg() {
-        tvAssemblyReportCreateMsg.setVisibility(View.VISIBLE);
+        Toast.makeText(this, getString(R.string.assemblies_report_create_report_msg), Toast.LENGTH_SHORT).show();
     }
 
     @Override

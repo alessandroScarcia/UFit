@@ -146,7 +146,7 @@
             android:id="@+id/tvAssemblyReportCreateMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/assemblies_report_create_report_msg"
+            android:text="@string/assemblies_report_gps_access_reasons"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:visibility="invisible" />
     </LinearLayout>
