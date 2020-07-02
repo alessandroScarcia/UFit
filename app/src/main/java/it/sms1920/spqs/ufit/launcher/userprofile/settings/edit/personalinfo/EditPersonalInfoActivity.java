@@ -170,7 +170,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements EditP
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etEditBirthDate.setText(getString(R.string.date, dayOfMonth, month, year));
+                        etEditBirthDate.setText(getString(R.string.date, dayOfMonth, month + 1, year));
                     }
                 }, year, month, day);
 
