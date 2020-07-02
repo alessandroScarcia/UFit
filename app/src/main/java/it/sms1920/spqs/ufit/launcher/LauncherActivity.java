@@ -282,8 +282,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
         toolbar.getMenu().findItem(R.id.timer).setVisible(visible);
     }
 
-
-
     public void insertBluetoothLinkingFragment() {
         resetMenuIcons();
         resetToolbarIcons();
@@ -304,7 +302,6 @@ public class LauncherActivity extends AppCompatActivity implements LauncherContr
     public void lockView() {
         toolbar.getMenu().findItem(R.id.logout).setEnabled(false);
         toolbar.getMenu().findItem(R.id.profile_settings).setEnabled(false);
-
         bottombar.getMenu().findItem(R.id.nav_home).setEnabled(false);
         bottombar.getMenu().findItem(R.id.nav_plans).setEnabled(false);
         bottombar.getMenu().findItem(R.id.nav_trainer).setEnabled(false);

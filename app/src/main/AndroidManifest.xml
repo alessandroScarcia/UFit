@@ -34,6 +34,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".search.SearchActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".exercise.ExerciseActivity"
@@ -58,12 +59,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".userprofile.resetpassword.ResetPasswordActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".userprofile.login.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".userprofile.registration.RegistrationActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".traineradvice.AdviceActivity"
