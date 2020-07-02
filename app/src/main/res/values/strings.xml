@@ -155,7 +155,7 @@
     <string name="profile_setting_change_credentials">This operation requires Login</string>
     <string name="delete">Delete profile</string>
     <string name="cancel">Cancel</string>
-    <string name="visit_our_site">"Visit Our Website"</string>
+    <string name="website">"Website"</string>
     <string name="insertValue">Insert value</string>
 
     <!-- Login -->

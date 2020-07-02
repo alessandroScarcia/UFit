@@ -106,7 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="@dimen/standard_margin"
-        android:text="@string/visit_our_site"
+        android:text="@string/website"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
