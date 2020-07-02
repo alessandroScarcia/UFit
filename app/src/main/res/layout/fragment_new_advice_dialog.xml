@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title"
         style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
@@ -24,8 +25,8 @@
         android:id="@+id/description"
         style="@style/CustomMaterialOutlinedEditTextDenseLayoutOnWhite"
         android:layout_width="match_parent"
-        android:layout_below="@+id/title"
         android:layout_height="match_parent"
+        android:layout_below="@+id/title"
         android:hint="@string/insertDescriptionAdvice">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -33,9 +34,11 @@
             style="@style/CustomMaterialEditTextOnWhite"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="start|top"
             android:importantForAutofill="no"
-            android:inputType="text" />
+            android:inputType="textMultiLine" >
 
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 
